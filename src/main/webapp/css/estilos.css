@@ -1,4 +1,15 @@
-body{
-    background-color: blue;
-}
+:root{
+    /* variables de colores de la pagina */
+    --body-color: #275eb028;
+    --sidebar-color: #FFFFFF;
+    --primary-color: #538fdc;
+    --primary-color-light: #9B27B00D;
+    --toggle-color: #78788c;
+    --text-color: #78788c;
 
+    /* animaciones de transicion */
+    --tran-03: all 0.2s ease;
+    --tran-04: all 0.3s ease;
+    --tran-05: all 0.4s ease;
+    --altura: 5vh;
+}
