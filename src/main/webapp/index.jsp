@@ -6,7 +6,7 @@
         <title>Construcciones</title>
         <link type="text/css" rel="stylesheet" href="./css/estilos.css">
     </head>
-    <body>
+    <body class="bodyIndex">
 
         <div class="ingresarUsuario">
             <h1>Bienvenido al sistema</h1>
@@ -16,14 +16,12 @@
                 <input type="password" name="pass" placeholder="Contraseña"/>
                 <button type="submit">Ingresar</button>
             </form>
-
-        </div>
-        
-        <div class="crearUsuario">
+            
             <form>
                 <label>Si no estas registrado, puedes crear una cuenta</label>
                 <button>Crear cuenta</button>
             </form>
+
         </div>
         
     </body>
