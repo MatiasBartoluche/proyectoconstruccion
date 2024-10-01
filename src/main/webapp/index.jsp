@@ -10,16 +10,16 @@
 
         <div class="ingresarUsuario">
             <h1>Bienvenido al sistema</h1>
-            <form>
+            <form action="SvIndex" method="POST">
                 <!--placeholder texto de ejemplo para cada input-->
                 <input type="text" name="usuario" placeholder="Usuario"/>
                 <input type="password" name="pass" placeholder="Contraseña"/>
                 <button type="submit">Ingresar</button>
             </form>
             
-            <form>
+            <form action="SvIndex" method="GET">
                 <label>Si no estas registrado, puedes crear una cuenta</label>
-                <button>Crear cuenta</button>
+                <button type="submit">Crear cuenta</button>
             </form>
 
         </div>
