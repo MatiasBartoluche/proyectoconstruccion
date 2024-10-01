@@ -12,6 +12,17 @@
         <title>Home</title>
     </head>
     <body>
-        <h1>home!</h1>
+
+        <%@ page session="true" %>
+        <%
+            String username = (String) session.getAttribute("usuario"); // recupero el nombre de usuario
+            if (username == null) {
+                // Si no hay sesión, redirige al login
+                response.sendRedirect("index.jsp");
+            }
+        %>
+        <h1>Bienvenido, <%= username %>!</h1>
+        <a href="SvLogout">Cerrar sesión</a>
+        
     </body>
 </html>

@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "SvIndex", urlPatterns = {"/SvIndex"})
 public class SvIndex extends HttpServlet {
@@ -35,9 +36,13 @@ public class SvIndex extends HttpServlet {
         if("admin".equals(usuario) && "1234".equals(pass)){
             System.out.println("bienvenido");
             response.sendRedirect("home.jsp");
+            
+            HttpSession session = request.getSession();
+            session.setAttribute("usuario", usuario); // guardo el nombre de usuario
         }
         else{
             System.out.println("usuario y/o conrtasenai incorrectos");
+            response.sendRedirect("index.jsp?error=1");
         }
     }
 
