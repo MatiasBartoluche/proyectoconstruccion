@@ -14,17 +14,12 @@ public class SvRegistrar extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        
+  
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        System.out.println("###########################estoy en registrar.jsp");
-        System.out.println("###########################usuario guardado");
-        System.out.println("###########################redireccionando a index.jsp");
         response.sendRedirect("index.jsp");
     }
 
@@ -37,6 +32,6 @@ public class SvRegistrar extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
 }

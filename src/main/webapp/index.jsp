@@ -14,7 +14,7 @@
                 <!--placeholder texto de ejemplo para cada input-->
                 <input type="text" name="usuario" placeholder="Usuario"/>
                 <input type="password" name="pass" placeholder="Contraseña"/>
-                <button type="submit">Ingresar</button>
+                <button type="submit" name="verificar" value="Verificar">Ingresar</button>
             </form>
             
             <form action="SvIndex" method="GET">

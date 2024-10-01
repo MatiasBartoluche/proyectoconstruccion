@@ -20,8 +20,6 @@ public class SvIndex extends HttpServlet {
             throws ServletException, IOException {
         
        //redirijo a la pagina de registro de usuarios
-       System.out.println("###########################redireccionando a registrar.jsp");
-       //request.getRequestDispatcher("/vistas/registrar.jsp").forward(request, response);
        response.sendRedirect("registrar.jsp");
        
     }
@@ -30,10 +28,17 @@ public class SvIndex extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        //obtengo el usuario y password de los input
         String usuario = request.getParameter("usuario");
         String pass = request.getParameter("pass");
         
-        System.out.println("###########################"+usuario+pass);
+        if("admin".equals(usuario) && "1234".equals(pass)){
+            System.out.println("bienvenido");
+            response.sendRedirect("home.jsp");
+        }
+        else{
+            System.out.println("usuario y/o conrtasenai incorrectos");
+        }
     }
 
     @Override
