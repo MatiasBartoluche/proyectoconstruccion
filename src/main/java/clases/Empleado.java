@@ -1,10 +1,14 @@
 package clases;
 
 import java.time.LocalDate;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+@Entity
 public class Empleado {
     
-    private int legajo;
+    @Id
+    private int legajo; // el legajo sera ingresado manualmente por el usuario del sistema
     private int id_jerarquia;
     private String nombres;
     private String apellidos;
@@ -53,7 +57,7 @@ public class Empleado {
         return legajo;
     }
 
-    public int getId_jerarquia() {
+    public int getIdJerarquia() {
         return id_jerarquia;
     }
 
@@ -85,27 +89,27 @@ public class Empleado {
         return telefono;
     }
 
-    public String getTelefono_familiar() {
+    public String getTelefonoFamiliar() {
         return telefono_familiar;
     }
 
-    public String getFoto_dni() {
+    public String getFotoDni() {
         return foto_dni;
     }
 
-    public LocalDate getFecha_ingreso() {
+    public LocalDate getFechaIngreso() {
         return fecha_ingreso;
     }
 
-    public int getTipo_contrato() {
+    public int getTipoContrato() {
         return tipo_contrato;
     }
 
-    public float getSueldo_base() {
+    public float getSueldoBase() {
         return sueldo_base;
     }
 
-    public int getId_estado_empleado() {
+    public int getIdEstadoEmpleado() {
         return id_estado_empleado;
     }
 
@@ -117,11 +121,11 @@ public class Empleado {
         return despido;
     }
 
-    public int getId_obra() {
+    public int getIdObra() {
         return id_obra;
     }
 
-    public int getId_grupo() {
+    public int getIdGrupo() {
         return id_grupo;
     }
 
@@ -129,7 +133,7 @@ public class Empleado {
         this.legajo = legajo;
     }
 
-    public void setId_jerarquia(int id_jerarquia) {
+    public void setIdJerarquia(int id_jerarquia) {
         this.id_jerarquia = id_jerarquia;
     }
 
@@ -161,27 +165,27 @@ public class Empleado {
         this.telefono = telefono;
     }
 
-    public void setTelefono_familiar(String telefono_familiar) {
+    public void setTelefonoFamiliar(String telefono_familiar) {
         this.telefono_familiar = telefono_familiar;
     }
 
-    public void setFoto_dni(String foto_dni) {
+    public void setFotoDni(String foto_dni) {
         this.foto_dni = foto_dni;
     }
 
-    public void setFecha_ingreso(LocalDate fecha_ingreso) {
+    public void setFechaIngreso(LocalDate fecha_ingreso) {
         this.fecha_ingreso = fecha_ingreso;
     }
 
-    public void setTipo_contrato(int tipo_contrato) {
+    public void setTipoContrato(int tipo_contrato) {
         this.tipo_contrato = tipo_contrato;
     }
 
-    public void setSueldo_base(float sueldo_base) {
+    public void setSueldoBase(float sueldo_base) {
         this.sueldo_base = sueldo_base;
     }
 
-    public void setId_estado_empleado(int id_estado_empleado) {
+    public void setIdEstadoEmpleado(int id_estado_empleado) {
         this.id_estado_empleado = id_estado_empleado;
     }
 
@@ -193,11 +197,11 @@ public class Empleado {
         this.despido = despido;
     }
 
-    public void setId_obra(int id_obra) {
+    public void setIdObra(int id_obra) {
         this.id_obra = id_obra;
     }
 
-    public void setId_grupo(int id_grupo) {
+    public void setIdGrupo(int id_grupo) {
         this.id_grupo = id_grupo;
     }
     

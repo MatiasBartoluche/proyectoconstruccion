@@ -1,5 +1,7 @@
 package servlets;
 
+import clases.Empleado;
+import clases.Rol;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,6 +30,11 @@ public class SvIndex extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        /*Rol rol = new Rol(0, "Admin sistemas");
+        Empleado empleado = new Empleado();
+        empleado.setLegajo(1234);
+        empleado.setTipoContrato(0);*/
         
         //obtengo el usuario y password de los input
         String usuario = request.getParameter("usuario");
