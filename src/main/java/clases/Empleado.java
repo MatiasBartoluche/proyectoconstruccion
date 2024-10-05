@@ -1,0 +1,205 @@
+package clases;
+
+import java.time.LocalDate;
+
+public class Empleado {
+    
+    private int legajo;
+    private int id_jerarquia;
+    private String nombres;
+    private String apellidos;
+    private String cuil;
+    private String calle;
+    private int altura;
+    private String localidad;
+    private String telefono;
+    private String telefono_familiar;
+    private String foto_dni;
+    private LocalDate fecha_ingreso; // LocalDate fecha sin hora
+    private int tipo_contrato; // 0 = empleado de oficina, 1 = obrero, 2 = subcontratado
+    private float sueldo_base;
+    private int id_estado_empleado;
+    private int antiguedad;
+    private boolean despido; // true = despido, false = empleado vigente
+    private int id_obra;
+    private int id_grupo;
+
+    public Empleado(int legajo, int id_jerarquia, String nombres, String apellidos, String cuil, String calle, int altura, String localidad, String telefono, String telefono_familiar, String foto_dni, LocalDate fecha_ingreso, int tipo_contrato, float sueldo_base, int id_estado_empleado, int antiguedad, boolean despido, int id_obra, int id_grupo) {
+        this.legajo = legajo;
+        this.id_jerarquia = id_jerarquia;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.cuil = cuil;
+        this.calle = calle;
+        this.altura = altura;
+        this.localidad = localidad;
+        this.telefono = telefono;
+        this.telefono_familiar = telefono_familiar;
+        this.foto_dni = foto_dni;
+        this.fecha_ingreso = fecha_ingreso;
+        this.tipo_contrato = tipo_contrato;
+        this.sueldo_base = sueldo_base;
+        this.id_estado_empleado = id_estado_empleado;
+        this.antiguedad = antiguedad;
+        this.despido = despido;
+        this.id_obra = id_obra;
+        this.id_grupo = id_grupo;
+    }
+
+    public Empleado() {
+    }
+
+    public int getLegajo() {
+        return legajo;
+    }
+
+    public int getId_jerarquia() {
+        return id_jerarquia;
+    }
+
+    public String getNombres() {
+        return nombres;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public String getCuil() {
+        return cuil;
+    }
+
+    public String getCalle() {
+        return calle;
+    }
+
+    public int getAltura() {
+        return altura;
+    }
+
+    public String getLocalidad() {
+        return localidad;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public String getTelefono_familiar() {
+        return telefono_familiar;
+    }
+
+    public String getFoto_dni() {
+        return foto_dni;
+    }
+
+    public LocalDate getFecha_ingreso() {
+        return fecha_ingreso;
+    }
+
+    public int getTipo_contrato() {
+        return tipo_contrato;
+    }
+
+    public float getSueldo_base() {
+        return sueldo_base;
+    }
+
+    public int getId_estado_empleado() {
+        return id_estado_empleado;
+    }
+
+    public int getAntiguedad() {
+        return antiguedad;
+    }
+
+    public boolean isDespido() {
+        return despido;
+    }
+
+    public int getId_obra() {
+        return id_obra;
+    }
+
+    public int getId_grupo() {
+        return id_grupo;
+    }
+
+    public void setLegajo(int legajo) {
+        this.legajo = legajo;
+    }
+
+    public void setId_jerarquia(int id_jerarquia) {
+        this.id_jerarquia = id_jerarquia;
+    }
+
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public void setCuil(String cuil) {
+        this.cuil = cuil;
+    }
+
+    public void setCalle(String calle) {
+        this.calle = calle;
+    }
+
+    public void setAltura(int altura) {
+        this.altura = altura;
+    }
+
+    public void setLocalidad(String localidad) {
+        this.localidad = localidad;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public void setTelefono_familiar(String telefono_familiar) {
+        this.telefono_familiar = telefono_familiar;
+    }
+
+    public void setFoto_dni(String foto_dni) {
+        this.foto_dni = foto_dni;
+    }
+
+    public void setFecha_ingreso(LocalDate fecha_ingreso) {
+        this.fecha_ingreso = fecha_ingreso;
+    }
+
+    public void setTipo_contrato(int tipo_contrato) {
+        this.tipo_contrato = tipo_contrato;
+    }
+
+    public void setSueldo_base(float sueldo_base) {
+        this.sueldo_base = sueldo_base;
+    }
+
+    public void setId_estado_empleado(int id_estado_empleado) {
+        this.id_estado_empleado = id_estado_empleado;
+    }
+
+    public void setAntiguedad(int antiguedad) {
+        this.antiguedad = antiguedad;
+    }
+
+    public void setDespido(boolean despido) {
+        this.despido = despido;
+    }
+
+    public void setId_obra(int id_obra) {
+        this.id_obra = id_obra;
+    }
+
+    public void setId_grupo(int id_grupo) {
+        this.id_grupo = id_grupo;
+    }
+    
+    
+}
