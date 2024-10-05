@@ -1,11 +1,12 @@
 package clases;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Empleado {
+public class Empleado implements Serializable {
     
     @Id
     private int legajo; // el legajo sera ingresado manualmente por el usuario del sistema

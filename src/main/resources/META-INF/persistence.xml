@@ -3,6 +3,9 @@
   <!-- Define Persistence Unit -->
   <persistence-unit name="ProyectoConstruccionesPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>clases.Usuario</class>
+    <class>clases.Empleado</class>
+    <class>clases.Rol</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/ProyectoConstruccion?serverTimezone=UTC"/>
