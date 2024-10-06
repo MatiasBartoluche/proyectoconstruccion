@@ -1,6 +1,6 @@
 package persistencia;
 
-import clases.Rol;
+import clases.Usuario;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -8,12 +8,12 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
 
 
-public class RolJpaController implements Serializable {
+public class UsuarioJpaController implements Serializable {
     
     
     private EntityManagerFactory emf = null;
 
-    public RolJpaController(EntityManagerFactory emf) {
+    public UsuarioJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
 
@@ -22,11 +22,11 @@ public class RolJpaController implements Serializable {
     }
 
     // Crear usuario
-    public void create(Rol rol) {
+    public void create(Usuario usuario) {
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
-            em.persist(rol);
+            em.persist(usuario);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -36,16 +36,16 @@ public class RolJpaController implements Serializable {
     }
 
     // Editar usuario
-    public void edit(Rol rol) throws Exception {
+    public void edit(Usuario usuario) throws Exception {
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
-            rol = em.merge(rol);
+            usuario = em.merge(usuario);
             em.getTransaction().commit();
         } catch (Exception ex) {
-            int id = rol.getIdRol();
-            if (findRol(id) == null) {
-                throw new EntityNotFoundException("El Rol con id " + id + " no existe.");
+            int id = usuario.getIdUsuario();
+            if (findUsuario(id) == null) {
+                throw new EntityNotFoundException("El Usuario con id " + id + " no existe.");
             }
             throw ex;
         } finally {
@@ -60,14 +60,14 @@ public class RolJpaController implements Serializable {
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
-            Rol rol;
+            Usuario usuario;
             try {
-                rol = em.getReference(Rol.class, id);
-                rol.getIdRol();
+                usuario = em.getReference(Usuario.class, id);
+                usuario.getIdRol();
             } catch (EntityNotFoundException enfe) {
-                throw new EntityNotFoundException("El Rol con id " + id + " no existe.");
+                throw new EntityNotFoundException("El usuario con id " + id + " no existe.");
             }
-            em.remove(rol);
+            em.remove(usuario);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -77,20 +77,20 @@ public class RolJpaController implements Serializable {
     }
 
     // Encontrar usuario por legajo
-    public Rol findRol(int id) {
+    public Usuario findUsuario(int id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Rol.class, id);
+            return em.find(Usuario.class, id);
         } finally {
             em.close();
         }
     }
 
     // Obtener todos los usuarios
-    public List<Rol> findRolEntities() {
+    public List<Usuario> findUsuarioEntities() {
         EntityManager em = getEntityManager();
         try {
-            return em.createQuery("SELECT * FROM construccion.rol", Rol.class).getResultList();
+            return em.createQuery("SELECT * FROM construccion.usuario", Usuario.class).getResultList();
         } finally {
             em.close();
         }

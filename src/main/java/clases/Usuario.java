@@ -29,7 +29,7 @@ public class Usuario {
         this.id_rol = id_rol;
     }
 
-    public void setId_usuario(int id_usuario) {
+    public void setIdUsuario(int id_usuario) {
         this.id_usuario = id_usuario;
     }
 
@@ -45,7 +45,7 @@ public class Usuario {
         this.clave = clave;
     }
 
-    public void setId_rol(int id_rol) {
+    public void setIdRol(int id_rol) {
         this.id_rol = id_rol;
     }
 
@@ -57,7 +57,7 @@ public class Usuario {
         this.auditoria = auditoria;
     }
 
-    public int getId_usuario() {
+    public int getIdUsuario() {
         return id_usuario;
     }
 
@@ -73,7 +73,7 @@ public class Usuario {
         return clave;
     }
 
-    public int getId_rol() {
+    public int getIdRol() {
         return id_rol;
     }
 
