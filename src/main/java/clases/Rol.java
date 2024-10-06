@@ -1,12 +1,13 @@
 package clases;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Rol {
+public class Rol implements Serializable {
     
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -21,7 +22,7 @@ public class Rol {
         this.descripcion = descripcion;
     }
 
-    public int getId_rol() {
+    public int getIdRol() {
         return id_rol;
     }
 
@@ -29,7 +30,7 @@ public class Rol {
         return descripcion;
     }
 
-    public void setId_rol(int id_rol) {
+    public void setIdRol(int id_rol) {
         this.id_rol = id_rol;
     }
 
