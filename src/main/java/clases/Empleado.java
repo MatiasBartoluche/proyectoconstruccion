@@ -149,6 +149,8 @@ public class Empleado implements Serializable {
         return id_grupo;
     }
 
+    /* ############################ setters ##################################*/
+    
     public void setLegajo(int legajo) {
         this.legajo = legajo;
     }
@@ -201,7 +203,7 @@ public class Empleado implements Serializable {
         this.tipo_contrato = tipo_contrato;
     }
 
-    public void setSueldoBase(float sueldo_base) {
+    public void setSueldoBase(double sueldo_base) {
         this.sueldo_base = sueldo_base;
     }
 
