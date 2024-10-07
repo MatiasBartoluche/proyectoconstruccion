@@ -3,6 +3,7 @@ package servlets;
 import clases.Controlador;
 import clases.Empleado;
 import clases.Rol;
+import clases.Usuario;
 import java.io.IOException;
 import java.time.LocalDate;
 import javax.servlet.ServletException;
@@ -35,7 +36,7 @@ public class SvIndex extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        /*Rol rolSistemas = new Rol("Admin sistemas");
+        Rol rolSistemas = new Rol("Admin sistemas");
         Rol rolAdministrativo = new Rol("Administrativo");
         Rol rolAyudante = new Rol("Ayudante");
         Rol rolContador = new Rol("Contador");
@@ -43,7 +44,7 @@ public class SvIndex extends HttpServlet {
         controlador.crearRol(rolSistemas);
         controlador.crearRol(rolAdministrativo);
         controlador.crearRol(rolAyudante);
-        controlador.crearRol(rolContador);*/
+        controlador.crearRol(rolContador);
         
         Empleado empleado = new Empleado();
         
@@ -68,6 +69,17 @@ public class SvIndex extends HttpServlet {
         empleado.setIdGrupo(1);
         
         controlador.crearEmpleado(empleado);
+        
+        Usuario usuario = new Usuario();
+        
+        usuario.setEmpleado(empleado);
+        usuario.setUsuario("usuarioJuan1234");
+        usuario.setClave("1234");
+        usuario.setRol(rolSistemas);
+        usuario.setAprobado(false);
+        usuario.setAuditoria("");
+        
+        controlador.crearUsuario(usuario);
         
         
         /*

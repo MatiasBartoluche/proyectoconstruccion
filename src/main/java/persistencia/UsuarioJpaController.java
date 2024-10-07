@@ -1,5 +1,6 @@
 package persistencia;
 
+
 import clases.Usuario;
 import java.io.Serializable;
 import java.util.List;
