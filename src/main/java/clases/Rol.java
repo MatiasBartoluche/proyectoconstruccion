@@ -10,15 +10,14 @@ import javax.persistence.Id;
 public class Rol implements Serializable {
     
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private int id_rol;
     private String descripcion;
 
     public Rol() {
     }
 
-    public Rol(int id_rol, String descripcion) {
-        this.id_rol = id_rol;
+    public Rol(String descripcion) {
         this.descripcion = descripcion;
     }
 

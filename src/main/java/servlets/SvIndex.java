@@ -1,5 +1,7 @@
 package servlets;
 
+import clases.Controlador;
+import clases.Rol;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +14,7 @@ import persistencia.EmpleadoJpaController;
 
 @WebServlet(name = "SvIndex", urlPatterns = {"/SvIndex"})
 public class SvIndex extends HttpServlet {
-
+    Controlador controlador = new Controlador();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -30,6 +32,17 @@ public class SvIndex extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        Rol rolSistemas = new Rol("Admin sistemas");
+        Rol rolAdministrativo = new Rol("Administrativo");
+        Rol rolAyudante = new Rol("Ayudante");
+        Rol rolContador = new Rol("Contador");
+        
+        controlador.crearRol(rolSistemas);
+        controlador.crearRol(rolAdministrativo);
+        controlador.crearRol(rolAyudante);
+        controlador.crearRol(rolContador);
+        
         
         /*
         if("admin".equals(usuario) && "1234".equals(pass)){
