@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.Persistence;
 
 
 public class EmpleadoJpaController implements Serializable {
@@ -16,6 +17,10 @@ public class EmpleadoJpaController implements Serializable {
 
     public EmpleadoJpaController(EntityManagerFactory emf) {
         this.emf = emf;
+    }
+    
+    public EmpleadoJpaController(){
+        emf = Persistence.createEntityManagerFactory("ProyectoConstruccionesPU");
     }
 
     public EntityManager getEntityManager() {

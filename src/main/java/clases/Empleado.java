@@ -22,14 +22,33 @@ public class Empleado implements Serializable {
     private String foto_dni;
     private LocalDate fecha_ingreso; // LocalDate fecha sin hora
     private int tipo_contrato; // 0 = empleado de oficina, 1 = obrero, 2 = subcontratado
-    private float sueldo_base;
+    private double sueldo_base;
     private int id_estado_empleado;
     private int antiguedad;
     private boolean despido; // true = despido, false = empleado vigente
     private int id_obra;
     private int id_grupo;
 
-    public Empleado(int legajo, int id_jerarquia, String nombres, String apellidos, String cuil, String calle, int altura, String localidad, String telefono, String telefono_familiar, String foto_dni, LocalDate fecha_ingreso, int tipo_contrato, float sueldo_base, int id_estado_empleado, int antiguedad, boolean despido, int id_obra, int id_grupo) {
+    public Empleado(
+            int legajo, 
+            int id_jerarquia, 
+            String nombres, 
+            String apellidos, 
+            String cuil, 
+            String calle, 
+            int altura, 
+            String localidad, 
+            String telefono, 
+            String telefono_familiar, 
+            String foto_dni, 
+            LocalDate fecha_ingreso, 
+            int tipo_contrato, 
+            double sueldo_base, 
+            int id_estado_empleado, 
+            int antiguedad, 
+            boolean despido, 
+            int id_obra, 
+            int id_grupo) {
         this.legajo = legajo;
         this.id_jerarquia = id_jerarquia;
         this.nombres = nombres;
@@ -106,7 +125,7 @@ public class Empleado implements Serializable {
         return tipo_contrato;
     }
 
-    public float getSueldoBase() {
+    public double getSueldoBase() {
         return sueldo_base;
     }
 

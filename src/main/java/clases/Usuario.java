@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Usuario {
@@ -11,49 +12,26 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int id_usuario;
-    private int legajo;
+    
+    @OneToOne
+    private Empleado empleado;
     private String usuario;
     private String clave;
-    private int id_rol;
+    
+    @OneToOne
+    private Rol rol;
     private boolean aprobado = false;
     private String auditoria;
     
     public Usuario() {
     }
-    
-    public Usuario(int id_usuario, int legajo, String usuario, String clave, int id_rol) {
+
+    public Usuario(int id_usuario, Empleado empleado, String usuario, String clave, Rol rol, String auditoria) {
         this.id_usuario = id_usuario;
-        this.legajo = legajo;
+        this.empleado = empleado;
         this.usuario = usuario;
         this.clave = clave;
-        this.id_rol = id_rol;
-    }
-
-    public void setIdUsuario(int id_usuario) {
-        this.id_usuario = id_usuario;
-    }
-
-    public void setLegajo(int legajo) {
-        this.legajo = legajo;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
-
-    public void setClave(String clave) {
-        this.clave = clave;
-    }
-
-    public void setIdRol(int id_rol) {
-        this.id_rol = id_rol;
-    }
-
-    public void setAprobado(boolean aprobado) {
-        this.aprobado = aprobado;
-    }
-
-    public void setAuditoria(String auditoria) {
+        this.rol = rol;
         this.auditoria = auditoria;
     }
 
@@ -61,28 +39,58 @@ public class Usuario {
         return id_usuario;
     }
 
-    public int getLegajo() {
-        return legajo;
+    public void setIdUsuario(int id_usuario) {
+        this.id_usuario = id_usuario;
+    }
+
+    public Empleado getEmpleado() {
+        return empleado;
+    }
+
+    public void setEmpleado(Empleado empleado) {
+        this.empleado = empleado;
     }
 
     public String getUsuario() {
         return usuario;
     }
 
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
     public String getClave() {
         return clave;
     }
 
-    public int getIdRol() {
-        return id_rol;
+    public void setClave(String clave) {
+        this.clave = clave;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
     }
 
     public boolean isAprobado() {
         return aprobado;
     }
 
+    public void setAprobado(boolean aprobado) {
+        this.aprobado = aprobado;
+    }
+
     public String getAuditoria() {
         return auditoria;
     }
+
+    public void setAuditoria(String auditoria) {
+        this.auditoria = auditoria;
+    }
+    
+    
 
 }

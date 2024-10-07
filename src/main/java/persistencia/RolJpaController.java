@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.Persistence;
 
 
 public class RolJpaController implements Serializable {
@@ -15,6 +16,10 @@ public class RolJpaController implements Serializable {
 
     public RolJpaController(EntityManagerFactory emf) {
         this.emf = emf;
+    }
+    
+    public RolJpaController(){
+        emf = Persistence.createEntityManagerFactory("ProyectoConstruccionesPU");
     }
 
     public EntityManager getEntityManager() {

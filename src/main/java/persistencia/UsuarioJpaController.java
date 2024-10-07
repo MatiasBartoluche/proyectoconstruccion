@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.Persistence;
 
 
 public class UsuarioJpaController implements Serializable {
@@ -15,6 +16,10 @@ public class UsuarioJpaController implements Serializable {
 
     public UsuarioJpaController(EntityManagerFactory emf) {
         this.emf = emf;
+    }
+    
+    public UsuarioJpaController(){
+        emf = Persistence.createEntityManagerFactory("construccionPU");
     }
 
     public EntityManager getEntityManager() {
@@ -63,7 +68,7 @@ public class UsuarioJpaController implements Serializable {
             Usuario usuario;
             try {
                 usuario = em.getReference(Usuario.class, id);
-                usuario.getIdRol();
+                usuario.getRol().getIdRol();
             } catch (EntityNotFoundException enfe) {
                 throw new EntityNotFoundException("El usuario con id " + id + " no existe.");
             }
