@@ -7,6 +7,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaQuery;
 
 
 public class RolJpaController implements Serializable {
@@ -91,14 +93,40 @@ public class RolJpaController implements Serializable {
         }
     }
 
-    // Obtener todos los usuarios
-    public List<Rol> findRolEntities() {
+    public List<Rol> findRolEntities(){
+        return findRolEntities(true, -1, -1);
+    }
+    
+    public List<Rol> findRolEntities(int maxResults, int firstResult){
+        return findRolEntities(false, maxResults, firstResult);
+    }
+    
+    
+    private List<Rol> findRolEntities(boolean all, int maxResults, int firstResult){
         EntityManager em = getEntityManager();
-        try {
-            return em.createQuery("SELECT * FROM construccion.rol", Rol.class).getResultList();
-        } finally {
+        try{
+            //Query query = em.createQuery("SELECT rol FROM rol");
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            cq.select(cq.from(Rol.class));
+            Query query = em.createQuery(cq);
+            if(!all){
+                query.setMaxResults(maxResults);
+                query.setFirstResult(firstResult);
+            }
+            return query.getResultList();
+        }
+        finally{
             em.close();
         }
     }
+    // Obtener todos los usuarios
+    /*private List<Rol> findRolEntities() {
+        EntityManager em = getEntityManager();
+        try {
+            return em.createQuery("SELECT u FROM rol u", Rol.class).getResultList();
+        } finally {
+            em.close();
+        }
+    }*/
     
 }

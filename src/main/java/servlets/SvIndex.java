@@ -6,6 +6,8 @@ import clases.Rol;
 import clases.Usuario;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,7 +30,17 @@ public class SvIndex extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-       //response.sendRedirect("registrar.jsp");
+        // leer los roles existentes en la base de datos
+        List<Rol> listaRoles = new ArrayList<>();
+        listaRoles = controlador.buscarListaRoles();
+        
+        HttpSession sesion = request.getSession();
+        
+        // guardar la lista de roles para que otros jsp puedan leerlos
+        sesion.setAttribute("listaRoles", listaRoles);
+        
+        // redirigir al formulario de creacion de nuevos usuarios
+        response.sendRedirect("registrar.jsp");
        
     }
 
@@ -36,19 +48,19 @@ public class SvIndex extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        Rol rolSistemas = new Rol("Admin sistemas");
+        /*Rol rolSistemas = new Rol("Admin sistemas");
         Rol rolAdministrativo = new Rol("Administrativo");
         Rol rolAyudante = new Rol("Ayudante");
-        Rol rolContador = new Rol("Contador");
+        Rol rolContador = new Rol("Contador");*/
         
-        controlador.crearRol(rolSistemas);
+        /*controlador.crearRol(rolSistemas);
         controlador.crearRol(rolAdministrativo);
         controlador.crearRol(rolAyudante);
-        controlador.crearRol(rolContador);
+        controlador.crearRol(rolContador);*/
         
-        Empleado empleado = new Empleado();
+        //Empleado empleado = new Empleado();
         
-        empleado.setLegajo(1234);
+        /*empleado.setLegajo(1234);
         empleado.setIdJerarquia(1);
         empleado.setNombres("juan");
         empleado.setApellidos("perez");
@@ -66,20 +78,20 @@ public class SvIndex extends HttpServlet {
         empleado.setAntiguedad(0);
         empleado.setDespido(false);
         empleado.setIdObra(0);
-        empleado.setIdGrupo(1);
+        empleado.setIdGrupo(1);*/
         
-        controlador.crearEmpleado(empleado);
+       //controlador.crearEmpleado(empleado);
         
-        Usuario usuario = new Usuario();
+        //Usuario usuario = new Usuario();
         
-        usuario.setEmpleado(empleado);
+        /*usuario.setEmpleado(empleado);
         usuario.setUsuario("usuarioJuan1234");
         usuario.setClave("1234");
         usuario.setRol(rolSistemas);
         usuario.setAprobado(false);
-        usuario.setAuditoria("");
+        usuario.setAuditoria("");*/
         
-        controlador.crearUsuario(usuario);
+        //controlador.crearUsuario(usuario);
         
         
         /*

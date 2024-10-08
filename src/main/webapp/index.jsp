@@ -8,7 +8,6 @@
     </head>
     <body class="bodyIndex">
 
-        <!--
         <div class="ingresarUsuario">
             <h1>Bienvenido al sistema</h1>
             <form action="SvIndex" method="POST">
@@ -24,13 +23,14 @@
             </form>
 
         </div>
-        -->
         
+        <!--
         <form action="SvIndex" method="POST">
             <input type="number" name="id" placeholder="id"/>
             <input type="text" name="nombre" placeholder="nombre"/>
             <button type="submit" name="verificar" value="Verificar">Ingresar</button>
         </form>
+        -->
         
     </body>
 </html>

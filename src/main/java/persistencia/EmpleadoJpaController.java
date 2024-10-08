@@ -8,6 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaQuery;
 
 
 public class EmpleadoJpaController implements Serializable {
@@ -92,12 +94,29 @@ public class EmpleadoJpaController implements Serializable {
         }
     }
 
-    // Obtener todos los usuarios
-    public List<Empleado> findEmpleadoEntities() {
+    public List<Empleado> findEmpleadoEntities(){
+        return findEmpleadoEntities(true, -1, -1);
+    }
+    
+    public List<Empleado> findEmpleadoEntities(int maxResults, int firstResult){
+        return findEmpleadoEntities(false, maxResults, firstResult);
+    }
+    
+    
+    private List<Empleado> findEmpleadoEntities(boolean all, int maxResults, int firstResult){
         EntityManager em = getEntityManager();
-        try {
-            return em.createQuery("SELECT * FROM construccion.empleado", Empleado.class).getResultList();
-        } finally {
+        try{
+            //Query query = em.createQuery("SELECT rol FROM rol");
+            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+            cq.select(cq.from(Empleado.class));
+            Query query = em.createQuery(cq);
+            if(!all){
+                query.setMaxResults(maxResults);
+                query.setFirstResult(firstResult);
+            }
+            return query.getResultList();
+        }
+        finally{
             em.close();
         }
     }
