@@ -28,7 +28,7 @@ public class Controlador {
         return controladorPersistencia.traerEmpleado(idEmpleado);
     }
     
-    public ArrayList<Empleado> buscarListaEmpleado(){
+    public ArrayList<Empleado> buscarListaEmpleados(){
         return controladorPersistencia.traerListaEmpleado();
     }
     

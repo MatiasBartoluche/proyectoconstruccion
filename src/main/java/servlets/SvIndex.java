@@ -30,14 +30,29 @@ public class SvIndex extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+/*############################ lista de roles ################################*/
         // leer los roles existentes en la base de datos
         List<Rol> listaRoles = new ArrayList<>();
         listaRoles = controlador.buscarListaRoles();
-        
         HttpSession sesion = request.getSession();
-        
         // guardar la lista de roles para que otros jsp puedan leerlos
         sesion.setAttribute("listaRoles", listaRoles);
+        
+/*############################ lista de usuarios #############################*/
+        // leer los usuarios existentes en la base de datos
+        List<Usuario> listaUsuarios = new ArrayList<>();
+        listaUsuarios = controlador.buscarListaUsuarios();
+        // guardar la lista de roles para que otros jsp puedan leerlos
+        sesion.setAttribute("listaUsuarios", listaUsuarios);
+       
+/*############################ lista de empleados ############################*/
+        // leer los empleados existentes en la base de datos
+        List<Empleado> listaEmpleados = new ArrayList<>();
+        listaEmpleados = controlador.buscarListaEmpleados();
+        sesion.setAttribute("listaEmpleados", listaEmpleados);
+        // guardar la lista de roles para que otros jsp puedan leerlos
+        sesion.setAttribute("listaRoles", listaRoles);
+       
         
         // redirigir al formulario de creacion de nuevos usuarios
         response.sendRedirect("registrar.jsp");
