@@ -1,3 +1,4 @@
+<%@page import="clases.Controlador"%>
 <%@page import="clases.Usuario"%>
 <%@page import="clases.Empleado"%>
 <%@page import="clases.Rol"%>
@@ -10,55 +11,63 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Lista de roles</h1>
+
+        <form action="registrar.jsp" method="GET">
+            <p>Buscar empleado</p>
+            <p>Ingrese su numero de legajo: <input type="text" placeholder="Legajo" name="buscarLegajo"></p>
+            <button type="submit">Buscar</button>
+        </form>
         
-        <%
-            List<Rol> listaRoles = (List)request.getSession().getAttribute("listaRoles");
-            for(Rol r : listaRoles){
-        %>
-                <p>---------------------------------------------------------</p>
-                <p>Id Rol: <%=r.getIdRol() %> </p>
-                <p>Descripcion: <%=r.getDescripcion() %> </p>
-                <p>---------------------------------------------------------</p>
-        <%
-            }
-        %>
+        <div class="resultadoBusquedaEmpleado">
+
+            <%
+                String legajo = request.getParameter("buscarLegajo");
+                
+                if (legajo != null && !legajo.trim().isEmpty()) {
+                    System.out.println("################## legajo"+legajo);
+                    try{
+                        Controlador controlador = new Controlador();
+                        Empleado empleado = controlador.buscarEmpleado(Integer.parseInt(legajo));
+                        
+                        if(empleado != null){
+                            %>
+                                <p>Nombre: <%= empleado.getNombres() %></p>
+                            <%
+                        }
+                        else{
+                            %>
+                                <p>No se encontro ningun empleado con ese legajo</p>
+                            <%
+                        }
+                    }
+                    catch(Exception e){
+                        System.out.println("############################# error"+e);
+
+                    }
+                }
+                else{
+                    System.out.println("################## no se encontro ningun empleado");
+            %>
+                    <p>Ingrese su legajo</p>
+            <%
+                }
+            %>
+            
+        </div>
         
-        <h1>Lista de empleados</h1>
-        
-        <%
-            List<Empleado> listaEmpleados = (List)request.getSession().getAttribute("listaEmpleados");
-            for(Empleado e : listaEmpleados){
-        %>
-                <p>---------------------------------------------------------</p>
-                <p>Legajo: <%=e.getLegajo() %> </p>
-                <p>Nombres: <%=e.getNombres() %> </p>
-                <p>Apellidos: <%=e.getApellidos() %> </p>
-                <p>---------------------------------------------------------</p>
-        <%
-            }
-        %>
-        
-        <h1>Lista de usuarios</h1>
-        
-        <%
-            List<Usuario> listaUsuarios = (List)request.getSession().getAttribute("listaUsuarios");
-            for(Usuario u : listaUsuarios){
-        %>
-                <p>---------------------------------------------------------</p>
-                <p>Id Usuario: <%=u.getIdUsuario() %> </p>
-                <p>Legajo: <%=u.getEmpleado().getLegajo() %> </p>
-                <p>Nombre de usuario: <%=u.getUsuario() %> </p>
-                <p>Clave: <%=u.getClave() %> </p>
-                <p>Rol: <%=u.getRol().getDescripcion() %> </p>
-                <p>Aprobacion: <%=u.isAprobado() %> </p>
-                <p>---------------------------------------------------------</p>
-        <%
-            }
-        %>
-        
-        
-        <form action="SvRegistrar" method="GET">
+        <form action="SvRegistrar" method="POST">
+            <select id="rol" name="rol">
+            <%
+                List<Rol> listaRoles = (List)request.getSession().getAttribute("listaRoles");
+                for(Rol r : listaRoles){
+            %>
+            <option value="<%=r.getIdRol() %>"> <%=r.getDescripcion() %> </option>
+
+            <%
+                }
+            %>
+            </select>
+            
             <button type="submit">Registrar</button>
         </form>
     </body>
