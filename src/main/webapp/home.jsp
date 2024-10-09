@@ -1,9 +1,3 @@
-<%-- 
-    Document   : home
-    Created on : 1 oct 2024, 4:40:01 p. m.
-    Author     : Bartoluche
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

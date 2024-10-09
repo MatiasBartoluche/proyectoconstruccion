@@ -3,6 +3,7 @@ package servlets;
 import clases.Controlador;
 import clases.Empleado;
 import clases.Rol;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
 @WebServlet(name = "SvRegistrar", urlPatterns = {"/SvRegistrar"})
 public class SvRegistrar extends HttpServlet {
     
@@ -21,38 +21,26 @@ public class SvRegistrar extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-  
-        //String accion = request.getParameter("accion");
-        
-        /*try{
-            if(accion != null){
-                System.out.println("####################### imprimiendo desde SvRegistrar");
-                switch(accion){
-                    case "buscarLegajo":
-                        System.out.println("####################### buscando legajo");
-                }
-            }
-        }
-        catch(Exception e){
-            
-        }*/
+
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        /*String buscarEmpleado = request.getParameter("buscarLegajo");
+        List<Rol> listaRoles = new ArrayList<Rol>();
         
-        int legajo = Integer.parseInt(buscarEmpleado);
+        // realizo la consulta a la base de datos
+        listaRoles = control.buscarListaRoles();
         
-        Empleado empleado = control.buscarEmpleado(legajo);
+        // convertir la lista de objetos Rol a Json
+        Gson gson = new Gson();
+        String rolesJson = gson.toJson(listaRoles);
         
-        HttpSession sesion = request.getSession();
-        
-        sesion.setAttribute("buscarEmpleado", empleado);*/
-        
+        //HttpSession sesion = request.getSession();
 
+        // enviar el Json a la pagina jsp
+        response.getWriter().write(rolesJson);
     }
 
     @Override

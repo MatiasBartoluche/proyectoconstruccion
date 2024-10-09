@@ -69,6 +69,12 @@
             <artifactId>postgresql</artifactId>
             <version>42.5.4</version>
         </dependency>
+        <dependency>
+            <groupId>io.fintrospect</groupId>
+            <artifactId>fintrospect-gson_2.11</artifactId>
+            <version>15.1.0</version>
+            <type>jar</type>
+        </dependency>
     </dependencies>
     
      <build>

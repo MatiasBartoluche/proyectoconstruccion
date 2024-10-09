@@ -8,7 +8,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Registrarse</title>
+        <link type="text/css" rel="stylesheet" href="./css/estilos.css">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script type="text/javascript" src="./js/registrar.js"></script>
     </head>
     <body>
 
@@ -18,54 +21,14 @@
             <button type="submit">Buscar</button>
         </form>
         
-        <div class="resultadoBusquedaEmpleado">
+        <div id="resultadoBusquedaEmpleado">
 
-            <%
-                String legajo = request.getParameter("buscarLegajo");
-                
-                if (legajo != null && !legajo.trim().isEmpty()) {
-                    System.out.println("################## legajo"+legajo);
-                    try{
-                        Controlador controlador = new Controlador();
-                        Empleado empleado = controlador.buscarEmpleado(Integer.parseInt(legajo));
-                        
-                        if(empleado != null){
-                            %>
-                                <p>Nombre: <%= empleado.getNombres() %></p>
-                            <%
-                        }
-                        else{
-                            %>
-                                <p>No se encontro ningun empleado con ese legajo</p>
-                            <%
-                        }
-                    }
-                    catch(Exception e){
-                        System.out.println("############################# error"+e);
-
-                    }
-                }
-                else{
-                    System.out.println("################## no se encontro ningun empleado");
-            %>
-                    <p>Ingrese su legajo</p>
-            <%
-                }
-            %>
             
         </div>
         
         <form action="SvRegistrar" method="POST">
             <select id="rol" name="rol">
-            <%
-                List<Rol> listaRoles = (List)request.getSession().getAttribute("listaRoles");
-                for(Rol r : listaRoles){
-            %>
-            <option value="<%=r.getIdRol() %>"> <%=r.getDescripcion() %> </option>
-
-            <%
-                }
-            %>
+                <!-- insertar desde javascript -->
             </select>
             
             <button type="submit">Registrar</button>
