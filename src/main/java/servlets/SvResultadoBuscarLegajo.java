@@ -42,10 +42,12 @@ public class SvResultadoBuscarLegajo extends HttpServlet {
         
         Empleado empleado = control.buscarEmpleado(numeroLegajo);
         
-        Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
-        String empleadoJson = gson.toJson(empleado);
-        
-        response.getWriter().write(empleadoJson);
+        if(empleado != null){
+            Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
+            String empleadoJson = gson.toJson(empleado);
+
+            response.getWriter().write(empleadoJson);
+        }
     }
 
     @Override
