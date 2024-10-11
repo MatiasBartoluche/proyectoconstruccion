@@ -17,6 +17,7 @@ function cargarRoles(){
             
             $.each(data, function(i, item){
                 console.log(item.id_rol + " - " + item.descripcion);
+                $('#rol').append('<option value="'+item.id_rol+'">'+item.descripcion+'</option>');
             });
             
         },

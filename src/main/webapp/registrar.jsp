@@ -10,8 +10,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Registrarse</title>
         <link type="text/css" rel="stylesheet" href="./css/estilos.css">
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script type="text/javascript" src="./js/registrar.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="./js/registrar.js"></script>
     </head>
     <body>
 
