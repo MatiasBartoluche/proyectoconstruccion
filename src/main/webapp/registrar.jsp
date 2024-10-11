@@ -15,23 +15,28 @@
     </head>
     <body>
 
-        <form action="registrar.jsp" method="GET">
-            <p>Buscar empleado</p>
-            <p>Ingrese su numero de legajo: <input type="text" placeholder="Legajo" name="buscarLegajo"></p>
-            <button type="submit">Buscar</button>
-        </form>
-        
-        <div id="resultadoBusquedaEmpleado">
+        <div id="contenidoRegistrar">
 
+            <div id="buscarEmpleado">
+                <H2>Buscar empleado</h2>
+                <p>Ingrese su numero de legajo: <input type="text" placeholder="Legajo" name="buscarLegajo" id="inputLegajo"></p>
+                <button id="btnBuscarEmpleado">Buscar</button>
+            </div>
+
+            <div id="resultadoBusquedaEmpleado">
+
+
+            </div>
+
+            <div id="formularioRegistro">
+                <select id="rol" name="rol">
+                    <!-- insertar desde javascript -->
+                </select>
+
+                <button type="submit">Registrar</button>
+            </div> 
             
         </div>
         
-        <form action="SvRegistrar" method="POST">
-            <select id="rol" name="rol">
-                <!-- insertar desde javascript -->
-            </select>
-            
-            <button type="submit">Registrar</button>
-        </form>
     </body>
 </html>

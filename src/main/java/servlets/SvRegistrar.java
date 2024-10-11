@@ -26,8 +26,7 @@ public class SvRegistrar extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
+            throws ServletException, IOException {        
         List<Rol> listaRoles = new ArrayList<Rol>();
         
         // realizo la consulta a la base de datos
