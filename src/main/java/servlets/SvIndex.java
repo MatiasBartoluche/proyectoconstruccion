@@ -1,7 +1,9 @@
 package servlets;
 
+import clases.Contrato;
 import clases.Controlador;
 import clases.Empleado;
+import clases.Estado;
 import clases.Jerarquia;
 import clases.Rol;
 import clases.Usuario;
@@ -64,7 +66,7 @@ public class SvIndex extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        /*Rol rolSistemas = new Rol("Admin sistemas");
+        Rol rolSistemas = new Rol("Admin sistemas");
         Rol rolAdministrativo = new Rol("Administrativo");
         Rol rolAyudante = new Rol("Ayudante");
         Rol rolContador = new Rol("Contador");
@@ -74,17 +76,48 @@ public class SvIndex extends HttpServlet {
         controlador.crearRol(rolAyudante);
         controlador.crearRol(rolContador);
         
-        Empleado empleado = new Empleado();
-        
         Jerarquia administrativo = new Jerarquia("Administrativo");
         Jerarquia contador = new Jerarquia("Contador");
         Jerarquia ayudanteAdmin = new Jerarquia("Ayudante administrativo");
+        Jerarquia adminSistemas = new Jerarquia("Admin Sistemas");
         Jerarquia ayudanteAlbanil = new Jerarquia("Ayudante albanil");
         Jerarquia oficial = new Jerarquia("Oficial");
         Jerarquia capataz = new Jerarquia("Capataz");
-        Jerarquia carpintyero = new Jerarquia("Carpintero");
+        Jerarquia carpintero = new Jerarquia("Carpintero");
         Jerarquia plomero = new Jerarquia("Plomero");
         Jerarquia balancin = new Jerarquia("Balancin");
+        
+        /*controlador.crearJerarquia(adminSistemas);
+        controlador.crearJerarquia(administrativo);
+        controlador.crearJerarquia(contador);
+        controlador.crearJerarquia(ayudanteAdmin);
+        controlador.crearJerarquia(ayudanteAlbanil);
+        controlador.crearJerarquia(oficial);
+        controlador.crearJerarquia(capataz);
+        controlador.crearJerarquia(carpintero);
+        controlador.crearJerarquia(plomero);
+        controlador.crearJerarquia(balancin);*/
+
+        
+        Contrato obrero = new Contrato("Obrero");
+        Contrato oficina = new Contrato("Oficina");
+        Contrato subcontratado = new Contrato("Subcontratado");
+        
+        /*controlador.crearContrato(obrero);
+        controlador.crearcontrato(oficina);
+        controlador.crearContrato(subcontratado);*/
+        
+        Estado activo = new Estado("Activo");
+        Estado art = new Estado("ART");
+        Estado vacaciones = new Estado("Vacaciones");
+        Estado libre = new Estado("Dia libre");
+        
+        /*controlador.crearEstado(activo);
+        controlador.crearEstado(art);
+        controlador.crearEstado(vacaciones);
+        controlador.crearEstado(libre);*/
+        
+        Empleado empleado = new Empleado();
         
         empleado.setLegajo(1234);
         empleado.setJerarquia(administrativo);
@@ -98,13 +131,13 @@ public class SvIndex extends HttpServlet {
         empleado.setTelefonoFamiliar("4287-1234");
         empleado.setFotoDni("");
         empleado.setFechaIngreso(LocalDate.of(2024,10,7));
-        empleado.setTipoContrato(0);
+        empleado.setContrato(oficina);
         empleado.setSueldoBase(100000.21);
-        empleado.setIdEstadoEmpleado(0);
+        empleado.setEstado(activo);
         empleado.setAntiguedad(0);
         empleado.setDespido(false);
         empleado.setIdObra(0);
-        empleado.setIdGrupo(1);
+        empleado.setGrupo(null);
         
        controlador.crearEmpleado(empleado);
         
@@ -117,7 +150,7 @@ public class SvIndex extends HttpServlet {
         usuario.setAprobado(false);
         usuario.setAuditoria("");
         
-        controlador.crearUsuario(usuario);*/
+        controlador.crearUsuario(usuario);
         
         
         /*

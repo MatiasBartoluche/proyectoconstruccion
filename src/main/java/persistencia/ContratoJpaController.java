@@ -1,6 +1,6 @@
 package persistencia;
 
-import clases.Empleado;
+import clases.Contrato;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -10,16 +10,16 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 
-public class EmpleadoJpaController implements Serializable{
-        
+public class ContratoJpaController implements Serializable{
+            
     
     private EntityManagerFactory emf = null;
 
-    public EmpleadoJpaController(EntityManagerFactory emf) {
+    public ContratoJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     
-    public EmpleadoJpaController(){
+    public ContratoJpaController(){
         emf = Persistence.createEntityManagerFactory("construccionPU");
     }
 
@@ -28,11 +28,11 @@ public class EmpleadoJpaController implements Serializable{
     }
 
     // Crear usuario
-    public void create(Empleado empleado) {
+    public void create(Contrato contrato) {
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
-            em.persist(empleado);
+            em.persist(contrato);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -42,16 +42,16 @@ public class EmpleadoJpaController implements Serializable{
     }
 
     // Editar usuario
-    public void edit(Empleado empleado) throws Exception {
+    public void edit(Contrato contrato) throws Exception {
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
-            empleado = em.merge(empleado);
+            contrato = em.merge(contrato);
             em.getTransaction().commit();
         } catch (Exception ex) {
-            int legajo = empleado.getLegajo();
-            if (findEmpleado(legajo) == null) {
-                throw new EntityNotFoundException("El Empleado con legajo " + legajo + " no existe.");
+            int id = contrato.getIdContrato();
+            if (findContrato(id) == null) {
+                throw new EntityNotFoundException("El contrato con id " + id + " no existe.");
             }
             throw ex;
         } finally {
@@ -62,18 +62,18 @@ public class EmpleadoJpaController implements Serializable{
     }
 
     // Eliminar usuario
-    public void destroy(int legajo) throws EntityNotFoundException {
+    public void destroy(int id) throws EntityNotFoundException {
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
-            Empleado empleado;
+            Contrato contrato;
             try {
-                empleado = em.getReference(Empleado.class, legajo);
-                empleado.getLegajo();
+                contrato = em.getReference(Contrato.class, id);
+                contrato.getIdContrato();
             } catch (EntityNotFoundException enfe) {
-                throw new EntityNotFoundException("El Empleado con legajo " + legajo + " no existe.");
+                throw new EntityNotFoundException("El Contrato con id " + id + " no existe.");
             }
-            em.remove(empleado);
+            em.remove(contrato);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -83,30 +83,30 @@ public class EmpleadoJpaController implements Serializable{
     }
 
     // Encontrar usuario por legajo
-    public Empleado findEmpleado(int legajo) {
+    public Contrato findContrato(int id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Empleado.class, legajo);
+            return em.find(Contrato.class, id);
         } finally {
             em.close();
         }
     }
 
-    public List<Empleado> findEmpleadoEntities(){
-        return findEmpleadoEntities(true, -1, -1);
+    public List<Contrato> findContratoEntities(){
+        return findContratoEntities(true, -1, -1);
     }
     
-    public List<Empleado> findEmpleadoEntities(int maxResults, int firstResult){
-        return findEmpleadoEntities(false, maxResults, firstResult);
+    public List<Contrato> findContratoEntities(int maxResults, int firstResult){
+        return findContratoEntities(false, maxResults, firstResult);
     }
     
     
-    private List<Empleado> findEmpleadoEntities(boolean all, int maxResults, int firstResult){
+    private List<Contrato> findContratoEntities(boolean all, int maxResults, int firstResult){
         EntityManager em = getEntityManager();
         try{
             //Query query = em.createQuery("SELECT rol FROM rol");
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Empleado.class));
+            cq.select(cq.from(Contrato.class));
             Query query = em.createQuery(cq);
             if(!all){
                 query.setMaxResults(maxResults);

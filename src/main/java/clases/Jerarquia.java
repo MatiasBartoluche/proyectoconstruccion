@@ -22,11 +22,11 @@ public class Jerarquia implements Serializable{
         this.descripcion = descripcion;
     }
 
-    public int getId_jerarquia() {
+    public int getIdJerarquia() {
         return id_jerarquia;
     }
 
-    public void setId_jerarquia(int id_jerarquia) {
+    public void setIdJerarquia(int id_jerarquia) {
         this.id_jerarquia = id_jerarquia;
     }
 
