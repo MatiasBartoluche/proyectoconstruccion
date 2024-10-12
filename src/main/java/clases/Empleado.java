@@ -24,34 +24,21 @@ public class Empleado implements Serializable {
     private String telefono_familiar;
     private String foto_dni;
     private LocalDate fecha_ingreso; // LocalDate fecha sin hora
-    private int tipo_contrato; // 0 = empleado de oficina, 1 = obrero, 2 = subcontratado
+    
+    @OneToOne
+    private Contrato contrato; // 0 = empleado de oficina, 1 = obrero, 2 = subcontratado
     private double sueldo_base;
-    private int id_estado_empleado;
+    
+    @OneToOne
+    private Estado estado;
     private int antiguedad;
     private boolean despido; // true = despido, false = empleado vigente
     private int id_obra;
-    private int id_grupo;
+    
+    @OneToOne
+    private GrupoTrabajo grupo;
 
-    public Empleado(
-            int legajo, 
-            Jerarquia jerarquia, 
-            String nombres, 
-            String apellidos, 
-            String cuil, 
-            String calle, 
-            int altura, 
-            String localidad, 
-            String telefono, 
-            String telefono_familiar, 
-            String foto_dni, 
-            LocalDate fecha_ingreso, 
-            int tipo_contrato, 
-            double sueldo_base, 
-            int id_estado_empleado, 
-            int antiguedad, 
-            boolean despido, 
-            int id_obra, 
-            int id_grupo) {
+    public Empleado(int legajo, Jerarquia jerarquia, String nombres, String apellidos, String cuil, String calle, int altura, String localidad, String telefono, String telefono_familiar, String foto_dni, LocalDate fecha_ingreso, Contrato contrato, double sueldo_base, Estado estado, int antiguedad, boolean despido, int id_obra, GrupoTrabajo grupo) {
         this.legajo = legajo;
         this.jerarquia = jerarquia;
         this.nombres = nombres;
@@ -64,13 +51,13 @@ public class Empleado implements Serializable {
         this.telefono_familiar = telefono_familiar;
         this.foto_dni = foto_dni;
         this.fecha_ingreso = fecha_ingreso;
-        this.tipo_contrato = tipo_contrato;
+        this.contrato = contrato;
         this.sueldo_base = sueldo_base;
-        this.id_estado_empleado = id_estado_empleado;
+        this.estado = estado;
         this.antiguedad = antiguedad;
         this.despido = despido;
         this.id_obra = id_obra;
-        this.id_grupo = id_grupo;
+        this.grupo = grupo;
     }
 
     public Empleado() {
@@ -80,155 +67,153 @@ public class Empleado implements Serializable {
         return legajo;
     }
 
-    public Jerarquia getJerarquia() {
-        return jerarquia;
-    }
-
-    public String getNombres() {
-        return nombres;
-    }
-
-    public String getApellidos() {
-        return apellidos;
-    }
-
-    public String getCuil() {
-        return cuil;
-    }
-
-    public String getCalle() {
-        return calle;
-    }
-
-    public int getAltura() {
-        return altura;
-    }
-
-    public String getLocalidad() {
-        return localidad;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public String getTelefonoFamiliar() {
-        return telefono_familiar;
-    }
-
-    public String getFotoDni() {
-        return foto_dni;
-    }
-
-    public LocalDate getFechaIngreso() {
-        return fecha_ingreso;
-    }
-
-    public int getTipoContrato() {
-        return tipo_contrato;
-    }
-
-    public double getSueldoBase() {
-        return sueldo_base;
-    }
-
-    public int getIdEstadoEmpleado() {
-        return id_estado_empleado;
-    }
-
-    public int getAntiguedad() {
-        return antiguedad;
-    }
-
-    public boolean isDespido() {
-        return despido;
-    }
-
-    public int getIdObra() {
-        return id_obra;
-    }
-
-    public int getIdGrupo() {
-        return id_grupo;
-    }
-
-    /* ############################ setters ##################################*/
-    
     public void setLegajo(int legajo) {
         this.legajo = legajo;
+    }
+
+    public Jerarquia getJerarquia() {
+        return jerarquia;
     }
 
     public void setJerarquia(Jerarquia jerarquia) {
         this.jerarquia = jerarquia;
     }
 
+    public String getNombres() {
+        return nombres;
+    }
+
     public void setNombres(String nombres) {
         this.nombres = nombres;
+    }
+
+    public String getApellidos() {
+        return apellidos;
     }
 
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
     }
 
+    public String getCuil() {
+        return cuil;
+    }
+
     public void setCuil(String cuil) {
         this.cuil = cuil;
+    }
+
+    public String getCalle() {
+        return calle;
     }
 
     public void setCalle(String calle) {
         this.calle = calle;
     }
 
+    public int getAltura() {
+        return altura;
+    }
+
     public void setAltura(int altura) {
         this.altura = altura;
+    }
+
+    public String getLocalidad() {
+        return localidad;
     }
 
     public void setLocalidad(String localidad) {
         this.localidad = localidad;
     }
 
+    public String getTelefono() {
+        return telefono;
+    }
+
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public String getTelefonoFamiliar() {
+        return telefono_familiar;
     }
 
     public void setTelefonoFamiliar(String telefono_familiar) {
         this.telefono_familiar = telefono_familiar;
     }
 
+    public String getFotoDni() {
+        return foto_dni;
+    }
+
     public void setFotoDni(String foto_dni) {
         this.foto_dni = foto_dni;
+    }
+
+    public LocalDate getFechaIngreso() {
+        return fecha_ingreso;
     }
 
     public void setFechaIngreso(LocalDate fecha_ingreso) {
         this.fecha_ingreso = fecha_ingreso;
     }
 
-    public void setTipoContrato(int tipo_contrato) {
-        this.tipo_contrato = tipo_contrato;
+    public Contrato getContrato() {
+        return contrato;
+    }
+
+    public void setContrato(Contrato contrato) {
+        this.contrato = contrato;
+    }
+
+    public double getSueldoBase() {
+        return sueldo_base;
     }
 
     public void setSueldoBase(double sueldo_base) {
         this.sueldo_base = sueldo_base;
     }
 
-    public void setIdEstadoEmpleado(int id_estado_empleado) {
-        this.id_estado_empleado = id_estado_empleado;
+    public Estado getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
+
+    public int getAntiguedad() {
+        return antiguedad;
     }
 
     public void setAntiguedad(int antiguedad) {
         this.antiguedad = antiguedad;
     }
 
+    public boolean isDespido() {
+        return despido;
+    }
+
     public void setDespido(boolean despido) {
         this.despido = despido;
+    }
+
+    public int getIdObra() {
+        return id_obra;
     }
 
     public void setIdObra(int id_obra) {
         this.id_obra = id_obra;
     }
 
-    public void setIdGrupo(int id_grupo) {
-        this.id_grupo = id_grupo;
+    public GrupoTrabajo getGrupo() {
+        return grupo;
     }
-    
+
+    public void setGrupo(GrupoTrabajo grupo) {
+        this.grupo = grupo;
+    }
+
     
 }

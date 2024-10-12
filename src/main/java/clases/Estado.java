@@ -1,33 +1,30 @@
 package clases;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
-public class Jerarquia implements Serializable{
-    
+public class Estado implements Serializable{
+        
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
-    private int id_jerarquia;
-    private String descripcion;
+    private int id_estado;
+    String descripcion;
 
-    public Jerarquia() {
+    public Estado() {
     }
 
-    public Jerarquia(String descripcion) {
-        this.id_jerarquia = id_jerarquia;
+    public Estado(String descripcion) {
         this.descripcion = descripcion;
     }
 
-    public int getId_jerarquia() {
-        return id_jerarquia;
+    public int getIdEstado() {
+        return id_estado;
     }
 
-    public void setId_jerarquia(int id_jerarquia) {
-        this.id_jerarquia = id_jerarquia;
+    public void setIdEstado(int id_estado) {
+        this.id_estado = id_estado;
     }
 
     public String getDescripcion() {
@@ -38,5 +35,5 @@ public class Jerarquia implements Serializable{
         this.descripcion = descripcion;
     }
     
-    
+
 }

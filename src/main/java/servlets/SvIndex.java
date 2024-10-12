@@ -2,6 +2,7 @@ package servlets;
 
 import clases.Controlador;
 import clases.Empleado;
+import clases.Jerarquia;
 import clases.Rol;
 import clases.Usuario;
 import java.io.IOException;
@@ -66,17 +67,27 @@ public class SvIndex extends HttpServlet {
         /*Rol rolSistemas = new Rol("Admin sistemas");
         Rol rolAdministrativo = new Rol("Administrativo");
         Rol rolAyudante = new Rol("Ayudante");
-        Rol rolContador = new Rol("Contador");*/
+        Rol rolContador = new Rol("Contador");
         
-        /*controlador.crearRol(rolSistemas);
+        controlador.crearRol(rolSistemas);
         controlador.crearRol(rolAdministrativo);
         controlador.crearRol(rolAyudante);
-        controlador.crearRol(rolContador);*/
+        controlador.crearRol(rolContador);
         
-        //Empleado empleado = new Empleado();
+        Empleado empleado = new Empleado();
         
-        /*empleado.setLegajo(1234);
-        empleado.setIdJerarquia(1);
+        Jerarquia administrativo = new Jerarquia("Administrativo");
+        Jerarquia contador = new Jerarquia("Contador");
+        Jerarquia ayudanteAdmin = new Jerarquia("Ayudante administrativo");
+        Jerarquia ayudanteAlbanil = new Jerarquia("Ayudante albanil");
+        Jerarquia oficial = new Jerarquia("Oficial");
+        Jerarquia capataz = new Jerarquia("Capataz");
+        Jerarquia carpintyero = new Jerarquia("Carpintero");
+        Jerarquia plomero = new Jerarquia("Plomero");
+        Jerarquia balancin = new Jerarquia("Balancin");
+        
+        empleado.setLegajo(1234);
+        empleado.setJerarquia(administrativo);
         empleado.setNombres("juan");
         empleado.setApellidos("perez");
         empleado.setCuil("20-12345678-9");
@@ -93,20 +104,20 @@ public class SvIndex extends HttpServlet {
         empleado.setAntiguedad(0);
         empleado.setDespido(false);
         empleado.setIdObra(0);
-        empleado.setIdGrupo(1);*/
+        empleado.setIdGrupo(1);
         
-       //controlador.crearEmpleado(empleado);
+       controlador.crearEmpleado(empleado);
         
-        //Usuario usuario = new Usuario();
+        Usuario usuario = new Usuario();
         
-        /*usuario.setEmpleado(empleado);
+        usuario.setEmpleado(empleado);
         usuario.setUsuario("usuarioJuan1234");
         usuario.setClave("1234");
         usuario.setRol(rolSistemas);
         usuario.setAprobado(false);
-        usuario.setAuditoria("");*/
+        usuario.setAuditoria("");
         
-        //controlador.crearUsuario(usuario);
+        controlador.crearUsuario(usuario);*/
         
         
         /*

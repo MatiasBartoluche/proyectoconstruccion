@@ -7,27 +7,26 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Jerarquia implements Serializable{
+public class Contrato implements Serializable {
     
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
-    private int id_jerarquia;
-    private String descripcion;
+    private int id_contrato;
+    String descripcion;
 
-    public Jerarquia() {
+    public Contrato() {
     }
 
-    public Jerarquia(String descripcion) {
-        this.id_jerarquia = id_jerarquia;
+    public Contrato(String descripcion) {
         this.descripcion = descripcion;
     }
 
-    public int getId_jerarquia() {
-        return id_jerarquia;
+    public int getIdContrato() {
+        return id_contrato;
     }
 
-    public void setId_jerarquia(int id_jerarquia) {
-        this.id_jerarquia = id_jerarquia;
+    public void setIdContrato(int id_contrato) {
+        this.id_contrato = id_contrato;
     }
 
     public String getDescripcion() {
