@@ -10,6 +10,28 @@ public class Controlador {
     // a traves de una sola instancia
     ControladorPersistencia controladorPersistencia = new ControladorPersistencia();
     
+    // ######################### creando metodos para Contrato ##################
+    
+    public void crearContrato(Contrato contrato){
+        controladorPersistencia.crearContrato(contrato);
+    }
+    
+    public void eliminarContrato(int idContrato){
+        controladorPersistencia.eliminarContrato(idContrato);
+    }
+    
+    public void editarContrato(Contrato contrato){
+        controladorPersistencia.editarContrato(contrato);
+    }
+    
+    public Contrato buscarContrato(int idContrato){
+        return controladorPersistencia.traerContrato(idContrato);
+    }
+    
+    public ArrayList<Contrato> buscarListaContratos(){
+        return controladorPersistencia.traerListaContratos();
+    }
+    
     // ######################### creando metodos para Empleado ##################
     
     public void crearEmpleado(Empleado empleado){
@@ -30,6 +52,50 @@ public class Controlador {
     
     public ArrayList<Empleado> buscarListaEmpleados(){
         return controladorPersistencia.traerListaEmpleado();
+    }
+    
+    // #########"############ creando metodos para grupoTrabajo #################
+    
+    public void crearGrupoTrabajo(GrupoTrabajo grupo){
+        controladorPersistencia.crearGrupo(grupo);
+    }
+    
+    public void eliminarGrupo(int idGrupo){
+        controladorPersistencia.eliminarGrupo(idGrupo);
+    }
+    
+    public void editarGrupo(GrupoTrabajo grupo){
+        controladorPersistencia.editarGrupo(grupo);
+    }
+    
+    public GrupoTrabajo buscarGrupo(int idGrupo){
+        return controladorPersistencia.traerGrupo(idGrupo);
+    }
+    
+    public ArrayList<GrupoTrabajo> buscarListaGruposTrabajo(){
+        return controladorPersistencia.traerListaGruposTrabajo();
+    }
+    
+    // ######################## creando metodos para Jerarquia ##################
+    
+    public void crearJerarquia(Jerarquia jerarquia){
+        controladorPersistencia.crearJerarquia(jerarquia);
+    }
+    
+    public void eliminarJerarquia(int idJerarquia){
+        controladorPersistencia.eliminarJerarquia(idJerarquia);
+    }
+    
+    public void editarJerarquia(Jerarquia jerarquia){
+        controladorPersistencia.editarJerarquia(jerarquia);
+    }
+    
+    public Jerarquia buscarJerarquia(int idJerarquia){
+        return controladorPersistencia.traerJerarquia(idJerarquia);
+    }
+    
+    public ArrayList<Jerarquia> buscarListaJerarquias(){
+        return controladorPersistencia.traerListaJerarquias();
     }
     
     // ########################## creando metodos para Rol ######################
