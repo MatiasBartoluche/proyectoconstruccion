@@ -23,6 +23,11 @@
 button{
     background: var(--primary-color); /*color de botones*/
     color: var(--sidebar-color); /*color de las letras de botones*/
+    border-radius: 6px;
+}
+
+div{
+    border-radius: 6px;
 }
 
 /*------------------------ estilos pagina index.jsp --------------------------*/
@@ -90,9 +95,16 @@ body{
     flex-wrap: wrap;
 }
 
-#buscarEmpleado, #resultadoBusquuedaEmpleado, #formularioRegistro{
+#buscarEmpleado, #resultadoBusquedaEmpleado, #formularioRegistro{
+    position: relative;
     width: 60%;
-    margin-left: 20%;
+    left: 20%;
     background-color: var(--sidebar-color);
     text-align: center;
+    margin: 1%;
+}
+
+/* inicialmente no sera visible */
+#formularioRegistro{
+    display: none;
 }

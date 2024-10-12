@@ -3,14 +3,10 @@ package servlets;
 import clases.Controlador;
 import clases.Empleado;
 import clases.LocalDateAdapter;
-import clases.Rol;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,7 +31,7 @@ public class SvResultadoBuscarLegajo extends HttpServlet {
         response.setContentType("text/plain");
 
         String legajo = request.getParameter("legajo");
-        System.out.println("#############################################"+legajo);
+        System.out.println("#############################################"+legajo);     
         
         // busco el empleado con el legajo recibido
         int numeroLegajo = Integer.parseInt(legajo);
