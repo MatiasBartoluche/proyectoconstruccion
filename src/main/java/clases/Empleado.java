@@ -4,13 +4,16 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Empleado implements Serializable {
     
     @Id
     private int legajo; // el legajo sera ingresado manualmente por el usuario del sistema
-    private int id_jerarquia;
+    
+    @OneToOne
+    private Jerarquia jerarquia;
     private String nombres;
     private String apellidos;
     private String cuil;
@@ -31,7 +34,7 @@ public class Empleado implements Serializable {
 
     public Empleado(
             int legajo, 
-            int id_jerarquia, 
+            Jerarquia jerarquia, 
             String nombres, 
             String apellidos, 
             String cuil, 
@@ -50,7 +53,7 @@ public class Empleado implements Serializable {
             int id_obra, 
             int id_grupo) {
         this.legajo = legajo;
-        this.id_jerarquia = id_jerarquia;
+        this.jerarquia = jerarquia;
         this.nombres = nombres;
         this.apellidos = apellidos;
         this.cuil = cuil;
@@ -77,8 +80,8 @@ public class Empleado implements Serializable {
         return legajo;
     }
 
-    public int getIdJerarquia() {
-        return id_jerarquia;
+    public Jerarquia getJerarquia() {
+        return jerarquia;
     }
 
     public String getNombres() {
@@ -155,8 +158,8 @@ public class Empleado implements Serializable {
         this.legajo = legajo;
     }
 
-    public void setIdJerarquia(int id_jerarquia) {
-        this.id_jerarquia = id_jerarquia;
+    public void setJerarquia(Jerarquia jerarquia) {
+        this.jerarquia = jerarquia;
     }
 
     public void setNombres(String nombres) {
