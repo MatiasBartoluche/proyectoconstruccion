@@ -66,7 +66,7 @@ public class SvIndex extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        Rol rolSistemas = new Rol("Admin sistemas");
+        /*Rol rolSistemas = new Rol("Admin sistemas");
         Rol rolAdministrativo = new Rol("Administrativo");
         Rol rolAyudante = new Rol("Ayudante");
         Rol rolContador = new Rol("Contador");
@@ -112,10 +112,10 @@ public class SvIndex extends HttpServlet {
         Estado vacaciones = new Estado("Vacaciones");
         Estado libre = new Estado("Dia libre");
         
-        /*controlador.crearEstado(activo);
+        controlador.crearEstado(activo);
         controlador.crearEstado(art);
         controlador.crearEstado(vacaciones);
-        controlador.crearEstado(libre);*/
+        controlador.crearEstado(libre);
         
         Empleado empleado = new Empleado();
         
@@ -150,7 +150,7 @@ public class SvIndex extends HttpServlet {
         usuario.setAprobado(false);
         usuario.setAuditoria("");
         
-        controlador.crearUsuario(usuario);
+        controlador.crearUsuario(usuario);*/
         
         
         /*

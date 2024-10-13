@@ -60,6 +60,8 @@ public class Empleado implements Serializable {
         this.grupo = grupo;
     }
 
+
+
     public Empleado() {
     }
 
