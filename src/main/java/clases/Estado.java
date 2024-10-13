@@ -1,10 +1,12 @@
 package clases;
 
 import java.io.Serializable;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+@Entity
 public class Estado implements Serializable{
         
     @Id
@@ -34,6 +36,6 @@ public class Estado implements Serializable{
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
+
 
 }

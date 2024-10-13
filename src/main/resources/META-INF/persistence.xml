@@ -8,6 +8,7 @@
     <class>clases.Contrato</class>
     <class>clases.GrupoTrabajo</class>
     <class>clases.Jerarquia</class>
+    <class>clases.Estado</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/construccion"/>

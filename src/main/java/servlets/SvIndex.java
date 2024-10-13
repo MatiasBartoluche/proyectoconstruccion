@@ -87,7 +87,7 @@ public class SvIndex extends HttpServlet {
         Jerarquia plomero = new Jerarquia("Plomero");
         Jerarquia balancin = new Jerarquia("Balancin");
         
-        /*controlador.crearJerarquia(adminSistemas);
+        controlador.crearJerarquia(adminSistemas);
         controlador.crearJerarquia(administrativo);
         controlador.crearJerarquia(contador);
         controlador.crearJerarquia(ayudanteAdmin);
@@ -96,16 +96,16 @@ public class SvIndex extends HttpServlet {
         controlador.crearJerarquia(capataz);
         controlador.crearJerarquia(carpintero);
         controlador.crearJerarquia(plomero);
-        controlador.crearJerarquia(balancin);*/
+        controlador.crearJerarquia(balancin);
 
         
         Contrato obrero = new Contrato("Obrero");
         Contrato oficina = new Contrato("Oficina");
         Contrato subcontratado = new Contrato("Subcontratado");
         
-        /*controlador.crearContrato(obrero);
-        controlador.crearcontrato(oficina);
-        controlador.crearContrato(subcontratado);*/
+        controlador.crearContrato(obrero);
+        controlador.crearContrato(oficina);
+        controlador.crearContrato(subcontratado);
         
         Estado activo = new Estado("Activo");
         Estado art = new Estado("ART");
