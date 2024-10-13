@@ -2,6 +2,7 @@ package persistencia;
 
 import clases.Contrato;
 import clases.Empleado;
+import clases.Estado;
 import clases.GrupoTrabajo;
 import clases.Jerarquia;
 import clases.Rol;
@@ -17,6 +18,7 @@ public class ControladorPersistencia {
     
     ContratoJpaController contratoJpa = new ContratoJpaController();
     EmpleadoJpaController empleadoJpa = new EmpleadoJpaController();
+    EstadoJpaController estadoJpa = new EstadoJpaController();
     GrupoTrabajoJpaController grupoJpa = new GrupoTrabajoJpaController();
     JerarquiaJpaController jerarquiaJpa = new JerarquiaJpaController();
     RolJpaController rolJpa = new RolJpaController();
@@ -82,6 +84,37 @@ public class ControladorPersistencia {
         ArrayList<Empleado> listaEmpleados = new ArrayList<>(lista);
         
         return listaEmpleados;
+    }
+    
+    // ###################### creando metodos para EstadoJpaController ###################################
+   
+    public void crearEstado(Estado estado) {
+        estadoJpa.create(estado);
+    }
+
+    public void eliminarEstado(int idEstado) {
+        estadoJpa.destroy(idEstado);
+    }
+
+    public void editarEstado(Estado estado) {
+        try{
+            estadoJpa.edit(estado);
+        }
+        catch (Exception ex) {
+            Logger.getLogger(ControladorPersistencia.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public Estado traerEstado(int idEstado) {
+        return estadoJpa.findEstado(idEstado);
+    }
+
+    public ArrayList<Estado> traerListaEstados() {
+        List<Estado> lista = estadoJpa.findEstadoEntities();
+        
+        ArrayList<Estado> listaEstados = new ArrayList<>(lista);
+        
+        return listaEstados;
     }
     
     // ###################### creando metodos para GrupoTrabajoJpaController #############################
