@@ -54,7 +54,30 @@ public class Controlador {
         return controladorPersistencia.traerListaEmpleado();
     }
     
-    // #########"############ creando metodos para grupoTrabajo #################
+    // ###################### creando metodos para Estado #######################
+    
+    
+    public void crearEstado(Estado estado){
+        controladorPersistencia.crearEstado(estado);
+    }
+    
+    public void eliminarEstado(int idEstado){
+        controladorPersistencia.eliminarEstado(idEstado);
+    }
+    
+    public void editarEstado(Estado estado){
+        controladorPersistencia.editarEstado(estado);
+    }
+    
+    public Estado buscarEstado(int idEstado){
+        return controladorPersistencia.traerEstado(idEstado);
+    }
+    
+    public ArrayList<Estado> buscarListaEstados(){
+        return controladorPersistencia.traerListaEstados();
+    }
+    
+    // ###################### creando metodos para grupoTrabajo #################
     
     public void crearGrupoTrabajo(GrupoTrabajo grupo){
         controladorPersistencia.crearGrupo(grupo);
