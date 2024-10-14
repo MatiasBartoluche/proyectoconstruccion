@@ -1,20 +1,20 @@
 $(document).ready(function(){
     
-    cargarRoles();
     buscarEmpleado();
     aceptarBusquedaEmpleado();
 });
 
 function cargarRoles(){
 $.ajax({
-        url: 'SvRegistrar', // URL del servlet
+        url: 'SvResultadoBuscarLegajo', // URL del servlet
         type: 'GET',
         dataType: 'json',
         success: function(data) {
             // 'data' es un array de objetos Usuario en formato JSON
             // Aquí puedes iterar y mostrar los datos en tu página
             $.each(data, function(i, item){
-                $('#rol').append('<option value="'+item.id_rol+'">'+item.descripcion+'</option>');
+                console.log(item);
+                $('#rol').append('<option value="'+item.id_rol+'" id="'+item.descripcion+'">'+item.descripcion+'</option>');
             });   
         },
         error: function(xhr, status, error) {
@@ -33,26 +33,29 @@ function buscarEmpleado(){
             $('#resultadoBusquedaEmpleado').append('<p>Ingrese un numero de legajo</p>');
         }
         else{
-            console.log(buscarLegajo);
             $.ajax({
                     url: 'SvResultadoBuscarLegajo', // URL del servlet
-                    type: 'GET',
+                    type: 'POST',
                     data: {legajo: buscarLegajo},
                     dataType: 'json',
                     success: function(response) {
-                        // 'data' es un array de objetos Usuario en formato JSON
-                        console.log(response);
+                        // 'response' es un array de objetos Usuario en formato JSON
+                        //console.log(response);
                         $('#resultadoBusquedaEmpleado').append(
                                 '<p> Usted es: '+response.apellidos+', '+response.nombres+'</p>'+
-                                '<p> Cargo: '+response.id_jerarquia+'</p>'+
+                                '<p> Cargo: '+response.jerarquia.descripcion+'</p>'+
+                                '<p>Numero de legajo: '+response.legajo+'</p>'+
                                 '<p>Si estos datos son correctos, presione el boton "Aceptar", de lo contrario, ingrese nuevamente su legajo</p>'+
                                 '<button id="aceptarBusquedaEmpleado">Aceptar</button>'
                         );
+                        // llamo a la funcion registroUsuario y le paso el response empleado como parametro
+                        registrarUsuario(response);
                     },
                     error: function(xhr, status, error) {
                         //console.error('Error al obtener el legajo ingresado:', error);
                         console.log('error al obtener el empleado');
                         $('#resultadoBusquedaEmpleado').append('<p>No se encontro un empleado con ese legajo</p>');
+                        $('#formularioRegistro').css('display', 'none');
                     }
             });  
         }
@@ -61,8 +64,147 @@ function buscarEmpleado(){
 
 function aceptarBusquedaEmpleado(){
     $('#resultadoBusquedaEmpleado').on('click', '#aceptarBusquedaEmpleado', function(){
-        console.log('aceptar');
+        cargarRoles();
         $('#formularioRegistro').css('display', 'block');
+    });
+}
+
+function registrarUsuario(empleado){
+    var empleadoBuscado = empleado;
+    
+    //$('#registrar').on('click', function(){
+        var usuarioValido = '';
+        var claveValida = '';
+        var verificarUsuario = false;
+        var verificarClave = false;
+        var verificarRepetirClave = false;
+        
+        //Validar nombre
+        const erUsuario = /^[a-z0-9_-]{3,16}$/;
+        //Validar password
+        const erPassword = /^[a-z0-9_-]{6,18}$/;
+        
+/*------------------------------- verifico el campo de usuario */
+        $('#usuario').on('input', function(){
+            // verificar el usuario
+            var usuario = $('#usuario').val();
+            if(erUsuario.test(usuario) && usuario.length >= 8){
+/*----------------------------------------------------------------------------*/
+                $.ajax({
+                    url: 'SvRegistrar',
+                    type: 'GET',
+                    data: { username: usuario },
+                    success: function(response) {
+                        if (response.existe) {
+                            // true, existe el usuario
+                            $('#mensajeUsuario').text('El usuario ya existe. Elige otro nombre.');
+                            $('#mensajeUsuario').css('color', 'red');
+                            verificarUsuario = false;
+                        } else {
+                            // false, no existe
+                            $('#mensajeUsuario').text('Usuario Valido');
+                            $('#mensajeUsuario').css('color', 'green');
+                            verificarUsuario = true;
+                            usuarioValido = usuarioValido + usuario;
+                        }
+                    },
+                    error: function() {
+                        $('#mensajeUsuario').text('Error al verificar el usuario.');
+                        verificarUsuario = false;
+                    }
+                });
+/*----------------------------------------------------------------------------*/
+            }
+            else{
+                $('#mensajeUsuario').text('Usuario incorrecto, debe tener al menos 8 caracteres, sin espacios');
+                $('#mensajeUsuario').css('color', 'red');
+                verificarUsuario = false;
+            }
+            console.log(verificarUsuario);
+        });
+        
+/*---------------------------------- verifico el campo de clave */
+        $('#clave').on('input', function(){
+            var clave = $('#clave').val();
+            if(erPassword.test(clave) && clave.length >= 8){
+                console.log('################clave valido');
+                $('#mensajeClave').text('Clave valida');
+                $('#mensajeClave').css('color', 'green');
+                verificarClave = true;
+            }
+            else{
+                console.log('###############clave incorrecto');
+                $('#mensajeClave').text('Clave incorrecta, debe tener al menos 8 caracteres, sin espacios');
+                $('#mensajeClave').css('color', 'red');
+                verificarClave = false;
+            }
+        });
+
+/*---------------------------------- verifico el campo de repetir clave */
+        $('#repetirClave').on('input', function(){
+            // verificar repetir clave
+            var clave = $('#clave').val();
+            var repetirClave = $('#repetirClave').val();
+            if(erPassword.test(clave) && clave.length >= 8 && clave === repetirClave){
+                console.log('################ ambas claves son validas');
+                $('#mensajeRepetirClave').text('Clave valida');
+                $('#mensajeRepetirClave').css('color', 'green');
+                verificarRepetirClave = true;
+                claveValida = claveValida + repetirClave;
+            }
+            else if(erPassword.test(clave) && clave.length >= 8 && clave !== repetirClave){
+                console.log('################ ambas claves son validas');
+                $('#mensajeRepetirClave').text('Las claves ingresadas no coinciden');
+                $('#mensajeRepetirClave').css('color', 'red');
+                verificarRepetirClave = false;
+            }
+            else{
+                console.log('############### ');
+                $('#mensajeRepetirClave').text('Clave incorrecta, debe tener al menos 8 caracteres');
+                $('#mensajeRepetirClave').css('color', 'red');
+                verificarRepetirClave = false;
+            }
+        });
+
+    $('#registrar').click(function(){
+        var idRol = $('#rol').val();
+        var descripcionRol = $('#rol option:selected').html();
+
+        if(verificarUsuario === true && verificarClave === true && verificarRepetirClave === true){
+            crearUsuario(usuarioValido, claveValida, idRol, descripcionRol, empleadoBuscado);
+        }
+    });
+}
+
+// recibo el objeto empleado para enviarlo al servlet con ajax
+// para evitar una nueva consulta a la base de datos en el servlet
+function crearUsuario(usuario, clave, idRol, descripcionRol, empleadoBuscado){
+    console.log('envio los datos al servlet para crear un usuario');
+    console.log(empleadoBuscado.legajo);
+    console.log(usuario);
+    console.log(clave);
+    console.log(idRol);
+    console.log(descripcionRol);
+    console.log(empleadoBuscado);
+    
+    var datos = {
+            empleado: empleadoBuscado,
+            rol: {id: idRol, descripcion: descripcionRol},
+            username: usuario,
+            password: clave
+    };
+    
+    $.ajax({
+        url: 'SvRegistrar',
+        type: 'POST',
+        contentType: 'application/json; charset=utf-8', // especifico que es json
+        data: JSON.stringify(datos), // convierto el objeto a json
+        succes: function(response){
+            console.log('respuesta del servidor:', response);
+        },
+        error: function(xhr, status, error){
+            console.error("Error al enviar datos:", error);
+        }
     });
 }
 //recibo la respuesta listaRoles e inserto en la pestania desplegable

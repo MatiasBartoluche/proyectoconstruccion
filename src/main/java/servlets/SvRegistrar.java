@@ -3,7 +3,9 @@ package servlets;
 import clases.Controlador;
 import clases.Empleado;
 import clases.Rol;
+import clases.Usuario;
 import com.google.gson.Gson;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,31 +28,53 @@ public class SvRegistrar extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {        
-        List<Rol> listaRoles = new ArrayList<Rol>();
+            throws ServletException, IOException {     
         
-        // realizo la consulta a la base de datos
-        listaRoles = control.buscarListaRoles();
+        String username = request.getParameter("username");
+        System.out.println("----------------------- "+username);
+        boolean existeUsuario = false;
         
-        // convertir la lista de objetos Rol a Json
-        Gson gson = new Gson();
-        String rolesJson = gson.toJson(listaRoles);
+        List<Usuario> listaUsuarios = new ArrayList<>();
         
-        //HttpSession sesion = request.getSession();
-
-        // enviar el Json a la pagina jsp
-        response.getWriter().write(rolesJson);
+        listaUsuarios = control.buscarListaUsuarios();
+        
+        for(Usuario usuario : listaUsuarios){
+            if(usuario.getUsuario().equals(username)){
+                existeUsuario = true;
+            }
+            else{
+                existeUsuario = false;
+            }
+        }
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        // creacion de un objeto en json para enviar respuesta a la pagina
+        response.getWriter().write("{\"existe\": " + existeUsuario + "}");
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        // capturo el id del rol que se selecciono para crear un nuevo usuario
-        String rolSeleccionado = request.getParameter("rol");
-        System.out.println("############################# opcion seleccionada: "+rolSeleccionado);
+        // Leer el cuerpo de la solicitud JSON
+        StringBuilder jsonBuffer = new StringBuilder();
+        BufferedReader reader = request.getReader();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            jsonBuffer.append(line);
+        }
+        String jsonData = jsonBuffer.toString();
+
+        // Aquí podrías parsear el JSON usando una librería como Gson o Jackson si lo necesitas
+        System.out.println("Datos recibidos en JSON: " + jsonData);
         
-        response.sendRedirect("index.jsp");
+        
+        // Enviar una respuesta al cliente
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write("{\"mensaje\":\"Datos recibidos correctamente\"}");
+        
+        //response.sendRedirect("index.jsp");
     }
 
     @Override

@@ -29,11 +29,22 @@
             </div>
 
             <div id="formularioRegistro">
+                <p>Ingrese su usuario y clave de acceso, dicho usuario y clave deben estar compuestos de al menos ocho caracteres</p>
+                <p>Ingrese su usuario <input type="text" id="usuario" name="usuario" placeholder="Usuario" required></p>
+                <p id="mensajeUsuario"></p>
+                
+                <p>Ingrese su clave <input type="password" id="clave" name="clave" placeholder="clave" required></p>
+                <p id="mensajeClave"></p>
+                
+                <p>Repita su clave <input type="password" id="repetirClave" name="repetirClave" placeholder="Repita su clave" required></p>
+                <p id="mensajeRepetirClave"></p>
+                
+                <p>Ingrese el cargo a desarrollar en el sistema</p>
                 <select id="rol" name="rol">
                     <!-- insertar desde javascript -->
                 </select>
 
-                <button type="submit">Registrar</button>
+                <button id="registrar">Registrar</button>
             </div> 
             
         </div>
