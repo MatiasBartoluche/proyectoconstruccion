@@ -9,14 +9,14 @@
 
         <%@ page session="true" %>
         <%
-            String username = (String) session.getAttribute("usuario"); // recupero el nombre de usuario
+            String username = (String) session.getAttribute("username"); // recupero el nombre de usuario
             if (username == null) {
                 // Si no hay sesión, redirige al login
                 response.sendRedirect("index.jsp");
             }
         %>
         <h1>Bienvenido, <%= username %>!</h1>
-        <a href="SvLogout">Cerrar sesión</a>
+        <a href="../SvLogout">Cerrar sesión</a>
         
     </body>
 </html>

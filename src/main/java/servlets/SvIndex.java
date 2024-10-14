@@ -8,11 +8,14 @@ import clases.Jerarquia;
 import clases.Rol;
 import clases.Usuario;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +24,10 @@ import persistencia.EmpleadoJpaController;
 
 
 @WebServlet(name = "SvIndex", urlPatterns = {"/SvIndex"})
-public class SvIndex extends HttpServlet {
+public class SvIndex extends HttpServlet{
+
+    private static final long serialVersionUID = 1L;
+    
     Controlador controlador = new Controlador();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -35,26 +41,26 @@ public class SvIndex extends HttpServlet {
         
 /*############################ lista de roles ################################*/
         // leer los roles existentes en la base de datos
-        List<Rol> listaRoles = new ArrayList<>();
-        listaRoles = controlador.buscarListaRoles();
-        HttpSession sesion = request.getSession();
+        //List<Rol> listaRoles = new ArrayList<>();
+        //listaRoles = controlador.buscarListaRoles();
+        //HttpSession sesion = request.getSession();
         // guardar la lista de roles para que otros jsp puedan leerlos
-        sesion.setAttribute("listaRoles", listaRoles);
+        //sesion.setAttribute("listaRoles", listaRoles);
         
 /*############################ lista de usuarios #############################*/
         // leer los usuarios existentes en la base de datos
-        List<Usuario> listaUsuarios = new ArrayList<>();
-        listaUsuarios = controlador.buscarListaUsuarios();
+        //List<Usuario> listaUsuarios = new ArrayList<>();
+        //listaUsuarios = controlador.buscarListaUsuarios();
         // guardar la lista de roles para que otros jsp puedan leerlos
-        sesion.setAttribute("listaUsuarios", listaUsuarios);
+        //sesion.setAttribute("listaUsuarios", listaUsuarios);
        
 /*############################ lista de empleados ############################*/
         // leer los empleados existentes en la base de datos
-        List<Empleado> listaEmpleados = new ArrayList<>();
-        listaEmpleados = controlador.buscarListaEmpleados();
-        sesion.setAttribute("listaEmpleados", listaEmpleados);
+        //List<Empleado> listaEmpleados = new ArrayList<>();
+        //listaEmpleados = controlador.buscarListaEmpleados();
+        //sesion.setAttribute("listaEmpleados", listaEmpleados);
         // guardar la lista de roles para que otros jsp puedan leerlos
-        sesion.setAttribute("listaRoles", listaRoles);
+        //sesion.setAttribute("listaRoles", listaRoles);
        
         
         // redirigir al formulario de creacion de nuevos usuarios
@@ -65,6 +71,7 @@ public class SvIndex extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html");
         
         /*Rol rolSistemas = new Rol("Admin sistemas");
         Rol rolAdministrativo = new Rol("Administrativo");
@@ -152,26 +159,46 @@ public class SvIndex extends HttpServlet {
         
         controlador.crearUsuario(usuario);*/
         
-        
-        /*
-        if("admin".equals(usuario) && "1234".equals(pass)){
-            System.out.println("bienvenido");
-            response.sendRedirect("home.jsp");
+        //capturo el usuario y clave ingresados
+
+        String usuarioIngresado = request.getParameter("usuario");
+        String claveIngresada = request.getParameter("pass");
+
+        PrintWriter out = response.getWriter();
+        RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+        // si los campos no estan vacios
+        if(!"".equals(usuarioIngresado) && !"".equals(claveIngresada)){
+            //consulto la lista de usuarios
+            List<Usuario> listaUsuarios = new ArrayList<>();
+            listaUsuarios = controlador.buscarListaUsuarios();
             
-            HttpSession session = request.getSession();
-            session.setAttribute("usuario", usuario); // guardo el nombre de usuario
+            for(Usuario usuario : listaUsuarios){
+                // si las credenciales coinciden con algun usuario registrado
+                if(usuario.getUsuario().equals(usuarioIngresado) && usuario.getClave().equals(claveIngresada)){
+                    // creacion de una sesion 
+                    HttpSession sesion = request.getSession();
+                    sesion.setAttribute("username", usuario.getUsuario());
+
+                    response.sendRedirect("/proyectoconstruccion/vistas/home.jsp");
+                }
+                else{
+                    //out.println("<font color=red>Usuario y/o clave incorrectos</font>");
+                    //rd.include(request, response);
+                    response.sendRedirect("index.jsp?error=1");
+                }
+            }
         }
         else{
-            System.out.println("usuario y/o conrtasenai incorrectos");
-            response.sendRedirect("index.jsp?error=1");
-        }*/
+            //out.println("<font color=red>Ingrese su usuario y clave</font>");
+            //rd.include(request, response);
+            response.sendRedirect("index.jsp?error=2");
+        }
     }
 
     @Override
     public String getServletInfo() {
         return "Short description";
     }
-
 }
 
 /* token github */
