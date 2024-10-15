@@ -27,8 +27,7 @@ public class Usuario implements Serializable{
     public Usuario() {
     }
 
-    public Usuario(int id_usuario, Empleado empleado, String usuario, String clave, Rol rol, String auditoria) {
-        this.id_usuario = id_usuario;
+    public Usuario(Empleado empleado, String usuario, String clave, Rol rol, String auditoria) {
         this.empleado = empleado;
         this.usuario = usuario;
         this.clave = clave;

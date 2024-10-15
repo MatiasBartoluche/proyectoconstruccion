@@ -43,7 +43,7 @@
                 <select id="rol" name="rol">
                     <!-- insertar desde javascript -->
                 </select>
-
+                <p id="mensajeCompletar"></p>
                 <button id="registrar">Registrar</button>
             </div> 
             

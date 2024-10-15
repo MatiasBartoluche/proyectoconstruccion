@@ -13,7 +13,7 @@ $.ajax({
             // 'data' es un array de objetos Usuario en formato JSON
             // Aquí puedes iterar y mostrar los datos en tu página
             $.each(data, function(i, item){
-                console.log(item);
+                //console.log(item);
                 $('#rol').append('<option value="'+item.id_rol+'" id="'+item.descripcion+'">'+item.descripcion+'</option>');
             });   
         },
@@ -167,38 +167,46 @@ function registrarUsuario(empleado){
         });
 
     $('#registrar').click(function(){
-        var idRol = $('#rol').val();
-        var descripcionRol = $('#rol option:selected').html();
-
         if(verificarUsuario === true && verificarClave === true && verificarRepetirClave === true){
-            crearUsuario(usuarioValido, claveValida, idRol, descripcionRol, empleadoBuscado);
+            $('#mensajeCompletar').empty();
+            // capturo el id y la descripcion del rol de usuario seleccionado
+            var idRol = $('#rol').val();
+            var descripcionRol = $('#rol option:selected').html();
+            // crar objeto rol
+            var rol ={
+                idRol: idRol,
+                descripcion: descripcionRol
+            };
+            // crear objeto usuario, compuesto de un objeto empleado y objeto rol
+            var nuevoUsuario = {
+                empleado: empleado,
+                usuario: usuarioValido,
+                clave: claveValida,
+                rol: rol,
+                auditoria: ''
+            };
+            // envio el objeto usuario a la funcion
+            crearUsuario(nuevoUsuario);
+        }
+        else{
+            $('#mensajeCompletar').text('Complete los campos de usuario y clave para poder registrarsr');
+            $('#mensajeCompletar').css('color', 'red');
         }
     });
 }
 
 // recibo el objeto empleado para enviarlo al servlet con ajax
 // para evitar una nueva consulta a la base de datos en el servlet
-function crearUsuario(usuario, clave, idRol, descripcionRol, empleadoBuscado){
+function crearUsuario(usuario){
     console.log('envio los datos al servlet para crear un usuario');
-    console.log(empleadoBuscado.legajo);
     console.log(usuario);
-    console.log(clave);
-    console.log(idRol);
-    console.log(descripcionRol);
-    console.log(empleadoBuscado);
-    
-    var datos = {
-            empleado: empleadoBuscado,
-            rol: {id: idRol, descripcion: descripcionRol},
-            username: usuario,
-            password: clave
-    };
+
     
     $.ajax({
         url: 'SvRegistrar',
         type: 'POST',
         contentType: 'application/json; charset=utf-8', // especifico que es json
-        data: JSON.stringify(datos), // convierto el objeto a json
+        data: JSON.stringify(usuario), // convierto el objeto a json
         succes: function(response){
             console.log('respuesta del servidor:', response);
         },
