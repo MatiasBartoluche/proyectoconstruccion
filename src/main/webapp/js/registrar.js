@@ -54,7 +54,7 @@ function buscarEmpleado(){
                     error: function(xhr, status, error) {
                         //console.error('Error al obtener el legajo ingresado:', error);
                         console.log('error al obtener el empleado');
-                        $('#resultadoBusquedaEmpleado').append('<p>No se encontro un empleado con ese legajo</p>');
+                        $('#resultadoBusquedaEmpleado').append('<p>No se encontro un empleado con ese legajo, o ese empleado ya posee una cuenta</p>');
                         $('#formularioRegistro').css('display', 'none');
                     }
             });  

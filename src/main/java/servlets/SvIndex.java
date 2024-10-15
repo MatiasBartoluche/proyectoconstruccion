@@ -126,9 +126,9 @@ public class SvIndex extends HttpServlet{
         
         Empleado empleado = new Empleado();
         
-        empleado.setLegajo(1234);
+        empleado.setLegajo(555);
         empleado.setJerarquia(administrativo);
-        empleado.setNombres("juan");
+        empleado.setNombres("jacinto");
         empleado.setApellidos("perez");
         empleado.setCuil("20-12345678-9");
         empleado.setCalle("calle falsa");
@@ -146,7 +146,7 @@ public class SvIndex extends HttpServlet{
         empleado.setIdObra(0);
         empleado.setGrupo(null);
         
-       controlador.crearEmpleado(empleado);
+        controlador.crearEmpleado(empleado);
         
         Usuario usuario = new Usuario();
         

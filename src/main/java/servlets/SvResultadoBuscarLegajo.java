@@ -4,6 +4,7 @@ import clases.Controlador;
 import clases.Empleado;
 import clases.LocalDateAdapter;
 import clases.Rol;
+import clases.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.IOException;
@@ -52,17 +53,30 @@ public class SvResultadoBuscarLegajo extends HttpServlet {
         response.setContentType("text/plain");
 
         String legajo = request.getParameter("legajo");   
-        
-        // busco el empleado con el legajo recibido
+        // convierto el string de legajo a entero
         int numeroLegajo = Integer.parseInt(legajo);
+        boolean existeUsuario = false;
+        // buscar entre los usuarios, un usuariocon legajo igual al ingresado
+        // si no se encuentra, buscar empleado con el legajo ingresado
+        List<Usuario> listaUsuarios = control.buscarListaUsuarios();
         
-        Empleado empleado = control.buscarEmpleado(numeroLegajo);
-        
-        if(empleado != null){
-            Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
-            String empleadoJson = gson.toJson(empleado);
+        for(Usuario usuario : listaUsuarios){
+            if(usuario.getEmpleado().getLegajo() != numeroLegajo){
+                // busco el usuario con el legajo recibido
+                Empleado empleado = control.buscarEmpleado(numeroLegajo);
 
-            response.getWriter().write(empleadoJson);
+                if(empleado != null){
+                    Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
+                    String empleadoJson = gson.toJson(empleado);
+
+                    response.getWriter().write(empleadoJson);
+                }
+            }
+            else{
+                System.out.println("el empleado ingresado ya tiene una cuenta asociada a su legajo");
+                
+                //response.getWriter().write("{\"existe\": " + existeUsuario + "}");
+            }
         }
     }
 

@@ -163,6 +163,5 @@ public class Controlador {
     
     public ArrayList<Usuario> buscarListaUsuarios(){
         return controladorPersistencia.traerListaUsuarios();
-    }
-    
+    }   
 }
