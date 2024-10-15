@@ -2,11 +2,14 @@ package servlets;
 
 import clases.Controlador;
 import clases.Empleado;
+import clases.LocalDateAdapter;
 import clases.Rol;
 import clases.Usuario;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -65,14 +68,24 @@ public class SvRegistrar extends HttpServlet {
         }
         String jsonData = jsonBuffer.toString();
 
+        // instancia de Gson, incluyo el adapter en el builder para evitar problemas de parse a objetos LocalDate
+        Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
+        
+        Usuario usuario = gson.fromJson(jsonData, Usuario.class);
+
+        // inicializo el nuevo usuario en false, para que no pueda ingresar al sistema
+        //usuario.setAprobado(false);
+        
         // Aquí podrías parsear el JSON usando una librería como Gson o Jackson si lo necesitas
-        System.out.println("Datos recibidos en JSON: " + jsonData);
+        System.out.println("Datos recibidos en JSON: " + usuario);
         
         
         // Enviar una respuesta al cliente
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write("{\"mensaje\":\"Datos recibidos correctamente\"}");
+        
+        control.crearUsuario(usuario);
         
         //response.sendRedirect("index.jsp");
     }

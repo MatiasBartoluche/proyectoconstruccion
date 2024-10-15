@@ -5,26 +5,28 @@ $(document).ready(function(){
 });
 
 function cargarRoles(){
-$.ajax({
-        url: 'SvResultadoBuscarLegajo', // URL del servlet
-        type: 'GET',
-        dataType: 'json',
-        success: function(data) {
-            // 'data' es un array de objetos Usuario en formato JSON
-            // Aquí puedes iterar y mostrar los datos en tu página
-            $.each(data, function(i, item){
-                //console.log(item);
-                $('#rol').append('<option value="'+item.id_rol+'" id="'+item.descripcion+'">'+item.descripcion+'</option>');
-            });   
-        },
-        error: function(xhr, status, error) {
-            console.error('Error al obtener la lista de roles:', error);
-        }
-    });
+    console.log('############## cargarRoles()()');
+    $.ajax({
+            url: 'SvResultadoBuscarLegajo', // URL del servlet
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                // 'data' es un array de objetos Usuario en formato JSON
+                // Aquí puedes iterar y mostrar los datos en tu página
+                $.each(data, function(i, item){
+                    //console.log(item);
+                    $('#rol').append('<option value="'+item.id_rol+'" id="'+item.descripcion+'">'+item.descripcion+'</option>');
+                });   
+            },
+            error: function(xhr, status, error) {
+                console.error('Error al obtener la lista de roles:', error);
+            }
+        });
 }
 
 function buscarEmpleado(){
     $('#btnBuscarEmpleado').click(function(){
+        console.log('############## buscarEmpleado()');
         $('#resultadoBusquedaEmpleado').empty();
         var buscarLegajo = $('#inputLegajo').val();
         
@@ -65,12 +67,13 @@ function buscarEmpleado(){
 function aceptarBusquedaEmpleado(){
     $('#resultadoBusquedaEmpleado').on('click', '#aceptarBusquedaEmpleado', function(){
         cargarRoles();
+        console.log('############## aceptarBusquedaEmpleado()');
         $('#formularioRegistro').css('display', 'block');
     });
 }
 
 function registrarUsuario(empleado){
-    var empleadoBuscado = empleado;
+    console.log('############## registrarUsuario()');
     
     //$('#registrar').on('click', function(){
         var usuarioValido = '';
@@ -174,7 +177,7 @@ function registrarUsuario(empleado){
             var descripcionRol = $('#rol option:selected').html();
             // crar objeto rol
             var rol ={
-                idRol: idRol,
+                id_rol: idRol,
                 descripcion: descripcionRol
             };
             // crear objeto usuario, compuesto de un objeto empleado y objeto rol
@@ -183,7 +186,8 @@ function registrarUsuario(empleado){
                 usuario: usuarioValido,
                 clave: claveValida,
                 rol: rol,
-                auditoria: ''
+                auditoria: '',
+                aprobado: false
             };
             // envio el objeto usuario a la funcion
             crearUsuario(nuevoUsuario);
@@ -201,7 +205,6 @@ function crearUsuario(usuario){
     console.log('envio los datos al servlet para crear un usuario');
     console.log(usuario);
 
-    
     $.ajax({
         url: 'SvRegistrar',
         type: 'POST',
