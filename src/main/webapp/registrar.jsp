@@ -19,7 +19,7 @@
 
             <div id="buscarEmpleado">
                 <H2>Buscar empleado</h2>
-                <p>Ingrese su numero de legajo: <input type="text" placeholder="Legajo" name="buscarLegajo" id="inputLegajo"></p>
+                <p>Ingrese su numero de legajo: <input type="number" placeholder="Legajo" name="buscarLegajo" id="inputLegajo"></p>
                 <button id="btnBuscarEmpleado">Buscar</button>
             </div>
 
@@ -48,6 +48,8 @@
             </div> 
             
         </div>
+        
+        <div id="mensajeCreacion"></div>
         
     </body>
 </html>

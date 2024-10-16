@@ -31,18 +31,13 @@ public class SvResultadoBuscarLegajo extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        List<Rol> listaRoles = new ArrayList<Rol>();
-        
+        List<Rol> listaRoles = new ArrayList<>();
         // realizo la consulta a la base de datos
         listaRoles = control.buscarListaRoles();
-        
         // convertir la lista de objetos Rol a Json
         Gson gson = new Gson();
         String rolesJson = gson.toJson(listaRoles);
-        
         //HttpSession sesion = request.getSession();
-
         // enviar el Json a la pagina jsp
         response.getWriter().write(rolesJson);
     }
@@ -50,32 +45,48 @@ public class SvResultadoBuscarLegajo extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/plain");
+        
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        // capturo el legajo ingresado
+        String legajo = request.getParameter("legajo");
 
-        String legajo = request.getParameter("legajo");   
-        // convierto el string de legajo a entero
+        // convierto a int
         int numeroLegajo = Integer.parseInt(legajo);
-        boolean existeUsuario = false;
-        // buscar entre los usuarios, un usuariocon legajo igual al ingresado
-        // si no se encuentra, buscar empleado con el legajo ingresado
+        // busco todos los usuarios
         List<Usuario> listaUsuarios = control.buscarListaUsuarios();
         
+        // boolean para verificar si el legajo esta asociado a algun usuario ya existente
+        // true = empleado ya tiene usuario
+        // false = empleado no tiene usuario
+        boolean existeUsuario = true;
+        
         for(Usuario usuario : listaUsuarios){
-            if(usuario.getEmpleado().getLegajo() != numeroLegajo){
-                // busco el usuario con el legajo recibido
-                Empleado empleado = control.buscarEmpleado(numeroLegajo);
-
-                if(empleado != null){
-                    Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
-                    String empleadoJson = gson.toJson(empleado);
-
-                    response.getWriter().write(empleadoJson);
-                }
+            if(usuario.getEmpleado().getLegajo() == numeroLegajo){
+                existeUsuario = true;
+                break; // dejo de recorrer la lista, ya encontre un usuario asociado a ese legajo
             }
             else{
-                System.out.println("el empleado ingresado ya tiene una cuenta asociada a su legajo");
-                
-                //response.getWriter().write("{\"existe\": " + existeUsuario + "}");
+                // nunca encontre usuario asociado a ese legajo
+                 existeUsuario = false;
+            }
+        }
+        
+        if(existeUsuario){
+            // el empleado ya tiene un usuario asociado a su legajo, preparo un json false para la pagina
+            response.getWriter().write("{\"empleado\": false}");
+        }
+        else{
+            // busco un empleado con el legajo ingresado
+            Empleado empleado = control.buscarEmpleado(numeroLegajo);
+            if(empleado == null){
+                // no existe empleado con el legajo ingresado, preparo un Json nulo para la pagina
+                response.getWriter().write("{\"empleado\": null}");
+            }
+            else{
+                Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
+                String empleadoJson = gson.toJson(empleado);
+                response.getWriter().write(empleadoJson);
             }
         }
     }

@@ -55,10 +55,13 @@ public class SvRegistrar extends HttpServlet {
         response.getWriter().write("{\"existe\": " + existeUsuario + "}");
     }
 
+/* -------------------------------------------------------------------------------------------------- */
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
         // Leer el cuerpo de la solicitud JSON
         StringBuilder jsonBuffer = new StringBuilder();
         BufferedReader reader = request.getReader();
@@ -66,27 +69,21 @@ public class SvRegistrar extends HttpServlet {
         while ((line = reader.readLine()) != null) {
             jsonBuffer.append(line);
         }
+        // almaceno el string obtenido del json
         String jsonData = jsonBuffer.toString();
-
         // instancia de Gson, incluyo el adapter en el builder para evitar problemas de parse a objetos LocalDate
         Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
         
+        // ller el string y parse a objeto Usuario
         Usuario usuario = gson.fromJson(jsonData, Usuario.class);
-
-        // inicializo el nuevo usuario en false, para que no pueda ingresar al sistema
-        //usuario.setAprobado(false);
         
-        // Aquí podrías parsear el JSON usando una librería como Gson o Jackson si lo necesitas
-        System.out.println("Datos recibidos en JSON: " + usuario);
-        
-        
-        // Enviar una respuesta al cliente
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write("{\"mensaje\":\"Datos recibidos correctamente\"}");
-        
+        // crear usuario con el objeto recibido
         control.crearUsuario(usuario);
-        
+        // Enviar una respuesta al cliente
+
+        //response.getWriter().write("{\"mensaje\":\"Datos recibidos correctamente\"}");
+        response.getWriter().write("{\"mensaje\": true}");
+
         //response.sendRedirect("index.jsp");
     }
 
