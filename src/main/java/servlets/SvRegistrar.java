@@ -34,7 +34,6 @@ public class SvRegistrar extends HttpServlet {
             throws ServletException, IOException {     
         
         String username = request.getParameter("username");
-        System.out.println("----------------------- "+username);
         boolean existeUsuario = false;
         
         List<Usuario> listaUsuarios = new ArrayList<>();

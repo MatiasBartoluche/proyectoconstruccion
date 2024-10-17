@@ -105,6 +105,6 @@ body{
 }
 
 /* inicialmente no sera visible */
-#formularioRegistro{
+#formularioRegistro, #mensajeCreacion{
     display: none;
 }

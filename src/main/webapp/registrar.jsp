@@ -44,7 +44,10 @@
                 <button id="registrar">Registrar</button>
             </div> 
             
-            <div id="mensajeCreacion"></div>
+            <div id="mensajeCreacion">
+                <p>El usuario fue creado con exito</p>
+                <button id="btnUsuarioCreado">Aceptar</button>
+            </div>
         </div>
         
     </body>
