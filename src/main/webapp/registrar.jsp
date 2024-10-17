@@ -23,10 +23,7 @@
                 <button id="btnBuscarEmpleado">Buscar</button>
             </div>
 
-            <div id="resultadoBusquedaEmpleado">
-
-
-            </div>
+            <div id="resultadoBusquedaEmpleado"></div>
 
             <div id="formularioRegistro">
                 <p>Ingrese su usuario y clave de acceso, dicho usuario y clave deben estar compuestos de al menos ocho caracteres</p>
@@ -47,9 +44,8 @@
                 <button id="registrar">Registrar</button>
             </div> 
             
+            <div id="mensajeCreacion"></div>
         </div>
-        
-        <div id="mensajeCreacion"></div>
         
     </body>
 </html>

@@ -95,7 +95,7 @@ body{
     flex-wrap: wrap;
 }
 
-#buscarEmpleado, #resultadoBusquedaEmpleado, #formularioRegistro{
+#buscarEmpleado, #resultadoBusquedaEmpleado, #formularioRegistro, #mensajeCreacion{
     position: relative;
     width: 60%;
     left: 20%;

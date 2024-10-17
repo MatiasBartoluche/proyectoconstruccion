@@ -189,8 +189,7 @@ function registrarUsuario(){
             
             var recuperarEmpleado = localStorage.getItem('empleado');
             console.log(recuperarEmpleado);
-            
-            
+
             var empleado = JSON.parse(recuperarEmpleado);
             console.log(empleado);
             // crear objeto usuario, compuesto de un objeto empleado y objeto rol
@@ -221,34 +220,35 @@ function registrarUsuario(){
 function crearUsuario(usuario){
     console.log('envio los datos al servlet para crear un usuario');
     console.log(usuario);
-
     $.ajax({
         url: 'SvRegistrar',
         type: 'POST',
         contentType: 'application/json; charset=utf-8', // especifico que es json
-        data: JSON.stringify(usuario), // convierto el objeto a json
-        succes: function(response){
+        data: JSON.stringify(usuario),
+        success: function (response) {
             console.log(response);
-            console.log("usuario creado");
-            //redirigirIndex();
-            
-
+            redirigirIndex();
         },
-        error: function(xhr, status, error){
-            console.error("Error al enviar datos:", error);
+        error: function (xhr, status, error) {
+            console.error("Error:", error);
         }
     });
 }
 
-/*
 function redirigirIndex(){
-    //$('#btnUsuarioCreado').on('click', function(){
         console.log('redirigir');
         
-        $('#contenidoRegistrar').css('display', 'none');
-        $('#mensajeCreacion').css('display', 'block');
-        $('#mensajeCreacion').add('<pEl usuario fue creado con exito!</p');
-        $('#mensajeCreacion').add('<button id="btnUsuarioCreado"Aceptar</button');
-    //});
-}*/
+        //$('#contenidoRegistrar').css('display', 'none');
+        
+        $('#buscarEmpleado').css('display', 'none');
+        $('#resultadoBusquedaEmpleado').css('display', 'none');
+        $('#formularioRegistro').css('display', 'none');
+        //$('#mensajeCreacion').css('display', 'block');
+        
+        $('#mensajeCreacion').append(
+            '<p>El usuario fue creado con exito</p>'+
+            '<button id="btnUsuarioCreado">Aceptar</button>'
+        );
+
+}
 //recibo la respuesta listaRoles e inserto en la pestania desplegable
