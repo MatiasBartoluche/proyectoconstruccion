@@ -9,9 +9,16 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -61,6 +68,7 @@ public class SvRegistrar extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
+
         // Leer el cuerpo de la solicitud JSON
         StringBuilder jsonBuffer = new StringBuilder();
         BufferedReader reader = request.getReader();
@@ -73,22 +81,53 @@ public class SvRegistrar extends HttpServlet {
         // instancia de Gson, incluyo el adapter en el builder para evitar problemas de parse a objetos LocalDate
         Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
         
-        // ller el string y parse a objeto Usuario
+        // leer el string y parse a objeto Usuario
         Usuario usuario = gson.fromJson(jsonData, Usuario.class);
         
-        // crear usuario con el objeto recibido
-        control.crearUsuario(usuario);
-        // Enviar una respuesta al cliente
+        String claveRecibida = usuario.getClave();
+        
+        String salt = generarSalt();
+        System.out.println(claveRecibida);
+        System.out.println(salt);
+        
+        try {
+            String claveEncriptada = encriptarClave(claveRecibida, salt);
+            
+            usuario.setClave(claveEncriptada); // al usuario recibido, le agrego la clave nueva
+            usuario.setSalt(salt); // le agrego salt
+            
+            // crear usuario con el objeto recibido
+            control.crearUsuario(usuario);
+            // Enviar una respuesta al cliente
 
-        //response.getWriter().write("{\"mensaje\":\"Datos recibidos correctamente\"}");
-        response.getWriter().write("{\"mensaje\": true}");
-
-        //response.sendRedirect("index.jsp");
+            //response.getWriter().write("{\"mensaje\":\"Datos recibidos correctamente\"}");
+            response.getWriter().write("{\"mensaje\": true}");
+            
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(SvRegistrar.class.getName()).log(Level.SEVERE, null, ex);
+            response.getWriter().write("{\"mensaje\": false}");
+        }
     }
 
     @Override
     public String getServletInfo() {
         return "Short description";
+    }
+
+    // generar un salt por cada nuevo usuario
+    private String generarSalt() {
+        SecureRandom random = new SecureRandom();
+        byte[] saltBytes = new byte[16];
+        random.nextBytes(saltBytes);
+        return Base64.getEncoder().encodeToString(saltBytes);
+    }
+    
+    // utilizo la clave que recibo de registro.jsp, el salt generado y hago una nueva encriptacion
+    private String encriptarClave(String claveRecibida, String salt) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        String saltedPassword = salt + claveRecibida;
+        byte[] hashBytes = md.digest(saltedPassword.getBytes(StandardCharsets.UTF_8));
+        return Base64.getEncoder().encodeToString(hashBytes);
     }
 
 }
