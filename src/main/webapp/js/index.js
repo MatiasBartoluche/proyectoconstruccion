@@ -61,9 +61,12 @@ function login(){
                         $('#mensajeIncorrecto').text('Usuario y/o claves incorrectas');
                         $('#mensajeIncorrecto').css('color', 'red');
                     }
-                    else{
+                    else if(response.mensaje === true && response.autorizado === true){
                         window.location.href = "/proyectoconstruccion/vistas/home.jsp";
                     }
+                     else if(response.mensaje === true && response.autorizado === false){
+                         window.location.href = "/proyectoconstruccion/vistas/noaprobado.jsp";
+                     }
                 },
                 error: function (xhr, status, error) {
                     console.error("Error:", error);
@@ -78,7 +81,8 @@ function login(){
 }
 
 function aceptar(){
-    $('#ceptar').click(function(){
-        window.location.href = "index.jsp";
+    $('#btnNoAprobado').click(function(){
+        console.log('boton no aprobado');
+        window.location.href = "../index.jsp";
     });
 }

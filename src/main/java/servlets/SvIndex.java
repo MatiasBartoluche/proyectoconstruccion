@@ -172,19 +172,20 @@ public class SvIndex extends HttpServlet{
             // si las credenciales coinciden con algun usuario registrado
             if (usuario.usuarioExiste(usuarioIngresado, claveIngresada)) {
                 System.out.println(" se ha encontrado un usuario");
-                
-                // construyo un json de usuario encontrado
-                response.getWriter().write("{\"mensaje\": true}");
-                
-                // creacion de una sesion
-                HttpSession sesion = request.getSession();
-                
-                // guardo la informacion del usuario
-                sesion.setAttribute("username", usuario.getUsuario());
-                
-                // redirijo a home.jsp
-                //response.sendRedirect("/proyectoconstruccion/vistas/home.jsp");
-                break;
+                if(usuario.isAprobado()){
+                    // construyo un json de usuario encontrado
+                    response.getWriter().write("{\"mensaje\": true, \"autorizado\": true}");
+
+                    // creacion de una sesion
+                    HttpSession sesion = request.getSession();
+
+                    // guardo la informacion del usuario
+                    sesion.setAttribute("username", usuario.getUsuario());
+                }
+                else{
+                    response.getWriter().write("{\"mensaje\": true, \"autorizado\": false}");
+                }
+                //break;
             }
             else {
                 //out.println("<font color=red>Usuario y/o clave incorrectos</font>");
