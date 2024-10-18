@@ -18,6 +18,7 @@ public class Usuario implements Serializable{
     private Empleado empleado;
     private String usuario;
     private String clave;
+    private String salt;
     
     @OneToOne
     private Rol rol;
@@ -27,12 +28,21 @@ public class Usuario implements Serializable{
     public Usuario() {
     }
 
-    public Usuario(Empleado empleado, String usuario, String clave, Rol rol, String auditoria) {
+    public Usuario(Empleado empleado, String usuario, String clave, String salt, Rol rol, String auditoria) {
         this.empleado = empleado;
         this.usuario = usuario;
         this.clave = clave;
+        this.salt = salt;
         this.rol = rol;
         this.auditoria = auditoria;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     public int getIdUsuario() {

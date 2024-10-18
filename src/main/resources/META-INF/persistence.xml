@@ -3,12 +3,12 @@
   <persistence-unit name="construccionPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>clases.Rol</class>
-    <class>clases.Usuario</class>
     <class>clases.Contrato</class>
     <class>clases.GrupoTrabajo</class>
     <class>clases.Jerarquia</class>
     <class>clases.Estado</class>
     <class>clases.Empleado</class>
+    <class>clases.Usuario</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/construccion"/>
