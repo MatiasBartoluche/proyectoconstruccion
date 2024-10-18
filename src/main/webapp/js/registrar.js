@@ -173,14 +173,14 @@ function registrarUsuario(){
                 id_rol: idRol,
                 descripcion: descripcionRol
             };
-
+            var claveEncriptada = CryptoJS.SHA256(claveValida).toString();
             var recuperarEmpleado = localStorage.getItem('empleado');
             var empleado = JSON.parse(recuperarEmpleado);
             // crear objeto usuario, compuesto de un objeto empleado y objeto rol
             var nuevoUsuario = {
                 empleado: empleado,
                 usuario: usuarioValido,
-                clave: claveValida,
+                clave: claveEncriptada,
                 rol: rol,
                 auditoria: '',
                 aprobado: false

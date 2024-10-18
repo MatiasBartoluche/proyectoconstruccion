@@ -181,11 +181,12 @@ public class SvIndex extends HttpServlet{
 
                     // guardo la informacion del usuario
                     sesion.setAttribute("username", usuario.getUsuario());
+                    break;
                 }
                 else{
                     response.getWriter().write("{\"mensaje\": true, \"autorizado\": false}");
+                    break;
                 }
-                //break;
             }
             else {
                 //out.println("<font color=red>Usuario y/o clave incorrectos</font>");
