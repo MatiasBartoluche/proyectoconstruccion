@@ -51,14 +51,14 @@ body{
     text-align: center;
 }
 
-.ingresarUsuario form{
+.ingresarUsuario #login, .ingresarUsuario form{
     display: flex;
     flex-wrap: wrap;
     margin-bottom: 5%
 }
 
 /* estilos de input*/
-.ingresarUsuario form input {
+.ingresarUsuario #login input {
     font-family: "Roboto", sans-serif; /*fuentes de letra*/
     outline: 0;
     background: #f2f2f2; /*fondo gris claro*/
@@ -70,14 +70,14 @@ body{
     font-size: 14px;
 }
 
-.ingresarUsuario form label{
+.ingresarUsuario #login label, .ingresarUsuario form label{
     margin: 1%;
     opacity: 1;
     color: var(--text-color);
 }
 
 /*estilos de botones*/
-.ingresarUsuario form button {
+.ingresarUsuario #login button, .ingresarUsuario form button  {
     font-family: "Roboto", sans-serif; /*fuentes de letra para botones*/
     text-transform: uppercase;
     outline: 0;
@@ -107,4 +107,15 @@ body{
 /* inicialmente no sera visible */
 #formularioRegistro, #mensajeCreacion{
     display: none;
+}
+
+/* --------------------- estilso pagina noautorizado.jsp -------------------- */
+
+#noAprobado{
+    position: relative;
+    width: 60%;
+    left: 20%;
+    background-color: var(--sidebar-color);
+    text-align: center;
+    margin: 1%;
 }

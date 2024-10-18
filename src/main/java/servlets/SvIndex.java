@@ -71,7 +71,8 @@ public class SvIndex extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html");
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
         
         /*Rol rolSistemas = new Rol("Admin sistemas");
         Rol rolAdministrativo = new Rol("Administrativo");
@@ -162,36 +163,36 @@ public class SvIndex extends HttpServlet{
         //capturo el usuario y clave ingresados
 
         String usuarioIngresado = request.getParameter("usuario");
-        String claveIngresada = request.getParameter("pass");
-
-        PrintWriter out = response.getWriter();
-        RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-        // si los campos no estan vacios
-        if(!"".equals(usuarioIngresado) && !"".equals(claveIngresada)){
-            //consulto la lista de usuarios
-            List<Usuario> listaUsuarios = new ArrayList<>();
-            listaUsuarios = controlador.buscarListaUsuarios();
-            
-            for(Usuario usuario : listaUsuarios){
-                // si las credenciales coinciden con algun usuario registrado
-                if(usuario.getUsuario().equals(usuarioIngresado) && usuario.getClave().equals(claveIngresada)){
-                    // creacion de una sesion 
-                    HttpSession sesion = request.getSession();
-                    sesion.setAttribute("username", usuario.getUsuario());
-
-                    response.sendRedirect("/proyectoconstruccion/vistas/home.jsp");
-                }
-                else{
-                    //out.println("<font color=red>Usuario y/o clave incorrectos</font>");
-                    //rd.include(request, response);
-                    response.sendRedirect("index.jsp?error=1");
-                }
+        String claveIngresada = request.getParameter("clave");
+        // consulto la lista de usuarios
+        List<Usuario> listaUsuarios = new ArrayList<>();
+        listaUsuarios = controlador.buscarListaUsuarios();
+        
+        for (Usuario usuario : listaUsuarios) {
+            // si las credenciales coinciden con algun usuario registrado
+            if (usuario.usuarioExiste(usuarioIngresado, claveIngresada)) {
+                System.out.println(" se ha encontrado un usuario");
+                
+                // construyo un json de usuario encontrado
+                response.getWriter().write("{\"mensaje\": true}");
+                
+                // creacion de una sesion
+                HttpSession sesion = request.getSession();
+                
+                // guardo la informacion del usuario
+                sesion.setAttribute("username", usuario.getUsuario());
+                
+                // redirijo a home.jsp
+                //response.sendRedirect("/proyectoconstruccion/vistas/home.jsp");
+                break;
             }
-        }
-        else{
-            //out.println("<font color=red>Ingrese su usuario y clave</font>");
-            //rd.include(request, response);
-            response.sendRedirect("index.jsp?error=2");
+            else {
+                //out.println("<font color=red>Usuario y/o clave incorrectos</font>");
+                //rd.include(request, response);
+                System.out.println("no existe usuarios con esas credenciales");
+                // construyo un json de usuario no encontrado
+                response.getWriter().write("{\"mensaje\": false}");
+            }
         }
     }
 
@@ -200,6 +201,5 @@ public class SvIndex extends HttpServlet{
         return "Short description";
     }
 }
-
 /* token github */
 /* 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 */

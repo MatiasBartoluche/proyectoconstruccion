@@ -2,7 +2,7 @@ $(document).ready(function(){
 
     buscarEmpleado();
     aceptarBusquedaEmpleado();
-    
+
     registrarUsuario();
 });
 
@@ -203,6 +203,7 @@ function crearUsuario(usuario){
     $.ajax({
         url: 'SvRegistrar',
         type: 'POST',
+        dataType: 'json',
         contentType: 'application/json; charset=utf-8', // especifico que es json
         data: JSON.stringify(usuario),
         success: function (response) {

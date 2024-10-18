@@ -91,6 +91,14 @@ public class Usuario implements Serializable{
         this.auditoria = auditoria;
     }
     
-    
+    public boolean usuarioExiste(String usuario, String clave){
+        boolean existe = false;
+        
+        if(this.usuario.equals(usuario) && this.clave.equals(clave)){
+            existe = true;
+        }
+        
+        return existe;
+    }
 
 }
