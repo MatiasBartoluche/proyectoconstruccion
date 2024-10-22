@@ -203,7 +203,7 @@ public class SvIndex extends HttpServlet{
                         // creacion de una sesion
                         HttpSession sesion = request.getSession();
                         // guardo la informacion del usuario
-                        sesion.setAttribute("username", usuario.getUsuario());
+                        sesion.setAttribute("usuario", usuario);
                         // construyo un json de usuario encontrado
                         armarRespuesta = "{\"mensaje\":true,\"autorizado\":true}";
                         break;

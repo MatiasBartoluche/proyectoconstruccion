@@ -1,3 +1,4 @@
+<%@page import="clases.Usuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -9,13 +10,13 @@
 
         <%@ page session="true" %>
         <%
-            String username = (String) session.getAttribute("username"); // recupero el nombre de usuario
-            if (username == null) {
+            Usuario usuario = (Usuario) session.getAttribute("usuario"); // recupero el nombre de usuario
+            if (usuario == null) {
                 // Si no hay sesión, redirige al login
                 response.sendRedirect("index.jsp");
             }
         %>
-        <h1>Bienvenido, <%= username %>!</h1>
+        <h1>Bienvenido, <%= usuario.getUsuario() %>!</h1>
         <a href="../SvLogout">Cerrar sesión</a>
         
     </body>
