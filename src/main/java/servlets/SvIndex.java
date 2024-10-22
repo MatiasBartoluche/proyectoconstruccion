@@ -9,9 +9,15 @@ import clases.Rol;
 import clases.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -167,40 +173,73 @@ public class SvIndex extends HttpServlet{
         // consulto la lista de usuarios
         List<Usuario> listaUsuarios = new ArrayList<>();
         listaUsuarios = controlador.buscarListaUsuarios();
+        int contador = 1;
+        
+        String armarRespuesta = "";
         
         for (Usuario usuario : listaUsuarios) {
-            // si las credenciales coinciden con algun usuario registrado
-            if (usuario.usuarioExiste(usuarioIngresado, claveIngresada)) {
-                System.out.println(" se ha encontrado un usuario");
-                if(usuario.isAprobado()){
-                    // construyo un json de usuario encontrado
-                    response.getWriter().write("{\"mensaje\": true, \"autorizado\": true}");
-
-                    // creacion de una sesion
-                    HttpSession sesion = request.getSession();
-
-                    // guardo la informacion del usuario
-                    sesion.setAttribute("username", usuario.getUsuario());
-                    break;
+            String claveGuardada = usuario.getClave();
+            String saltGuardado = usuario.getSalt();
+            
+            System.out.println("---------------------------------------------");
+            System.out.println("usuarios contados: "+contador);
+            System.out.println("Usuario ingresado: "+usuarioIngresado);
+            System.out.println("Clave ingresada: "+claveIngresada);
+            System.out.println("Clave guardada: "+claveGuardada);
+            System.out.println("Salt guardado: "+saltGuardado);
+            
+            contador = contador + 1;
+            
+            try {
+                //debo hacer un hash con la clave recibida del formulario y el salt del usuario
+                // y comparar el resultado con la clave ingresada
+                String claveEncriptada = encriptarClave(claveIngresada, saltGuardado);
+                System.out.println(claveEncriptada);
+                
+                if(usuario.usuarioExiste(usuarioIngresado, claveEncriptada)){
+                    if(usuario.isAprobado()){
+                        System.out.println("############### autenticar usuario #################");
+                        System.out.println("---------------------------------------------");
+                        // creacion de una sesion
+                        HttpSession sesion = request.getSession();
+                        // guardo la informacion del usuario
+                        sesion.setAttribute("username", usuario.getUsuario());
+                        // construyo un json de usuario encontrado
+                        armarRespuesta = "{\"mensaje\":true,\"autorizado\":true}";
+                        break;
+                    }
+                    else{
+                        System.out.println("############### usuario no autorizado #################");
+                        System.out.println("---------------------------------------------");
+                        armarRespuesta = "{\"mensaje\":true,\"autorizado\":false}";
+                        break;
+                    }
                 }
-                else{
-                    response.getWriter().write("{\"mensaje\": true, \"autorizado\": false}");
-                    break;
+                else {
+                    System.out.println("############### no exixte el usuario #################");
+                    System.out.println("---------------------------------------------");
+                    // construyo un json de usuario no encontrado
+                    armarRespuesta = "{\"mensaje\":false}";
                 }
-            }
-            else {
-                //out.println("<font color=red>Usuario y/o clave incorrectos</font>");
-                //rd.include(request, response);
-                System.out.println("no existe usuarios con esas credenciales");
-                // construyo un json de usuario no encontrado
-                response.getWriter().write("{\"mensaje\": false}");
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(SvIndex.class.getName()).log(Level.SEVERE, null, ex);
+                armarRespuesta = "{\"mensaje\":false}";
             }
         }
+        response.getWriter().write(armarRespuesta);
     }
 
     @Override
     public String getServletInfo() {
         return "Short description";
+    }
+
+    // utilizo la clave que recibo de index.jsp, el salt generado y hago una nueva encriptacion
+    private String encriptarClave(String claveRecibida, String salt) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        String saltedPassword = salt + claveRecibida;
+        byte[] hashBytes = md.digest(saltedPassword.getBytes(StandardCharsets.UTF_8));
+        return Base64.getEncoder().encodeToString(hashBytes);
     }
 }
 /* token github */

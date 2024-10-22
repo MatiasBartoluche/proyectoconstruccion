@@ -48,24 +48,30 @@ function login(){
         
         var verificar = verificarLongitud();
         
+        var claveEncriptada = CryptoJS.SHA256(clave).toString();
+        
         if(verificar === true){
             console.log('enviar datos al servidor');
             
             $.ajax({
                 url: 'SvIndex',
                 type: 'POST',
-                data: {usuario: usuario, clave: clave},
+                //contentType: 'application/json; charset=utf-8', // especifico que es json
+                data: {usuario: usuario, clave: claveEncriptada},
                 success: function (response) {
-                    console.log(response.mensaje);
+                    console.log(response);
                     if (response.mensaje === false) {
+                        console.log('Usuario y/o clave incorrectos');
                         $('#mensajeIncorrecto').text('Usuario y/o claves incorrectas');
                         $('#mensajeIncorrecto').css('color', 'red');
                     }
                     else if(response.mensaje === true && response.autorizado === true){
                         window.location.href = "/proyectoconstruccion/vistas/home.jsp";
+                        console.log('Bienvenido');
                     }
                      else if(response.mensaje === true && response.autorizado === false){
                          window.location.href = "/proyectoconstruccion/vistas/noaprobado.jsp";
+                         console.log('Usuario no autorizado');
                      }
                 },
                 error: function (xhr, status, error) {
