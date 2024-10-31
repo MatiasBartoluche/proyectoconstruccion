@@ -7,6 +7,7 @@ import clases.Estado;
 import clases.Jerarquia;
 import clases.Rol;
 import clases.Usuario;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
@@ -15,7 +16,9 @@ import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -88,9 +91,9 @@ public class SvIndex extends HttpServlet{
         controlador.crearRol(rolSistemas);
         controlador.crearRol(rolAdministrativo);
         controlador.crearRol(rolAyudante);
-        controlador.crearRol(rolContador);
-        
-        Jerarquia administrativo = new Jerarquia("Administrativo");
+        controlador.crearRol(rolContador);*/
+       
+        /*Jerarquia administrativo = new Jerarquia("Administrativo");
         Jerarquia contador = new Jerarquia("Contador");
         Jerarquia ayudanteAdmin = new Jerarquia("Ayudante administrativo");
         Jerarquia adminSistemas = new Jerarquia("Admin Sistemas");
@@ -155,16 +158,16 @@ public class SvIndex extends HttpServlet{
         
         controlador.crearEmpleado(empleado);
         
-        Usuario usuario = new Usuario();
+        /*Usuario u = new Usuario();
         
-        usuario.setEmpleado(empleado);
-        usuario.setUsuario("usuarioJuan1234");
-        usuario.setClave("1234");
-        usuario.setRol(rolSistemas);
-        usuario.setAprobado(false);
-        usuario.setAuditoria("");
+        u.setEmpleado(empleado);
+        u.setUsuario("usuarioJuan1234");
+        u.setClave("1234");
+        u.setRol(rolSistemas);
+        u.setAprobado(false);
+        u.setAuditoria("");
         
-        controlador.crearUsuario(usuario);*/
+        controlador.crearUsuario(u);*/
         
         //capturo el usuario y clave ingresados
 
@@ -173,22 +176,22 @@ public class SvIndex extends HttpServlet{
         // consulto la lista de usuarios
         List<Usuario> listaUsuarios = new ArrayList<>();
         listaUsuarios = controlador.buscarListaUsuarios();
-        int contador = 1;
+        int cont = 1;
         
-        String armarRespuesta = "";
+        Map <String, Object> armarJson = new HashMap<>();
         
         for (Usuario usuario : listaUsuarios) {
             String claveGuardada = usuario.getClave();
             String saltGuardado = usuario.getSalt();
             
             System.out.println("---------------------------------------------");
-            System.out.println("usuarios contados: "+contador);
+            System.out.println("usuarios contados: "+cont);
             System.out.println("Usuario ingresado: "+usuarioIngresado);
             System.out.println("Clave ingresada: "+claveIngresada);
             System.out.println("Clave guardada: "+claveGuardada);
             System.out.println("Salt guardado: "+saltGuardado);
             
-            contador = contador + 1;
+            cont = cont + 1;
             
             try {
                 //debo hacer un hash con la clave recibida del formulario y el salt del usuario
@@ -205,13 +208,16 @@ public class SvIndex extends HttpServlet{
                         // guardo la informacion del usuario
                         sesion.setAttribute("usuario", usuario);
                         // construyo un json de usuario encontrado
-                        armarRespuesta = "{\"mensaje\":true,\"autorizado\":true}";
+                        armarJson.put("mensaje", true);
+                        armarJson.put("autorizado", true);
+                        armarJson.put("rol", usuario.getRol().getDescripcion());
                         break;
                     }
                     else{
                         System.out.println("############### usuario no autorizado #################");
                         System.out.println("---------------------------------------------");
-                        armarRespuesta = "{\"mensaje\":true,\"autorizado\":false}";
+                        armarJson.put("mensaje", true);
+                        armarJson.put("autorizado", false);
                         break;
                     }
                 }
@@ -219,14 +225,17 @@ public class SvIndex extends HttpServlet{
                     System.out.println("############### no exixte el usuario #################");
                     System.out.println("---------------------------------------------");
                     // construyo un json de usuario no encontrado
-                    armarRespuesta = "{\"mensaje\":false}";
+                    armarJson.put("mensaje", false);
                 }
             } catch (NoSuchAlgorithmException ex) {
                 Logger.getLogger(SvIndex.class.getName()).log(Level.SEVERE, null, ex);
-                armarRespuesta = "{\"mensaje\":false}";
+                armarJson.put("mensaje", false);
             }
         }
-        response.getWriter().write(armarRespuesta);
+        Gson gson = new Gson();
+        String json = gson.toJson(armarJson);
+        
+        response.getWriter().write(json);
     }
 
     @Override

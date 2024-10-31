@@ -1,5 +1,6 @@
 package servlets;
 
+import clases.Usuario;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,15 +21,17 @@ public class SvLogout extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        HttpSession session = request.getSession(false);        
+        HttpSession session = request.getSession(false);
+
         session.invalidate(); // Invalidar la sesión actual
         response.sendRedirect("index.jsp"); // Redirigir al login
+        System.out.println("---------------------------------- imprimiendo desde log out");
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
     }
 
     @Override

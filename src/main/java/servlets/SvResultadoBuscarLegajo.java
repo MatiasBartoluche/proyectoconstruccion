@@ -56,10 +56,12 @@ public class SvResultadoBuscarLegajo extends HttpServlet {
         // busco todos los usuarios
         List<Usuario> listaUsuarios = control.buscarListaUsuarios();
         
+        System.out.println("------------------------"+listaUsuarios);
+        
         // boolean para verificar si el legajo esta asociado a algun usuario ya existente
         // true = empleado ya tiene usuario
         // false = empleado no tiene usuario
-        boolean existeUsuario = true;
+        boolean existeUsuario = false;
         
         for(Usuario usuario : listaUsuarios){
             if(usuario.getEmpleado().getLegajo() == numeroLegajo){

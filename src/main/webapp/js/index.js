@@ -65,14 +65,24 @@ function login(){
                         $('#mensajeIncorrecto').text('Usuario y/o claves incorrectas');
                         $('#mensajeIncorrecto').css('color', 'red');
                     }
-                    else if(response.mensaje === true && response.autorizado === true){
-                        window.location.href = "/proyectoconstruccion/vistas/home.jsp";
-                        console.log('Bienvenido');
-                    }
                      else if(response.mensaje === true && response.autorizado === false){
                          window.location.href = "/proyectoconstruccion/vistas/noaprobado.jsp";
                          console.log('Usuario no autorizado');
                      }
+                     else if(response.mensaje === true && response.autorizado === true){
+                        if(response.rol === 'Admin sistemas'){
+                            window.location.href = "/proyectoconstruccion/vistas/sistemas.jsp";
+                        }
+                        else if(response.rol === 'Administrativo'){
+                            window.location.href = "/proyectoconstruccion/vistas/administrativo.jsp";
+                        }
+                        else if(response.rol === 'Ayudante'){
+                            window.location.href = "/proyectoconstruccion/vistas/ayudante.jsp";
+                        }
+                        else if(response.rol === 'Contador'){
+                            window.location.href = "/proyectoconstruccion/vistas/contador.jsp";
+                        }
+                    }
                 },
                 error: function (xhr, status, error) {
                     console.error("Error:", error);

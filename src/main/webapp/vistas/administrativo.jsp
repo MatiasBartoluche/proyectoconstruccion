@@ -16,7 +16,11 @@
                 response.sendRedirect("index.jsp");
             }
         %>
-        <h1>Bienvenido, <%= usuario.getUsuario() %>!</h1>
+        <h1>Bienvenido, <%= usuario.getEmpleado().getApellidos() %>, <%=usuario.getEmpleado().getNombres() %></h1>
+        <h1> <%=usuario.getRol().getDescripcion() %> </h1>
+        
+        <p>pagina administrativo</p>
+        
         <a href="../SvLogout">Cerrar sesión</a>
         
     </body>
