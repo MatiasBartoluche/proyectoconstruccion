@@ -244,16 +244,16 @@ public class SvIndex extends HttpServlet{
         String url = null;
         
         if("Admin sistemas".equals(rolUsuario)){
-            url = "/proyectoconstruccion/vistas/sistemas/sistemas.jsp";
+            url = "/proyectoconstruccion/vistas/sistemas/home.jsp";
         }
         else if("Administrativo".equals(rolUsuario)){
-            url = "/proyectoconstruccion/vistas/administrativo/administrativo.jsp";
+            url = "/proyectoconstruccion/vistas/administrativo/home.jsp";
         }
         else if("Ayudante".equals(rolUsuario)){
-            url = "/proyectoconstruccion/vistas/ayudante/ayudante.jsp";
+            url = "/proyectoconstruccion/vistas/ayudante/home.jsp";
         }
         else if("Contador".equals(rolUsuario)){
-            url = "/proyectoconstruccion/vistas/contador/contador.jsp";
+            url = "/proyectoconstruccion/vistas/contador/home.jsp";
         }
         
         return url;
