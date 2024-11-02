@@ -58,9 +58,26 @@ function login(){
                 type: 'POST',
                 //contentType: 'application/json; charset=utf-8', // especifico que es json
                 data: {usuario: usuario, clave: claveEncriptada},
+                dataType: 'json',
                 success: function (response) {
                     console.log(response);
-                    if (response.mensaje === false) {
+                    
+                    if(response.status === 'success'){
+                        console.log('usuario correcto');
+                        if(response.autorizado === true){
+                            console.log("ingresar al sistema");
+                            window.location.href = response.redirectUrl;
+                        }
+                        else{
+                            console.log("denegado");
+                            window.location.href = "/proyectoconstruccion/vistas/noaprobado.jsp";
+                        }
+                    }
+                    else{
+                        console.log('usuario y/o clave incorrectos');
+                    }
+                    
+                    /*if (response.mensaje === false) {
                         console.log('Usuario y/o clave incorrectos');
                         $('#mensajeIncorrecto').text('Usuario y/o claves incorrectas');
                         $('#mensajeIncorrecto').css('color', 'red');
@@ -71,20 +88,20 @@ function login(){
                      }
                      else if(response.mensaje === true && response.autorizado === true){
                         if(response.rol === 'Admin sistemas'){
-                            window.location.href = "/proyectoconstruccion/vistas/sistemas.jsp";
+                            window.location.href = "/proyectoconstruccion/vistas/sistemas/sistemas.jsp";
                         }
                         else if(response.rol === 'Administrativo'){
-                            window.location.href = "/proyectoconstruccion/vistas/administrativo.jsp";
+                            window.location.href = "/proyectoconstruccion/vistas/administrativo/administrativo.jsp";
                         }
                         else if(response.rol === 'Ayudante'){
-                            window.location.href = "/proyectoconstruccion/vistas/ayudante.jsp";
+                            window.location.href = "/proyectoconstruccion/vistas/ayudante/ayudante.jsp";
                         }
                         else if(response.rol === 'Contador'){
-                            window.location.href = "/proyectoconstruccion/vistas/contador.jsp";
+                            window.location.href = "/proyectoconstruccion/vistas/contador/contador.jsp";
                         }
-                    }
+                    }*/
                 },
-                error: function (xhr, status, error) {
+                error: function (xhr, status, error, response) {
                     console.error("Error:", error);
                 }
             });

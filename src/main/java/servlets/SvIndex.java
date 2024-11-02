@@ -80,8 +80,6 @@ public class SvIndex extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
         
         /*Rol rolSistemas = new Rol("Admin sistemas");
         Rol rolAdministrativo = new Rol("Administrativo");
@@ -170,17 +168,26 @@ public class SvIndex extends HttpServlet{
         controlador.crearUsuario(u);*/
         
         //capturo el usuario y clave ingresados
-
         String usuarioIngresado = request.getParameter("usuario");
         String claveIngresada = request.getParameter("clave");
+        
         // consulto la lista de usuarios
         List<Usuario> listaUsuarios = new ArrayList<>();
         listaUsuarios = controlador.buscarListaUsuarios();
         int cont = 1;
         
+        // armo un map para guardar informacion y convertirlo en json
         Map <String, Object> armarJson = new HashMap<>();
         
-        for (Usuario usuario : listaUsuarios) {
+        // inicio el map con valores para usuario no encontrado
+        armarJson.put("status", "error");
+        armarJson.put("message", "Usuario y/o clave incorrectos");
+        
+        /*while(listaUsuarios.get(cont).getUsuario().equals(usuarioIngresado) && listaUsuarios.get(cont).getClave().equals(claveIngresada)){
+            System.out.println("--------------------------- usuario encontrado");
+        }*/
+        
+        for(Usuario usuario : listaUsuarios){
             String claveGuardada = usuario.getClave();
             String saltGuardado = usuario.getSalt();
             
@@ -191,13 +198,57 @@ public class SvIndex extends HttpServlet{
             System.out.println("Clave guardada: "+claveGuardada);
             System.out.println("Salt guardado: "+saltGuardado);
             
+            String claveEncriptada = null;
+            try {
+                // utilizo la clave ingresada y el salt del usuario iterado en este momento, para generar la clave encriptada
+                // y luego comparar esta variable con la clave guardada de este usuario
+                claveEncriptada = encriptarClave(claveIngresada, saltGuardado);
+            } catch (NoSuchAlgorithmException ex) {
+                Logger.getLogger(SvIndex.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            System.out.println("clave ingresada+salt: "+claveEncriptada);
+            
+            if(usuario.usuarioExiste(usuarioIngresado, claveEncriptada)){
+                System.out.println("#################################### el usuario existe");
+                
+                    // elimino los valores del map para usuario no encontrado
+                    armarJson.remove("status");
+                    armarJson.remove("message");
+
+                    // agrego valores para usuario encontrado
+                    armarJson.put("status", "success");
+                    armarJson.put("rol", usuario.getRol().getDescripcion());
+                    armarJson.put("autorizado", usuario.isAprobado());
+                
+                if(usuario.isAprobado()){
+                    HttpSession sesion = request.getSession();
+                    sesion.setAttribute("usuario", usuario);
+                    
+                    String rolUsuario = usuario.getRol().getDescripcion();
+                    sesion.setAttribute("rolUsuario", rolUsuario);
+
+                    armarJson.put("redirectUrl", "/proyectoconstruccion/vistas/sistemas/sistemas.jsp");
+                    break;
+                }
+                else{
+                    System.out.println("no autorizado");
+                    break;
+                }
+            }
+            else{
+                System.out.println("#################################### el usuario no existe");
+            }
+        }
+        
+        /*for (Usuario usuario : listaUsuarios) {
+
             cont = cont + 1;
             
             try {
                 //debo hacer un hash con la clave recibida del formulario y el salt del usuario
                 // y comparar el resultado con la clave ingresada
-                String claveEncriptada = encriptarClave(claveIngresada, saltGuardado);
-                System.out.println(claveEncriptada);
+
                 
                 if(usuario.usuarioExiste(usuarioIngresado, claveEncriptada)){
                     if(usuario.isAprobado()){
@@ -207,10 +258,13 @@ public class SvIndex extends HttpServlet{
                         HttpSession sesion = request.getSession();
                         // guardo la informacion del usuario
                         sesion.setAttribute("usuario", usuario);
+                        sesion.setAttribute("rolUsuario", usuario.getRol().getDescripcion());
                         // construyo un json de usuario encontrado
                         armarJson.put("mensaje", true);
                         armarJson.put("autorizado", true);
                         armarJson.put("rol", usuario.getRol().getDescripcion());
+
+                        redirigirUsuario(request, response);
                         break;
                     }
                     else{
@@ -231,10 +285,12 @@ public class SvIndex extends HttpServlet{
                 Logger.getLogger(SvIndex.class.getName()).log(Level.SEVERE, null, ex);
                 armarJson.put("mensaje", false);
             }
-        }
+        }*/
         Gson gson = new Gson();
         String json = gson.toJson(armarJson);
         
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
         response.getWriter().write(json);
     }
 
@@ -249,6 +305,28 @@ public class SvIndex extends HttpServlet{
         String saltedPassword = salt + claveRecibida;
         byte[] hashBytes = md.digest(saltedPassword.getBytes(StandardCharsets.UTF_8));
         return Base64.getEncoder().encodeToString(hashBytes);
+    }
+
+    private void redirigirUsuario(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession sesion = request.getSession(false);
+        String rol = (sesion != null) ? (String) sesion.getAttribute("rolUsuario") : null;
+        
+        if("Admin sistemas".equals(rol) && request.getRequestURI().contains("/sistemas")){
+            System.out.println("######################## inicio de sesion: "+rol);
+        }
+        else if("Administrativo".equals(rol) && request.getRequestURI().contains("/administrativo")){
+            System.out.println("######################## inicio de sesion: "+rol);
+        }
+        else if("Ayudante".equals(rol) && request.getRequestURI().contains("/ayudante")){
+            System.out.println("######################## inicio de sesion: "+rol);
+        }
+        else if("Contador".equals(rol) && request.getRequestURI().contains("/contador")){
+            System.out.println("######################## inicio de sesion: "+rol);
+        }
+        else{
+            response.sendRedirect("denegado.jsp");
+        }
+    
     }
 }
 /* token github */

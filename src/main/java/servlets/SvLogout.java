@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "SvLogout", urlPatterns = {"/SvLogout"})
+@WebServlet(name = "SvLogout", urlPatterns = {"/servlets/SvLogout"})
 public class SvLogout extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -24,7 +24,7 @@ public class SvLogout extends HttpServlet {
         HttpSession session = request.getSession(false);
 
         session.invalidate(); // Invalidar la sesión actual
-        response.sendRedirect("index.jsp"); // Redirigir al login
+        response.sendRedirect(request.getContextPath() + "/index.jsp"); // Redirigir al login
         System.out.println("---------------------------------- imprimiendo desde log out");
     }
 
