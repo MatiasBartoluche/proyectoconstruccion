@@ -20,26 +20,15 @@ public class RoleFilter implements Filter {
         String uri = request.getRequestURI();
 
 // ----------------------- exclusion del filto para recursos generales --------------------------------
-        // excluir la pagina de login y su servlet del filtro
-        if (uri.contains("/index.jsp") || uri.contains("/SvIndex")) {
+
+        // excluir las paginas del filtro
+        if (uri.contains("/index.jsp") || uri.contains("/registrar.jsp") || uri.contains("/noaprobado.jsp")) {
             chain.doFilter(req, res);
             return;
         }
         
-        // excluir la pagina de registro y su servlet del filtro
-        if (uri.contains("/registrar.jsp") || uri.contains("/SvRegistrar")) {
-            chain.doFilter(req, res);
-            return;
-        }
-        
-        // excluir la pagina de usuarios no autorizados
-        if (uri.contains("/noaprobado.jsp")) {
-            chain.doFilter(req, res);
-            return;
-        }
-        
-        // excluir el SvLogout
-        if(uri.contains("/SvLogout")){
+        // excluir los servlet del filtro
+        if ( uri.contains("/SvIndex") ||  uri.contains("/SvRegistrar") || uri.contains("/SvLogout") || uri.contains("/SvResultadoBuscarLegajo")) {
             chain.doFilter(req, res);
             return;
         }
