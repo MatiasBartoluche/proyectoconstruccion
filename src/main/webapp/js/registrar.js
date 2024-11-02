@@ -10,7 +10,8 @@ function buscarEmpleado(){
     $('#btnBuscarEmpleado').click(function(){
         localStorage.removeItem('empleado');
         $('#resultadoBusquedaEmpleado').empty();
-        $('#formularioRegistro').css('display', 'none');
+        $('#resultadoBusquedaEmpleado').css('display', 'block');
+        //$('#formularioRegistro').css('display', 'none');
         var legajo = $('#inputLegajo').val();
         
         if(legajo === ''){
