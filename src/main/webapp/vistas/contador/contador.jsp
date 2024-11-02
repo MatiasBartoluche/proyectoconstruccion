@@ -21,7 +21,7 @@
         
         <p>pagina contador</p>
         
-        <a href="../SvLogout">Cerrar sesión</a>
+        <a href="${pageContext.request.contextPath}/servlets/SvLogout">Cerrar sesión</a>
         
     </body>
 </html>

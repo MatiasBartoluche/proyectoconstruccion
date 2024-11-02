@@ -52,7 +52,6 @@ function login(){
         
         if(verificar === true){
             console.log('enviar datos al servidor');
-            
             $.ajax({
                 url: 'SvIndex',
                 type: 'POST',
@@ -61,7 +60,6 @@ function login(){
                 dataType: 'json',
                 success: function (response) {
                     console.log(response);
-                    
                     if(response.status === 'success'){
                         console.log('usuario correcto');
                         if(response.autorizado === true){
@@ -76,36 +74,12 @@ function login(){
                     else{
                         console.log('usuario y/o clave incorrectos');
                     }
-                    
-                    /*if (response.mensaje === false) {
-                        console.log('Usuario y/o clave incorrectos');
-                        $('#mensajeIncorrecto').text('Usuario y/o claves incorrectas');
-                        $('#mensajeIncorrecto').css('color', 'red');
-                    }
-                     else if(response.mensaje === true && response.autorizado === false){
-                         window.location.href = "/proyectoconstruccion/vistas/noaprobado.jsp";
-                         console.log('Usuario no autorizado');
-                     }
-                     else if(response.mensaje === true && response.autorizado === true){
-                        if(response.rol === 'Admin sistemas'){
-                            window.location.href = "/proyectoconstruccion/vistas/sistemas/sistemas.jsp";
-                        }
-                        else if(response.rol === 'Administrativo'){
-                            window.location.href = "/proyectoconstruccion/vistas/administrativo/administrativo.jsp";
-                        }
-                        else if(response.rol === 'Ayudante'){
-                            window.location.href = "/proyectoconstruccion/vistas/ayudante/ayudante.jsp";
-                        }
-                        else if(response.rol === 'Contador'){
-                            window.location.href = "/proyectoconstruccion/vistas/contador/contador.jsp";
-                        }
-                    }*/
                 },
-                error: function (xhr, status, error, response) {
+                error: function (xhr, status, error) {
                     console.error("Error:", error);
+                    console.error("Status:", status);
                 }
             });
-            
         }
         else{
             console.log('usuario y/o contrasenia incorrectos');

@@ -48,30 +48,6 @@ public class SvIndex extends HttpServlet{
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-/*############################ lista de roles ################################*/
-        // leer los roles existentes en la base de datos
-        //List<Rol> listaRoles = new ArrayList<>();
-        //listaRoles = controlador.buscarListaRoles();
-        //HttpSession sesion = request.getSession();
-        // guardar la lista de roles para que otros jsp puedan leerlos
-        //sesion.setAttribute("listaRoles", listaRoles);
-        
-/*############################ lista de usuarios #############################*/
-        // leer los usuarios existentes en la base de datos
-        //List<Usuario> listaUsuarios = new ArrayList<>();
-        //listaUsuarios = controlador.buscarListaUsuarios();
-        // guardar la lista de roles para que otros jsp puedan leerlos
-        //sesion.setAttribute("listaUsuarios", listaUsuarios);
-       
-/*############################ lista de empleados ############################*/
-        // leer los empleados existentes en la base de datos
-        //List<Empleado> listaEmpleados = new ArrayList<>();
-        //listaEmpleados = controlador.buscarListaEmpleados();
-        //sesion.setAttribute("listaEmpleados", listaEmpleados);
-        // guardar la lista de roles para que otros jsp puedan leerlos
-        //sesion.setAttribute("listaRoles", listaRoles);
-       
-        
         // redirigir al formulario de creacion de nuevos usuarios
         response.sendRedirect("registrar.jsp");
        
@@ -183,10 +159,6 @@ public class SvIndex extends HttpServlet{
         armarJson.put("status", "error");
         armarJson.put("message", "Usuario y/o clave incorrectos");
         
-        /*while(listaUsuarios.get(cont).getUsuario().equals(usuarioIngresado) && listaUsuarios.get(cont).getClave().equals(claveIngresada)){
-            System.out.println("--------------------------- usuario encontrado");
-        }*/
-        
         for(Usuario usuario : listaUsuarios){
             String claveGuardada = usuario.getClave();
             String saltGuardado = usuario.getSalt();
@@ -227,8 +199,10 @@ public class SvIndex extends HttpServlet{
                     
                     String rolUsuario = usuario.getRol().getDescripcion();
                     sesion.setAttribute("rolUsuario", rolUsuario);
-
-                    armarJson.put("redirectUrl", "/proyectoconstruccion/vistas/sistemas/sistemas.jsp");
+                    
+                    String redirectUrl = obtenerUrl(rolUsuario);
+                    
+                    armarJson.put("redirectUrl", redirectUrl);
                     break;
                 }
                 else{
@@ -241,54 +215,13 @@ public class SvIndex extends HttpServlet{
             }
         }
         
-        /*for (Usuario usuario : listaUsuarios) {
-
-            cont = cont + 1;
-            
-            try {
-                //debo hacer un hash con la clave recibida del formulario y el salt del usuario
-                // y comparar el resultado con la clave ingresada
-
-                
-                if(usuario.usuarioExiste(usuarioIngresado, claveEncriptada)){
-                    if(usuario.isAprobado()){
-                        System.out.println("############### autenticar usuario #################");
-                        System.out.println("---------------------------------------------");
-                        // creacion de una sesion
-                        HttpSession sesion = request.getSession();
-                        // guardo la informacion del usuario
-                        sesion.setAttribute("usuario", usuario);
-                        sesion.setAttribute("rolUsuario", usuario.getRol().getDescripcion());
-                        // construyo un json de usuario encontrado
-                        armarJson.put("mensaje", true);
-                        armarJson.put("autorizado", true);
-                        armarJson.put("rol", usuario.getRol().getDescripcion());
-
-                        redirigirUsuario(request, response);
-                        break;
-                    }
-                    else{
-                        System.out.println("############### usuario no autorizado #################");
-                        System.out.println("---------------------------------------------");
-                        armarJson.put("mensaje", true);
-                        armarJson.put("autorizado", false);
-                        break;
-                    }
-                }
-                else {
-                    System.out.println("############### no exixte el usuario #################");
-                    System.out.println("---------------------------------------------");
-                    // construyo un json de usuario no encontrado
-                    armarJson.put("mensaje", false);
-                }
-            } catch (NoSuchAlgorithmException ex) {
-                Logger.getLogger(SvIndex.class.getName()).log(Level.SEVERE, null, ex);
-                armarJson.put("mensaje", false);
-            }
-        }*/
+        // instancia de objeto Gson
         Gson gson = new Gson();
+        
+        // convierto el map a Json
         String json = gson.toJson(armarJson);
         
+        // envio el json
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(json);
@@ -307,26 +240,23 @@ public class SvIndex extends HttpServlet{
         return Base64.getEncoder().encodeToString(hashBytes);
     }
 
-    private void redirigirUsuario(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        HttpSession sesion = request.getSession(false);
-        String rol = (sesion != null) ? (String) sesion.getAttribute("rolUsuario") : null;
+    private String obtenerUrl(String rolUsuario) {
+        String url = null;
         
-        if("Admin sistemas".equals(rol) && request.getRequestURI().contains("/sistemas")){
-            System.out.println("######################## inicio de sesion: "+rol);
+        if("Admin sistemas".equals(rolUsuario)){
+            url = "/proyectoconstruccion/vistas/sistemas/sistemas.jsp";
         }
-        else if("Administrativo".equals(rol) && request.getRequestURI().contains("/administrativo")){
-            System.out.println("######################## inicio de sesion: "+rol);
+        else if("Administrativo".equals(rolUsuario)){
+            url = "/proyectoconstruccion/vistas/administrativo/administrativo.jsp";
         }
-        else if("Ayudante".equals(rol) && request.getRequestURI().contains("/ayudante")){
-            System.out.println("######################## inicio de sesion: "+rol);
+        else if("Ayudante".equals(rolUsuario)){
+            url = "/proyectoconstruccion/vistas/ayudante/ayudante.jsp";
         }
-        else if("Contador".equals(rol) && request.getRequestURI().contains("/contador")){
-            System.out.println("######################## inicio de sesion: "+rol);
+        else if("Contador".equals(rolUsuario)){
+            url = "/proyectoconstruccion/vistas/contador/contador.jsp";
         }
-        else{
-            response.sendRedirect("denegado.jsp");
-        }
-    
+        
+        return url;
     }
 }
 /* token github */

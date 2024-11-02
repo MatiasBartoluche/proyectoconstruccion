@@ -16,11 +16,10 @@ public class RoleFilter implements Filter {
         
         HttpSession sesion = request.getSession(false);
         
-        //Usuario usuario = (Usuario) sesion.getAttribute("usuario");
-        
         String rol = (sesion != null) ? (String) sesion.getAttribute("rolUsuario") : null;
         String uri = request.getRequestURI();
 
+// ----------------------- exclusion del filto para recursos generales --------------------------------
         // excluir la pagina de login y su servlet del filtro
         if (uri.contains("/index.jsp") || uri.contains("/SvIndex")) {
             chain.doFilter(req, res);
@@ -39,6 +38,7 @@ public class RoleFilter implements Filter {
             return;
         }
         
+        // excluir el SvLogout
         if(uri.contains("/SvLogout")){
             chain.doFilter(req, res);
             return;
@@ -56,6 +56,7 @@ public class RoleFilter implements Filter {
             return;
         }
         
+// ------------------------ restringir acceso a otras paginas segun el rol de usuario -----------------------
         if (uri.contains("/sistemas") && "Admin sistemas".equals(rol)) {
             chain.doFilter(req, res); // Usuario Admin sistemas autorizado
         }
