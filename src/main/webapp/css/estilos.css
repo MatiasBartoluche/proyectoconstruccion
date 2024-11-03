@@ -68,7 +68,8 @@ body{
     outline: 0;
     background: #f2f2f2; /*fondo gris claro*/
     width: 100%;
-    border: 0;
+    border: 1px solid var(--text-color);
+    border-radius: 6px;
     margin: 0 0 15px;
     padding: 15px;
     box-sizing: border-box;
@@ -108,6 +109,45 @@ body{
     text-align: center;
     margin: 1%;
     padding: 1%;
+}
+
+#buscarEmpleado h2{
+    width: 98%;
+    margin: 1%;
+}
+
+#buscarEmpleado div{
+    width: 98%;
+    margin: 1%;
+    padding: 1%;
+}
+
+#buscarEmpleado label{
+    width: 60%;
+}
+
+#inputLegajo{
+    width: 30%;
+    font-family: "Roboto", sans-serif; /*fuentes de letra*/
+    outline: 0;
+    background: #f2f2f2; /*fondo gris claro*/
+    border: 1px solid var(--text-color);
+    border-radius: 6px;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+#buscarEmpleado button{
+    font-family: "Roboto", sans-serif; /*fuentes de letra para botones*/
+    text-transform: uppercase;
+    outline: 0;
+    width: 50%;
+    border: 0;
+    padding: 15px;
+    font-size: 14px;
+    cursor: pointer;
 }
 
 /* inicialmente no sera visible */

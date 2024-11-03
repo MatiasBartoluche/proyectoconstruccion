@@ -19,8 +19,11 @@
         <div id="contenidoRegistrar">
 
             <div id="buscarEmpleado">
-                <H2>Buscar empleado</h2>
-                <p>Ingrese su numero de legajo: <input type="number" placeholder="Legajo" name="buscarLegajo" id="inputLegajo"></p>
+                <h2>Buscar empleado</h2>
+                <div>
+                    <label>Ingrese su numero de legajo</label>
+                    <input type="number" placeholder="Legajo" name="buscarLegajo" id="inputLegajo">
+                </div>
                 <button id="btnBuscarEmpleado">Buscar</button>
             </div>
 

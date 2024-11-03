@@ -4,9 +4,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
         <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/estilos.css">
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-        <title>Home</title>
     </head>
     <body>
 
@@ -110,19 +110,7 @@
         
     <section class="home">
 
-        <a href="./sociedades.jsp"> <article class="modulo">Modulo Sociedades</article> </a>
-
-        <a href="./empleados.jsp"> <article class="modulo">Modulo empleados</article> </a>
-
-        <a href="./obras.jsp"> <article class="modulo">Modulo obras</article> </a>
-
-        <a href="./proveedores.jsp"> <article class="modulo">Modulo proveedores</article> </a>
-
-        <a href="./subcontratistas.jsp"> <article class="modulo">Modulo subcontratista</article> </a>
-
-        <a href="./contabilidad.jsp"> <article class="modulo">Modulo contabilidad</article> </a>
         
-        <a href="./sistemas.jsp"> <article class="modulo">Modulo Administrador de sistemas</article> </a>
 
     </section>
                 
@@ -131,6 +119,6 @@
     </footer>
     
     <script src="${pageContext.request.contextPath}/js/menu.js"></script>
-       
+
     </body>
 </html>
