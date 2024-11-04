@@ -243,17 +243,21 @@ public class SvIndex extends HttpServlet{
     private String obtenerUrl(String rolUsuario) {
         String url = null;
         
-        if("Admin sistemas".equals(rolUsuario)){
-            url = "/proyectoconstruccion/vistas/sistemas/home.jsp";
-        }
-        else if("Administrativo".equals(rolUsuario)){
-            url = "/proyectoconstruccion/vistas/administrativo/home.jsp";
-        }
-        else if("Ayudante".equals(rolUsuario)){
-            url = "/proyectoconstruccion/vistas/ayudante/home.jsp";
-        }
-        else if("Contador".equals(rolUsuario)){
-            url = "/proyectoconstruccion/vistas/contador/home.jsp";
+        if(null != rolUsuario)switch (rolUsuario) {
+            case "Admin sistemas":
+                url = "/proyectoconstruccion/vistas/sistemas/home.jsp";
+                break;
+            case "Administrativo":
+                url = "/proyectoconstruccion/vistas/administrativo/home.jsp";
+                break;
+            case "Ayudante":
+                url = "/proyectoconstruccion/vistas/ayudante/home.jsp";
+                break;
+            case "Contador":
+                url = "/proyectoconstruccion/vistas/contador/home.jsp";
+                break;
+            default:
+                break;
         }
         
         return url;
