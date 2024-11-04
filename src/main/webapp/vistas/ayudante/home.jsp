@@ -120,8 +120,6 @@
         
     <section class="home">
 
-        <a href="./sociedades.html"> <article class="modulo">Modulo Sociedades</article> </a>
-
         <a href="./empleados.html"> <article class="modulo">Modulo empleados</article> </a>
 
         <a href="./obras.html"> <article class="modulo">Modulo obras</article> </a>
@@ -129,10 +127,6 @@
         <a href="./proveedores.html"> <article class="modulo">Modulo proveedores</article> </a>
 
         <a href="./subcontratistas.html"> <article class="modulo">Modulo subcontratista</article> </a>
-
-        <a href="./contabilidad.html"> <article class="modulo">Modulo contabilidad</article> </a>
-        
-        <a href="./sistemas.html"> <article class="modulo">Modulo Administrador de sistemas</article> </a>
 
     </section>
                 

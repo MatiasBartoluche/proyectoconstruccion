@@ -131,8 +131,6 @@
         <a href="./subcontratistas.html"> <article class="modulo">Modulo subcontratista</article> </a>
 
         <a href="./contabilidad.html"> <article class="modulo">Modulo contabilidad</article> </a>
-        
-        <a href="./sistemas.html"> <article class="modulo">Modulo Administrador de sistemas</article> </a>
 
     </section>
                 
