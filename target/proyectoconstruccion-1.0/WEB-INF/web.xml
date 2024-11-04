@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>sistemas Pages</web-resource-name>
+            <url-pattern>/sistemas/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>Admin sistemas</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Administrativo Pages</web-resource-name>
+            <url-pattern>/administrativo/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>Administrativo</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Ayudante Pages</web-resource-name>
+            <url-pattern>/ayudante/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>Ayudante</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Contador Pages</web-resource-name>
+            <url-pattern>/contador/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>Contador</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-role>
+        <role-name>Admin sistemas</role-name>
+    </security-role>
+    <security-role>
+        <role-name>Administrativo</role-name>
+    </security-role>
+    <security-role>
+        <role-name>Ayudante</role-name>
+    </security-role>
+    <security-role>
+        <role-name>Contador</role-name>
+    </security-role>
+    <filter>
+        <filter-name>RoleFilter</filter-name>
+        <filter-class>servlets.RoleFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>RoleFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+</web-app>

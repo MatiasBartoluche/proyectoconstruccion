@@ -1,0 +1,514 @@
+:root{
+    /* variables de colores de la pagina */
+    --body-color: #275eb028;
+    --sidebar-color: #FFFFFF;
+    --primary-color: #538fdc;
+    --primary-color-light: #9B27B00D;
+    --toggle-color: #78788c;
+    --text-color: #78788c;
+
+    /* animaciones de transicion */
+    --tran-03: all 0.2s ease;
+    --tran-04: all 0.3s ease;
+    --tran-05: all 0.4s ease;
+    --altura: 5vh;
+    --esquinas: 6px;
+}
+
+/*-------------------------- estilos generales -------------------------------*/
+*{
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+button{
+    background: var(--primary-color); /*color de botones*/
+    color: var(--sidebar-color); /*color de las letras de botones*/
+    border-radius: 6px;
+}
+
+div{
+    border-radius: 6px;
+}
+
+/*------------------------ estilos pagina index.jsp --------------------------*/
+body{
+    background-color: var(--body-color);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /*centra horizontalmente*/
+    /*align-items: center;*/
+    width: 100%;
+}
+
+.ingresarUsuario{
+    margin-top: 20vh;
+    background-color: var(--sidebar-color);
+    width: 50%;
+    border-radius: var(--esquinas);
+    padding: 1%
+}
+
+.ingresarUsuario h1, .ingresarUsuario label{
+    width: 100%;
+    text-align: center;
+}
+
+.ingresarUsuario #login, .ingresarUsuario form{
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 5%
+}
+
+/* estilos de input*/
+.ingresarUsuario #login input {
+    font-family: "Roboto", sans-serif; /*fuentes de letra*/
+    outline: 0;
+    background: #f2f2f2; /*fondo gris claro*/
+    width: 100%;
+    border: 1px solid var(--text-color);
+    border-radius: 6px;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.ingresarUsuario #login label, .ingresarUsuario form label{
+    margin: 1%;
+    opacity: 1;
+    color: var(--text-color);
+}
+
+/*estilos de botones*/
+.ingresarUsuario #login button, .ingresarUsuario form button  {
+    font-family: "Roboto", sans-serif; /*fuentes de letra para botones*/
+    text-transform: uppercase;
+    outline: 0;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* -------------------------- estilos para registrar.jsp ---------------------*/
+#contenidoRegistrar{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#buscarEmpleado, #resultadoBusquedaEmpleado, #formularioRegistro, #mensajeCreacion{
+    position: relative;
+    width: 60%;
+    left: 20%;
+    background-color: var(--sidebar-color);
+    text-align: center;
+    margin: 1%;
+    padding: 1%;
+}
+
+#buscarEmpleado h2{
+    width: 98%;
+    margin: 1%;
+}
+
+#buscarEmpleado div{
+    width: 98%;
+    margin: 1%;
+    padding: 1%;
+}
+
+#buscarEmpleado label{
+    width: 60%;
+}
+
+#inputLegajo{
+    width: 30%;
+    font-family: "Roboto", sans-serif; /*fuentes de letra*/
+    outline: 0;
+    background: #f2f2f2; /*fondo gris claro*/
+    border: 1px solid var(--text-color);
+    border-radius: 6px;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+#buscarEmpleado button{
+    font-family: "Roboto", sans-serif; /*fuentes de letra para botones*/
+    text-transform: uppercase;
+    outline: 0;
+    width: 50%;
+    border: 0;
+    padding: 15px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* inicialmente no sera visible */
+#formularioRegistro, #mensajeCreacion, #resultadoBusquedaEmpleado{
+    display: none;
+}
+
+/* --------------------- estilso pagina noautorizado.jsp -------------------- */
+
+#noAprobado{
+    background-color: var(--sidebar-color);
+    text-align: center;
+    margin: 1%;
+}
+
+/* -------------------------- estilos pagina home.jsp ----------------------- */
+
+.cabecera, .pie{
+    background-color: var(--primary-color);
+    color: white;
+    position: fixed;
+    width: 100%;
+    height: var(--altura);
+}
+
+.cabecera{
+    top: 0;
+}
+
+.pie{
+    bottom: 0;
+}
+
+::selection{
+    background-color: var(--primary-color);
+    color: #FFFFFF;
+}
+
+/*------------------------------ inicio estilos menu lateral ----------------------------------------------*/
+/* aplicando estilos al menu lateral*/
+.sidebar{
+    position: fixed;
+    top: 5vh;
+    left: 0;
+    height: 90vh;
+    width: 25%;
+    padding: 10px 14px;
+    background: var(--sidebar-color);
+    transition: var(--tran-05);
+    z-index: 100;
+    float: left;
+}
+
+/* tamanio del menu lateral al cerrarse */
+.sidebar.close{
+    width: 88px;
+}
+
+/* aplicando estilos a cada elemento "li" de la lista*/
+.sidebar li{
+    height: 50px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+/* aplicando estilos al header del menu lateral*/
+.sidebar header .image, .sidebar .icon{
+    min-width: 60px;
+    border-radius: 6px; /* redondeando bordes*/
+}
+
+/* aplicando estilos a los iconos */
+.sidebar .icon{
+    min-width: 60px;
+    border-radius: 6px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+/* aplicando colores y transicion*/
+.sidebar .text, .sidebar .icon{
+    color: var(--text-color);
+    transition: var(--tran-03);
+}
+
+/* aplicando estilos a los textos de las opciones */
+.sidebar .text{
+    font-size: 17px;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 1;
+}
+
+/* ocultando texto cuando se cierra el menu */
+.sidebar.close .text{
+    opacity: 0;
+}
+
+
+.sidebar header{
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    width: 98%;
+    padding: 1%;
+}
+
+.sidebar header div{
+    width: 80%;
+}
+
+.sidebar header .logo{
+    display: flex;
+    flex-direction: column;
+}
+
+.name {
+    margin-top: 2px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.rol{
+    font-size: 16px;
+    margin-top: -2px;
+    display: block;
+}
+
+.sidebar header .image{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar header .image img{
+    width: 40px;
+    border-radius: 6px;
+}
+
+
+/* aplicando estilos al icono de la cabecera*/
+.sidebar header .toggle{
+    position: absolute;
+    /*top: 20px;*/
+    right: 0px;
+    height: 35px;
+    background-color: var(--primary-color);
+    color: var(--sidebar-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 35px;
+    cursor: pointer;
+    transition: var(--tran-05);
+}
+
+
+.sidebar.close .toggle{
+    width: 100%;
+    top: 20%;
+}
+
+.sidebar .menu{
+    margin-top: 40px;
+}
+
+/* aplicando estilos a los link de cada opcion*/
+.sidebar li a{
+    list-style: none;
+    height: 100%;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: var(--tran-03);
+}
+
+/* aplicando animacion y cambio de color*/
+.sidebar li a:hover{
+    background-color: var(--primary-color);
+}
+
+.sidebar li a:hover .icon, .sidebar li a:hover span{
+    color: var(--sidebar-color);
+}
+
+/* aplicando estilos a cada seccion del menu */
+/*.menu-bar contiene ambas secciones del menu*/
+.sidebar .menu-bar{
+    height: calc(100% - 55px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: scroll;
+}
+
+/* borrando los scroll del menu lateral*/
+.menu-bar::-webkit-scrollbar{
+    display: none;
+}
+
+/*------------------------------------inicio de estilos al boton switch ------------------------------------*/
+.sidebar .menu-bar .mode{
+    border-radius: 6px;
+    background-color: var(--primary-color-light);
+    position: relative;
+    transition: var(--tran-05);
+}
+
+.menu-bar .mode .sun-moon{
+    width: 60px;
+    height: 50px;
+}
+
+.mode .sun-moon i{
+    position: absolute;
+}
+
+.mode .sun-moon i.sun{
+    opacity: 0;
+}
+
+body.dark .mode .sun-moon i.sun{
+    opacity: 1;
+}
+
+body.dark .mode .sun-moon i.moon{
+    opacity: 0;
+}
+
+/*.bottom content es la seccion de abajo del menu*/
+.menu-bar .bottom-content .toggle-switch{
+    position: absolute;
+    right: 0;
+    height: 100%;
+    min-width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* haciendo visible el switch*/
+.toggle-switch .switch{
+    position: relative;
+    height: 22px;
+    width: 40px;
+    border-radius: 25px;
+    background-color: var(--toggle-color);
+    transition: var(--tran-05);
+}
+
+/* boton deslizante del switch visible, todavía esta estatico*/
+.switch::before{
+    content: '';
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    background-color: var(--sidebar-color);
+    transition: var(--tran-04); /* se aplica esta animacion al hacer click en el switch*/
+}
+
+/* boton deslizande del switch se desliza*/
+body.dark .switch::before{
+    left: 20px;
+}
+
+/*------------------------------- inicio de estilos para modo dark ---------------------------------------*/
+body.dark{
+    --body-color: #18191A;
+    --sidebar-color: #242526;
+    --primary-color-light: #3A3B3C;
+    --toggle-color: #FFFFFF;
+    --text-color: #CCCCCC;
+}
+
+/* cambiando colores al header y footer al activar modo dark*/
+body.dark .cabecera, body.dark .pie{
+    background-color: var(--sidebar-color);
+    color: var(--text-color);
+}
+
+/* aplicando estilos al header del menu cuando se activa em modo oscuro*/
+body.dark .sidebar header .toggle{
+    color:var(--text-color);
+}
+
+body.dark .sidebar li a:hover .icon, body.dark .sidebar li a:hover span{
+    color: var(--text-color);
+}
+
+/* aplicando color al texto en modo oscuro*/
+body.dark .home .text{
+    color: var(--text-color);
+}
+/*------------------------------ fin de estilos para modo dark --------------------------------------------*/
+
+
+/*---------------------------------------- inicio estilos contenedor home/section --------------------------*/
+/* aplicando estilos a la seccion principal */
+.home{
+    position: fixed;
+    top: 5vh;
+    left: 25%;
+    width: 75%;
+    height: 90vh;
+    background-color: var(--body-color);
+    transition: var(--tran-05);
+    overflow-y: auto;
+    padding-left: 2%;
+    padding-bottom: 12%;
+
+}
+
+
+
+/* achicando el menu lateral al cerrar*/
+/* alt 126 = ~*/
+.sidebar.close ~ .home{
+    left: 78px;
+    height: 100vh;
+    width: calc(100% - 78px);
+}
+/*--------------------------------------- fin estilos contenedor home/section ------------------------------*/
+
+/*--------------------------------------- inicio estilos article -------------------------------------------*/
+
+/* estos estilos se aplican a los modulos de la pagina principal, sociedades*/
+.home .modulo{
+    font-size: 30px;
+    font-weight: 500;
+    background-color: var(--sidebar-color);
+    color: var(--text-color);
+    margin: 4% 4%;
+    width: 40%;
+    height: 120px;
+    float: left;
+    text-align: center;
+    border-radius: 6px;
+}
+
+.modulo:hover{
+    -webkit-transform:scale(1.2);
+    transform:scale(1.2);
+    
+    box-shadow: 14px 14px 20px 0 var(--text-color);
+    -webkit-box-shadow: 14px 14px 20px 0 var(--text-color);
+    transition: var(--tran-05);
+}
+
+/*--------------------------------------- fin estilos article -------------------------------------------*/
