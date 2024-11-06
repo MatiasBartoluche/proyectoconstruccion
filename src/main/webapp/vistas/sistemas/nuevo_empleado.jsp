@@ -9,7 +9,7 @@
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="${pageContext.request.contextPath}/js/nuevoEmpleado.js"></script>
+        <script src="${pageContext.request.contextPath}/js/nuevo_empleado.js"></script>
     </head>
     <body>
 
@@ -186,7 +186,7 @@
 
             </div>
 
-            <button type="submit">Guardar</button>
+            <button type="button" id="guardarNuevoEmpleado">Guardar</button>
         </form>
 
     </section>
