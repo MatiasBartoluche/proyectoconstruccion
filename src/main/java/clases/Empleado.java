@@ -22,7 +22,7 @@ public class Empleado implements Serializable {
     private String localidad;
     private String telefono;
     private String telefono_familiar;
-    private String foto_dni;
+    private byte[] foto_dni;
     private LocalDate fecha_ingreso; // LocalDate fecha sin hora
     
     @OneToOne
@@ -38,7 +38,7 @@ public class Empleado implements Serializable {
     @OneToOne
     private GrupoTrabajo grupo;
 
-    public Empleado(int legajo, Jerarquia jerarquia, String nombres, String apellidos, String cuil, String calle, int altura, String localidad, String telefono, String telefono_familiar, String foto_dni, LocalDate fecha_ingreso, Contrato contrato, double sueldo_base, Estado estado, int antiguedad, boolean despido, int id_obra, GrupoTrabajo grupo) {
+    public Empleado(int legajo, Jerarquia jerarquia, String nombres, String apellidos, String cuil, String calle, int altura, String localidad, String telefono, String telefono_familiar, byte[] foto_dni, LocalDate fecha_ingreso, Contrato contrato, double sueldo_base, Estado estado, int antiguedad, boolean despido, int id_obra, GrupoTrabajo grupo) {
         this.legajo = legajo;
         this.jerarquia = jerarquia;
         this.nombres = nombres;
@@ -145,11 +145,11 @@ public class Empleado implements Serializable {
         this.telefono_familiar = telefono_familiar;
     }
 
-    public String getFotoDni() {
+    public byte[] getFotoDni() {
         return foto_dni;
     }
 
-    public void setFotoDni(String foto_dni) {
+    public void setFotoDni(byte[] foto_dni) {
         this.foto_dni = foto_dni;
     }
 

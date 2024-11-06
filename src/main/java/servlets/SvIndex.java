@@ -65,9 +65,9 @@ public class SvIndex extends HttpServlet{
         controlador.crearRol(rolSistemas);
         controlador.crearRol(rolAdministrativo);
         controlador.crearRol(rolAyudante);
-        controlador.crearRol(rolContador);*/
+        controlador.crearRol(rolContador);
        
-        /*Jerarquia administrativo = new Jerarquia("Administrativo");
+        Jerarquia administrativo = new Jerarquia("Administrativo");
         Jerarquia contador = new Jerarquia("Contador");
         Jerarquia ayudanteAdmin = new Jerarquia("Ayudante administrativo");
         Jerarquia adminSistemas = new Jerarquia("Admin Sistemas");
@@ -120,7 +120,7 @@ public class SvIndex extends HttpServlet{
         empleado.setLocalidad("Berazategui");
         empleado.setTelefono("1234567890");
         empleado.setTelefonoFamiliar("4287-1234");
-        empleado.setFotoDni("");
+        
         empleado.setFechaIngreso(LocalDate.of(2024,10,7));
         empleado.setContrato(oficina);
         empleado.setSueldoBase(100000.21);
@@ -130,7 +130,7 @@ public class SvIndex extends HttpServlet{
         empleado.setIdObra(0);
         empleado.setGrupo(null);
         
-        controlador.crearEmpleado(empleado);
+        controlador.crearEmpleado(empleado);*/
         
         /*Usuario u = new Usuario();
         
