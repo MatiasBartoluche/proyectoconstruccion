@@ -8,6 +8,27 @@ $(document).ready(function(){
 
 function cargarJerarquia(){
     console.log("cargar jerarquia");
+    $.ajax({
+        url: '/proyectoconstruccion/SvNuevoEmpleado', // URL del servlet
+        type: 'GET',
+        dataType: 'json',
+        success: function (response) {
+            console.log(response.jerarquias);
+            console.log(response.contratos);
+            // 'data' es un array de objetos Usuario en formato JSON
+            // Aquí puedes iterar y mostrar los datos en tu página
+            $.each(response.jerarquias, function (i, item) {
+                $('#jerarquia').append('<option value="' + item.id_jerarquia + '" id="' + item.descripcion + '">' + item.descripcion + '</option>');
+            });
+            
+            $.each(response.contratos, function (i, item) {
+                $('#contrato').append('<option value="' + item.id_contrato + '" id="' + item.descripcion + '">' + item.descripcion + '</option>');
+            });
+        },
+        error: function (xhr, status, error) {
+            console.error('Error al obtener la lista de roles:', error);
+        }
+    });
 }
 
 function cargarTiposContratos(){
@@ -61,7 +82,11 @@ function capturarDatos(imagen){
     //datos administrativos
     var legajo = $('#legajo').val();
     
+    var idJerarquia = $('#jerarquia').val();
+    var jerarquia = $('#jerarquia option:selected').html();
     
+    var idContrato = $('#contrato').val();
+    var contrato = $('#contrato option:selected').html();
     var salarioEmpleado = $('#salarioEmpleado').val();
     var fechaIngreso = $('#fechaIngreso').val();
     
@@ -75,4 +100,10 @@ function capturarDatos(imagen){
     }*/
 
     console.log(empleado);
+    
+    console.log(idJerarquia);
+    console.log(jerarquia);
+    
+    console.log(idContrato);
+    console.log(contrato);
 }

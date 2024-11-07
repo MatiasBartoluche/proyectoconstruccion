@@ -163,19 +163,12 @@
 
                 <label>Cargo jerarquico</label>
                 <select id="jerarquia" name="jerarquia">
-                    <option selected>Ayudante</option>
-                    <option>Oficial</option>
-                    <option>Balancin</option>
-                    <option>Capataz</option>
-                    <option>Gasista</option>
-                    <option>Plomero</option>
-                    <option>Carpintero</option>
+
                 </select>
 
                 <label>Contrato</label>
                 <select id="contrato" name="contrato">
-                    <option selected>Planta permanente</option>
-                    <option>Subcontratado</option>
+
                 </select>
 
                 <label>Salario</label>

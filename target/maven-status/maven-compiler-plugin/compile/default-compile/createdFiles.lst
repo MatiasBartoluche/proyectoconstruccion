@@ -1,5 +1,6 @@
 persistencia\EstadoJpaController.class
 servlets\SvRoles.class
+servlets\SvNuevoEmpleado.class
 clases\LocalDateAdapter.class
 clases\Rol.class
 persistencia\GrupoTrabajoJpaController.class
@@ -20,6 +21,7 @@ persistencia\ContratoJpaController.class
 persistencia\EmpleadoJpaController.class
 servlets\SvResultadoBuscarLegajo.class
 clases\Empleado.class
+servlets\SvNuevoEmpleado$CargarDatos.class
 clases\GrupoTrabajo.class
 servlets\SvIndex.class
 persistencia\JerarquiaJpaController.class
