@@ -116,18 +116,27 @@
         <form class="formulario" id="nuevoEmpleado">
             <h2>Datos personales</h2>
             <div class="datosPersonales">
-                <label>Nombres</label>
-                <input type="text" name="nombresEmpleado" placeholder="Nombres" id="nombresEmpleado">
+                <div id="contenedorNombres">
+                    <label>Nombres</label>
+                    <input type="text" name="nombresEmpleado" placeholder="Nombres" id="nombresEmpleado">
+                    <p></p>
+                </div>
 
-                <label>Apellidos</label>
-                <input type="text" name="apellidosEmpleado" placeholder="Apellidos" id="apellidosEmpleado">
-
-                <label>CUIL</label>
-                <input type="text" name="digitoGlobal" id="digitoGlobal" placeholder="30">
-                <label id="guion1">-</label>
-                <input type="text" name="cuerpoCUIL" id="cuerpoCUIL" placeholder="12345678">
-                <label id="guion2">-</label>
-                <input type="text" name="digitoVerificador" id="digitoVerificador" placeholder="9">
+                <div id="contenedorApellidos">
+                    <label>Apellidos</label>
+                    <input type="text" name="apellidosEmpleado" placeholder="Apellidos" id="apellidosEmpleado">
+                    <p></p>
+                </div>
+                
+                <div id="contenedorCuil">
+                    <label>CUIL</label>
+                    <input type="number" name="digitoGlobal" id="digitoGlobal" placeholder="30" min="1" max="2">
+                    <label id="guion1">-</label>
+                    <input type="number" name="cuerpoCUIL" id="cuerpoCUIL" placeholder="12345678">
+                    <label id="guion2">-</label>
+                    <input type="number" name="digitoVerificador" id="digitoVerificador" placeholder="9" min="1" max="1">
+                    <div></div>
+                </div>
             </div>
             
             <h2>Cargar foto</h2>
@@ -147,6 +156,9 @@
     
                     <label>Dpto-piso</label>
                     <input id="pisoEmpleado" type="text" placeholder="piso" name="pisoEmpleado">
+                    
+                    <label>Localidad</label>
+                    <input id="localidadEmpleado" type="text" placeholder="Localidad" name="localidadEmpleado">
                 </div>
 
                 <label>Telefono</label>
@@ -157,25 +169,39 @@
             </div>
 
             <h2>Datos Administrativos</h2>
+            
             <div class="datosAdministrativos">
-                <label>N° legajo</label>
-                <input id="legajo" type="number" placeholder="Legajo" name="legajo">
+                <div id="contenedorLegajo">
+                    <label>N° legajo</label>
+                    <input id="legajo" type="number" placeholder="Legajo" name="legajo">
+                    <p></p>
+                </div>
 
+                <div id="contenedorJerarquia">
                 <label>Cargo jerarquico</label>
-                <select id="jerarquia" name="jerarquia">
+                    <select id="jerarquia" name="jerarquia">
+                        <!-- select vacio, los tag option se cargaran por jquery -->
+                    </select>
+                </div>
 
-                </select>
-
+                <div id="contenedorContrato">
                 <label>Contrato</label>
-                <select id="contrato" name="contrato">
+                    <select id="contrato" name="contrato">
+                        <!-- select vacio, los tag option se cargaran por jquery -->
+                    </select>
+                </div>
 
-                </select>
-
-                <label>Salario</label>
-                <input id="salarioEmpleado" type="number" placeholder="Salario" name="salario">
+                <div id="contenedorSalario">
+                    <label>Salario</label>
+                    <input id="salarioEmpleado" type="number" placeholder="Salario" name="salario">
+                    <p></p>
+                </div>
                 
-                <label>Fecha de ingreso</label>
-                <input type="date" name="fechaIngreso" id="fechaIngreso">
+                <div id="contenedorFechaIngreso">
+                    <label>Fecha de ingreso</label>
+                    <input type="date" name="fechaIngreso" id="fechaIngreso">
+                    <p></p>
+                </div>
 
             </div>
 

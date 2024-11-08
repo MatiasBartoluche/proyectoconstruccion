@@ -33,6 +33,12 @@ div{
     border-radius: 6px;
 }
 
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  
+}
 /*------------------------ estilos pagina index.jsp --------------------------*/
 body{
     background-color: var(--body-color);
@@ -573,33 +579,38 @@ body.dark .home .text{
     align-items: center;
 }
 
-
-.datosPersonales label{
-    width: 10%;
+/* campos de datos personales */
+#contenedorNombres, #contenedorApellidos, #contenedorCuil{
+    width: 48%;
+    margin: 1%;
 }
 
-.datosPersonales input{
-    width: 35%;
+#contenedorNombres label, #contenedorApellidos label{
+    width: 20%;
+    
 }
 
-.datosPersonales label, .datosPersonales input{
-    padding: 1%;
-    margin-bottom: 1%;
+#contenedorNombres input ,#contenedorApellidos input{
+    width: 75%;
+    
 }
 
+/* campos de cuil */
 #guion1, #guion2{
     width: 2%;
     text-align: center;
 }
 
 #digitoGlobal, #digitoVerificador{
-    width: 4%;
+    width: 15%;
 }
 
 #cuerpoCUIL{
-    width: 19%;
+    width: 40%;
 }
 
+
+/* campos carga foto dni */
 .cargarDNI{
     width: 50%;
 }
@@ -608,6 +619,7 @@ body.dark .home .text{
     width: 100%;
 }
 
+/* campos informacion de contacto */
 .contenido1{
     width: 100%;
     display: flex;
@@ -632,15 +644,19 @@ body.dark .home .text{
     width: 15%;
 }
 
+/* campos datos administrativos */
+
+#contenedorLegajo, #contenedorJerarquia, #contenedorContrato, #contenedorSalario, #contenedorFechaIngreso{
+    width: 23%;
+    margin: 1%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .datosAdministrativos label{
-    width: 20%;
-    margin-left: 1%;
+    width: 45%;
 }
 
-#legajo{
-    width: 8%;
-}
-
-#salarioEmpleado{
-    width: 8%;
+.datosAdministrativos input, .datosAdministrativos select{
+    width: 45%;
 }
