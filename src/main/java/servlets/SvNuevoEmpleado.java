@@ -85,8 +85,18 @@ public class SvNuevoEmpleado extends HttpServlet {
         String enviarJson;
 
         if(empleado != null){
+            // si el empleado recibido no es nulo
             System.out.println("----------------------- empleado recibido");
-            enviarJson = "{\"mensaje\": true}";
+            // verifico que no exista un empleado con legajo igual al legajo recibido
+            Empleado buscarEmpleadoPorLegajo = control.buscarEmpleado(empleado.getLegajo());
+            if(buscarEmpleadoPorLegajo == null){
+                // si no encuentra ningun empleado con legajo igual al legajo recibido, crea un nuevo empleado
+                control.crearEmpleado(empleado);
+                enviarJson = "{\"mensaje\": true}";
+            }
+            else{
+                enviarJson = "{\"message\":\"Ya existe un empleado con ese legajo\"}";
+            }
         }
         else{
             System.out.println("----------------------- null");
