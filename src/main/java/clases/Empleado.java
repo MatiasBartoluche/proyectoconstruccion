@@ -36,12 +36,12 @@ public class Empleado implements Serializable {
     private Estado estado;
     private int antiguedad;
     private boolean despido; // true = despido, false = empleado vigente
-    private int id_obra;
+    private Obra obra;
     
     @OneToOne
     private GrupoTrabajo grupo;
 
-    public Empleado(int legajo, Jerarquia jerarquia, String nombres, String apellidos, String cuil, String calle, int altura, String localidad, String telefono, String telefono_familiar, byte[] foto_dni, String foto_dni_base64, LocalDate fecha_ingreso, Contrato contrato, double sueldo_base, Estado estado, int antiguedad, boolean despido, int id_obra, GrupoTrabajo grupo) {
+    public Empleado(int legajo, Jerarquia jerarquia, String nombres, String apellidos, String cuil, String calle, int altura, String localidad, String telefono, String telefono_familiar, byte[] foto_dni, String foto_dni_base64, LocalDate fecha_ingreso, Contrato contrato, double sueldo_base, Estado estado, int antiguedad, boolean despido, Obra obra, GrupoTrabajo grupo) {
         this.legajo = legajo;
         this.jerarquia = jerarquia;
         this.nombres = nombres;
@@ -59,7 +59,7 @@ public class Empleado implements Serializable {
         this.estado = estado;
         this.antiguedad = antiguedad;
         this.despido = despido;
-        this.id_obra = id_obra;
+        this.obra = obra;
         this.grupo = grupo;
     }
 
@@ -204,12 +204,12 @@ public class Empleado implements Serializable {
         this.despido = despido;
     }
 
-    public int getIdObra() {
-        return id_obra;
+    public int getObra() {
+        return obra;
     }
 
-    public void setIdObra(int id_obra) {
-        this.id_obra = id_obra;
+    public void setObra(Obra obra) {
+        this.obra = obra;
     }
 
     public GrupoTrabajo getGrupo() {
