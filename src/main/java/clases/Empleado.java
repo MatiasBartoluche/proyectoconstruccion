@@ -17,7 +17,8 @@ public class Empleado implements Serializable {
     @Id
     private int legajo; // el legajo sera ingresado manualmente por el usuario del sistema
     
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "id_jerarquia", referencedColumnName = "id_jerarquia")
     private Jerarquia jerarquia;
     private String nombres;
     private String apellidos;
@@ -31,15 +32,18 @@ public class Empleado implements Serializable {
     private String foto_dni_base64;
     private LocalDate fecha_ingreso; // LocalDate fecha sin hora
     
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "id_contrato", referencedColumnName = "id_contrato")
     private Contrato contrato; // 0 = empleado de oficina, 1 = obrero, 2 = subcontratado
+    
     private double sueldo_base;
     
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "id_estado", referencedColumnName = "id_contrato")
     private Estado estado;
+    
     private int antiguedad;
     private boolean despido; // true = despido, false = empleado vigente
-    private Obra obra;
     
     @OneToOne
     private GrupoTrabajo grupo;
