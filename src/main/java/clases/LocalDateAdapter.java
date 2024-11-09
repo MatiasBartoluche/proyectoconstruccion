@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
 
 public class LocalDateAdapter extends TypeAdapter<LocalDate> {
 
-    private static final DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     
     @Override
     public void write(JsonWriter jsonWriter, LocalDate localDate) throws IOException {
@@ -24,5 +24,4 @@ public class LocalDateAdapter extends TypeAdapter<LocalDate> {
     public LocalDate read(JsonReader jsonReader) throws IOException {
         return LocalDate.parse(jsonReader.nextString(), formatter);
     }
-    
 }

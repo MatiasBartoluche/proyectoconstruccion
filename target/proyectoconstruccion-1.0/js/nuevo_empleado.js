@@ -1,20 +1,16 @@
 $(document).ready(function(){
     
-    cargarJerarquia();
-    cargarTiposContratos();
+    cargarDatos();
     
     cargarImagen();
 });
 
-function cargarJerarquia(){
-    console.log("cargar jerarquia");
+function cargarDatos(){
     $.ajax({
         url: '/proyectoconstruccion/SvNuevoEmpleado', // URL del servlet
         type: 'GET',
         dataType: 'json',
         success: function (response) {
-            console.log(response.jerarquias);
-            console.log(response.contratos);
             // 'data' es un array de objetos Usuario en formato JSON
             // Aquí puedes iterar y mostrar los datos en tu página
             $.each(response.jerarquias, function (i, item) {
@@ -31,10 +27,6 @@ function cargarJerarquia(){
     });
 }
 
-function cargarTiposContratos(){
-    console.log("cargar contratos");
-}
-
 function cargarImagen(){
     $('#guardarNuevoEmpleado').click(function(){
         const fileInput = document.getElementById("dniEmpleado");
@@ -46,9 +38,10 @@ function cargarImagen(){
             // Convertir la imagen a base64
             const reader = new FileReader();
             reader.onload = function (event) {
-                const base64Image = event.target.result.split(",")[1]; // Remover el encabezado "data:image/png;base64,"
+                const base64Image = event.target.result; // Remover el encabezado "data:image/png;base64,"
                 //console.log(base64Image);
                 var imagen = {foto_dni: base64Image};
+                // paso la imagen en base64
                 capturarDatos(imagen);
             };
             reader.readAsDataURL(file);
@@ -224,7 +217,7 @@ function capturarDatos(imagen){
         $.extend(empleado, { localidad: localidadEmpleado});
         $.extend(empleado, { telefono: telefonoEmpleado});
         $.extend(empleado, { telefono_familiar: telefonoFamiliarEmpleado});
-        $.extend(empleado, { foto_dni: dniEmpleado});
+        $.extend(empleado, { foto_dni_base64: dniEmpleado});
         $.extend(empleado, { fecha_ingreso: fechaIngreso});
         $.extend(empleado, { contrato: contrato});
         $.extend(empleado, { sueldo_base: salarioEmpleado});
@@ -235,19 +228,21 @@ function capturarDatos(imagen){
         console.log('---------------- campos invalidos');
     }
 }
-/*
+
 function nuevoEmpleado(empleado){
     console.log(empleado);
     
     $.ajax({
         url: '/proyectoconstruccion/SvNuevoEmpleado', // URL del servlet
         type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(empleado),
         dataType: 'json',
         success: function (response) {
             console.log(response);
         },
         error: function (xhr, status, error) {
-            console.error('Error al obtener la lista de roles:', error);
+            console.error('Error al guardar el empleado:', error);
         }
     });
-}*/
+}

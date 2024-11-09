@@ -2,12 +2,20 @@ package servlets;
 
 import clases.Contrato;
 import clases.Controlador;
+import clases.Empleado;
 import clases.Jerarquia;
+import clases.LocalDateAdapter;
 import clases.Rol;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -46,15 +54,46 @@ public class SvNuevoEmpleado extends HttpServlet {
         String datosJson = gson.toJson(datos);
 
         // enviar el Json a la pagina jsp
-        
-        System.out.println("----------------------------"+datosJson);
         response.getWriter().write(datosJson);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
+        BufferedReader reader = request.getReader();
+        Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
+
+        // Convertir JSON a objeto Java
+        Empleado empleado = gson.fromJson(reader, Empleado.class);
+        
+        String fotoBase64 = empleado.getFotoDniBase64();
+        
+        if(fotoBase64 == null){
+            System.out.println("++++++++++++++++++++++++++++++++ no hay foto");
+        }
+        else{
+            byte[] foto = Base64.getDecoder().decode(empleado.getFotoDniBase64().split(",")[1]); // Eliminar el prefijo "data:image/..."
+
+            empleado.setFotoDni(foto);
+            System.out.println("++++++++++++++++++++++++++++++++ hay foto");
+        }
+       
+        System.out.println("++++++++++++++++++++++++++++++++"+empleado);
+        String enviarJson;
+
+        if(empleado != null){
+            System.out.println("----------------------- empleado recibido");
+            enviarJson = "{\"mensaje\": true}";
+        }
+        else{
+            System.out.println("----------------------- null");
+            enviarJson = "{\"mensaje\": false}";
+        }
+        response.getWriter().write(enviarJson);
+        //"{\"message\":\"Empleado registrado exitosamente!\"}"
     }
 
     @Override
