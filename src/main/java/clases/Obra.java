@@ -3,6 +3,7 @@ package clases;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,8 +34,8 @@ public class Obra implements Serializable {
     
     // OneToMany representa relacion n-n con actualizacion en cascada
     
-    //@OneToMany(mappedBy = "oficina", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    //private List<ObraEmpleado> lista_empleados;
+    @OneToMany(mappedBy = "obra", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<EmpleadoObra> asignaciones;
 
     public Obra() {
     }
@@ -109,5 +110,21 @@ public class Obra implements Serializable {
 
     public void setFechaInicio(LocalDate fecha_inicio) {
         this.fecha_inicio = fecha_inicio;
+    }
+    
+    public List<EmpleadoObra> getListaAsignaciones() {
+        return asignaciones;
+    }
+
+    public void setListaAsignaciones(List<EmpleadoObra> asignaciones) {
+        this.asignaciones = asignaciones;
+    }
+    
+    // obtiene una lista de los empleados actuales de la obra
+    public List<Empleado> getEmpleadosActualmenteAsignados() {
+        return asignaciones.stream()
+            .filter(asignacion -> asignacion.getFechaFin() == null) // Filtrar asignaciones activas
+            .map(EmpleadoObra::getEmpleado) // Obtener el empleado de cada asignación
+            .collect(Collectors.toList()); // Convertir a lista
     }
 }

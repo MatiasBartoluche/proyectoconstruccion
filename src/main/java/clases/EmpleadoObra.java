@@ -10,7 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class EmpleadoOficina implements Serializable {
+public class EmpleadoObra implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -22,16 +22,16 @@ public class EmpleadoOficina implements Serializable {
     private Empleado empleado;
 
     @ManyToOne
-    @JoinColumn(name = "oficina_id", nullable = false)
+    @JoinColumn(name = "id_obra", nullable = false)
     private Obra obra;
 
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
 
-    public EmpleadoOficina() {
+    public EmpleadoObra() {
     }
 
-    public EmpleadoOficina(int id, Empleado empleado, Obra obra, LocalDate fechaInicio, LocalDate fechaFin) {
+    public EmpleadoObra(int id, Empleado empleado, Obra obra, LocalDate fechaInicio, LocalDate fechaFin) {
         this.id = id;
         this.empleado = empleado;
         this.obra = obra;
@@ -78,6 +78,4 @@ public class EmpleadoOficina implements Serializable {
     public void setFechaFin(LocalDate fechaFin) {
         this.fechaFin = fechaFin;
     }
-    
-    
 }

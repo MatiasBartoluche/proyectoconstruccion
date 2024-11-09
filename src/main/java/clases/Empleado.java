@@ -2,8 +2,11 @@ package clases;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -40,6 +43,9 @@ public class Empleado implements Serializable {
     
     @OneToOne
     private GrupoTrabajo grupo;
+    
+    @OneToMany(mappedBy = "empleado", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<EmpleadoObra> asignaciones;
 
     public Empleado(int legajo, Jerarquia jerarquia, String nombres, String apellidos, String cuil, String calle, int altura, String localidad, String telefono, String telefono_familiar, byte[] foto_dni, String foto_dni_base64, LocalDate fecha_ingreso, Contrato contrato, double sueldo_base, Estado estado, int antiguedad, boolean despido, Obra obra, GrupoTrabajo grupo) {
         this.legajo = legajo;
@@ -225,5 +231,13 @@ public class Empleado implements Serializable {
 
     public void setFotoDniBase64(String foto_dni_base64) {
         this.foto_dni_base64 = foto_dni_base64;
+    }
+
+    public List<EmpleadoObra> getAsignaciones() {
+        return asignaciones;
+    }
+
+    public void setAsignaciones(List<EmpleadoObra> asignaciones) {
+        this.asignaciones = asignaciones;
     }
 }
