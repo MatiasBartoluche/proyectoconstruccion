@@ -63,8 +63,6 @@ public class Empleado implements Serializable {
         this.grupo = grupo;
     }
 
-
-
     public Empleado() {
     }
 
@@ -204,7 +202,7 @@ public class Empleado implements Serializable {
         this.despido = despido;
     }
 
-    public int getObra() {
+    public Obra getObra() {
         return obra;
     }
 
