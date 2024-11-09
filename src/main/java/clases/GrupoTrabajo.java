@@ -1,10 +1,13 @@
 package clases;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -17,13 +20,17 @@ public class GrupoTrabajo implements Serializable {
     
     @OneToOne
     Empleado capataz;
+    
+    @OneToMany
+    ArrayList<Empleado> lista_empleados;
 
     public GrupoTrabajo() {
     }
 
-    public GrupoTrabajo(String nombre_grupo, Empleado capataz) {
+    public GrupoTrabajo(String nombre_grupo, Empleado capataz, ArrayList<Empleado> lista_empleados) {
         this.nombre_grupo = nombre_grupo;
         this.capataz = capataz;
+        this.lista_empleados = lista_empleados;
     }
 
     public int getIdGrupo() {
@@ -49,6 +56,11 @@ public class GrupoTrabajo implements Serializable {
     public void setCapataz(Empleado capataz) {
         this.capataz = capataz;
     }
-    
-    
+    public List<Empleado> getListaEmpleados() {
+        return lista_empleados;
+    }
+
+    public void setListaEmpleados(ArrayList<Empleado> lista_empleados) {
+        this.lista_empleados = lista_empleados;
+    }
 }
