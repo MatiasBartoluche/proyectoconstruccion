@@ -3,6 +3,7 @@ package clases;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +21,8 @@ public class FacturaProveedor implements Serializable {
     private int id_factura;
     
     private LocalDate fecha_emision;
+    
+    @Column(precision = 14, scale = 7)
     private BigDecimal monto;
     
     @ManyToOne
