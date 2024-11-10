@@ -32,7 +32,7 @@ public class FacturaSubcontratista implements Serializable {
     
     @ManyToOne
     @JoinColumn(name = "id_obra", nullable = false)
-    private Obra obra;
+    private Obra obraSubcontratista;
 
     public FacturaSubcontratista() {
     }
@@ -78,11 +78,11 @@ public class FacturaSubcontratista implements Serializable {
     }
 
     public Obra getObra() {
-        return obra;
+        return obraSubcontratista;
     }
 
     public void setObra(Obra obra) {
-        this.obra = obra;
+        this.obraSubcontratista = obra;
     }
 
 }

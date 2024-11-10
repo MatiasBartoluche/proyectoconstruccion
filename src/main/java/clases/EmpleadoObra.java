@@ -19,11 +19,11 @@ public class EmpleadoObra implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "legajo", nullable = false)
-    private Empleado empleado;
+    private Empleado empleadoObra;
 
     @ManyToOne
     @JoinColumn(name = "id_obra", nullable = false)
-    private Obra obra;
+    private Obra obraEmpleado;
 
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
@@ -33,8 +33,8 @@ public class EmpleadoObra implements Serializable {
 
     public EmpleadoObra(int id, Empleado empleado, Obra obra, LocalDate fechaInicio, LocalDate fechaFin) {
         this.id = id;
-        this.empleado = empleado;
-        this.obra = obra;
+        this.empleadoObra = empleado;
+        this.obraEmpleado = obra;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
     }
@@ -48,19 +48,19 @@ public class EmpleadoObra implements Serializable {
     }
 
     public Empleado getEmpleado() {
-        return empleado;
+        return empleadoObra;
     }
 
     public void setEmpleado(Empleado empleado) {
-        this.empleado = empleado;
+        this.empleadoObra = empleado;
     }
 
     public Obra getObra() {
-        return obra;
+        return obraEmpleado;
     }
 
     public void setObra(Obra obra) {
-        this.obra = obra;
+        this.obraEmpleado = obra;
     }
 
     public LocalDate getFechaInicio() {

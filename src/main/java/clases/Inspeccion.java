@@ -17,7 +17,7 @@ public class Inspeccion implements Serializable {
     
     @ManyToOne
     @JoinColumn(name = "id_obra", referencedColumnName = "id_obra")
-    private Obra obra;
+    private Obra obraInspeccion;
     
     private String nombre_inspector;
     private LocalDate fecha_inspeccion;
@@ -50,11 +50,11 @@ public class Inspeccion implements Serializable {
     }
 
     public Obra getObra() {
-        return obra;
+        return obraInspeccion;
     }
 
     public void setObra(Obra obra) {
-        this.obra = obra;
+        this.obraInspeccion = obra;
     }
     
     

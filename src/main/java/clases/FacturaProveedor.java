@@ -31,7 +31,7 @@ public class FacturaProveedor implements Serializable {
     
     @ManyToOne
     @JoinColumn(name="id_obra", nullable = false)
-    private Obra obra;
+    private Obra obraProveedor;
 
     public FacturaProveedor() {
     }
@@ -69,11 +69,11 @@ public class FacturaProveedor implements Serializable {
     }
 
     public Obra getObra() {
-        return obra;
+        return obraProveedor;
     }
 
     public void setObra(Obra obra) {
-        this.obra = obra;
+        this.obraProveedor = obra;
     }
     
     

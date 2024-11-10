@@ -45,27 +45,27 @@ public class Obra implements Serializable {
     private TipoObra tipo_obra;
     
     // OneToMany representa relacion 1-n con actualizacion en cascada
-    // mappedBy="obra" apunta al atributo de tipo Obra en la otra clase a relacionar
+    // mappedBy="empleadoObra" apunta al atributo de tipo Obra en la otra clase a relacionar
     
-    @OneToMany(mappedBy = "obra", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "obraEmpleado", cascade = CascadeType.ALL)
     private ArrayList<EmpleadoObra> asignaciones;
     
-    @OneToMany(mappedBy = "obra", cascade = CascadeType.ALL)
-    private ArrayList<historialEstadoObra> historial_estado_obra;
+    @OneToMany(mappedBy = "obraHistorial", cascade = CascadeType.ALL)
+    private ArrayList<HistorialEstadoObra> historial_estado_obra;
     
-    @OneToMany(mappedBy = "obra", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "obraPlano", cascade = CascadeType.ALL)
     private ArrayList<Plano> planos;
     
-    @OneToMany(mappedBy = "obra", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "obraInspeccion", cascade = CascadeType.ALL)
     private ArrayList<Inspeccion> inspecciones;
     
-    @OneToMany(mappedBy = "obra", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "obraART", cascade = CascadeType.ALL)
     private ArrayList<HistorialART> historialART;
     
-    @OneToMany(mappedBy = "obra", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "obraProveedor", cascade = CascadeType.ALL)
     private ArrayList<FacturaProveedor> facturas_proveedores;
     
-    @OneToMany(mappedBy = "obra", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "obraSubcontratista", cascade = CascadeType.ALL)
     private ArrayList<FacturaSubcontratista> facturas_subcontratistas;
 
     public Obra() {

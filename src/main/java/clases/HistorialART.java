@@ -20,11 +20,11 @@ public class HistorialART implements Serializable {
     
     @ManyToOne
     @JoinColumn(name = "id_obra", nullable = false)
-    private Obra obra;
+    private Obra obraART;
     
     @ManyToOne
     @JoinColumn(name = "legajo", nullable = false)
-    private Empleado empleado;
+    private Empleado empleadoART;
     
     private String descripcion;
     
@@ -43,19 +43,19 @@ public class HistorialART implements Serializable {
     }
 
     public Obra getObra() {
-        return obra;
+        return obraART;
     }
 
     public void setObra(Obra obra) {
-        this.obra = obra;
+        this.obraART = obra;
     }
 
     public Empleado getEmpleado() {
-        return empleado;
+        return empleadoART;
     }
 
     public void setEmpleado(Empleado empleado) {
-        this.empleado = empleado;
+        this.empleadoART = empleado;
     }
 
     public String getDescripcion() {

@@ -19,7 +19,7 @@ public class Plano implements Serializable {
     
     @ManyToOne
     @JoinColumn(name="id_obra", referencedColumnName="id_obra")
-    private Obra obra;
+    private Obra obraPlano;
     
     private String directorio;
     private String descripcion;
@@ -61,10 +61,10 @@ public class Plano implements Serializable {
     }
 
     public Obra getObra() {
-        return obra;
+        return obraPlano;
     }
 
     public void setObra(Obra obra) {
-        this.obra = obra;
+        this.obraPlano = obra;
     }
 }

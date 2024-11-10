@@ -50,10 +50,10 @@ public class Empleado implements Serializable {
     @OneToOne
     private GrupoTrabajo grupo;
     
-    @OneToMany(mappedBy = "empleado", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "empleadoObra", cascade = CascadeType.ALL)
     private ArrayList<EmpleadoObra> asignaciones;
 
-    @OneToMany(mappedBy = "empleado", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "empleadoART", cascade = CascadeType.ALL)
     private ArrayList<HistorialART> historialART;
     
     public Empleado() {

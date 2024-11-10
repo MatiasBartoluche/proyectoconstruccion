@@ -19,7 +19,7 @@ public class HistorialEstadoObra implements Serializable {
     
     @ManyToOne
     @JoinColumn(name="id_obra", nullable = false)
-    private Obra obra;
+    private Obra obraHistorial;
     
     @ManyToOne
     @JoinColumn(name="id_estado_obra", nullable = false)
@@ -40,11 +40,11 @@ public class HistorialEstadoObra implements Serializable {
     }
 
     public Obra getObra() {
-        return obra;
+        return obraHistorial;
     }
 
     public void setObra(Obra obra) {
-        this.obra = obra;
+        this.obraHistorial = obra;
     }
 
     public EstadoObra getEstado() {
