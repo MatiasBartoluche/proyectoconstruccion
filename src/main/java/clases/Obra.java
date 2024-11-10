@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Obra implements Serializable {
@@ -38,7 +39,10 @@ public class Obra implements Serializable {
     private String localidad;
     //private Provincia provincia;
     private LocalDate fecha_inicio;
-    //private TipoObra tipo_obra;
+    
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "id_tipo:obra", referencedColumnName = "id_tipoObra")
+    private TipoObra tipo_obra;
     
     // OneToMany representa relacion n-n con actualizacion en cascada
     
@@ -142,5 +146,13 @@ public class Obra implements Serializable {
 
     public void setSociedad(Sociedad sociedad) {
         this.sociedad = sociedad;
+    }
+
+    public TipoObra getTipo_obra() {
+        return tipo_obra;
+    }
+
+    public void setTipo_obra(TipoObra tipo_obra) {
+        this.tipo_obra = tipo_obra;
     }
 }
