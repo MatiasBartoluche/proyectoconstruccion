@@ -57,7 +57,7 @@ public class Controlador {
     // ###################### creando metodos para Estado #######################
     
     
-    public void crearEstado(Estado estado){
+    public void crearEstado(EstadoEmpleado estado){
         controladorPersistencia.crearEstado(estado);
     }
     
@@ -65,15 +65,15 @@ public class Controlador {
         controladorPersistencia.eliminarEstado(idEstado);
     }
     
-    public void editarEstado(Estado estado){
+    public void editarEstado(EstadoEmpleado estado){
         controladorPersistencia.editarEstado(estado);
     }
     
-    public Estado buscarEstado(int idEstado){
+    public EstadoEmpleado buscarEstado(int idEstado){
         return controladorPersistencia.traerEstado(idEstado);
     }
     
-    public ArrayList<Estado> buscarListaEstados(){
+    public ArrayList<EstadoEmpleado> buscarListaEstados(){
         return controladorPersistencia.traerListaEstados();
     }
     

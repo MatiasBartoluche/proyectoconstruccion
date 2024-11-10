@@ -2,7 +2,7 @@ package persistencia;
 
 import clases.Contrato;
 import clases.Empleado;
-import clases.Estado;
+import clases.EstadoEmpleado;
 import clases.GrupoTrabajo;
 import clases.Jerarquia;
 import clases.Rol;
@@ -88,7 +88,7 @@ public class ControladorPersistencia {
     
     // ###################### creando metodos para EstadoJpaController ###################################
    
-    public void crearEstado(Estado estado) {
+    public void crearEstado(EstadoEmpleado estado) {
         estadoJpa.create(estado);
     }
 
@@ -96,7 +96,7 @@ public class ControladorPersistencia {
         estadoJpa.destroy(idEstado);
     }
 
-    public void editarEstado(Estado estado) {
+    public void editarEstado(EstadoEmpleado estado) {
         try{
             estadoJpa.edit(estado);
         }
@@ -105,14 +105,14 @@ public class ControladorPersistencia {
         }
     }
 
-    public Estado traerEstado(int idEstado) {
+    public EstadoEmpleado traerEstado(int idEstado) {
         return estadoJpa.findEstado(idEstado);
     }
 
-    public ArrayList<Estado> traerListaEstados() {
-        List<Estado> lista = estadoJpa.findEstadoEntities();
+    public ArrayList<EstadoEmpleado> traerListaEstados() {
+        List<EstadoEmpleado> lista = estadoJpa.findEstadoEntities();
         
-        ArrayList<Estado> listaEstados = new ArrayList<>(lista);
+        ArrayList<EstadoEmpleado> listaEstados = new ArrayList<>(lista);
         
         return listaEstados;
     }

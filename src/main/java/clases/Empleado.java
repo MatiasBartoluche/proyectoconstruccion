@@ -42,7 +42,7 @@ public class Empleado implements Serializable {
     
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "id_estado", referencedColumnName = "id_contrato")
-    private Estado estado;
+    private EstadoEmpleado estado;
     
     private int antiguedad;
     private boolean despido; // true = despido, false = empleado vigente
@@ -179,11 +179,11 @@ public class Empleado implements Serializable {
         this.sueldo_base = sueldo_base;
     }
 
-    public Estado getEstado() {
+    public EstadoEmpleado getEstado() {
         return estado;
     }
 
-    public void setEstado(Estado estado) {
+    public void setEstado(EstadoEmpleado estado) {
         this.estado = estado;
     }
 

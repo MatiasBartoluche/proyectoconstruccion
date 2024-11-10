@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Estado implements Serializable{
+public class EstadoEmpleado implements Serializable{
 
     private static final long serialVersionUID = 1L;
         
@@ -16,10 +16,10 @@ public class Estado implements Serializable{
     private int id_estado;
     String descripcion;
 
-    public Estado() {
+    public EstadoEmpleado() {
     }
 
-    public Estado(String descripcion) {
+    public EstadoEmpleado(String descripcion) {
         this.descripcion = descripcion;
     }
 

@@ -3,7 +3,7 @@ package servlets;
 import clases.Contrato;
 import clases.Controlador;
 import clases.Empleado;
-import clases.Estado;
+import clases.EstadoEmpleado;
 import clases.Jerarquia;
 import clases.Rol;
 import clases.Usuario;
