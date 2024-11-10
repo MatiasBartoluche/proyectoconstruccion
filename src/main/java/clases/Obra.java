@@ -183,4 +183,12 @@ public class Obra implements Serializable {
         plano.setObra(this);
         this.planos.add(plano);
     }
+    
+    // Método para obtener empleados actualmente asignados
+    public List<Empleado> getEmpleadosActualmente() {
+        return asignaciones.stream()
+            .filter(asignacion -> asignacion.getFechaFin() == null) // Filtrar asignaciones activas
+            .map(EmpleadoObra::getEmpleado) // Obtener el empleado de cada asignación
+            .collect(Collectors.toList()); // Convertir a lista
+    }
 }
