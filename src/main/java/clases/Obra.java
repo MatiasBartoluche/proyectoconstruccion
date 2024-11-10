@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import javax.persistence.OneToMany;
 
@@ -21,7 +23,12 @@ public class Obra implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private int id_obra;
-    //private Sociedad sociedad;
+    
+    // apunta al atributo "id_sociedad" de la clase Sociedad
+    @ManyToOne
+    @JoinColumn(name = "id_sociedad", nullable = false)
+    private Sociedad sociedad;
+    
     private String expediente_dgroc;
     private String expediente_dgfyco;
     private String nombre_obra;
@@ -127,5 +134,13 @@ public class Obra implements Serializable {
             .filter(asignacion -> asignacion.getFechaFin() == null) // Filtrar asignaciones activas
             .map(EmpleadoObra::getEmpleado) // Obtener el empleado de cada asignación
             .collect(Collectors.toList()); // Convertir a lista
+    }
+
+    public Sociedad getSociedad() {
+        return sociedad;
+    }
+
+    public void setSociedad(Sociedad sociedad) {
+        this.sociedad = sociedad;
     }
 }

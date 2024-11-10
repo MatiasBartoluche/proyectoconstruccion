@@ -1,10 +1,13 @@
 package clases;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Sociedad implements Serializable {
@@ -25,11 +28,15 @@ public class Sociedad implements Serializable {
     private int altura;
     private String localidad;
     //private Provincia provincia;
+    
+    // mappedBy="sociedad", relacion bidireccional, apunta al atributo "sociedad" de la clase "Obra"
+    @OneToMany(mappedBy = "sociedad", cascade = {CascadeType.ALL, CascadeType.REMOVE})
+    private ArrayList<Obra> obras;
 
     public Sociedad() {
     }
 
-    public Sociedad(String cuit_sociedad, String razon_social, String telefono, String mail, String Calle, int altura, String localidad) {
+    public Sociedad(String cuit_sociedad, String razon_social, String telefono, String mail, String Calle, int altura, String localidad, ArrayList<Obra> obras) {
         this.cuit_sociedad = cuit_sociedad;
         this.razon_social = razon_social;
         this.telefono = telefono;
@@ -37,6 +44,7 @@ public class Sociedad implements Serializable {
         this.Calle = Calle;
         this.altura = altura;
         this.localidad = localidad;
+        this.obras = obras;
     }
 
     public int getId_sociedad() {
@@ -102,6 +110,12 @@ public class Sociedad implements Serializable {
     public void setLocalidad(String localidad) {
         this.localidad = localidad;
     }
-    
-    
+
+    public ArrayList<Obra> getObras() {
+        return obras;
+    }
+
+    public void setObras(ArrayList<Obra> obras) {
+        this.obras = obras;
+    }
 }
