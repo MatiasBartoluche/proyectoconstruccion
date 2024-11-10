@@ -24,7 +24,7 @@ public class Seguro implements Serializable {
     
     @ManyToOne
     @JoinColumn(name = "id_sociedad", referencedColumnName = "id_sociedad")
-    private Sociedad sociedad;
+    private Sociedad sociedadSeguro;
 
     public Seguro() {
     }
@@ -62,10 +62,10 @@ public class Seguro implements Serializable {
     }
 
     public Sociedad getSociedad() {
-        return sociedad;
+        return sociedadSeguro;
     }
 
     public void setSociedad(Sociedad sociedad) {
-        this.sociedad = sociedad;
+        this.sociedadSeguro = sociedad;
     }
 }

@@ -20,7 +20,7 @@ public class Sociedad implements Serializable {
     private int id_sociedad;
     
     // apunta al atributo "sociedad" de la clase "seguro"
-    @OneToMany(mappedBy = "sociedad", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "sociedadSeguro", cascade = CascadeType.ALL)
     private ArrayList<Seguro> seguros;
     
     private String cuit_sociedad;
@@ -33,7 +33,7 @@ public class Sociedad implements Serializable {
     //private Provincia provincia;
     
     // mappedBy="sociedad", relacion bidireccional, apunta al atributo "sociedad" de la clase "Obra"
-    @OneToMany(mappedBy = "sociedad", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "sociedadObra", cascade = CascadeType.ALL)
     private ArrayList<Obra> obras;
 
     public Sociedad() {

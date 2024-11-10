@@ -28,7 +28,7 @@ public class Obra implements Serializable {
     // apunta al atributo "id_sociedad" de la clase Sociedad
     @ManyToOne
     @JoinColumn(name = "id_sociedad", nullable = false)
-    private Sociedad sociedad;
+    private Sociedad sociedadObra;
     
     private String expediente_dgroc;
     private String expediente_dgfyco;
@@ -41,7 +41,7 @@ public class Obra implements Serializable {
     private LocalDate fecha_inicio;
     
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "id_tipo:obra", referencedColumnName = "id_tipoObra")
+    @JoinColumn(name = "id_tipo_obra", referencedColumnName = "id_tipoObra")
     private TipoObra tipo_obra;
     
     // OneToMany representa relacion 1-n con actualizacion en cascada
@@ -160,11 +160,11 @@ public class Obra implements Serializable {
     }
 
     public Sociedad getSociedad() {
-        return sociedad;
+        return sociedadObra;
     }
 
     public void setSociedad(Sociedad sociedad) {
-        this.sociedad = sociedad;
+        this.sociedadObra = sociedad;
     }
 
     public TipoObra getTipoObra() {
