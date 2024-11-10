@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -38,7 +39,8 @@ public class Empleado implements Serializable {
     @JoinColumn(name = "id_contrato", referencedColumnName = "id_contrato")
     private Contrato contrato; // 0 = empleado de oficina, 1 = obrero, 2 = subcontratado
     
-    private double sueldo_base;
+    @Column(precision = 14, scale = 7)
+    private BigDecimal sueldo_base;
     
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "id_estado", referencedColumnName = "id_contrato")
