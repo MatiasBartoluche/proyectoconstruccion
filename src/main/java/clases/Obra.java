@@ -48,25 +48,25 @@ public class Obra implements Serializable {
     // mappedBy="empleadoObra" apunta al atributo de tipo Obra en la otra clase a relacionar
     
     @OneToMany(mappedBy = "obraEmpleado", cascade = CascadeType.ALL)
-    private ArrayList<EmpleadoObra> asignaciones;
+    private ArrayList<EmpleadoObra> asignaciones = new ArrayList<>();
     
     @OneToMany(mappedBy = "obraHistorial", cascade = CascadeType.ALL)
-    private ArrayList<HistorialEstadoObra> historial_estado_obra;
+    private ArrayList<HistorialEstadoObra> historial_estado_obra = new ArrayList<>();
     
     @OneToMany(mappedBy = "obraPlano", cascade = CascadeType.ALL)
-    private ArrayList<Plano> planos;
+    private ArrayList<Plano> planos = new ArrayList<>();
     
     @OneToMany(mappedBy = "obraInspeccion", cascade = CascadeType.ALL)
-    private ArrayList<Inspeccion> inspecciones;
+    private ArrayList<Inspeccion> inspecciones = new ArrayList<>();
     
     @OneToMany(mappedBy = "obraART", cascade = CascadeType.ALL)
-    private ArrayList<HistorialART> historialART;
+    private ArrayList<HistorialART> historialART = new ArrayList<>();
     
     @OneToMany(mappedBy = "obraProveedor", cascade = CascadeType.ALL)
-    private ArrayList<FacturaProveedor> facturas_proveedores;
+    private ArrayList<FacturaProveedor> facturas_proveedores = new ArrayList<>();
     
     @OneToMany(mappedBy = "obraSubcontratista", cascade = CascadeType.ALL)
-    private ArrayList<FacturaSubcontratista> facturas_subcontratistas;
+    private ArrayList<FacturaSubcontratista> facturas_subcontratistas = new ArrayList<>();
 
     public Obra() {
     }

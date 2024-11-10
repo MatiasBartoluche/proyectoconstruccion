@@ -22,7 +22,7 @@ public class Proveedor implements Serializable{
     private String nombre;
     
     @OneToMany(mappedBy="proveedor", cascade = CascadeType.ALL)
-    private ArrayList<FacturaProveedor> facturas;
+    private ArrayList<FacturaProveedor> facturas = new ArrayList<>();
 
     public Proveedor() {
     }

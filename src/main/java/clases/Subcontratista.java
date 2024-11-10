@@ -24,7 +24,7 @@ public class Subcontratista implements Serializable {
     
     // apunta al atributo de tipo "Subcontratista" 
     @OneToMany(mappedBy="subcontratista", cascade = CascadeType.ALL)
-    private ArrayList<FacturaSubcontratista> facturas;
+    private ArrayList<FacturaSubcontratista> facturas = new ArrayList<>();
 
     public Subcontratista() {
     }
