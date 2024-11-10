@@ -3,34 +3,42 @@ package clases;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
 public class GrupoTrabajo implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private int id_grupo;
-    String nombre_grupo;
+    private String nombre_grupo;
     
-    @OneToOne
-    Empleado capataz;
+    @OneToOne(cascade = CascadeType.MERGE)
+    // crea la columna capataz_id en la tabla grupotrabajo, que hace referencia al legajo del empleado capataz
+    @JoinColumn(name = "capataz_id", referencedColumnName = "legajo")
+    private Empleado capataz;
     
-    @OneToMany
-    ArrayList<Empleado> lista_empleados;
+    // Relación uno-a-muchos para los empleados subalternos, con cascada de actualizaciones
+    @OneToMany(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "id_grupo") // Crea una columna 'id_grupo' en la tabla Empleado para esta relación
+    private ArrayList<Empleado> empleados;
 
     public GrupoTrabajo() {
     }
 
-    public GrupoTrabajo(String nombre_grupo, Empleado capataz, ArrayList<Empleado> lista_empleados) {
+    public GrupoTrabajo(String nombre_grupo, Empleado capataz, ArrayList<Empleado> empleados) {
         this.nombre_grupo = nombre_grupo;
         this.capataz = capataz;
-        this.lista_empleados = lista_empleados;
+        this.empleados = empleados;
     }
 
     public int getIdGrupo() {
@@ -57,10 +65,10 @@ public class GrupoTrabajo implements Serializable {
         this.capataz = capataz;
     }
     public List<Empleado> getListaEmpleados() {
-        return lista_empleados;
+        return empleados;
     }
 
-    public void setListaEmpleados(ArrayList<Empleado> lista_empleados) {
-        this.lista_empleados = lista_empleados;
+    public void setListaEmpleados(ArrayList<Empleado> empleados) {
+        this.empleados = empleados;
     }
 }
