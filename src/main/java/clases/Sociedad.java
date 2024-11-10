@@ -1,6 +1,7 @@
 package clases;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -20,7 +21,7 @@ public class Sociedad implements Serializable {
     
     // apunta al atributo "sociedad" de la clase "seguro"
     @OneToMany(mappedBy = "sociedad", cascade = CascadeType.ALL)
-    private ArrayList<Seguro> seguro;
+    private ArrayList<Seguro> seguros;
     
     private String cuit_sociedad;
     private String razon_social;
@@ -49,27 +50,27 @@ public class Sociedad implements Serializable {
         this.obras = obras;
     }
 
-    public int getId_sociedad() {
+    public int getIdSociedad() {
         return id_sociedad;
     }
 
-    public void setId_sociedad(int id_sociedad) {
+    public void setIdSociedad(int id_sociedad) {
         this.id_sociedad = id_sociedad;
     }
 
-    public String getCuit_sociedad() {
+    public String getCuitSociedad() {
         return cuit_sociedad;
     }
 
-    public void setCuit_sociedad(String cuit_sociedad) {
+    public void setCuitSociedad(String cuit_sociedad) {
         this.cuit_sociedad = cuit_sociedad;
     }
 
-    public String getRazon_social() {
+    public String getRazonSocial() {
         return razon_social;
     }
 
-    public void setRazon_social(String razon_social) {
+    public void setRazonSocial(String razon_social) {
         this.razon_social = razon_social;
     }
 
@@ -122,10 +123,18 @@ public class Sociedad implements Serializable {
     }
 
     public ArrayList<Seguro> getSeguro() {
-        return seguro;
+        return seguros;
     }
 
     public void setSeguro(ArrayList<Seguro> seguro) {
-        this.seguro = seguro;
+        this.seguros = seguro;
+    }
+    
+    // Método para añadir una nueva póliza con fecha de contratación
+    public void contratarSeguro(Seguro poliza, LocalDate fechaContratacion, LocalDate fechaVencimiento) {
+        poliza.setSociedad(this);
+        poliza.setFechaContratacion(fechaContratacion);
+        poliza.setFechaVencimiento(fechaVencimiento);
+        this.seguros.add(poliza);
     }
 }

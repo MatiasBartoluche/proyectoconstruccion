@@ -29,35 +29,35 @@ public class Seguro implements Serializable {
     public Seguro() {
     }
 
-    public int getId_seguro() {
+    public int getIdSeguro() {
         return id_seguro;
     }
 
-    public void setId_seguro(int id_seguro) {
+    public void setIdSeguro(int id_seguro) {
         this.id_seguro = id_seguro;
     }
 
-    public int getNumero_poliza() {
+    public int getNumeroPoliza() {
         return numero_poliza;
     }
 
-    public void setNumero_poliza(int numero_poliza) {
+    public void setNumeroPoliza(int numero_poliza) {
         this.numero_poliza = numero_poliza;
     }
 
-    public LocalDate getFecha_contratacion() {
+    public LocalDate getFechaContratacion() {
         return fecha_contratacion;
     }
 
-    public void setFecha_contratacion(LocalDate fecha_contratacion) {
+    public void setFechaContratacion(LocalDate fecha_contratacion) {
         this.fecha_contratacion = fecha_contratacion;
     }
 
-    public LocalDate getFecha_vencimiento() {
+    public LocalDate getFechaVencimiento() {
         return fecha_vencimiento;
     }
 
-    public void setFecha_vencimiento(LocalDate fecha_vencimiento) {
+    public void setFechaVencimiento(LocalDate fecha_vencimiento) {
         this.fecha_vencimiento = fecha_vencimiento;
     }
 
