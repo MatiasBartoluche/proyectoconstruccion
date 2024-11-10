@@ -18,7 +18,9 @@ public class Sociedad implements Serializable {
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private int id_sociedad;
     
-    //private Seguro seguro;
+    // apunta al atributo "sociedad" de la clase "seguro"
+    @OneToMany(mappedBy = "sociedad", cascade = CascadeType.ALL)
+    private ArrayList<Seguro> seguro;
     
     private String cuit_sociedad;
     private String razon_social;
@@ -117,5 +119,13 @@ public class Sociedad implements Serializable {
 
     public void setObras(ArrayList<Obra> obras) {
         this.obras = obras;
+    }
+
+    public ArrayList<Seguro> getSeguro() {
+        return seguro;
+    }
+
+    public void setSeguro(ArrayList<Seguro> seguro) {
+        this.seguro = seguro;
     }
 }

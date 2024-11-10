@@ -22,9 +22,9 @@ public class Seguro implements Serializable {
     LocalDate fecha_contratacion;
     LocalDate fecha_vencimiento;
     
-    /*@ManyToOne
+    @ManyToOne
     @JoinColumn(name = "id_sociedad", referencedColumnName = "id_sociedad")
-    private Sociedad sociedad;*/
+    private Sociedad sociedad;
 
     public Seguro() {
     }
@@ -60,6 +60,12 @@ public class Seguro implements Serializable {
     public void setFecha_vencimiento(LocalDate fecha_vencimiento) {
         this.fecha_vencimiento = fecha_vencimiento;
     }
-    
-    
+
+    public Sociedad getSociedad() {
+        return sociedad;
+    }
+
+    public void setSociedad(Sociedad sociedad) {
+        this.sociedad = sociedad;
+    }
 }
