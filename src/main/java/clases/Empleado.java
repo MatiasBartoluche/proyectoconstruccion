@@ -2,7 +2,7 @@ package clases;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.ArrayList;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -53,7 +53,7 @@ public class Empleado implements Serializable {
     @OneToMany(mappedBy = "empleado", cascade = CascadeType.ALL)
     private ArrayList<EmpleadoObra> asignaciones;
 
-    @OneToMany(mappedBy = "empleado", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(mappedBy = "empleado", cascade = CascadeType.ALL)
     private ArrayList<HistorialART> historialART;
     
     public Empleado() {
