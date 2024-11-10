@@ -1,10 +1,13 @@
 package clases;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Subcontratista implements Serializable {
@@ -18,6 +21,10 @@ public class Subcontratista implements Serializable {
     private String cuit;
     private String nombre;
     private String descripcion;
+    
+    // apunta al atributo de tipo "Subcontratista" 
+    @OneToMany(mappedBy="subcontratista", cascade = CascadeType.ALL)
+    private ArrayList<FacturaSubcontratista> facturas;
 
     public Subcontratista() {
     }
@@ -53,7 +60,13 @@ public class Subcontratista implements Serializable {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
-    
-    
+
+    public ArrayList<FacturaSubcontratista> getFacturas() {
+        return facturas;
+    }
+
+    public void setFacturas(ArrayList<FacturaSubcontratista> facturas) {
+        this.facturas = facturas;
+    }
+
 }

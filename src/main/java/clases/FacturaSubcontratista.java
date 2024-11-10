@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class FacturaSubcontratista implements Serializable {
@@ -23,6 +25,10 @@ public class FacturaSubcontratista implements Serializable {
     
     @Column(precision = 14, scale = 7)
     private BigDecimal monto;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_obra", nullable = false) // apunto al id de la clase a relacionar
+    private Subcontratista subcontratista;
 
     public FacturaSubcontratista() {
     }
