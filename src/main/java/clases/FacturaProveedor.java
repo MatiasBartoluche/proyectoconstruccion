@@ -25,6 +25,10 @@ public class FacturaProveedor implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_proveedor", nullable = false)
     private Proveedor proveedor;
+    
+    @ManyToOne
+    @JoinColumn(name="id_obra", nullable = false)
+    private Obra obra;
 
     public FacturaProveedor() {
     }
@@ -52,4 +56,22 @@ public class FacturaProveedor implements Serializable {
     public void setMonto(BigDecimal monto) {
         this.monto = monto;
     }
+
+    public Proveedor getProveedor() {
+        return proveedor;
+    }
+
+    public void setProveedor(Proveedor proveedor) {
+        this.proveedor = proveedor;
+    }
+
+    public Obra getObra() {
+        return obra;
+    }
+
+    public void setObra(Obra obra) {
+        this.obra = obra;
+    }
+    
+    
 }

@@ -44,7 +44,8 @@ public class Obra implements Serializable {
     @JoinColumn(name = "id_tipo:obra", referencedColumnName = "id_tipoObra")
     private TipoObra tipo_obra;
     
-    // OneToMany representa relacion n-n con actualizacion en cascada
+    // OneToMany representa relacion 1-n con actualizacion en cascada
+    // mappedBy="obra" apunta al atributo de tipo Obra en la otra clase a relacionar
     
     @OneToMany(mappedBy = "obra", cascade = CascadeType.ALL)
     private ArrayList<EmpleadoObra> asignaciones;
@@ -60,6 +61,9 @@ public class Obra implements Serializable {
     
     @OneToMany(mappedBy = "obra", cascade = CascadeType.ALL)
     private ArrayList<HistorialART> historialART;
+    
+    @OneToMany(mappedBy = "obra", cascade = CascadeType.ALL)
+    private ArrayList<FacturaProveedor> facturas_proveedores;
 
     public Obra() {
     }
@@ -219,4 +223,14 @@ public class Obra implements Serializable {
             .map(EmpleadoObra::getEmpleado) // Obtener el empleado de cada asignación
             .collect(Collectors.toList()); // Convertir a lista
     }
+
+    public ArrayList<FacturaProveedor> getFacturasProveedores() {
+        return facturas_proveedores;
+    }
+
+    public void setFacturasProveedores(ArrayList<FacturaProveedor> facturas_proveedores) {
+        this.facturas_proveedores = facturas_proveedores;
+    }
+    
+    
 }
