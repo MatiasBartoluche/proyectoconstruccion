@@ -1,10 +1,13 @@
 package clases;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Proveedor implements Serializable{
@@ -17,6 +20,9 @@ public class Proveedor implements Serializable{
     
     private String cuit;
     private String nombre;
+    
+    @OneToMany(mappedBy="proveedor", cascade = CascadeType.ALL)
+    private ArrayList<FacturaProveedor> facturas;
 
     public Proveedor() {
     }
@@ -44,6 +50,12 @@ public class Proveedor implements Serializable{
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
-    
+
+    public ArrayList<FacturaProveedor> getFacturas() {
+        return facturas;
+    }
+
+    public void setFacturas(ArrayList<FacturaProveedor> facturas) {
+        this.facturas = facturas;
+    }
 }

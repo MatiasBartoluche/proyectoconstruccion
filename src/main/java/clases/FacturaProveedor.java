@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class FacturaProveedor implements Serializable {
@@ -19,6 +21,10 @@ public class FacturaProveedor implements Serializable {
     
     private LocalDate fecha_emision;
     private BigDecimal monto;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_proveedor", nullable = false)
+    private Proveedor proveedor;
 
     public FacturaProveedor() {
     }
@@ -46,6 +52,4 @@ public class FacturaProveedor implements Serializable {
     public void setMonto(BigDecimal monto) {
         this.monto = monto;
     }
-    
-    
 }
