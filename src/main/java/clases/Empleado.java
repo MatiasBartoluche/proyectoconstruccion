@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -49,31 +50,12 @@ public class Empleado implements Serializable {
     @OneToOne
     private GrupoTrabajo grupo;
     
-    @OneToMany(mappedBy = "empleado", CascadeType.ALL)
-    private List<EmpleadoObra> asignaciones;
+    @OneToMany(mappedBy = "empleado", cascade = CascadeType.ALL)
+    private ArrayList<EmpleadoObra> asignaciones;
 
-    public Empleado(int legajo, Jerarquia jerarquia, String nombres, String apellidos, String cuil, String calle, int altura, String localidad, String telefono, String telefono_familiar, byte[] foto_dni, String foto_dni_base64, LocalDate fecha_ingreso, Contrato contrato, double sueldo_base, Estado estado, int antiguedad, boolean despido, Obra obra, GrupoTrabajo grupo) {
-        this.legajo = legajo;
-        this.jerarquia = jerarquia;
-        this.nombres = nombres;
-        this.apellidos = apellidos;
-        this.cuil = cuil;
-        this.calle = calle;
-        this.altura = altura;
-        this.localidad = localidad;
-        this.telefono = telefono;
-        this.telefono_familiar = telefono_familiar;
-        this.foto_dni = foto_dni;
-        this.fecha_ingreso = fecha_ingreso;
-        this.contrato = contrato;
-        this.sueldo_base = sueldo_base;
-        this.estado = estado;
-        this.antiguedad = antiguedad;
-        this.despido = despido;
-        this.obra = obra;
-        this.grupo = grupo;
-    }
-
+    @OneToMany(mappedBy = "empleado", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private ArrayList<HistorialART> historialART;
+    
     public Empleado() {
     }
 
@@ -165,6 +147,14 @@ public class Empleado implements Serializable {
         this.foto_dni = foto_dni;
     }
 
+    public String getFotoDniBase64() {
+        return foto_dni_base64;
+    }
+
+    public void setFotoDniBase64(String foto_dni_base64) {
+        this.foto_dni_base64 = foto_dni_base64;
+    }
+
     public LocalDate getFechaIngreso() {
         return fecha_ingreso;
     }
@@ -213,14 +203,6 @@ public class Empleado implements Serializable {
         this.despido = despido;
     }
 
-    public Obra getObra() {
-        return obra;
-    }
-
-    public void setObra(Obra obra) {
-        this.obra = obra;
-    }
-
     public GrupoTrabajo getGrupo() {
         return grupo;
     }
@@ -229,20 +211,19 @@ public class Empleado implements Serializable {
         this.grupo = grupo;
     }
 
-  
-    public String getFotoDniBase64() {
-        return foto_dni_base64;
-    }
-
-    public void setFotoDniBase64(String foto_dni_base64) {
-        this.foto_dni_base64 = foto_dni_base64;
-    }
-
-    public List<EmpleadoObra> getAsignaciones() {
+    public ArrayList<EmpleadoObra> getAsignaciones() {
         return asignaciones;
     }
 
-    public void setAsignaciones(List<EmpleadoObra> asignaciones) {
+    public void setAsignaciones(ArrayList<EmpleadoObra> asignaciones) {
         this.asignaciones = asignaciones;
+    }
+
+    public ArrayList<HistorialART> getHistorialART() {
+        return historialART;
+    }
+
+    public void setHistorialART(ArrayList<HistorialART> historialART) {
+        this.historialART = historialART;
     }
 }
