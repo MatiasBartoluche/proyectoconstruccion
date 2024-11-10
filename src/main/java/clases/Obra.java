@@ -2,6 +2,7 @@ package clases;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.persistence.CascadeType;
@@ -35,7 +36,7 @@ public class Obra implements Serializable {
     // OneToMany representa relacion n-n con actualizacion en cascada
     
     @OneToMany(mappedBy = "obra", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<EmpleadoObra> asignaciones;
+    private ArrayList<EmpleadoObra> asignaciones;
 
     public Obra() {
     }
@@ -116,7 +117,7 @@ public class Obra implements Serializable {
         return asignaciones;
     }
 
-    public void setListaAsignaciones(List<EmpleadoObra> asignaciones) {
+    public void setListaAsignaciones(ArrayList<EmpleadoObra> asignaciones) {
         this.asignaciones = asignaciones;
     }
     

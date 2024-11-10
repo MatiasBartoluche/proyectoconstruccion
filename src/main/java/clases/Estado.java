@@ -8,6 +8,8 @@ import javax.persistence.Id;
 
 @Entity
 public class Estado implements Serializable{
+
+    private static final long serialVersionUID = 1L;
         
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
@@ -36,6 +38,4 @@ public class Estado implements Serializable{
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
-
 }

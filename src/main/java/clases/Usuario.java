@@ -11,6 +11,8 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class Usuario implements Serializable{
+
+    private static final long serialVersionUID = 1L;
     
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
@@ -113,7 +115,6 @@ public class Usuario implements Serializable{
         if(this.usuario.equals(usuario) && this.clave.equals(clave)){
             existe = true;
         }
-        
         return existe;
     }
 

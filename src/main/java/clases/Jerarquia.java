@@ -8,16 +8,19 @@ import javax.persistence.Id;
 
 @Entity
 public class Jerarquia implements Serializable{
+
+    private static final long serialVersionUID = 1L;
     
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private int id_jerarquia;
+    
     private String descripcion;
 
     public Jerarquia() {
     }
 
-    public Jerarquia(String descripcion) {
+    public Jerarquia(int id_jerarquia, String descripcion) {
         this.id_jerarquia = id_jerarquia;
         this.descripcion = descripcion;
     }
@@ -37,6 +40,4 @@ public class Jerarquia implements Serializable{
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
-    
 }

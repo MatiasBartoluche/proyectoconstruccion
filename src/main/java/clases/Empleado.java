@@ -20,6 +20,7 @@ public class Empleado implements Serializable {
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "id_jerarquia", referencedColumnName = "id_jerarquia")
     private Jerarquia jerarquia;
+    
     private String nombres;
     private String apellidos;
     private String cuil;
