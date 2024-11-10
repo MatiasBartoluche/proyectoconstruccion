@@ -48,6 +48,9 @@ public class Obra implements Serializable {
     
     @OneToMany(mappedBy = "obra", cascade = CascadeType.ALL)
     private ArrayList<EmpleadoObra> asignaciones;
+    
+    @OneToMany(mappedBy = "obra", cascade = CascadeType.ALL)
+    private ArrayList<historialEstadoObra> historial_estado_obra;
 
     public Obra() {
     }
@@ -148,11 +151,21 @@ public class Obra implements Serializable {
         this.sociedad = sociedad;
     }
 
-    public TipoObra getTipo_obra() {
+    public TipoObra getTipoObra() {
         return tipo_obra;
     }
 
-    public void setTipo_obra(TipoObra tipo_obra) {
+    public void setTipoObra(TipoObra tipo_obra) {
         this.tipo_obra = tipo_obra;
     }
+
+    public ArrayList<historialEstadoObra> getHistorialEstadoObra() {
+        return historial_estado_obra;
+    }
+
+    public void setHistorialEstadoObra(ArrayList<historialEstadoObra> historial_estado_obra) {
+        this.historial_estado_obra = historial_estado_obra;
+    }
+    
+
 }
