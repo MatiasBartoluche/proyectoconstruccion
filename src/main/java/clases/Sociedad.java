@@ -32,7 +32,7 @@ public class Sociedad implements Serializable {
     //private Provincia provincia;
     
     // mappedBy="sociedad", relacion bidireccional, apunta al atributo "sociedad" de la clase "Obra"
-    @OneToMany(mappedBy = "sociedad", cascade = {CascadeType.ALL, CascadeType.REMOVE})
+    @OneToMany(mappedBy = "sociedad", cascade = CascadeType.ALL)
     private ArrayList<Obra> obras;
 
     public Sociedad() {

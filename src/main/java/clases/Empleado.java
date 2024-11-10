@@ -49,7 +49,7 @@ public class Empleado implements Serializable {
     @OneToOne
     private GrupoTrabajo grupo;
     
-    @OneToMany(mappedBy = "empleado", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(mappedBy = "empleado", CascadeType.ALL)
     private List<EmpleadoObra> asignaciones;
 
     public Empleado(int legajo, Jerarquia jerarquia, String nombres, String apellidos, String cuil, String calle, int altura, String localidad, String telefono, String telefono_familiar, byte[] foto_dni, String foto_dni_base64, LocalDate fecha_ingreso, Contrato contrato, double sueldo_base, Estado estado, int antiguedad, boolean despido, Obra obra, GrupoTrabajo grupo) {

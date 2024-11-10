@@ -42,7 +42,7 @@ public class Obra implements Serializable {
     
     // OneToMany representa relacion n-n con actualizacion en cascada
     
-    @OneToMany(mappedBy = "obra", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @OneToMany(mappedBy = "obra", cascade = CascadeType.ALL)
     private ArrayList<EmpleadoObra> asignaciones;
 
     public Obra() {
