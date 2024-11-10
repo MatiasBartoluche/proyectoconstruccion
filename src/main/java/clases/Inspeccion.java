@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Inspeccion implements Serializable {
@@ -13,34 +15,46 @@ public class Inspeccion implements Serializable {
     @Id
     private int numero_acta;
     
+    @ManyToOne
+    @JoinColumn(name = "id_obra", referencedColumnName = "id_obra")
+    private Obra obra;
+    
     private String nombre_inspector;
     private LocalDate fecha_inspeccion;
 
     public Inspeccion() {
     }
 
-    public int getNumero_acta() {
+    public int getNumeroActa() {
         return numero_acta;
     }
 
-    public void setNumero_acta(int numero_acta) {
+    public void setNumeroActa(int numero_acta) {
         this.numero_acta = numero_acta;
     }
 
-    public String getNombre_inspector() {
+    public String getNombreInspector() {
         return nombre_inspector;
     }
 
-    public void setNombre_inspector(String nombre_inspector) {
+    public void setNombreInspector(String nombre_inspector) {
         this.nombre_inspector = nombre_inspector;
     }
 
-    public LocalDate getFecha_inspeccion() {
+    public LocalDate getFechaInspeccion() {
         return fecha_inspeccion;
     }
 
-    public void setFecha_inspeccion(LocalDate fecha_inspeccion) {
+    public void setFechaInspeccion(LocalDate fecha_inspeccion) {
         this.fecha_inspeccion = fecha_inspeccion;
+    }
+
+    public Obra getObra() {
+        return obra;
+    }
+
+    public void setObra(Obra obra) {
+        this.obra = obra;
     }
     
     
