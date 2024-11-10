@@ -51,6 +51,9 @@ public class Obra implements Serializable {
     
     @OneToMany(mappedBy = "obra", cascade = CascadeType.ALL)
     private ArrayList<historialEstadoObra> historial_estado_obra;
+    
+    @OneToMany(mappedBy = "obra", cascade = CascadeType.ALL)
+    private ArrayList<Plano> planos;
 
     public Obra() {
     }
@@ -166,6 +169,18 @@ public class Obra implements Serializable {
     public void setHistorialEstadoObra(ArrayList<historialEstadoObra> historial_estado_obra) {
         this.historial_estado_obra = historial_estado_obra;
     }
-    
 
+    public ArrayList<Plano> getPlanos() {
+        return planos;
+    }
+
+    public void setPlanos(ArrayList<Plano> planos) {
+        this.planos = planos;
+    }
+    
+    // Método para añadir un nuevo plano
+    public void agregarPlano(Plano plano) {
+        plano.setObra(this);
+        this.planos.add(plano);
+    }
 }

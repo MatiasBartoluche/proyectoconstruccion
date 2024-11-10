@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Plano implements Serializable {
@@ -14,6 +16,10 @@ public class Plano implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private int id_plano;
+    
+    @ManyToOne
+    @JoinColumn(name="id_obra", referencedColumnName="id_obra")
+    private Obra obra;
     
     private String directorio;
     private String descripcion;
@@ -53,6 +59,12 @@ public class Plano implements Serializable {
     public void setSuperficiem2(double superficiem2) {
         this.superficiem2 = superficiem2;
     }
-    
-    
+
+    public Obra getObra() {
+        return obra;
+    }
+
+    public void setObra(Obra obra) {
+        this.obra = obra;
+    }
 }
