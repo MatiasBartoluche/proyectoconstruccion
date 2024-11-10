@@ -27,8 +27,12 @@ public class FacturaSubcontratista implements Serializable {
     private BigDecimal monto;
     
     @ManyToOne
-    @JoinColumn(name = "id_obra", nullable = false) // apunto al id de la clase a relacionar
+    @JoinColumn(name = "id_subcontratista", nullable = false) // apunto al id de la clase a relacionar
     private Subcontratista subcontratista;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_obra", nullable = false)
+    private Obra obra;
 
     public FacturaSubcontratista() {
     }
@@ -64,6 +68,21 @@ public class FacturaSubcontratista implements Serializable {
     public void setMonto(BigDecimal monto) {
         this.monto = monto;
     }
-    
-    
+
+    public Subcontratista getSubcontratista() {
+        return subcontratista;
+    }
+
+    public void setSubcontratista(Subcontratista subcontratista) {
+        this.subcontratista = subcontratista;
+    }
+
+    public Obra getObra() {
+        return obra;
+    }
+
+    public void setObra(Obra obra) {
+        this.obra = obra;
+    }
+
 }
