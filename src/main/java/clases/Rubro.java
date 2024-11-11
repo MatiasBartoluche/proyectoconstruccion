@@ -38,11 +38,10 @@ public class Rubro implements Serializable {
     private BigDecimal adelanto;
     
     @Column(precision = 20, scale = 10)
-    private BigDecimal saldoDescuento;
+    private BigDecimal saldo;
     
     @Column(precision = 20, scale = 10)
-    private BigDecimal presupuestoCAC;
-    
+    private BigDecimal saldoCAC;
     
     // float para porcentajes chicos
     private float porcentajeAvance;
@@ -58,11 +57,11 @@ public class Rubro implements Serializable {
         this.presupuesto = presupuesto;
     }
 
-    public int getId_rubro() {
+    public int getIdRubro() {
         return id_rubro;
     }
 
-    public void setId_rubro(int id_rubro) {
+    public void setIdRubro(int id_rubro) {
         this.id_rubro = id_rubro;
     }
 
@@ -74,68 +73,73 @@ public class Rubro implements Serializable {
         this.nombre = nombre;
     }
 
-    public BigDecimal getPresupuesto() {
-        return presupuesto;
-    }
-
-    public void setPresupuesto(BigDecimal presupuesto) {
-        this.presupuesto = presupuesto;
-    }
-
-    public BigDecimal getAdelanto() {
-        return adelanto;
-    }
-
-    public void setAdelanto(BigDecimal adelanto) {
-        this.adelanto = adelanto;
-    }
-
-    public BigDecimal getSaldoDescuento() {
-        return saldoDescuento;
-    }
-
-    public void setSaldoDescuento(BigDecimal saldoDescuento) {
-        this.saldoDescuento = saldoDescuento;
-    }
-
-    public BigDecimal getPresupuestoCAC() {
-        return presupuestoCAC;
-    }
-
-    public void setPresupuestoCAC(BigDecimal presupuestoCAC) {
-        this.presupuestoCAC = presupuestoCAC;
-    }
-
-    public float getPorcentajeAvance() {
-        return porcentajeAvance;
-    }
-
-    public void setPorcentajeAvance(float porcentajeAvance) {
-        this.porcentajeAvance = porcentajeAvance;
-    }
-
-    public BigDecimal getCert1() {
-        return cert1;
-    }
-
-    public void setCert1(BigDecimal cert1) {
-        this.cert1 = cert1;
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
     public Rubro getRubroPadre() {
         return rubroPadre;
     }
 
-    public void setRubroPadre(Rubro rubroPadre) {
-        this.rubroPadre = rubroPadre;
-    }
-
     public ArrayList<Rubro> getSubRubros() {
         return subRubros;
+    }
+
+    public BigDecimal getPresupuesto() {
+        return presupuesto;
+    }
+
+    public BigDecimal getAdelanto() {
+        return adelanto;
+    }
+
+    public BigDecimal getSaldo() {
+        return saldo;
+    }
+
+    public BigDecimal getSaldoCAC() {
+        return saldoCAC;
+    }
+
+    public float getPorcentajeAvance() {
+        return porcentajeAvance;
+    }
+
+    public BigDecimal getCert1() {
+        return cert1;
+    }
+
+    public void setRubroPadre(Rubro rubroPadre) {
+        this.rubroPadre = rubroPadre;
     }
 
     public void setSubRubros(ArrayList<Rubro> subRubros) {
         this.subRubros = subRubros;
     }
+
+    public void setPresupuesto(BigDecimal presupuesto) {
+        this.presupuesto = presupuesto;
+    }
+
+    public void setAdelanto(BigDecimal adelanto) {
+        this.adelanto = adelanto;
+    }
+
+    public void setSaldo(BigDecimal saldoDescuento) {
+        this.saldo = saldoDescuento;
+    }
+
+    public void setSaldoCAC(BigDecimal saldoCAC) {
+        this.saldoCAC = saldoCAC;
+    }
+
+    public void setPorcentajeAvance(float porcentajeAvance) {
+        this.porcentajeAvance = porcentajeAvance;
+    }
+
+    public void setCert1(BigDecimal cert1) {
+        this.cert1 = cert1;
+    }
+
 
 }
