@@ -178,11 +178,11 @@ public class Obra implements Serializable {
         this.tipo_obra = tipo_obra;
     }
 
-    public ArrayList<historialEstadoObra> getHistorialEstadoObra() {
+    public ArrayList<HistorialEstadoObra> getHistorialEstadoObra() {
         return historial_estado_obra;
     }
 
-    public void setHistorialEstadoObra(ArrayList<historialEstadoObra> historial_estado_obra) {
+    public void setHistorialEstadoObra(ArrayList<HistorialEstadoObra> historial_estado_obra) {
         this.historial_estado_obra = historial_estado_obra;
     }
 

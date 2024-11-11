@@ -98,10 +98,10 @@ public class SvIndex extends HttpServlet{
         controlador.crearContrato(oficina);
         controlador.crearContrato(subcontratado);
         
-        Estado activo = new Estado("Activo");
-        Estado art = new Estado("ART");
-        Estado vacaciones = new Estado("Vacaciones");
-        Estado libre = new Estado("Dia libre");
+        EstadoEmpleado activo = new Estado("Activo");
+        EstadoEmpleado art = new Estado("ART");
+        EstadoEmpleado vacaciones = new Estado("Vacaciones");
+        EstadoEmpleado libre = new Estado("Dia libre");
         
         controlador.crearEstado(activo);
         controlador.crearEstado(art);

@@ -1,6 +1,7 @@
 package clases;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.persistence.CascadeType;
@@ -34,39 +35,38 @@ public class Empleado implements Serializable {
     private byte[] foto_dni;
     private String foto_dni_base64;
     private LocalDate fecha_ingreso; // LocalDate fecha sin hora
-    
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "id_contrato", referencedColumnName = "id_contrato")
-    private Contrato contrato; // 0 = empleado de oficina, 1 = obrero, 2 = subcontratado
+    private int antiguedad;
+    private boolean despido; // true = despido, false = empleado vigente
     
     @Column(precision = 14, scale = 7)
     private BigDecimal sueldo_base;
     
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "id_estado", referencedColumnName = "id_contrato")
+    @JoinColumn(name = "id_contrato", referencedColumnName = "id_contrato")
+    private Contrato contrato; // 0 = empleado de oficina, 1 = obrero, 2 = subcontratado
+    
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "id_estado", referencedColumnName = "id_estado")
     private EstadoEmpleado estado;
     
-    private int antiguedad;
-    private boolean despido; // true = despido, false = empleado vigente
-    
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private GrupoTrabajo grupo;
-    
+
     @OneToMany(mappedBy = "empleadoObra", cascade = CascadeType.ALL)
     private ArrayList<EmpleadoObra> asignaciones = new ArrayList<>();
-
+    
     @OneToMany(mappedBy = "empleadoART", cascade = CascadeType.ALL)
     private ArrayList<HistorialART> historialART = new ArrayList<>();
-    
+
     @OneToMany(mappedBy = "empleadoLiquidacion", cascade = CascadeType.ALL)
-    private List<LiquidacionSueldo> liquidaciones = new ArrayList<>();
-    
+    private ArrayList<LiquidacionSueldo> liquidaciones = new ArrayList<>();
+ 
     @OneToMany(mappedBy = "empleadoEPP", cascade = CascadeType.ALL)
     private ArrayList<EntregaEPP> planillaEPP = new ArrayList<>();
-    
+
     @OneToMany(mappedBy = "empleadoAsistencia", cascade = CascadeType.ALL)
     private ArrayList<Asistencia> asistencias;
-    
+      
     public Empleado() {
     }
 
@@ -182,11 +182,11 @@ public class Empleado implements Serializable {
         this.contrato = contrato;
     }
 
-    public double getSueldoBase() {
+    public BigDecimal getSueldoBase() {
         return sueldo_base;
     }
 
-    public void setSueldoBase(double sueldo_base) {
+    public void setSueldoBase(BigDecimal sueldo_base) {
         this.sueldo_base = sueldo_base;
     }
 
@@ -261,6 +261,4 @@ public class Empleado implements Serializable {
     public void setAsistencias(ArrayList<Asistencia> asistencias) {
         this.asistencias = asistencias;
     }
-    
-    
 }

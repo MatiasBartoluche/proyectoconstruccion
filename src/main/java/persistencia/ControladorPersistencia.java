@@ -18,7 +18,7 @@ public class ControladorPersistencia {
     
     ContratoJpaController contratoJpa = new ContratoJpaController();
     EmpleadoJpaController empleadoJpa = new EmpleadoJpaController();
-    EstadoJpaController estadoJpa = new EstadoJpaController();
+    EstadoEmpleadoJpaController estadoJpa = new EstadoEmpleadoJpaController();
     GrupoTrabajoJpaController grupoJpa = new GrupoTrabajoJpaController();
     JerarquiaJpaController jerarquiaJpa = new JerarquiaJpaController();
     RolJpaController rolJpa = new RolJpaController();
@@ -86,17 +86,17 @@ public class ControladorPersistencia {
         return listaEmpleados;
     }
     
-    // ###################### creando metodos para EstadoJpaController ###################################
+    // ###################### creando metodos para EstadoEmpleadoJpaController ###################################
    
-    public void crearEstado(EstadoEmpleado estado) {
+    public void crearEstadoEmpleado(EstadoEmpleado estado) {
         estadoJpa.create(estado);
     }
 
-    public void eliminarEstado(int idEstado) {
+    public void eliminarEstadoEmpleado(int idEstado) {
         estadoJpa.destroy(idEstado);
     }
 
-    public void editarEstado(EstadoEmpleado estado) {
+    public void editarEstadoEmpleado(EstadoEmpleado estado) {
         try{
             estadoJpa.edit(estado);
         }
@@ -105,7 +105,7 @@ public class ControladorPersistencia {
         }
     }
 
-    public EstadoEmpleado traerEstado(int idEstado) {
+    public EstadoEmpleado traerEstadoEmpleado(int idEstado) {
         return estadoJpa.findEstado(idEstado);
     }
 

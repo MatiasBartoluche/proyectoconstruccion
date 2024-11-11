@@ -1,6 +1,6 @@
 package persistencia;
 
-import clases.Estado;
+import clases.EstadoEmpleado;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -9,15 +9,15 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 
-public class EstadoJpaController {
+public class EstadoEmpleadoJpaController {
 
     private EntityManagerFactory emf = null;
 
-    public EstadoJpaController(EntityManagerFactory emf) {
+    public EstadoEmpleadoJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     
-    public EstadoJpaController(){
+    public EstadoEmpleadoJpaController(){
         emf = Persistence.createEntityManagerFactory("construccionPU");
     }
 
@@ -26,7 +26,7 @@ public class EstadoJpaController {
     }
 
     // Crear usuario
-    public void create(Estado estado) {
+    public void create(EstadoEmpleado estado) {
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
@@ -40,7 +40,7 @@ public class EstadoJpaController {
     }
 
     // Editar usuario
-    public void edit(Estado estado) throws Exception {
+    public void edit(EstadoEmpleado estado) throws Exception {
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
@@ -64,9 +64,9 @@ public class EstadoJpaController {
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
-            Estado estado;
+            EstadoEmpleado estado;
             try {
-                estado = em.getReference(Estado.class, id);
+                estado = em.getReference(EstadoEmpleado.class, id);
                 estado.getIdEstado();
             } catch (EntityNotFoundException enfe) {
                 throw new EntityNotFoundException("El Rol con id " + id + " no existe.");
@@ -81,30 +81,30 @@ public class EstadoJpaController {
     }
 
     // Encontrar usuario por legajo
-    public Estado findEstado(int id) {
+    public EstadoEmpleado findEstado(int id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Estado.class, id);
+            return em.find(EstadoEmpleado.class, id);
         } finally {
             em.close();
         }
     }
 
-    public List<Estado> findEstadoEntities(){
+    public List<EstadoEmpleado> findEstadoEntities(){
         return findEstadoEntities(true, -1, -1);
     }
     
-    public List<Estado> findEstadoEntities(int maxResults, int firstResult){
+    public List<EstadoEmpleado> findEstadoEntities(int maxResults, int firstResult){
         return findEstadoEntities(false, maxResults, firstResult);
     }
     
     
-    private List<Estado> findEstadoEntities(boolean all, int maxResults, int firstResult){
+    private List<EstadoEmpleado> findEstadoEntities(boolean all, int maxResults, int firstResult){
         EntityManager em = getEntityManager();
         try{
             //Query query = em.createQuery("SELECT rol FROM rol");
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Estado.class));
+            cq.select(cq.from(EstadoEmpleado.class));
             Query query = em.createQuery(cq);
             if(!all){
                 query.setMaxResults(maxResults);
