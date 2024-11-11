@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 @Entity
 public class EntregaEPP implements Serializable {
@@ -17,7 +19,9 @@ public class EntregaEPP implements Serializable {
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private int id_entrega;
     
-    
+    @OneToMany
+    @JoinColumn(name = "id_epp") // Columna en la tabla EPP para almacenar el ID de EntregaEPP
+    private ArrayList<EPP> lista_epp = new ArrayList<>();
     
     
     // lista del modelo de cada EPP
