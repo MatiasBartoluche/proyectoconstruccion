@@ -3,11 +3,14 @@ package clases;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Presupuesto implements Serializable {
@@ -23,7 +26,8 @@ public class Presupuesto implements Serializable {
     
     private LocalDate fechaVersion;
     
-    
+    @OneToMany(mappedBy = "presupuestoRubto", cascade = CascadeType.ALL, orphanRemoval = true)
+    private ArrayList<Rubro> rubros = new ArrayList<>();
 
     public Presupuesto() {
     }
@@ -50,5 +54,13 @@ public class Presupuesto implements Serializable {
 
     public void setFechaVersion(LocalDate fechaVersion) {
         this.fechaVersion = fechaVersion;
+    }
+
+    public ArrayList<Rubro> getRubros() {
+        return rubros;
+    }
+
+    public void setRubros(ArrayList<Rubro> rubros) {
+        this.rubros = rubros;
     }
 }

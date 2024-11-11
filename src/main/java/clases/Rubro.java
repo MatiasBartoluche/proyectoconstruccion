@@ -48,6 +48,10 @@ public class Rubro implements Serializable {
     
     @Column(precision = 20, scale = 10)
     private BigDecimal cert1;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_presupuesto", nullable = false)
+    private Presupuesto presupuestoRubro;
 
     public Rubro() {
     }
@@ -141,5 +145,11 @@ public class Rubro implements Serializable {
         this.cert1 = cert1;
     }
 
+    public Presupuesto getPresupuestoRubro() {
+        return presupuestoRubro;
+    }
 
+    public void setPresupuestoRubro(Presupuesto presupuestoRubro) {
+        this.presupuestoRubro = presupuestoRubro;
+    }
 }
