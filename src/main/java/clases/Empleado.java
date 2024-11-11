@@ -58,6 +58,9 @@ public class Empleado implements Serializable {
     @OneToMany(mappedBy = "empleadoART", cascade = CascadeType.ALL)
     private ArrayList<HistorialART> historialART = new ArrayList<>();
     
+    @OneToMany(mappedBy = "empleadoLiquidacion", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<LiquidacionSueldo> liquidaciones = new ArrayList<>();
+    
     public Empleado() {
     }
 
@@ -228,4 +231,13 @@ public class Empleado implements Serializable {
     public void setHistorialART(ArrayList<HistorialART> historialART) {
         this.historialART = historialART;
     }
+
+    public ArrayList<LiquidacionSueldo> getLiquidaciones() {
+        return liquidaciones;
+    }
+
+    public void setLiquidaciones(ArrayList<LiquidacionSueldo> liquidaciones) {
+        this.liquidaciones = liquidaciones;
+    }
+
 }
