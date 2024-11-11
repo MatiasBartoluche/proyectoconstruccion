@@ -2,6 +2,8 @@ package clases;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Rubro implements Serializable {
@@ -24,6 +27,9 @@ public class Rubro implements Serializable {
     @ManyToOne
     @JoinColumn(name = "rubro_padre_id")
     private Rubro rubroPadre;
+    
+    @OneToMany(mappedBy = "rubroPadre", cascade = CascadeType.ALL, orphanRemoval = true)
+    private ArrayList<Rubro> subRubros = new ArrayList<>();
     
     @Column(precision = 20, scale = 10)
     private BigDecimal presupuesto;
@@ -122,6 +128,14 @@ public class Rubro implements Serializable {
 
     public void setRubroPadre(Rubro rubroPadre) {
         this.rubroPadre = rubroPadre;
+    }
+
+    public ArrayList<Rubro> getSubRubros() {
+        return subRubros;
+    }
+
+    public void setSubRubros(ArrayList<Rubro> subRubros) {
+        this.subRubros = subRubros;
     }
 
 }
