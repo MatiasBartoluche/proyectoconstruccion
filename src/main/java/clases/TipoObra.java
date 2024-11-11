@@ -35,6 +35,4 @@ public class TipoObra implements Serializable {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
-    
 }

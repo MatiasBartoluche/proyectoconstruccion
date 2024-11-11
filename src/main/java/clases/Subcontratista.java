@@ -68,5 +68,4 @@ public class Subcontratista implements Serializable {
     public void setFacturas(ArrayList<FacturaSubcontratista> facturas) {
         this.facturas = facturas;
     }
-
 }

@@ -75,6 +75,4 @@ public class FacturaProveedor implements Serializable {
     public void setObra(Obra obra) {
         this.obraProveedor = obra;
     }
-    
-    
 }

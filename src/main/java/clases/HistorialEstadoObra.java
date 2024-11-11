@@ -70,6 +70,4 @@ public class HistorialEstadoObra implements Serializable {
     public void setFecha_fin(LocalDate fecha_fin) {
         this.fecha_fin = fecha_fin;
     }
-    
-    
 }

@@ -56,6 +56,4 @@ public class Inspeccion implements Serializable {
     public void setObra(Obra obra) {
         this.obraInspeccion = obra;
     }
-    
-    
 }

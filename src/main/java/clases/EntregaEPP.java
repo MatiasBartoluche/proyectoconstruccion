@@ -32,7 +32,6 @@ public class EntregaEPP implements Serializable {
     @JoinColumn(name = "id_epp") // Columna en la tabla EPP para almacenar el ID de EntregaEPP
     private ArrayList<EPP> lista_epp = new ArrayList<>();
     
-    
     // lista del modelo de cada EPP
     private ArrayList<String> modelos = new ArrayList<>();
     // lista de la marca de cada EPP
@@ -108,5 +107,4 @@ public class EntregaEPP implements Serializable {
     public void setObraEPP(Obra obraEPP) {
         this.obraEPP = obraEPP;
     }
-
 }

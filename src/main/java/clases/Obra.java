@@ -71,7 +71,6 @@ public class Obra implements Serializable {
     @OneToMany(mappedBy = "obraEPP", cascade = CascadeType.ALL)
     private ArrayList<EntregaEPP> entregasEPP = new ArrayList<>();
 
-
     public Obra() {
     }
 
@@ -253,6 +252,5 @@ public class Obra implements Serializable {
 
     public void setEntregasEPP(ArrayList<EntregaEPP> entregasEPP) {
         this.entregasEPP = entregasEPP;
-    }
-    
+    } 
 }

@@ -55,6 +55,4 @@ public class Aporte implements Serializable {
     public void setTipo_aporte(int tipo_aporte) {
         this.tipo_aporte = tipo_aporte;
     }
-    
-    
 }

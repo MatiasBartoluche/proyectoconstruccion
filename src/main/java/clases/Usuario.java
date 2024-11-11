@@ -117,5 +117,4 @@ public class Usuario implements Serializable{
         }
         return existe;
     }
-
 }

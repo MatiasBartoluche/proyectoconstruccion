@@ -84,5 +84,4 @@ public class FacturaSubcontratista implements Serializable {
     public void setObra(Obra obra) {
         this.obraSubcontratista = obra;
     }
-
 }

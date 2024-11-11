@@ -51,5 +51,4 @@ public class GrupoAportes implements Serializable {
     public void setAportes(ArrayList<Aporte> aportes) {
         this.aportes = aportes;
     }
-
 }
