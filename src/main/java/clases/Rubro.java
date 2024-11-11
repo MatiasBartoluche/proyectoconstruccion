@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Rubro implements Serializable {
@@ -19,7 +21,9 @@ public class Rubro implements Serializable {
     
     private String nombre;
     
-    
+    @ManyToOne
+    @JoinColumn(name = "rubro_padre_id")
+    private Rubro rubroPadre;
     
     @Column(precision = 20, scale = 10)
     private BigDecimal presupuesto;
@@ -112,5 +116,12 @@ public class Rubro implements Serializable {
         this.cert1 = cert1;
     }
 
-    
+    public Rubro getRubroPadre() {
+        return rubroPadre;
+    }
+
+    public void setRubroPadre(Rubro rubroPadre) {
+        this.rubroPadre = rubroPadre;
+    }
+
 }
