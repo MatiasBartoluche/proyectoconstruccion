@@ -67,6 +67,10 @@ public class Obra implements Serializable {
     
     @OneToMany(mappedBy = "obraSubcontratista", cascade = CascadeType.ALL)
     private ArrayList<FacturaSubcontratista> facturas_subcontratistas = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "obraEPP", cascade = CascadeType.ALL)
+    private ArrayList<EntregaEPP> entregasEPP = new ArrayList<>();
+
 
     public Obra() {
     }
@@ -241,6 +245,14 @@ public class Obra implements Serializable {
 
     public void setFacturasSubcontratistas(ArrayList<FacturaSubcontratista> facturas_subcontratistas) {
         this.facturas_subcontratistas = facturas_subcontratistas;
+    }
+
+    public ArrayList<EntregaEPP> getEntregasEPP() {
+        return entregasEPP;
+    }
+
+    public void setEntregasEPP(ArrayList<EntregaEPP> entregasEPP) {
+        this.entregasEPP = entregasEPP;
     }
     
 }

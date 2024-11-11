@@ -24,6 +24,7 @@ public class EntregaEPP implements Serializable {
     @JoinColumn(name = "legajo", referencedColumnName = "legajo")
     private Empleado empleadoEPP;
     
+    @JoinColumn(name = "id_obra", referencedColumnName = "id_obra")
     private Obra obraEPP;
     
     @OneToMany
@@ -98,6 +99,13 @@ public class EntregaEPP implements Serializable {
     public void setLista_epp(ArrayList<EPP> lista_epp) {
         this.lista_epp = lista_epp;
     }
-    
-    
+
+    public Obra getObraEPP() {
+        return obraEPP;
+    }
+
+    public void setObraEPP(Obra obraEPP) {
+        this.obraEPP = obraEPP;
+    }
+
 }
