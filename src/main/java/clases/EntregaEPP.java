@@ -24,6 +24,7 @@ public class EntregaEPP implements Serializable {
     @JoinColumn(name = "legajo", referencedColumnName = "legajo")
     private Empleado empleadoEPP;
     
+    @ManyToOne
     @JoinColumn(name = "id_obra", referencedColumnName = "id_obra")
     private Obra obraEPP;
     
