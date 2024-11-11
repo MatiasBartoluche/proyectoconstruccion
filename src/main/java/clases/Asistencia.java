@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Asistencia implements Serializable {
@@ -15,6 +17,10 @@ public class Asistencia implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private int id_asistencia;
+    
+    @ManyToOne
+    @JoinColumn(name = "legajo", nullable = false)
+    private Empleado empleadoAsistencia;
     
     private LocalDate fecha;
     private boolean presente;
@@ -63,6 +69,12 @@ public class Asistencia implements Serializable {
     public void setMotivo(String motivo) {
         this.motivo = motivo;
     }
-    
-    
+
+    public Empleado getEmpleadoAsistencia() {
+        return empleadoAsistencia;
+    }
+
+    public void setEmpleadoAsistencia(Empleado empleadoAsistencia) {
+        this.empleadoAsistencia = empleadoAsistencia;
+    }
 }

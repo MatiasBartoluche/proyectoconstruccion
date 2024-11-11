@@ -64,6 +64,9 @@ public class Empleado implements Serializable {
     @OneToMany(mappedBy = "empleadoEPP", cascade = CascadeType.ALL)
     private ArrayList<EntregaEPP> planillaEPP = new ArrayList<>();
     
+    @OneToMany(mappedBy = "empleadoAsistencia", cascade = CascadeType.ALL)
+    private ArrayList<Asistencia> asistencias;
+    
     public Empleado() {
     }
 
@@ -250,4 +253,14 @@ public class Empleado implements Serializable {
     public void setPlanillaEPP(ArrayList<EntregaEPP> planillaEPP) {
         this.planillaEPP = planillaEPP;
     }
+
+    public ArrayList<Asistencia> getAsistencias() {
+        return asistencias;
+    }
+
+    public void setAsistencias(ArrayList<Asistencia> asistencias) {
+        this.asistencias = asistencias;
+    }
+    
+    
 }
