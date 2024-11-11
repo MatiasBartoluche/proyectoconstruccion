@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -18,6 +19,12 @@ public class EntregaEPP implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private int id_entrega;
+    
+    @ManyToOne
+    @JoinColumn(name = "legajo", referencedColumnName = "legajo")
+    private Empleado empleadoEPP;
+    
+    private Obra obraEPP;
     
     @OneToMany
     @JoinColumn(name = "id_epp") // Columna en la tabla EPP para almacenar el ID de EntregaEPP
@@ -74,6 +81,22 @@ public class EntregaEPP implements Serializable {
 
     public void setFechaEntrega(ArrayList<LocalDate> fecha_entrega) {
         this.fecha_entrega = fecha_entrega;
+    }
+
+    public Empleado getEmpleadoEPP() {
+        return empleadoEPP;
+    }
+
+    public void setEmpleadoEPP(Empleado empleadoEPP) {
+        this.empleadoEPP = empleadoEPP;
+    }
+
+    public ArrayList<EPP> getLista_epp() {
+        return lista_epp;
+    }
+
+    public void setLista_epp(ArrayList<EPP> lista_epp) {
+        this.lista_epp = lista_epp;
     }
     
     
