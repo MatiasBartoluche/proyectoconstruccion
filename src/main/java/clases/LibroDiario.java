@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 public class LibroDiario implements Serializable {
@@ -14,6 +16,10 @@ public class LibroDiario implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private int id_libro_diario;
+    
+    @OneToOne
+    @JoinColumn(name = "id_sociedad")
+    private Sociedad sociedadLibroDiario;
 
     public LibroDiario() {
     }
@@ -24,6 +30,14 @@ public class LibroDiario implements Serializable {
 
     public void setIdLibroDiario(int id_libro_diario) {
         this.id_libro_diario = id_libro_diario;
+    }
+
+    public Sociedad getSociedad() {
+        return sociedadLibroDiario;
+    }
+
+    public void setSociedad(Sociedad sociedad) {
+        this.sociedadLibroDiario = sociedad;
     }
     
     

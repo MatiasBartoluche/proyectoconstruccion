@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Sociedad implements Serializable {
@@ -35,6 +36,9 @@ public class Sociedad implements Serializable {
     // mappedBy="sociedadObra", relacion bidireccional, apunta al atributo "sociedad" de la clase "Obra"
     @OneToMany(mappedBy = "sociedadObra", cascade = CascadeType.ALL)
     private ArrayList<Obra> obras = new ArrayList<>();
+    
+    @OneToOne(mappedBy = "sociedadLibroDiario", cascade = CascadeType.ALL)
+    private LibroDiario libroDiario;
 
     public Sociedad() {
     }
@@ -136,5 +140,13 @@ public class Sociedad implements Serializable {
         poliza.setFechaContratacion(fechaContratacion);
         poliza.setFechaVencimiento(fechaVencimiento);
         this.seguros.add(poliza);
+    }
+
+    public LibroDiario getLibroDiario() {
+        return libroDiario;
+    }
+
+    public void setLibroDiario(LibroDiario libroDiario) {
+        this.libroDiario = libroDiario;
     }
 }
