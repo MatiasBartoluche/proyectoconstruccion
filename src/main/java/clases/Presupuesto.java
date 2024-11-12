@@ -28,7 +28,7 @@ public class Presupuesto implements Serializable {
     
     private LocalDate fechaVersion;
     
-    @OneToMany(mappedBy = "presupuestoRubto", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "presupuestoRubro", cascade = CascadeType.ALL, orphanRemoval = true)
     private ArrayList<Rubro> rubros = new ArrayList<>();
 
     @ManyToOne
