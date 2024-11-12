@@ -2,13 +2,38 @@
 <persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence           http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
   <persistence-unit name="construccionPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>clases.Aporte</class>
+    <class>clases.AsientoContable</class>
+    <class>clases.Asistencia</class>
     <class>clases.Contrato</class>
-    <class>clases.GrupoTrabajo</class>
-    <class>clases.Jerarquia</class>
-    <class>clases.Rol</class>
-    <class>clases.Usuario</class>
+    <class>clases.EPP</class>
     <class>clases.Empleado</class>
+    <class>clases.EmpleadoObra</class>
+    <class>clases.EntregaEPP</class>
     <class>clases.EstadoEmpleado</class>
+    <class>clases.EstadoObra</class>
+    <class>clases.FacturaProveedor</class>
+    <class>clases.FacturaSubcontratista</class>
+    <class>clases.GrupoAportes</class>
+    <class>clases.GrupoTrabajo</class>
+    <class>clases.HistorialART</class>
+    <class>clases.HistorialEstadoObra</class>
+    <class>clases.Inspeccion</class>
+    <class>clases.Jerarquia</class>
+    <class>clases.LibroDiario</class>
+    <class>clases.LiquidacionSueldo</class>
+    <class>clases.Obra</class>
+    <class>clases.Plano</class>
+    <class>clases.Presupuesto</class>
+    <class>clases.Proveedor</class>
+    <class>clases.RegistroContable</class>
+    <class>clases.Rol</class>
+    <class>clases.Rubro</class>
+    <class>clases.Seguro</class>
+    <class>clases.Sociedad</class>
+    <class>clases.Subcontratista</class>
+    <class>clases.TipoObra</class>
+    <class>clases.Usuario</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/construccion"/>
