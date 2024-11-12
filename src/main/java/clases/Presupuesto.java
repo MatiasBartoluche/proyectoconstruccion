@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -29,6 +31,10 @@ public class Presupuesto implements Serializable {
     @OneToMany(mappedBy = "presupuestoRubto", cascade = CascadeType.ALL, orphanRemoval = true)
     private ArrayList<Rubro> rubros = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name = "id_obra", nullable = false)
+    private Obra obraPresupuesto;
+    
     public Presupuesto() {
     }
 
@@ -62,5 +68,13 @@ public class Presupuesto implements Serializable {
 
     public void setRubros(ArrayList<Rubro> rubros) {
         this.rubros = rubros;
+    }
+
+    public Obra getObraPresupuesto() {
+        return obraPresupuesto;
+    }
+
+    public void setObraPresupuesto(Obra obraPresupuesto) {
+        this.obraPresupuesto = obraPresupuesto;
     }
 }
