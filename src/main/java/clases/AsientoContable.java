@@ -9,6 +9,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class AsientoContable implements Serializable {
@@ -29,6 +31,10 @@ public class AsientoContable implements Serializable {
     
     @Enumerated(EnumType.STRING)
     private Columna columna;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_registro_contable")
+    private RegistroContable registroContable;
 
     public AsientoContable() {
     }
@@ -72,6 +78,13 @@ public class AsientoContable implements Serializable {
     public void setColumna(Columna columna) {
         this.columna = columna;
     }
-    
+
+    public RegistroContable getRegistroContable() {
+        return registroContable;
+    }
+
+    public void setRegistroContable(RegistroContable registroContable) {
+        this.registroContable = registroContable;
+    }
     
 }

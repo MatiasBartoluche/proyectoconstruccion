@@ -3,10 +3,13 @@ package clases;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class RegistroContable implements Serializable {
@@ -18,6 +21,9 @@ public class RegistroContable implements Serializable {
     private int id_registro_contable;
     
     private LocalDate fecha_registro;
+    
+    @OneToMany(mappedBy = "registroContable", cascade = CascadeType.ALL, orphanRemoval = true)
+    private ArrayList<AsientoContable> asientos = new ArrayList<>();
     
     private BigDecimal total_columna_debe;
     private BigDecimal total_columna_haber;
@@ -56,6 +62,12 @@ public class RegistroContable implements Serializable {
     public void setTotalColumnaHaber(BigDecimal total_columna_haber) {
         this.total_columna_haber = total_columna_haber;
     }
-    
-    
+
+    public ArrayList<AsientoContable> getAsientos() {
+        return asientos;
+    }
+
+    public void setAsientos(ArrayList<AsientoContable> asientos) {
+        this.asientos = asientos;
+    }
 }
