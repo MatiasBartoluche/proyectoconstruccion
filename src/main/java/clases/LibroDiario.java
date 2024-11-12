@@ -1,11 +1,14 @@
 package clases;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -20,6 +23,9 @@ public class LibroDiario implements Serializable {
     @OneToOne
     @JoinColumn(name = "id_sociedad")
     private Sociedad sociedadLibroDiario;
+    
+    @OneToMany(mappedBy = "libroDiario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private ArrayList<RegistroContable> registros = new ArrayList<>();
 
     public LibroDiario() {
     }
@@ -39,6 +45,12 @@ public class LibroDiario implements Serializable {
     public void setSociedad(Sociedad sociedad) {
         this.sociedadLibroDiario = sociedad;
     }
-    
-    
+
+    public ArrayList<RegistroContable> getRegistros() {
+        return registros;
+    }
+
+    public void setRegistros(ArrayList<RegistroContable> registros) {
+        this.registros = registros;
+    }
 }

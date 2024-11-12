@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -19,6 +21,10 @@ public class RegistroContable implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private int id_registro_contable;
+    
+    @ManyToOne
+    @JoinColumn(name = "id_libor_diario")
+    private LibroDiario libroDiario;
     
     private LocalDate fecha_registro;
     
@@ -69,5 +75,13 @@ public class RegistroContable implements Serializable {
 
     public void setAsientos(ArrayList<AsientoContable> asientos) {
         this.asientos = asientos;
+    }
+
+    public LibroDiario getLibroDiario() {
+        return libroDiario;
+    }
+
+    public void setLibroDiario(LibroDiario libroDiario) {
+        this.libroDiario = libroDiario;
     }
 }
