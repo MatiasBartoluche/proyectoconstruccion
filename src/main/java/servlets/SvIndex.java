@@ -1,5 +1,6 @@
 package servlets;
 
+import clases.Aporte;
 import clases.Contrato;
 import clases.Controlador;
 import clases.Empleado;
@@ -56,6 +57,11 @@ public class SvIndex extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        /*Aporte aporte = new Aporte();
+        aporte.setDetalle_aporte("jubilacion");
+        aporte.setPorcentaje(2.02f);
+        aporte.setTipo_aporte(0);*/
         
         /*Rol rolSistemas = new Rol("Admin sistemas");
         Rol rolAdministrativo = new Rol("Administrativo");
