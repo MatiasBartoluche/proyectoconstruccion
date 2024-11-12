@@ -23,7 +23,7 @@ public class Presupuesto implements Serializable {
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private int id_presupuesto;
     
-    @Column(precision = 12, scale = 10)
+    @Column(precision = 20, scale = 10)
     private BigDecimal porcentajeCAC;
     
     private LocalDate fechaVersion;
