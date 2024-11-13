@@ -60,14 +60,15 @@ public class SvIndex extends HttpServlet{
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        AporteJpaController aporteController = new AporteJpaController();
+
+        /*AporteJpaController aporteController = new AporteJpaController();
         
         Aporte aporte = new Aporte();
         aporte.setDetalle_aporte("jubilacion");
         aporte.setPorcentaje(BigDecimal.valueOf(2.02));
         aporte.setTipo_aporte(0);
         
-        aporteController.create(aporte);
+        aporteController.create(aporte);*/
         
         /*Rol rolSistemas = new Rol("Admin sistemas");
         Rol rolAdministrativo = new Rol("Administrativo");
