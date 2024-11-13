@@ -11,6 +11,7 @@ import clases.Usuario;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -30,6 +31,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import persistencia.AporteJpaController;
 import persistencia.EmpleadoJpaController;
 
 
@@ -58,10 +60,14 @@ public class SvIndex extends HttpServlet{
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        /*Aporte aporte = new Aporte();
+        AporteJpaController aporteController = new AporteJpaController();
+        
+        Aporte aporte = new Aporte();
         aporte.setDetalle_aporte("jubilacion");
-        aporte.setPorcentaje(2.02f);
-        aporte.setTipo_aporte(0);*/
+        aporte.setPorcentaje(BigDecimal.valueOf(2.02));
+        aporte.setTipo_aporte(0);
+        
+        aporteController.create(aporte);
         
         /*Rol rolSistemas = new Rol("Admin sistemas");
         Rol rolAdministrativo = new Rol("Administrativo");

@@ -1,6 +1,8 @@
 package clases;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,7 +18,9 @@ public class Aporte implements Serializable {
     private int id_aporte;
     
     private String detalle_aporte;
-    private float porcentaje;
+    
+    @Column(precision = 6, scale = 4)
+    private BigDecimal porcentaje;
     
     // 0 = aporte de descuento, 1 = aporte de beneficio
     private int tipo_aporte;
@@ -40,11 +44,11 @@ public class Aporte implements Serializable {
         this.detalle_aporte = detalle_aporte;
     }
 
-    public float getPorcentaje() {
+    public BigDecimal getPorcentaje() {
         return porcentaje;
     }
 
-    public void setPorcentaje(float porcentaje) {
+    public void setPorcentaje(BigDecimal porcentaje) {
         this.porcentaje = porcentaje;
     }
 

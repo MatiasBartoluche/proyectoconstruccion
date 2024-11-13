@@ -3,19 +3,18 @@ package persistencia;
 
 import clases.Usuario;
 import java.io.Serializable;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 
 
 public class UsuarioJpaController implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     
     
     private EntityManagerFactory emf = null;

@@ -11,6 +11,8 @@ import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 
 public class GrupoTrabajoJpaController implements Serializable{
+
+    private static final long serialVersionUID = 1L;
                 
     
     private EntityManagerFactory emf = null;
