@@ -33,7 +33,7 @@ public class Empleado implements Serializable {
     private String telefono;
     private String telefono_familiar;
     private byte[] foto_dni;
-    private String foto_dni_base64;
+
     private LocalDate fecha_ingreso; // LocalDate fecha sin hora
     private int antiguedad;
     private boolean despido; // true = despido, false = empleado vigente
@@ -156,14 +156,6 @@ public class Empleado implements Serializable {
 
     public void setFotoDni(byte[] foto_dni) {
         this.foto_dni = foto_dni;
-    }
-
-    public String getFotoDniBase64() {
-        return foto_dni_base64;
-    }
-
-    public void setFotoDniBase64(String foto_dni_base64) {
-        this.foto_dni_base64 = foto_dni_base64;
     }
 
     public LocalDate getFechaIngreso() {

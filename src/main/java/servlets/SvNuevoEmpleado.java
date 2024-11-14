@@ -69,13 +69,13 @@ public class SvNuevoEmpleado extends HttpServlet {
         // Convertir JSON a objeto Java
         Empleado empleado = gson.fromJson(reader, Empleado.class);
         
-        String fotoBase64 = empleado.getFotoDniBase64();
+        byte[] foto = null;
         
-        if(fotoBase64 == null){
+        if(empleado.getFotoDni() == null){
             System.out.println("++++++++++++++++++++++++++++++++ no hay foto");
         }
         else{
-            byte[] foto = Base64.getDecoder().decode(empleado.getFotoDniBase64().split(",")[1]); // Eliminar el prefijo "data:image/..."
+            foto = Base64.getDecoder().decode(empleado.getFotoDni()); // Eliminar el prefijo "data:image/..."
 
             empleado.setFotoDni(foto);
             System.out.println("++++++++++++++++++++++++++++++++ hay foto");

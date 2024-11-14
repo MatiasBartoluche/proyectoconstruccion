@@ -38,7 +38,7 @@ function cargarImagen(){
             // Convertir la imagen a base64
             const reader = new FileReader();
             reader.onload = function (event) {
-                const base64Image = event.target.result; // Remover el encabezado "data:image/png;base64,"
+                const base64Image = event.target.result.split(",")[1]; // Remover el encabezado "data:image/png;base64,"
                 //console.log(base64Image);
                 var imagen = {foto_dni: base64Image};
                 // paso la imagen en base64
