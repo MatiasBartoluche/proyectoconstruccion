@@ -76,6 +76,7 @@ public class SvRegistrar extends HttpServlet {
         while ((line = reader.readLine()) != null) {
             jsonBuffer.append(line);
         }
+        
         // almaceno el string obtenido del json
         String jsonData = jsonBuffer.toString();
         // instancia de Gson, incluyo el adapter en el builder para evitar problemas de parse a objetos LocalDate
@@ -83,7 +84,7 @@ public class SvRegistrar extends HttpServlet {
         
         // leer el string y parse a objeto Usuario
         Usuario usuario = gson.fromJson(jsonData, Usuario.class);
-        
+      
         String claveRecibida = usuario.getClave();
         
         String salt = generarSalt();

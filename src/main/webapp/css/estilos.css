@@ -170,7 +170,7 @@ body{
     margin: 1%;
 }
 
-#btnBuscarEmpleado, #aceptarBusquedaEmpleado, #registrar{
+#btnBuscarEmpleado, #aceptarBusquedaEmpleado, #registrar, #btnUsuarioCreado{
     font-family: "Roboto", sans-serif; /*fuentes de letra para botones*/
     text-transform: uppercase;
     outline: 0;
