@@ -25,6 +25,7 @@ function buscarEmpleado(){
                     data: {legajo: legajo},
                     dataType: 'json',
                     success: function(response) {
+                        console.log(response);
                         // recibo un json con clave "empleado"
                         // valor = null para empleado inexistente
                         // valor = false para empleado con usuario ya creado
@@ -37,9 +38,15 @@ function buscarEmpleado(){
                         }
                         else{
                             $('#resultadoBusquedaEmpleado').append(
-                               '<p> Usted es: '+response.apellidos+', '+response.nombres+'</p>'+
-                               '<p> Cargo: '+response.jerarquia.descripcion+'</p>'+
-                               '<p id="legajoEmpleado" value="'+response.legajo+'"> Numero de legajo: '+response.legajo+'</p>'+
+                               '<p> Usted es: '+response.apellidos+', '+response.nombres+'</p>');
+                               // continuar aca
+                            if(response.jerarquia){
+                                $('#resultadoBusquedaEmpleado').append('<p> Usted es: '+response.jerarquia.descripcion+'</p>');
+                            }
+                            else{
+                                $('#resultadoBusquedaEmpleado').append('<p> Cargo: no asignado</p>');
+                            }
+                            $('#resultadoBusquedaEmpleado').append('<p id="legajoEmpleado" value="'+response.legajo+'"> Numero de legajo: '+response.legajo+'</p>'+
                                '<p> Si estos datos son correctos, presione el boton "Aceptar", de lo contrario, ingrese nuevamente su legajo</p>'+
                                '<button id="aceptarBusquedaEmpleado">Aceptar</button>'
                             );

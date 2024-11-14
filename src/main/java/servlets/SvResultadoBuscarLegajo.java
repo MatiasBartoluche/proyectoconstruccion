@@ -46,6 +46,8 @@ public class SvResultadoBuscarLegajo extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        
+        
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         // capturo el legajo ingresado
@@ -62,35 +64,43 @@ public class SvResultadoBuscarLegajo extends HttpServlet {
         // true = empleado ya tiene usuario
         // false = empleado no tiene usuario
         boolean existeUsuario = false;
+        String respuestaJson = "";
         
-        for(Usuario usuario : listaUsuarios){
-            if(usuario.getEmpleado().getLegajo() == numeroLegajo){
-                existeUsuario = true;
-                break; // dejo de recorrer la lista, ya encontre un usuario asociado a ese legajo
+        if(listaUsuarios != null){
+            for(Usuario usuario : listaUsuarios){
+                if(usuario.getEmpleado().getLegajo() == numeroLegajo){
+                    existeUsuario = true;
+                    break; // dejo de recorrer la lista, ya encontre un usuario asociado a ese legajo
+                }
+                else{
+                    // nunca encontre usuario asociado a ese legajo
+                     existeUsuario = false;
+                }
             }
-            else{
-                // nunca encontre usuario asociado a ese legajo
-                 existeUsuario = false;
-            }
+        }
+        else{
+            System.out.println("++++++++++++++++++++++++++++ no hay usuarios registrados");
         }
         
         if(existeUsuario){
             // el empleado ya tiene un usuario asociado a su legajo, preparo un json false para la pagina
-            response.getWriter().write("{\"empleado\": false}");
+            respuestaJson = "{\"empleado\": false}";
         }
         else{
             // busco un empleado con el legajo ingresado
             Empleado empleado = control.buscarEmpleado(numeroLegajo);
             if(empleado == null){
                 // no existe empleado con el legajo ingresado, preparo un Json nulo para la pagina
-                response.getWriter().write("{\"empleado\": null}");
+                respuestaJson = "{\"empleado\": null}";
             }
             else{
                 Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
                 String empleadoJson = gson.toJson(empleado);
-                response.getWriter().write(empleadoJson);
+                respuestaJson = empleadoJson;
             }
         }
+        response.getWriter().write(respuestaJson);
+        
     }
 
     @Override

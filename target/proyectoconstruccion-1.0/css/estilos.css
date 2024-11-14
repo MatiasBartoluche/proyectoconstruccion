@@ -132,7 +132,7 @@ body{
     width: 60%;
 }
 
-#inputLegajo{
+#inputLegajo, #usuario, #clave, #repetirClave{
     width: 30%;
     font-family: "Roboto", sans-serif; /*fuentes de letra*/
     outline: 0;
@@ -145,7 +145,11 @@ body{
     font-size: 14px;
 }
 
-#buscarEmpleado button{
+#resultadoBusquedaEmpleado p{
+    margin: 1%;
+}
+
+#btnBuscarEmpleado, #aceptarBusquedaEmpleado, #registrar{
     font-family: "Roboto", sans-serif; /*fuentes de letra para botones*/
     text-transform: uppercase;
     outline: 0;
