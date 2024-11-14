@@ -40,38 +40,38 @@ public class Obra implements Serializable {
     //private Provincia provincia;
     private LocalDate fecha_inicio;
     
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(cascade = CascadeType.MERGE, orphanRemoval = true)
     @JoinColumn(name = "id_tipo_obra", referencedColumnName = "id_tipoObra")
     private TipoObra tipo_obra;
     
     // OneToMany representa relacion 1-n con actualizacion en cascada
     // mappedBy="empleadoObra" apunta al atributo de tipo Obra en la otra clase a relacionar
     
-    @OneToMany(mappedBy = "obraEmpleado", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "obraEmpleado", cascade = CascadeType.MERGE)
     private ArrayList<EmpleadoObra> asignaciones = new ArrayList<>();
     
-    @OneToMany(mappedBy = "obraHistorial", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "obraHistorial", cascade = CascadeType.MERGE)
     private ArrayList<HistorialEstadoObra> historial_estado_obra = new ArrayList<>();
     
-    @OneToMany(mappedBy = "obraPlano", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "obraPlano", cascade = CascadeType.MERGE)
     private ArrayList<Plano> planos = new ArrayList<>();
     
-    @OneToMany(mappedBy = "obraInspeccion", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "obraInspeccion", cascade = CascadeType.MERGE)
     private ArrayList<Inspeccion> inspecciones = new ArrayList<>();
     
-    @OneToMany(mappedBy = "obraART", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "obraART", cascade = CascadeType.MERGE)
     private ArrayList<HistorialART> historialART = new ArrayList<>();
     
-    @OneToMany(mappedBy = "obraProveedor", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "obraProveedor", cascade = CascadeType.MERGE)
     private ArrayList<FacturaProveedor> facturas_proveedores = new ArrayList<>();
     
-    @OneToMany(mappedBy = "obraSubcontratista", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "obraSubcontratista", cascade = CascadeType.MERGE)
     private ArrayList<FacturaSubcontratista> facturas_subcontratistas = new ArrayList<>();
     
-    @OneToMany(mappedBy = "obraEPP", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "obraEPP", cascade = CascadeType.MERGE)
     private ArrayList<EntregaEPP> entregasEPP = new ArrayList<>();
     
-    @OneToMany(mappedBy = "obraPresupuesto", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "obraPresupuesto", cascade = CascadeType.MERGE, orphanRemoval = true)
     private ArrayList<Presupuesto> historialPresupuestos = new ArrayList<>();
 
 

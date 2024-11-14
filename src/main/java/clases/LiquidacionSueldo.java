@@ -21,7 +21,7 @@ public class LiquidacionSueldo implements Serializable {
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private int id_liquidacion;
     
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "grupo_aportes_id") // Define la columna en la tabla LiquidarSueldo que almacena el ID de GrupoAportes
     private GrupoAportes grupoAportes;
     

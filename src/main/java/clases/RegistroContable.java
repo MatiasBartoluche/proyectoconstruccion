@@ -28,7 +28,7 @@ public class RegistroContable implements Serializable {
     
     private LocalDate fecha_registro;
     
-    @OneToMany(mappedBy = "registroContable", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "registroContable", cascade = CascadeType.MERGE, orphanRemoval = true)
     private ArrayList<AsientoContable> asientos = new ArrayList<>();
     
     private BigDecimal total_columna_debe;

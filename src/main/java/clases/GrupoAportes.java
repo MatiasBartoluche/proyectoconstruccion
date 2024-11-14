@@ -21,7 +21,7 @@ public class GrupoAportes implements Serializable {
     
     private String nombre;
     
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.MERGE)
     @JoinColumn(name = "grupo_aporte_id") // Columna en la tabla Aporte para almacenar el ID de GrupoAporte
     private ArrayList<Aporte> aportes = new ArrayList<>();
 

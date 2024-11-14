@@ -20,7 +20,7 @@ public class Empleado implements Serializable {
     @Id
     private int legajo; // el legajo sera ingresado manualmente por el usuario del sistema
     
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(cascade = CascadeType.MERGE, orphanRemoval = true)
     @JoinColumn(name = "id_jerarquia", referencedColumnName = "id_jerarquia")
     private Jerarquia jerarquia;
     

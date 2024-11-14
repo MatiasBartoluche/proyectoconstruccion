@@ -28,7 +28,7 @@ public class Rubro implements Serializable {
     @JoinColumn(name = "rubro_padre_id")
     private Rubro rubroPadre;
     
-    @OneToMany(mappedBy = "rubroPadre", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "rubroPadre", cascade = CascadeType.MERGE, orphanRemoval = true)
     private ArrayList<Rubro> subRubros = new ArrayList<>();
     
     @Column(precision = 20, scale = 10)

@@ -24,7 +24,7 @@ public class LibroDiario implements Serializable {
     @JoinColumn(name = "id_sociedad")
     private Sociedad sociedadLibroDiario;
     
-    @OneToMany(mappedBy = "libroDiario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "libroDiario", cascade = CascadeType.MERGE, orphanRemoval = true)
     private ArrayList<RegistroContable> registros = new ArrayList<>();
 
     public LibroDiario() {
