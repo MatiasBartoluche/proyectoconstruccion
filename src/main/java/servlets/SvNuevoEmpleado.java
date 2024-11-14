@@ -69,19 +69,22 @@ public class SvNuevoEmpleado extends HttpServlet {
         // Convertir JSON a objeto Java
         Empleado empleado = gson.fromJson(reader, Empleado.class);
         
-        byte[] foto = null;
+        System.out.println("++++++++++++++++++++++++++++++++ foto antes de la conversion: "+empleado.getFotoDniBase64());
         
-        if(empleado.getFotoDni() == null){
+        if(empleado.getFotoDniBase64() == null){
             System.out.println("++++++++++++++++++++++++++++++++ no hay foto");
         }
         else{
-            foto = Base64.getDecoder().decode(empleado.getFotoDni()); // Eliminar el prefijo "data:image/..."
+            System.out.println("++++++++++++++++++++++++++++++++ foto base 64: "+Arrays.toString(empleado.getFotoDni()));
+            String fotoBase64 = empleado.getFotoDniBase64();
+            byte[] foto = Base64.getDecoder().decode(fotoBase64); // Eliminar el prefijo "data:image/..."
 
             empleado.setFotoDni(foto);
             System.out.println("++++++++++++++++++++++++++++++++ hay foto");
+            
+            System.out.println("++++++++++++++++++++++++++++++++ foto bytea: "+Arrays.toString(empleado.getFotoDni()));
         }
        
-        System.out.println("++++++++++++++++++++++++++++++++"+empleado);
         String enviarJson;
 
         if(empleado != null){
@@ -92,7 +95,7 @@ public class SvNuevoEmpleado extends HttpServlet {
             if(buscarEmpleadoPorLegajo == null){
                 // si no encuentra ningun empleado con legajo igual al legajo recibido, crea un nuevo empleado
                 control.crearEmpleado(empleado);
-                enviarJson = "{\"mensaje\": true}";
+                enviarJson = "{\"mensaje\": \"El empleado fue registrado exitosamente\"}";
             }
             else{
                 enviarJson = "{\"message\":\"Ya existe un empleado con ese legajo\"}";

@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 @Entity
 public class Empleado implements Serializable {
@@ -33,7 +34,9 @@ public class Empleado implements Serializable {
     private String telefono;
     private String telefono_familiar;
     private byte[] foto_dni;
-
+    
+    @Transient
+    private String foto_dni_base64;
     private LocalDate fecha_ingreso; // LocalDate fecha sin hora
     private int antiguedad;
     private boolean despido; // true = despido, false = empleado vigente
@@ -41,30 +44,30 @@ public class Empleado implements Serializable {
     @Column(precision = 14, scale = 7)
     private BigDecimal sueldo_base;
     
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(cascade = CascadeType.MERGE, orphanRemoval = true)
     @JoinColumn(name = "id_contrato", referencedColumnName = "id_contrato")
     private Contrato contrato; // 0 = empleado de oficina, 1 = obrero, 2 = subcontratado
     
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(cascade = CascadeType.MERGE, orphanRemoval = true)
     @JoinColumn(name = "id_estado", referencedColumnName = "id_estado")
     private EstadoEmpleado estado;
     
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     private GrupoTrabajo grupo;
 
-    @OneToMany(mappedBy = "empleadoObra", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "empleadoObra", cascade = CascadeType.MERGE)
     private ArrayList<EmpleadoObra> asignaciones = new ArrayList<>();
     
-    @OneToMany(mappedBy = "empleadoART", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "empleadoART", cascade = CascadeType.MERGE)
     private ArrayList<HistorialART> historialART = new ArrayList<>();
 
-    @OneToMany(mappedBy = "empleadoLiquidacion", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "empleadoLiquidacion", cascade = CascadeType.MERGE)
     private ArrayList<LiquidacionSueldo> liquidaciones = new ArrayList<>();
  
-    @OneToMany(mappedBy = "empleadoEPP", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "empleadoEPP", cascade = CascadeType.MERGE)
     private ArrayList<EntregaEPP> planillaEPP = new ArrayList<>();
 
-    @OneToMany(mappedBy = "empleadoAsistencia", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "empleadoAsistencia", cascade = CascadeType.MERGE)
     private ArrayList<Asistencia> asistencias;
       
     public Empleado() {
@@ -156,6 +159,14 @@ public class Empleado implements Serializable {
 
     public void setFotoDni(byte[] foto_dni) {
         this.foto_dni = foto_dni;
+    }
+
+    public String getFotoDniBase64() {
+        return foto_dni_base64;
+    }
+
+    public void setFotoDniBase64(String foto_dni_base64) {
+        this.foto_dni_base64 = foto_dni_base64;
     }
 
     public LocalDate getFechaIngreso() {

@@ -239,10 +239,14 @@ function nuevoEmpleado(empleado){
         data: JSON.stringify(empleado),
         dataType: 'json',
         success: function (response) {
-            console.log(response);
+            mensajeModal(response.mensaje);
         },
         error: function (xhr, status, error) {
             console.error('Error al guardar el empleado:', error);
         }
     });
+}
+
+function mensajeModal(respuesta){
+    console.log(respuesta);
 }
