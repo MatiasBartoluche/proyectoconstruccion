@@ -23,12 +23,6 @@
     box-sizing: border-box;
 }
 
-button{
-    background: var(--primary-color); /*color de botones*/
-    color: var(--sidebar-color); /*color de las letras de botones*/
-    border-radius: 6px;
-}
-
 div{
     border-radius: 6px;
 }
@@ -38,8 +32,34 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
   -webkit-appearance: none; 
 }
 
+input{
+    font-family: "Roboto", sans-serif; /*fuentes de letra*/
+    outline: 0;
+    background: #f2f2f2; /*fondo gris claro*/
+    border: 1px solid var(--text-color);
+    border-radius: 6px;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+button{
+    background: var(--primary-color); /*color de botones*/
+    color: var(--sidebar-color); /*color de las letras de botones*/
+    border-radius: 6px;
+    font-family: "Roboto", sans-serif; 
+    text-transform: uppercase;
+    outline: 0;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
 select{
-display: block;
+    display: block;
     font-size: 16px;
     font-family: 'Verdana', sans-serif;
     font-weight: 400;
@@ -66,7 +86,6 @@ body{
     display: flex;
     flex-wrap: wrap;
     justify-content: center; /*centra horizontalmente*/
-    /*align-items: center;*/
     width: 100%;
 }
 
@@ -91,16 +110,7 @@ body{
 
 /* estilos de input*/
 .ingresarUsuario #login input {
-    font-family: "Roboto", sans-serif; /*fuentes de letra*/
-    outline: 0;
-    background: #f2f2f2; /*fondo gris claro*/
     width: 100%;
-    border: 1px solid var(--text-color);
-    border-radius: 6px;
-    margin: 0 0 15px;
-    padding: 15px;
-    box-sizing: border-box;
-    font-size: 14px;
 }
 
 .ingresarUsuario #login label, .ingresarUsuario form label{
@@ -109,16 +119,10 @@ body{
     color: var(--text-color);
 }
 
-/*estilos de botones*/
-.ingresarUsuario #login button, .ingresarUsuario form button  {
-    font-family: "Roboto", sans-serif; /*fuentes de letra para botones*/
-    text-transform: uppercase;
-    outline: 0;
+#mensajeIncorrecto{
     width: 100%;
-    border: 0;
-    padding: 15px;
-    font-size: 14px;
-    cursor: pointer;
+    font-size: 20px;
+    text-align: center;
 }
 
 /* -------------------------- estilos para registrar.jsp ---------------------*/
@@ -153,32 +157,13 @@ body{
     width: 60%;
 }
 
-#inputLegajo, #usuario, #clave, #repetirClave{
-    width: 30%;
-    font-family: "Roboto", sans-serif; /*fuentes de letra*/
-    outline: 0;
-    background: #f2f2f2; /*fondo gris claro*/
-    border: 1px solid var(--text-color);
-    border-radius: 6px;
-    margin: 0 0 15px;
-    padding: 15px;
-    box-sizing: border-box;
-    font-size: 14px;
-}
-
 #resultadoBusquedaEmpleado p{
     margin: 1%;
 }
 
 #btnBuscarEmpleado, #aceptarBusquedaEmpleado, #registrar, #btnUsuarioCreado{
-    font-family: "Roboto", sans-serif; /*fuentes de letra para botones*/
-    text-transform: uppercase;
-    outline: 0;
     width: 50%;
-    border: 0;
-    padding: 15px;
-    font-size: 14px;
-    cursor: pointer;
+    margin: 1%;
 }
 
 #rol{
@@ -200,6 +185,15 @@ body{
     background-color: var(--sidebar-color);
     text-align: center;
     margin: 1%;
+    padding: 1%;
+}
+
+#noAprobado p{
+    margin: 1%;
+}
+
+#btnNoAprobado{
+    width: 50%;
 }
 
 /* -------------------------- estilos pagina home.jsp ----------------------- */
