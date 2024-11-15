@@ -13,6 +13,17 @@
     </head>
     <body>
 
+        <div id="mensajeModal" class="modal">
+            <div class="modal-content">
+                <span class="close"></span>
+                <h2>Mensaje del servidor</h2>
+                <p id="mensajeModalTexto"></p>
+                <div class="botonesModal">
+
+                </div>
+            </div>
+        </div>
+        
         <%@ page session="true" %>
         <%
             Usuario usuario = (Usuario) session.getAttribute("usuario"); // recupero el nombre de usuario
@@ -113,7 +124,7 @@
         
     <section class="home">
 
-        <form class="formulario" id="nuevoEmpleado">
+        <form class="formulario" id="formularioNuevoEmpleado">
             <h2>Datos personales</h2>
             <div class="datosPersonales">
                 <div id="contenedorNombres">
@@ -208,15 +219,6 @@
             <button type="button" id="guardarNuevoEmpleado">Guardar</button>
         </form>
         
-        <div id="mensajeModal" class="modal">
-            <div class="modal-content">
-                <span class="close"></span>
-                <h2>Mensaje del servidor</h2>
-                <p id="mensajeModalTexto"></p>
-                <div id="botonesModal"></div>
-            </div>
-        </div>
-
     </section>
                 
     <footer class="pie">

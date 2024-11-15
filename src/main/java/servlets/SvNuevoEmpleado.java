@@ -95,17 +95,17 @@ public class SvNuevoEmpleado extends HttpServlet {
             if(buscarEmpleadoPorLegajo == null){
                 // si no encuentra ningun empleado con legajo igual al legajo recibido, crea un nuevo empleado
                 control.crearEmpleado(empleado);
-                enviarJson = "{\"status\": \" true \" ,\"mensaje\": \"El empleado fue registrado exitosamente\"}";
+                enviarJson = "{\"status\": true, \"mensaje\": \"El empleado fue registrado exitosamente\"}";
                 System.out.println("++++++++++++++++++++++ empleado nuevo");
             }
             else{
-                enviarJson = "{\"status\": \" false \",  \"mensaje\":\"El numero de legajo ingresado ya esta asociado a otro empleado\"}";
+                enviarJson = "{\"status\": false,  \"mensaje\":\"El numero de legajo ingresado ya esta asociado a otro empleado\"}";
                 System.out.println("++++++++++++++++++++++ ya existe empleado con ese legajo");
             }
         }
         else{
             System.out.println("----------------------- null");
-            enviarJson = "{\"status\": \" null \",\"mensaje\": \" Ha ocurrido un error al enviar los datos al servidor \"}";
+            enviarJson = "{\"status\": null,\"mensaje\": \" Ha ocurrido un error al enviar los datos al servidor \"}";
         }
         response.getWriter().write(enviarJson);
         //"{\"message\":\"Empleado registrado exitosamente!\"}"

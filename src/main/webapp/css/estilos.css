@@ -85,21 +85,26 @@ select{
 .modal{
     display: none;
     position: fixed;
-    z-index: 1;
+    z-index: 1000;
     padding-top: 100px;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.4);
+    justify-content: center;
 }
 
 .modal-content {
-    background-color: #fff;
+    position: relative; /* Para que el contenido esté centrado dentro del modal */
+    background-color: white;
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
+    width: 50%;
+    top: 30%;
+    transform: translateY(-60%); /* Centrar verticalmente */
+    z-index: 1010; /* Más alto que el fondo del modal */
 }
 .close {
     color: #aaa;
@@ -107,6 +112,18 @@ select{
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
+}
+
+.botonesModal{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.botonesModal button{
+    width: 30%;
+    margin: 1%;
 }
 
 /*------------------------ estilos pagina index.jsp --------------------------*/

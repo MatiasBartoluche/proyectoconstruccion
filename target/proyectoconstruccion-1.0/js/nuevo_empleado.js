@@ -3,6 +3,9 @@ $(document).ready(function(){
     cargarDatos();
     
     cargarImagen();
+    cerrarModal();
+    aceptarModal();
+    nuevoEmpleadoModal();
 });
 
 function cargarDatos(){
@@ -268,7 +271,8 @@ function nuevoEmpleado(empleado){
         contentType: 'application/json',
         data: JSON.stringify(empleado),
         dataType: 'json',
-        success: function (response) {
+        success: function (response){
+            console.log(response);
             mensajeModal(response);
         },
         error: function (xhr, status, error) {
@@ -278,21 +282,73 @@ function nuevoEmpleado(empleado){
 }
 
 function mensajeModal(respuesta){
-    console.log('++++++++++++++++++ mensaje modal: '+respuesta);
+    console.log('++++++++++++++++++ mensaje modal: '+respuesta.status);
 
     $('#mensajeModal').css('display', 'block');
     $('#mensajeModalTexto').text();
     $('#mensajeModalTexto').text(respuesta.mensaje);
-    $('#botonesModal').empty();
-    $('#botonesModal').append('<button id="btnModalCerrar">Aceptar</button>');
+    $('.botonesModal').empty();
     
     if(respuesta.status === true){
-        $('#mensajeModalTexto').text('Si desea registrar un nuevo empleado, pulse el boton "Nuevo Empleado"');
-        $('#mensajeModalTexto').text('Si desea finalizar, pulse el boton "Aceptar"');
-        $('#botonesModal').append('<button id="btnModalNuevoEmpleado">Nuevo empleado</button>');
+        $('#mensajeModalTexto').after('Si desea registrar un nuevo empleado, pulse el boton "Nuevo Empleado"');
+         ('#mensajeModalTexto').after('Si desea finalizar, pulse el boton "Cerrar"');
+        
+        $('.botonesModal').append('<button id="btnModalNuevoEmpleado">Nuevo empleado</button>');
+            $('.botonesModal').append('<button id="btnModalCerrar">Cerrar</button>');
     }
     else if(respuesta.status === false){
         $('#mensajeModalTexto').text('El numero de legajo ingresado ya esta asociado a otro empleado');
-        $('#botonesModal').append('<button id="btnModalAceptar">Nuevo empleado</button>');
+        $('.botonesModal').append('<button id="btnModalAceptar">Aceptar</button>');
     }
+}
+
+function cerrarModal(){
+    $(document).on('click', '#btnModalCerrar', function(){
+        console.log(' cerrar modal');
+        $('#mensajeModal').css('display', 'none');
+        window.location.href = "/proyectoconstruccion/vistas/sistemas/empleados.jsp";
+    });
+}
+
+function aceptarModal(){
+    $(document).on('click', "#btnModalAceptar",function(){
+        console.log('aceptar modal');
+        $('#mensajeModal').css('display', 'none');
+    });
+}
+
+function nuevoEmpleadoModal(){
+    $(document).on('click', '#btnModalNuevoEmpleado',function(){
+        console.log('nuevo empleado modal');
+        $('#mensajeModal').css('display', 'none');
+        
+        // vaciar todos los campos para ingresar nuevos datos
+        
+        $('#formularioNuevoEmpleado').trigger('reset');
+        /*$('#nombresEmpleado').val();
+        $('#apellidosEmpleado').val();
+        $('#digitoGlobal').val();
+        $('#cuerpoCUIL').val();
+        $('#digitoVerificador').val();
+
+
+        // datos de contacto
+        $('#calleEmpleado').val();
+        $('#numeroDomicilioEmpleado').val();
+        $('#pisoEmpleado').val();
+        $('#localidadEmpleado').val();
+        $('#telefonoEmpleado').val();
+        $('#telefonoFamiliarEmpleado').val();
+
+        //datos administrativos
+        $('#legajo').val();
+
+        $('#jerarquia').val();
+        $('#jerarquia option:selected').html();
+
+        $('#contrato').val();
+        $('#contrato option:selected').html();
+        $('#salarioEmpleado').val();
+        $('#fechaIngreso').val();*/
+    });
 }
