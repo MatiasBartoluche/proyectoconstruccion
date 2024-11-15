@@ -207,6 +207,15 @@
 
             <button type="button" id="guardarNuevoEmpleado">Guardar</button>
         </form>
+        
+        <div id="mensajeModal" class="modal">
+            <div class="modal-content">
+                <span class="close"></span>
+                <h2>Mensaje del servidor</h2>
+                <p id="mensajeModalTexto"></p>
+                <div id="botonesModal"></div>
+            </div>
+        </div>
 
     </section>
                 

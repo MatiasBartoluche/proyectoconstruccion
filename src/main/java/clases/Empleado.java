@@ -30,6 +30,7 @@ public class Empleado implements Serializable {
     private String cuil;
     private String calle;
     private int altura;
+    private String piso;
     private String localidad;
     private String telefono;
     private String telefono_familiar;
@@ -127,6 +128,14 @@ public class Empleado implements Serializable {
 
     public void setAltura(int altura) {
         this.altura = altura;
+    }
+
+    public String getPiso() {
+        return piso;
+    }
+
+    public void setPiso(String piso) {
+        this.piso = piso;
     }
 
     public String getLocalidad() {

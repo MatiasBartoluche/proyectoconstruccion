@@ -96,6 +96,17 @@ function capturarDatos(imagen){
     // objeto empleado vacio
     var empleado = {};
     
+    console.log('-----------------------------------------------');
+    console.log("calle :"+calleEmpleado);
+    console.log("altura :"+numeroDomicilioEmpleado);
+    console.log("oiso :"+pisoEmpleado);
+    console.log("localidad :"+localidadEmpleado);
+    console.log("telefono :"+telefonoEmpleado);
+    console.log("telefono familiar :"+telefonoFamiliarEmpleado);
+    console.log('-----------------------------------------------');
+    
+
+    
     if(nombres!==""){
         $('#contenedorNombres').css('border', '0');
         $('#contenedorNombres p').empty();
@@ -212,15 +223,34 @@ function capturarDatos(imagen){
         $.extend(empleado, { nombres: nombres });
         $.extend(empleado, { apellidos: apellidos });
         $.extend(empleado, { cuil: digitoGlobal+'-'+cuerpoCUIL+'-'+digitoVerificador});
-        $.extend(empleado, { calle: calleEmpleado });
-        $.extend(empleado, { altura: numeroDomicilioEmpleado});
-        $.extend(empleado, { localidad: localidadEmpleado});
-        $.extend(empleado, { telefono: telefonoEmpleado});
-        $.extend(empleado, { telefono_familiar: telefonoFamiliarEmpleado});
         $.extend(empleado, { foto_dni_base64: dniEmpleado});
         $.extend(empleado, { fecha_ingreso: fechaIngreso});
         $.extend(empleado, { contrato: contrato});
         $.extend(empleado, { sueldo_base: salarioEmpleado});
+
+    if(calleEmpleado !== ''){
+        $.extend(empleado, { calle: calleEmpleado });
+    }
+    
+    if(numeroDomicilioEmpleado !== ''){
+        $.extend(empleado, { altura: numeroDomicilioEmpleado});
+    }
+    
+    if(pisoEmpleado !== ''){
+        $.extend(empleado, { piso: pisoEmpleado});
+    }
+    
+    if(localidadEmpleado !== ''){
+        $.extend(empleado, { localidad: localidadEmpleado});
+    }
+
+    if(telefonoEmpleado !== ''){
+        $.extend(empleado, { telefono: telefonoEmpleado});
+    }
+
+    if(telefonoFamiliarEmpleado === ''){
+        $.extend(empleado, { telefono_familiar: telefonoFamiliarEmpleado});
+    }
         
         nuevoEmpleado(empleado);
     }
@@ -239,7 +269,7 @@ function nuevoEmpleado(empleado){
         data: JSON.stringify(empleado),
         dataType: 'json',
         success: function (response) {
-            mensajeModal(response.mensaje);
+            mensajeModal(response);
         },
         error: function (xhr, status, error) {
             console.error('Error al guardar el empleado:', error);
@@ -248,5 +278,21 @@ function nuevoEmpleado(empleado){
 }
 
 function mensajeModal(respuesta){
-    console.log(respuesta);
+    console.log('++++++++++++++++++ mensaje modal: '+respuesta);
+
+    $('#mensajeModal').css('display', 'block');
+    $('#mensajeModalTexto').text();
+    $('#mensajeModalTexto').text(respuesta.mensaje);
+    $('#botonesModal').empty();
+    $('#botonesModal').append('<button id="btnModalCerrar">Aceptar</button>');
+    
+    if(respuesta.status === true){
+        $('#mensajeModalTexto').text('Si desea registrar un nuevo empleado, pulse el boton "Nuevo Empleado"');
+        $('#mensajeModalTexto').text('Si desea finalizar, pulse el boton "Aceptar"');
+        $('#botonesModal').append('<button id="btnModalNuevoEmpleado">Nuevo empleado</button>');
+    }
+    else if(respuesta.status === false){
+        $('#mensajeModalTexto').text('El numero de legajo ingresado ya esta asociado a otro empleado');
+        $('#botonesModal').append('<button id="btnModalAceptar">Nuevo empleado</button>');
+    }
 }
