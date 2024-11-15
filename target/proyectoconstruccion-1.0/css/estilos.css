@@ -79,6 +79,7 @@ select{
     background-position: right .7em top 50%, 0 0;
     background-size: .65em auto, 100%;
     color: var(--text-color);
+    text-align: center;
 }
 /*------------------------ estilos pagina index.jsp --------------------------*/
 body{
@@ -554,12 +555,16 @@ body.dark .home .text{
     background-color: var(--sidebar-color);
     color: var(--text-color);
     border-radius: 6px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .formulario h2{
     margin: 1%;
     padding: 1%;
     border-bottom: 3px solid var(--text-color);
+    width: 100%;
 }
 
 .formulario button{
@@ -673,11 +678,18 @@ body.dark .home .text{
 
 /* campos datos administrativos */
 
-#contenedorLegajo, #contenedorJerarquia, #contenedorContrato, #contenedorSalario, #contenedorFechaIngreso{
-    width: 23%;
+#contenedorLegajo, #contenedorSalario, #contenedorFechaIngreso{
+    width: 30%;
     margin: 1%;
     display: flex;
     flex-wrap: wrap;
+}
+
+#contenedorJerarquia, #contenedorContrato{
+    width: 48%;
+    margin: 1%;
+    display: flex;
+    flex-wrap: wrap;    
 }
 
 .datosAdministrativos label{
@@ -686,4 +698,8 @@ body.dark .home .text{
 
 .datosAdministrativos input, .datosAdministrativos select{
     width: 45%;
+}
+
+#guardarNuevoEmpleado{
+    width: 30%;
 }

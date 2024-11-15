@@ -177,6 +177,18 @@
                     <p></p>
                 </div>
 
+                <div id="contenedorSalario">
+                    <label>Salario</label>
+                    <input id="salarioEmpleado" type="number" placeholder="Salario" name="salario">
+                    <p></p>
+                </div>
+                
+                <div id="contenedorFechaIngreso">
+                    <label>Fecha de ingreso</label>
+                    <input type="date" name="fechaIngreso" id="fechaIngreso">
+                    <p></p>
+                </div>
+
                 <div id="contenedorJerarquia">
                 <label>Cargo jerarquico</label>
                     <select id="jerarquia" name="jerarquia">
@@ -190,19 +202,7 @@
                         <!-- select vacio, los tag option se cargaran por jquery -->
                     </select>
                 </div>
-
-                <div id="contenedorSalario">
-                    <label>Salario</label>
-                    <input id="salarioEmpleado" type="number" placeholder="Salario" name="salario">
-                    <p></p>
-                </div>
                 
-                <div id="contenedorFechaIngreso">
-                    <label>Fecha de ingreso</label>
-                    <input type="date" name="fechaIngreso" id="fechaIngreso">
-                    <p></p>
-                </div>
-
             </div>
 
             <button type="button" id="guardarNuevoEmpleado">Guardar</button>
