@@ -1,7 +1,6 @@
 package persistencia;
 
 import clases.Aporte;
-import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -10,9 +9,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 
-public class AporteJpaController implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class AporteJpaController{
 
     private EntityManagerFactory emf = null;
 

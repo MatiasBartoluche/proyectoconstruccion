@@ -1,7 +1,6 @@
 package persistencia;
 
 import clases.Jerarquia;
-import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -10,10 +9,8 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 
-public class JerarquiaJpaController implements Serializable{
+public class JerarquiaJpaController{
 
-    private static final long serialVersionUID = 1L;
-        
     private EntityManagerFactory emf = null;
 
     public JerarquiaJpaController(EntityManagerFactory emf) {

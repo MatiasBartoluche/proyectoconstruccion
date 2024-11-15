@@ -2,7 +2,6 @@ package persistencia;
 
 
 import clases.Usuario;
-import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -12,11 +11,8 @@ import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 
 
-public class UsuarioJpaController implements Serializable {
+public class UsuarioJpaController{
 
-    private static final long serialVersionUID = 1L;
-    
-    
     private EntityManagerFactory emf = null;
 
     public UsuarioJpaController(EntityManagerFactory emf) {

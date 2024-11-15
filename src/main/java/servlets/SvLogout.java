@@ -25,7 +25,6 @@ public class SvLogout extends HttpServlet {
 
         session.invalidate(); // Invalidar la sesión actual
         response.sendRedirect(request.getContextPath() + "/index.jsp"); // Redirigir al login
-        System.out.println("---------------------------------- imprimiendo desde log out");
     }
 
     @Override
@@ -37,6 +36,5 @@ public class SvLogout extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
-
+    }
 }

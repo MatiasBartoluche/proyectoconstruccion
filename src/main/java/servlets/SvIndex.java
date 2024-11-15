@@ -1,21 +1,12 @@
 package servlets;
 
-import clases.Aporte;
-import clases.Contrato;
 import clases.Controlador;
-import clases.Empleado;
-import clases.EstadoEmpleado;
-import clases.Jerarquia;
-import clases.Rol;
 import clases.Usuario;
 import com.google.gson.Gson;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
@@ -23,34 +14,28 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import persistencia.AporteJpaController;
-import persistencia.EmpleadoJpaController;
-
 
 @WebServlet(name = "SvIndex", urlPatterns = {"/SvIndex"})
 public class SvIndex extends HttpServlet{
 
     private static final long serialVersionUID = 1L;
+
     
     Controlador controlador = new Controlador();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
- 
+            throws ServletException, IOException{
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         // redirigir al formulario de creacion de nuevos usuarios
         response.sendRedirect("registrar.jsp");
        
@@ -60,110 +45,13 @@ public class SvIndex extends HttpServlet{
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-
-        /*AporteJpaController aporteController = new AporteJpaController();
-        
-        Aporte aporte = new Aporte();
-        aporte.setDetalle_aporte("jubilacion");
-        aporte.setPorcentaje(BigDecimal.valueOf(2.02));
-        aporte.setTipo_aporte(0);
-        
-        aporteController.create(aporte);*/
-        
-        /*Rol rolSistemas = new Rol("Admin sistemas");
-        Rol rolAdministrativo = new Rol("Administrativo");
-        Rol rolAyudante = new Rol("Ayudante");
-        Rol rolContador = new Rol("Contador");
-        
-        controlador.crearRol(rolSistemas);
-        controlador.crearRol(rolAdministrativo);
-        controlador.crearRol(rolAyudante);
-        controlador.crearRol(rolContador);
-       
-        Jerarquia administrativo = new Jerarquia("Administrativo");
-        Jerarquia contador = new Jerarquia("Contador");
-        Jerarquia ayudanteAdmin = new Jerarquia("Ayudante administrativo");
-        Jerarquia adminSistemas = new Jerarquia("Admin Sistemas");
-        Jerarquia ayudanteAlbanil = new Jerarquia("Ayudante albanil");
-        Jerarquia oficial = new Jerarquia("Oficial");
-        Jerarquia capataz = new Jerarquia("Capataz");
-        Jerarquia carpintero = new Jerarquia("Carpintero");
-        Jerarquia plomero = new Jerarquia("Plomero");
-        Jerarquia balancin = new Jerarquia("Balancin");
-        
-        controlador.crearJerarquia(adminSistemas);
-        controlador.crearJerarquia(administrativo);
-        controlador.crearJerarquia(contador);
-        controlador.crearJerarquia(ayudanteAdmin);
-        controlador.crearJerarquia(ayudanteAlbanil);
-        controlador.crearJerarquia(oficial);
-        controlador.crearJerarquia(capataz);
-        controlador.crearJerarquia(carpintero);
-        controlador.crearJerarquia(plomero);
-        controlador.crearJerarquia(balancin);
-
-        
-        Contrato obrero = new Contrato("Obrero");
-        Contrato oficina = new Contrato("Oficina");
-        Contrato subcontratado = new Contrato("Subcontratado");
-        
-        controlador.crearContrato(obrero);
-        controlador.crearContrato(oficina);
-        controlador.crearContrato(subcontratado);
-        
-        EstadoEmpleado activo = new Estado("Activo");
-        EstadoEmpleado art = new Estado("ART");
-        EstadoEmpleado vacaciones = new Estado("Vacaciones");
-        EstadoEmpleado libre = new Estado("Dia libre");
-        
-        controlador.crearEstado(activo);
-        controlador.crearEstado(art);
-        controlador.crearEstado(vacaciones);
-        controlador.crearEstado(libre);
-        
-        Empleado empleado = new Empleado();
-        
-        empleado.setLegajo(555);
-        empleado.setJerarquia(administrativo);
-        empleado.setNombres("jacinto");
-        empleado.setApellidos("perez");
-        empleado.setCuil("20-12345678-9");
-        empleado.setCalle("calle falsa");
-        empleado.setAltura(123);
-        empleado.setLocalidad("Berazategui");
-        empleado.setTelefono("1234567890");
-        empleado.setTelefonoFamiliar("4287-1234");
-        
-        empleado.setFechaIngreso(LocalDate.of(2024,10,7));
-        empleado.setContrato(oficina);
-        empleado.setSueldoBase(100000.21);
-        empleado.setEstado(activo);
-        empleado.setAntiguedad(0);
-        empleado.setDespido(false);
-        empleado.setIdObra(0);
-        empleado.setGrupo(null);
-        
-        controlador.crearEmpleado(empleado);*/
-        
-        /*Usuario u = new Usuario();
-        
-        u.setEmpleado(empleado);
-        u.setUsuario("usuarioJuan1234");
-        u.setClave("1234");
-        u.setRol(rolSistemas);
-        u.setAprobado(false);
-        u.setAuditoria("");
-        
-        controlador.crearUsuario(u);*/
-        
         //capturo el usuario y clave ingresados
         String usuarioIngresado = request.getParameter("usuario");
         String claveIngresada = request.getParameter("clave");
         
         // consulto la lista de usuarios
-        List<Usuario> listaUsuarios = new ArrayList<>();
+        List<Usuario> listaUsuarios;
         listaUsuarios = controlador.buscarListaUsuarios();
-        int cont = 1;
         
         // armo un map para guardar informacion y convertirlo en json
         Map <String, Object> armarJson = new HashMap<>();
@@ -173,30 +61,19 @@ public class SvIndex extends HttpServlet{
         armarJson.put("message", "Usuario y/o clave incorrectos");
         
         for(Usuario usuario : listaUsuarios){
-            String claveGuardada = usuario.getClave();
-            String saltGuardado = usuario.getSalt();
-            
-            System.out.println("---------------------------------------------");
-            System.out.println("usuarios contados: "+cont);
-            System.out.println("Usuario ingresado: "+usuarioIngresado);
-            System.out.println("Clave ingresada: "+claveIngresada);
-            System.out.println("Clave guardada: "+claveGuardada);
-            System.out.println("Salt guardado: "+saltGuardado);
-            
+            // variable que almacenara el resultado de la clave ingresada por el usuario
+            // mas el salt de la clase "Usuario"
             String claveEncriptada = null;
+            String saltGuardado = usuario.getSalt();
             try {
                 // utilizo la clave ingresada y el salt del usuario iterado en este momento, para generar la clave encriptada
-                // y luego comparar esta variable con la clave guardada de este usuario
+                // y luego comparar esta variable "claveEncriptada" con la clave guardada de este usuario
                 claveEncriptada = encriptarClave(claveIngresada, saltGuardado);
             } catch (NoSuchAlgorithmException ex) {
                 Logger.getLogger(SvIndex.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-            System.out.println("clave ingresada+salt: "+claveEncriptada);
-            
             if(usuario.usuarioExiste(usuarioIngresado, claveEncriptada)){
-                System.out.println("#################################### el usuario existe");
-                
                     // elimino los valores del map para usuario no encontrado
                     armarJson.remove("status");
                     armarJson.remove("message");
@@ -219,12 +96,12 @@ public class SvIndex extends HttpServlet{
                     break;
                 }
                 else{
-                    System.out.println("no autorizado");
+                    System.out.println("No autorizado");
                     break;
                 }
             }
             else{
-                System.out.println("#################################### el usuario no existe");
+                System.out.println("El usuario no existe");
             }
         }
         
@@ -272,7 +149,6 @@ public class SvIndex extends HttpServlet{
             default:
                 break;
         }
-        
         return url;
     }
 }
