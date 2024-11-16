@@ -55,7 +55,7 @@
     </security-role>
     <filter>
         <filter-name>RoleFilter</filter-name>
-        <filter-class>servlets.RoleFilter</filter-class>
+        <filter-class>clases.RoleFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>RoleFilter</filter-name>
