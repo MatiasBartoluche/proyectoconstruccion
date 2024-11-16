@@ -33,7 +33,6 @@ clases\HistorialEstadoObra.class
 clases\EntregaEPP.class
 clases\Asistencia.class
 clases\Presupuesto.class
-servlets\SvRoles.class
 clases\FacturaProveedor.class
 clases\Rol.class
 persistencia\GrupoTrabajoJpaController.class

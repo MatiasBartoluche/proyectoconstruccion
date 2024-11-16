@@ -50,7 +50,7 @@ button{
     font-family: "Roboto", sans-serif; 
     text-transform: uppercase;
     outline: 0;
-    width: 100%;
+    margin: 1%;
     border: 0;
     padding: 15px;
     font-size: 14px;
@@ -155,7 +155,7 @@ body{
 }
 
 /* estilos de input*/
-.ingresarUsuario #login input {
+.ingresarUsuario input , .ingresarUsuario button {
     width: 100%;
 }
 
@@ -537,7 +537,6 @@ body.dark .home .text{
 }
 /*------------------------------ fin de estilos para modo dark --------------------------------------------*/
 
-
 /*---------------------------------------- inicio estilos contenedor home/section --------------------------*/
 /* aplicando estilos a la seccion principal */
 .home{
@@ -553,8 +552,6 @@ body.dark .home .text{
     padding-bottom: 12%;
 
 }
-
-
 
 /* achicando el menu lateral al cerrar*/
 /* alt 126 = ~*/
@@ -579,12 +576,30 @@ body.dark .home .text{
     float: left;
     text-align: center;
     border-radius: 6px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center; /*alineamiento vertical*/
+    justify-content: center; /*alineamiento horizontal*/
+}
+
+.modulo .icono{
+    width: 20%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center; /*alineamiento vertical*/
+    justify-content: center; /*alineamiento horizontal*/
+}
+
+.modulo .moduloTexto{
+    width: 78%;
+    margin: 1%;
+    align-content: center; /*alineamiento vertical*/
+    justify-content: center; /*alineamiento horizontal*/
 }
 
 .modulo:hover{
     -webkit-transform:scale(1.2);
     transform:scale(1.2);
-    
     box-shadow: 14px 14px 20px 0 var(--text-color);
     -webkit-box-shadow: 14px 14px 20px 0 var(--text-color);
     transition: var(--tran-05);
