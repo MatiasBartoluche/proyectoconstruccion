@@ -26,7 +26,6 @@ clases\Empleado.class
 clases\EmpleadoObra.class
 clases\GrupoTrabajo.class
 clases\Rubro.class
-servlets\RoleFilter.class
 com\mycompany\proyectoconstruccion\JakartaRestConfiguration.class
 persistencia\exceptions\NonexistentEntityException.class
 clases\HistorialEstadoObra.class
@@ -46,6 +45,7 @@ clases\TipoObra.class
 persistencia\AporteJpaController.class
 persistencia\ControladorPersistencia.class
 clases\Contrato.class
+clases\RoleFilter.class
 clases\GrupoAportes.class
 clases\TipoAsiento.class
 servlets\SvNuevoEmpleado$CargarDatos.class

@@ -120,6 +120,8 @@
     <section class="home">
 
         <a href="./nuevo_empleado.jsp"> <article class="modulo">Nuevo empleado</article> </a>
+        
+        <a href="./lista_empleados.jsp"> <article class="modulo">Lista de empleados</article> </a>
 
     </section>
                 
