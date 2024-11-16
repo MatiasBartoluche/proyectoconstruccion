@@ -50,6 +50,7 @@ clases\GrupoAportes.class
 clases\TipoAsiento.class
 servlets\SvNuevoEmpleado$CargarDatos.class
 clases\Obra.class
+servlets\SvEmpleados.class
 servlets\SvIndex.class
 persistencia\JerarquiaJpaController.class
 clases\Aporte.class

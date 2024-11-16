@@ -8,7 +8,17 @@ $(document).ready(function(){
 });
 
 function cargarEmpleados(){
-    console.log("cargar empleados");
+    $.ajax({
+        url: '/proyectoconstruccion/SvEmpleados', // URL del servlet
+        type: 'GET',
+        dataType: 'json',
+        success: function (response) {
+            console.log(response);
+        },
+        error: function (xhr, status, error) {
+            console.error('Error al obtener empleados:', error);
+        }
+    });
 }
 
 function toggleListas(idBoton, idLista, texto){
