@@ -3,6 +3,9 @@ $(document).ready(function(){
     cargarDatos();
     
     cargarImagen();
+    
+    verificarContrato();
+    
     cerrarModal();
     aceptarModal();
     nuevoEmpleadoModal();
@@ -21,7 +24,12 @@ function cargarDatos(){
             });
             
             $.each(response.contratos, function (i, item) {
-                $('#contrato').append('<option value="' + item.id_contrato + '" id="' + item.descripcion + '">' + item.descripcion + '</option>');
+                if(item.descripcion === 'Obrero'){
+                    $('#contrato').append('<option value="' + item.id_contrato + '" id="' + item.descripcion + '" selected>' + item.descripcion + '</option>');
+                }
+                else{
+                    $('#contrato').append('<option value="' + item.id_contrato + '" id="' + item.descripcion + '">' + item.descripcion + '</option>');
+                }
             });
         },
         error: function (xhr, status, error) {
@@ -78,7 +86,6 @@ function capturarDatos(imagen){
     
     //datos administrativos
     var legajo = $('#legajo').val();
-    
     var idJerarquia = $('#jerarquia').val();
     var descripcionJerarquia = $('#jerarquia option:selected').html();
     
@@ -98,18 +105,7 @@ function capturarDatos(imagen){
     
     // objeto empleado vacio
     var empleado = {};
-    
-    console.log('-----------------------------------------------');
-    console.log("calle :"+calleEmpleado);
-    console.log("altura :"+numeroDomicilioEmpleado);
-    console.log("oiso :"+pisoEmpleado);
-    console.log("localidad :"+localidadEmpleado);
-    console.log("telefono :"+telefonoEmpleado);
-    console.log("telefono familiar :"+telefonoFamiliarEmpleado);
-    console.log('-----------------------------------------------');
-    
 
-    
     if(nombres!==""){
         $('#contenedorNombres').css('border', '0');
         $('#contenedorNombres p').empty();
@@ -185,18 +181,27 @@ function capturarDatos(imagen){
         verificarLegajos = false;
     }
     
-    if(salarioEmpleado!==""){
+    if(salarioEmpleado!=="" && descripcionContrato !== 'Subcontratista'){
         $('#contenedorSalario').css('border', '0');
         $('#contenedorSalario p').empty();
         verificarSalario = true;
+        console.log('---------- armar objeto Empleado con salario');
     }
-    else{
+    else if(salarioEmpleado ==="" && descripcionContrato !== 'Subcontratista'){
         $('#contenedorsalario').css('border', '1px solid red');
         $('#contenedorSalario p').empty();
         $('#contenedorSalario p').css('color', 'red');
         $('#contenedorSalario').css('border', '1px solid red');
         $('#contenedorSalario p').text("Este campo no puede estar vacio");
         verificarSalarios = false;
+    }
+    else if(descripcionContrato === 'Subcontratista'){
+        $('#contenedorSalario').css('border', '0');
+        $('#contenedorSalario p').empty();
+        salarioEmpleado = null;
+        verificarSalario = true;
+        console.log('---------- '+descripcionContrato);
+        console.log('---------- armar objeto Empleado sin salario');
     }
     
     if(fechaIngreso!==""){
@@ -221,40 +226,40 @@ function capturarDatos(imagen){
         var jerarquia = {id_jerarquia: idJerarquia, descripcion: descripcionJerarquia};
         var contrato = {id_contrato: idContrato, descripcion: descripcionContrato};
         // agrego informacion al objeto empleado
-        $.extend(empleado, { legajo: legajo});
-        $.extend(empleado, { jerarquia: jerarquia});
-        $.extend(empleado, { nombres: nombres });
-        $.extend(empleado, { apellidos: apellidos });
-        $.extend(empleado, { cuil: digitoGlobal+'-'+cuerpoCUIL+'-'+digitoVerificador});
-        $.extend(empleado, { foto_dni_base64: dniEmpleado});
-        $.extend(empleado, { fecha_ingreso: fechaIngreso});
-        $.extend(empleado, { contrato: contrato});
-        $.extend(empleado, { sueldo_base: salarioEmpleado});
+        $.extend(empleado, {legajo: legajo});
+        $.extend(empleado, {jerarquia: jerarquia});
+        $.extend(empleado, {nombres: nombres});
+        $.extend(empleado, {apellidos: apellidos});
+        $.extend(empleado, {cuil: digitoGlobal + '-' + cuerpoCUIL + '-' + digitoVerificador});
+        $.extend(empleado, {foto_dni_base64: dniEmpleado});
+        $.extend(empleado, {fecha_ingreso: fechaIngreso});
+        $.extend(empleado, {contrato: contrato});
+        $.extend(empleado, {sueldo_base: salarioEmpleado});
 
-    if(calleEmpleado !== ''){
-        $.extend(empleado, { calle: calleEmpleado });
-    }
-    
-    if(numeroDomicilioEmpleado !== ''){
-        $.extend(empleado, { altura: numeroDomicilioEmpleado});
-    }
-    
-    if(pisoEmpleado !== ''){
-        $.extend(empleado, { piso: pisoEmpleado});
-    }
-    
-    if(localidadEmpleado !== ''){
-        $.extend(empleado, { localidad: localidadEmpleado});
-    }
+        if (calleEmpleado !== '') {
+            $.extend(empleado, {calle: calleEmpleado});
+        }
 
-    if(telefonoEmpleado !== ''){
-        $.extend(empleado, { telefono: telefonoEmpleado});
-    }
+        if (numeroDomicilioEmpleado !== '') {
+            $.extend(empleado, {altura: numeroDomicilioEmpleado});
+        }
 
-    if(telefonoFamiliarEmpleado === ''){
-        $.extend(empleado, { telefono_familiar: telefonoFamiliarEmpleado});
-    }
-        
+        if (pisoEmpleado !== '') {
+            $.extend(empleado, {piso: pisoEmpleado});
+        }
+
+        if (localidadEmpleado !== '') {
+            $.extend(empleado, {localidad: localidadEmpleado});
+        }
+
+        if (telefonoEmpleado !== '') {
+            $.extend(empleado, {telefono: telefonoEmpleado});
+        }
+
+        if (telefonoFamiliarEmpleado !== '') {
+            $.extend(empleado, {telefono_familiar: telefonoFamiliarEmpleado});
+        }
+
         nuevoEmpleado(empleado);
     }
     else{
@@ -290,8 +295,8 @@ function mensajeModal(respuesta){
     $('.botonesModal').empty();
     
     if(respuesta.status === true){
-        $('#mensajeModalTexto').after('Si desea registrar un nuevo empleado, pulse el boton "Nuevo Empleado"');
-         ('#mensajeModalTexto').after('Si desea finalizar, pulse el boton "Cerrar"');
+        $('#contenedorTextoModal').append('<p>Si desea registrar un nuevo empleado, pulse el boton "Nuevo Empleado"</p>');
+        $('#contenedorTextoModal').append('<p>Si desea finalizar, pulse el boton "Cerrar"</p>');
         
         $('.botonesModal').append('<button id="btnModalNuevoEmpleado">Nuevo empleado</button>');
             $('.botonesModal').append('<button id="btnModalCerrar">Cerrar</button>');
@@ -323,32 +328,22 @@ function nuevoEmpleadoModal(){
         $('#mensajeModal').css('display', 'none');
         
         // vaciar todos los campos para ingresar nuevos datos
-        
         $('#formularioNuevoEmpleado').trigger('reset');
-        /*$('#nombresEmpleado').val();
-        $('#apellidosEmpleado').val();
-        $('#digitoGlobal').val();
-        $('#cuerpoCUIL').val();
-        $('#digitoVerificador').val();
+    });
+}
 
-
-        // datos de contacto
-        $('#calleEmpleado').val();
-        $('#numeroDomicilioEmpleado').val();
-        $('#pisoEmpleado').val();
-        $('#localidadEmpleado').val();
-        $('#telefonoEmpleado').val();
-        $('#telefonoFamiliarEmpleado').val();
-
-        //datos administrativos
-        $('#legajo').val();
-
-        $('#jerarquia').val();
-        $('#jerarquia option:selected').html();
-
-        $('#contrato').val();
-        $('#contrato option:selected').html();
-        $('#salarioEmpleado').val();
-        $('#fechaIngreso').val();*/
+function verificarContrato(){
+    $('#contrato').on('change', function(){
+        descripcion = $('#contrato option:selected').html();
+        
+        if(descripcion === 'Subcontratista'){
+            $('#salarioEmpleado').val('');
+            $('#salarioEmpleado').prop('disabled', true);
+            $('#contenedorSalario').css('border', '0');
+            $('#contenedorSalario p').empty();
+        }
+        else{
+            $('#salarioEmpleado').prop('disabled', false);
+        }
     });
 }

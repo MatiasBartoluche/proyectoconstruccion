@@ -17,7 +17,9 @@
             <div class="modal-content">
                 <span class="close"></span>
                 <h2>Mensaje del servidor</h2>
-                <p id="mensajeModalTexto"></p>
+                <div id="contenedorTextoModal">
+                    <p id="mensajeModalTexto"></p>
+                </div>
                 <div class="botonesModal">
 
                 </div>
@@ -189,24 +191,6 @@
             <h2>Datos Administrativos</h2>
             
             <div class="datosAdministrativos">
-                <div id="contenedorLegajo">
-                    <label>N° legajo</label>
-                    <input id="legajo" type="number" placeholder="Legajo" name="legajo">
-                    <p></p>
-                </div>
-
-                <div id="contenedorSalario">
-                    <label>Salario</label>
-                    <input id="salarioEmpleado" type="number" placeholder="Salario" name="salario">
-                    <p></p>
-                </div>
-                
-                <div id="contenedorFechaIngreso">
-                    <label>Fecha de ingreso</label>
-                    <input type="date" name="fechaIngreso" id="fechaIngreso">
-                    <p></p>
-                </div>
-
                 <div id="contenedorJerarquia">
                 <label>Cargo jerarquico</label>
                     <select id="jerarquia" name="jerarquia">
@@ -219,6 +203,24 @@
                     <select id="contrato" name="contrato">
                         <!-- select vacio, los tag option se cargaran por jquery -->
                     </select>
+                </div>
+                
+                <div id="contenedorLegajo">
+                    <label>N° legajo</label>
+                    <input id="legajo" type="number" placeholder="Legajo" name="legajo">
+                    <p></p>
+                </div>
+                
+                <div id="contenedorFechaIngreso">
+                    <label>Fecha de ingreso</label>
+                    <input type="date" name="fechaIngreso" id="fechaIngreso">
+                    <p></p>
+                </div>
+                
+                <div id="contenedorSalario">
+                    <label>Salario</label>
+                    <input id="salarioEmpleado" type="number" placeholder="Salario" name="salario">
+                    <p></p>
                 </div>
                 
             </div>
