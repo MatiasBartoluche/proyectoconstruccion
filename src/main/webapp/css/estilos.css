@@ -105,7 +105,17 @@ select{
     top: 30%;
     transform: translateY(-60%); /* Centrar verticalmente */
     z-index: 1010; /* Más alto que el fondo del modal */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
+
+.modal-content h2, .modal-content div, .modal-content div p{
+    width: 98%;
+    margin: 1%;
+    text-align: center;
+}
+
 .close {
     color: #aaa;
     float: right;

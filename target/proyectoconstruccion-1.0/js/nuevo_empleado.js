@@ -235,35 +235,18 @@ function capturarDatos(imagen){
         $.extend(empleado, {fecha_ingreso: fechaIngreso});
         $.extend(empleado, {contrato: contrato});
         $.extend(empleado, {sueldo_base: salarioEmpleado});
+        
+        // ajustarDato() recibe el dato capturado y en caso de ser '' retorna null
+        // para evitar errores en el servlet al crear una insyancia de Empleado con campos incorrectos
+        $.extend(empleado, {calle: ajustarDato(calleEmpleado)});
+        $.extend(empleado, {altura: ajustarDato(numeroDomicilioEmpleado)});
+        $.extend(empleado, {piso: ajustarDato(pisoEmpleado)});
+        $.extend(empleado, {localidad: ajustarDato(localidadEmpleado)});
+        $.extend(empleado, {telefono: ajustarDato(telefonoEmpleado)});
+        $.extend(empleado, {telefono_familiar: ajustarDato(telefonoFamiliarEmpleado)});
 
-        if (calleEmpleado !== '') {
-            $.extend(empleado, {calle: calleEmpleado});
-        }
-
-        if (numeroDomicilioEmpleado !== '') {
-            $.extend(empleado, {altura: numeroDomicilioEmpleado});
-        }
-
-        if (pisoEmpleado !== '') {
-            $.extend(empleado, {piso: pisoEmpleado});
-        }
-
-        if (localidadEmpleado !== '') {
-            $.extend(empleado, {localidad: localidadEmpleado});
-        }
-
-        if (telefonoEmpleado !== '') {
-            $.extend(empleado, {telefono: telefonoEmpleado});
-        }
-
-        if (telefonoFamiliarEmpleado !== '') {
-            $.extend(empleado, {telefono_familiar: telefonoFamiliarEmpleado});
-        }
-
+        console.log(empleado);
         nuevoEmpleado(empleado);
-    }
-    else{
-        console.log('---------------- campos invalidos');
     }
 }
 
@@ -346,4 +329,15 @@ function verificarContrato(){
             $('#salarioEmpleado').prop('disabled', false);
         }
     });
+}
+
+function ajustarDato(variable){
+    var campo = variable;
+    var retornar = null;
+    
+    if(campo !== ''){
+        console.log('asignar nuevo valor');
+        retornar = campo;
+    }
+    return retornar;
 }
