@@ -7,6 +7,8 @@
         <title>JSP Page</title>
         <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/estilos.css">
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     </head>
     <body>
 
@@ -79,6 +81,13 @@
                     <li class="nav-link"> <!--------------- Inicio elemento de la lista -->
                         <a href="./contabilidad.html">
                             <i class="bx bx-line-chart icon"></i>
+                            <span class="text nav-text">Contabilidad</span>
+                        </a>
+                    </li> <!-- ----------------------------- fin elemento de la lista -->
+                    
+                    <li class="nav-link"> <!--------------- Inicio elemento de la lista -->
+                        <a href="./sistemas.html">
+                            <i class="bx bx-laptop icon"></i>
                             <span class="text nav-text">Contabilidad</span>
                         </a>
                     </li> <!------------------------------- fin elemento de la lista -->

@@ -1,7 +1,6 @@
 package persistencia;
 
 import clases.Rol;
-import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -11,9 +10,8 @@ import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 
 
-public class RolJpaController implements Serializable {
-    
-    
+public class RolJpaController{
+
     private EntityManagerFactory emf = null;
 
     public RolJpaController(EntityManagerFactory emf) {

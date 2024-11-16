@@ -6,6 +6,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/estilos.css">
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <title>Home</title>
     </head>
     <body>
@@ -82,6 +84,13 @@
                             <span class="text nav-text">Contabilidad</span>
                         </a>
                     </li> <!------------------------------- fin elemento de la lista -->
+                    
+                    <li class="nav-link"> <!--------------- Inicio elemento de la lista -->
+                        <a href="./sistemas.html">
+                            <i class="bx bx-laptop icon"></i>
+                            <span class="text nav-text">Sistemas</span>
+                        </a>
+                    </li> <!------------------------------- fin elemento de la lista -->
                 </ul>
             </div>
 
@@ -110,19 +119,82 @@
         
     <section class="home">
 
-        <a href="./sociedades.jsp"> <article class="modulo">Modulo Sociedades</article> </a>
+        <a href="./sociedades.jsp">
+            <article class="modulo">
+                <div class="icono">
+                    <i class="bx bx-food-menu icon"></i>
+                </div>
+                <div class="moduloTexto">
+                    <p>Modulo sociedades</p>
+                </div>
+            </article> 
+        </a>
 
-        <a href="./empleados.jsp"> <article class="modulo">Modulo empleados</article> </a>
+        <a href="./empleados.jsp">
+            <article class="modulo">
+                <div class="icono">
+                    <i class="bx bx-hard-hat icon"></i>
+                </div>
+                <div class="moduloTexto">
+                    <p>Modulo Empleados</p>
+                </div>
+            </article> 
+        </a>
 
-        <a href="./obras.jsp"> <article class="modulo">Modulo obras</article> </a>
+        <a href="./obras.jsp">
+            <article class="modulo">
+                <div class="icono">
+                    <i class="bx bx-buildings icon"></i>
+                </div>
+                <div class="moduloTexto">
+                    <p>Modulo Obras</p>
+                </div>
+            </article> 
+        </a>
 
-        <a href="./proveedores.jsp"> <article class="modulo">Modulo proveedores</article> </a>
+        <a href="./proveedores.jsp">
+            <article class="modulo">
+                <div class="icono">
+                    <i class="bx bx-cart-add icon"></i>
+                </div>
+                <div class="moduloTexto">
+                    <p>Modulo Proveedores</p>
+                </div>
+            </article>
+        </a>
 
-        <a href="./subcontratistas.jsp"> <article class="modulo">Modulo subcontratista</article> </a>
+        <a href="./subcontratistas.jsp">
+            <article class="modulo">
+                <div class="icono">
+                    <i class="bx bx-user-plus icon"></i>
+                </div>
+                <div class="moduloTexto">
+                    <p>Modulo Subcontratistas</p>
+                </div>
+            </article> 
+        </a>
 
-        <a href="./contabilidad.jsp"> <article class="modulo">Modulo contabilidad</article> </a>
+        <a href="./contabilidad.jsp">
+            <article class="modulo">
+                <div class="icono">
+                    <i class="bx bx-line-chart icon"></i>
+                </div>
+                <div class="moduloTexto">
+                    <p>Modulo Contabilidad</p>
+                </div>
+            </article> 
+        </a>
         
-        <a href="./sistemas.jsp"> <article class="modulo">Modulo Administrador de sistemas</article> </a>
+        <a href="./sistemas.jsp">
+            <article class="modulo">
+                <div class="icono">
+                    <i class="bx bx-laptop icon"></i>
+                </div>
+                <div class="moduloTexto">
+                    <p>Modulo Contabilidad</p>
+                </div>
+            </article> 
+        </a>
 
     </section>
                 

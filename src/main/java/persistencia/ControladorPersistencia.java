@@ -2,7 +2,7 @@ package persistencia;
 
 import clases.Contrato;
 import clases.Empleado;
-import clases.Estado;
+import clases.EstadoEmpleado;
 import clases.GrupoTrabajo;
 import clases.Jerarquia;
 import clases.Rol;
@@ -18,7 +18,7 @@ public class ControladorPersistencia {
     
     ContratoJpaController contratoJpa = new ContratoJpaController();
     EmpleadoJpaController empleadoJpa = new EmpleadoJpaController();
-    EstadoJpaController estadoJpa = new EstadoJpaController();
+    EstadoEmpleadoJpaController estadoJpa = new EstadoEmpleadoJpaController();
     GrupoTrabajoJpaController grupoJpa = new GrupoTrabajoJpaController();
     JerarquiaJpaController jerarquiaJpa = new JerarquiaJpaController();
     RolJpaController rolJpa = new RolJpaController();
@@ -86,17 +86,17 @@ public class ControladorPersistencia {
         return listaEmpleados;
     }
     
-    // ###################### creando metodos para EstadoJpaController ###################################
+    // ###################### creando metodos para EstadoEmpleadoJpaController ###################################
    
-    public void crearEstado(Estado estado) {
+    public void crearEstadoEmpleado(EstadoEmpleado estado) {
         estadoJpa.create(estado);
     }
 
-    public void eliminarEstado(int idEstado) {
+    public void eliminarEstadoEmpleado(int idEstado) {
         estadoJpa.destroy(idEstado);
     }
 
-    public void editarEstado(Estado estado) {
+    public void editarEstadoEmpleado(EstadoEmpleado estado) {
         try{
             estadoJpa.edit(estado);
         }
@@ -105,14 +105,14 @@ public class ControladorPersistencia {
         }
     }
 
-    public Estado traerEstado(int idEstado) {
+    public EstadoEmpleado traerEstadoEmpleado(int idEstado) {
         return estadoJpa.findEstado(idEstado);
     }
 
-    public ArrayList<Estado> traerListaEstados() {
-        List<Estado> lista = estadoJpa.findEstadoEntities();
+    public ArrayList<EstadoEmpleado> traerListaEstados() {
+        List<EstadoEmpleado> lista = estadoJpa.findEstadoEntities();
         
-        ArrayList<Estado> listaEstados = new ArrayList<>(lista);
+        ArrayList<EstadoEmpleado> listaEstados = new ArrayList<>(lista);
         
         return listaEstados;
     }

@@ -1,9 +1,7 @@
 package servlets;
 
 import clases.Controlador;
-import clases.Empleado;
 import clases.LocalDateAdapter;
-import clases.Rol;
 import clases.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -14,7 +12,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.logging.Level;
@@ -24,10 +21,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "SvRegistrar", urlPatterns = {"/SvRegistrar"})
 public class SvRegistrar extends HttpServlet {
+
+    private static final long serialVersionUID = 1L;
     
     Controlador control = new Controlador();
 
@@ -43,7 +41,7 @@ public class SvRegistrar extends HttpServlet {
         String username = request.getParameter("username");
         boolean existeUsuario = false;
         
-        List<Usuario> listaUsuarios = new ArrayList<>();
+        List<Usuario> listaUsuarios;
         
         listaUsuarios = control.buscarListaUsuarios();
         
@@ -60,8 +58,6 @@ public class SvRegistrar extends HttpServlet {
         // creacion de un objeto en json para enviar respuesta a la pagina
         response.getWriter().write("{\"existe\": " + existeUsuario + "}");
     }
-
-/* -------------------------------------------------------------------------------------------------- */
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -76,6 +72,7 @@ public class SvRegistrar extends HttpServlet {
         while ((line = reader.readLine()) != null) {
             jsonBuffer.append(line);
         }
+        
         // almaceno el string obtenido del json
         String jsonData = jsonBuffer.toString();
         // instancia de Gson, incluyo el adapter en el builder para evitar problemas de parse a objetos LocalDate
@@ -83,24 +80,25 @@ public class SvRegistrar extends HttpServlet {
         
         // leer el string y parse a objeto Usuario
         Usuario usuario = gson.fromJson(jsonData, Usuario.class);
-        
+      
+        // clave recibida
         String claveRecibida = usuario.getClave();
         
+        // genero una cadena de caracteres aleatoria
         String salt = generarSalt();
-        System.out.println(claveRecibida);
-        System.out.println(salt);
         
         try {
+            // encripto la clave recibida con el salt generado
             String claveEncriptada = encriptarClave(claveRecibida, salt);
             
-            usuario.setClave(claveEncriptada); // al usuario recibido, le agrego la clave nueva
-            usuario.setSalt(salt); // le agrego salt
+            // guardo la nueva clave y el salt en el usuario
+            usuario.setClave(claveEncriptada);
+            usuario.setSalt(salt);
             
-            // crear usuario con el objeto recibido
+            // crear usuario
             control.crearUsuario(usuario);
+            
             // Enviar una respuesta al cliente
-
-            //response.getWriter().write("{\"mensaje\":\"Datos recibidos correctamente\"}");
             response.getWriter().write("{\"mensaje\": true}");
             
         } catch (NoSuchAlgorithmException ex) {
@@ -129,5 +127,4 @@ public class SvRegistrar extends HttpServlet {
         byte[] hashBytes = md.digest(saltedPassword.getBytes(StandardCharsets.UTF_8));
         return Base64.getEncoder().encodeToString(hashBytes);
     }
-
 }

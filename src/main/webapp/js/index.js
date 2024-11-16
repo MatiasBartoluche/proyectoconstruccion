@@ -59,20 +59,25 @@ function login(){
                 data: {usuario: usuario, clave: claveEncriptada},
                 dataType: 'json',
                 success: function (response) {
-                    console.log(response);
                     if(response.status === 'success'){
                         console.log('usuario correcto');
                         if(response.autorizado === true){
+                            console.log(response);
                             console.log("ingresar al sistema");
                             window.location.href = response.redirectUrl;
                         }
                         else{
                             console.log("denegado");
+                            console.log(response);
                             window.location.href = "/proyectoconstruccion/vistas/noaprobado.jsp";
                         }
                     }
                     else{
+                        $('#mensajeIncorrecto').empty();
+                        $('#mensajeIncorrecto').text('El usuario y/o clave son incorrectos');
+                        $('#mensajeIncorrecto').css('color', 'red');
                         console.log('usuario y/o clave incorrectos');
+                        console.log(response);
                     }
                 },
                 error: function (xhr, status, error) {

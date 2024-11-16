@@ -8,10 +8,13 @@ import javax.persistence.Id;
 
 @Entity
 public class Rol implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private int id_rol;
+    
     private String descripcion;
 
     public Rol() {
@@ -41,7 +44,4 @@ public class Rol implements Serializable {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
-    
-    
 }

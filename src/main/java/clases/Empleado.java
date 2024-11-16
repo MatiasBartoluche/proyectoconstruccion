@@ -1,67 +1,76 @@
 package clases;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 @Entity
 public class Empleado implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     
     @Id
     private int legajo; // el legajo sera ingresado manualmente por el usuario del sistema
     
-    @OneToOne
+    @OneToOne(cascade = CascadeType.MERGE, orphanRemoval = true)
+    @JoinColumn(name = "id_jerarquia", referencedColumnName = "id_jerarquia")
     private Jerarquia jerarquia;
+    
     private String nombres;
     private String apellidos;
     private String cuil;
     private String calle;
     private int altura;
+    private String piso;
     private String localidad;
     private String telefono;
     private String telefono_familiar;
-    private String foto_dni;
+    private byte[] foto_dni;
+    
+    @Transient
+    private String foto_dni_base64;
     private LocalDate fecha_ingreso; // LocalDate fecha sin hora
-    
-    @OneToOne
-    private Contrato contrato; // 0 = empleado de oficina, 1 = obrero, 2 = subcontratado
-    private double sueldo_base;
-    
-    @OneToOne
-    private Estado estado;
     private int antiguedad;
     private boolean despido; // true = despido, false = empleado vigente
-    private int id_obra;
     
-    @OneToOne
+    @Column(precision = 14, scale = 7)
+    private BigDecimal sueldo_base;
+    
+    @OneToOne(cascade = CascadeType.MERGE, orphanRemoval = true)
+    @JoinColumn(name = "id_contrato", referencedColumnName = "id_contrato")
+    private Contrato contrato; // 0 = empleado de oficina, 1 = obrero, 2 = subcontratado
+    
+    @OneToOne(cascade = CascadeType.MERGE, orphanRemoval = true)
+    @JoinColumn(name = "id_estado", referencedColumnName = "id_estado")
+    private EstadoEmpleado estado;
+    
+    @OneToOne(cascade = CascadeType.MERGE)
     private GrupoTrabajo grupo;
 
-    public Empleado(int legajo, Jerarquia jerarquia, String nombres, String apellidos, String cuil, String calle, int altura, String localidad, String telefono, String telefono_familiar, String foto_dni, LocalDate fecha_ingreso, Contrato contrato, double sueldo_base, Estado estado, int antiguedad, boolean despido, int id_obra, GrupoTrabajo grupo) {
-        this.legajo = legajo;
-        this.jerarquia = jerarquia;
-        this.nombres = nombres;
-        this.apellidos = apellidos;
-        this.cuil = cuil;
-        this.calle = calle;
-        this.altura = altura;
-        this.localidad = localidad;
-        this.telefono = telefono;
-        this.telefono_familiar = telefono_familiar;
-        this.foto_dni = foto_dni;
-        this.fecha_ingreso = fecha_ingreso;
-        this.contrato = contrato;
-        this.sueldo_base = sueldo_base;
-        this.estado = estado;
-        this.antiguedad = antiguedad;
-        this.despido = despido;
-        this.id_obra = id_obra;
-        this.grupo = grupo;
-    }
+    @OneToMany(mappedBy = "empleadoObra", cascade = CascadeType.MERGE)
+    private ArrayList<EmpleadoObra> asignaciones = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "empleadoART", cascade = CascadeType.MERGE)
+    private ArrayList<HistorialART> historialART = new ArrayList<>();
 
+    @OneToMany(mappedBy = "empleadoLiquidacion", cascade = CascadeType.MERGE)
+    private ArrayList<LiquidacionSueldo> liquidaciones = new ArrayList<>();
+ 
+    @OneToMany(mappedBy = "empleadoEPP", cascade = CascadeType.MERGE)
+    private ArrayList<EntregaEPP> planillaEPP = new ArrayList<>();
 
-
+    @OneToMany(mappedBy = "empleadoAsistencia", cascade = CascadeType.MERGE)
+    private ArrayList<Asistencia> asistencias;
+      
     public Empleado() {
     }
 
@@ -121,6 +130,14 @@ public class Empleado implements Serializable {
         this.altura = altura;
     }
 
+    public String getPiso() {
+        return piso;
+    }
+
+    public void setPiso(String piso) {
+        this.piso = piso;
+    }
+
     public String getLocalidad() {
         return localidad;
     }
@@ -145,12 +162,20 @@ public class Empleado implements Serializable {
         this.telefono_familiar = telefono_familiar;
     }
 
-    public String getFotoDni() {
+    public byte[] getFotoDni() {
         return foto_dni;
     }
 
-    public void setFotoDni(String foto_dni) {
+    public void setFotoDni(byte[] foto_dni) {
         this.foto_dni = foto_dni;
+    }
+
+    public String getFotoDniBase64() {
+        return foto_dni_base64;
+    }
+
+    public void setFotoDniBase64(String foto_dni_base64) {
+        this.foto_dni_base64 = foto_dni_base64;
     }
 
     public LocalDate getFechaIngreso() {
@@ -169,19 +194,19 @@ public class Empleado implements Serializable {
         this.contrato = contrato;
     }
 
-    public double getSueldoBase() {
+    public BigDecimal getSueldoBase() {
         return sueldo_base;
     }
 
-    public void setSueldoBase(double sueldo_base) {
+    public void setSueldoBase(BigDecimal sueldo_base) {
         this.sueldo_base = sueldo_base;
     }
 
-    public Estado getEstado() {
+    public EstadoEmpleado getEstado() {
         return estado;
     }
 
-    public void setEstado(Estado estado) {
+    public void setEstado(EstadoEmpleado estado) {
         this.estado = estado;
     }
 
@@ -201,14 +226,6 @@ public class Empleado implements Serializable {
         this.despido = despido;
     }
 
-    public int getIdObra() {
-        return id_obra;
-    }
-
-    public void setIdObra(int id_obra) {
-        this.id_obra = id_obra;
-    }
-
     public GrupoTrabajo getGrupo() {
         return grupo;
     }
@@ -217,5 +234,43 @@ public class Empleado implements Serializable {
         this.grupo = grupo;
     }
 
-    
+    public ArrayList<EmpleadoObra> getAsignaciones() {
+        return asignaciones;
+    }
+
+    public void setAsignaciones(ArrayList<EmpleadoObra> asignaciones) {
+        this.asignaciones = asignaciones;
+    }
+
+    public ArrayList<HistorialART> getHistorialART() {
+        return historialART;
+    }
+
+    public void setHistorialART(ArrayList<HistorialART> historialART) {
+        this.historialART = historialART;
+    }
+
+    public ArrayList<LiquidacionSueldo> getLiquidaciones() {
+        return liquidaciones;
+    }
+
+    public void setLiquidaciones(ArrayList<LiquidacionSueldo> liquidaciones) {
+        this.liquidaciones = liquidaciones;
+    }
+
+    public ArrayList<EntregaEPP> getPlanillaEPP() {
+        return planillaEPP;
+    }
+
+    public void setPlanillaEPP(ArrayList<EntregaEPP> planillaEPP) {
+        this.planillaEPP = planillaEPP;
+    }
+
+    public ArrayList<Asistencia> getAsistencias() {
+        return asistencias;
+    }
+
+    public void setAsistencias(ArrayList<Asistencia> asistencias) {
+        this.asistencias = asistencias;
+    }
 }

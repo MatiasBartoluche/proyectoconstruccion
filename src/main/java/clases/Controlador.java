@@ -57,23 +57,23 @@ public class Controlador {
     // ###################### creando metodos para Estado #######################
     
     
-    public void crearEstado(Estado estado){
-        controladorPersistencia.crearEstado(estado);
+    public void crearEstadoEmpleado(EstadoEmpleado estado){
+        controladorPersistencia.crearEstadoEmpleado(estado);
     }
     
     public void eliminarEstado(int idEstado){
-        controladorPersistencia.eliminarEstado(idEstado);
+        controladorPersistencia.eliminarEstadoEmpleado(idEstado);
     }
     
-    public void editarEstado(Estado estado){
-        controladorPersistencia.editarEstado(estado);
+    public void editarEstado(EstadoEmpleado estado){
+        controladorPersistencia.editarEstadoEmpleado(estado);
     }
     
-    public Estado buscarEstado(int idEstado){
-        return controladorPersistencia.traerEstado(idEstado);
+    public EstadoEmpleado buscarEstado(int idEstado){
+        return controladorPersistencia.traerEstadoEmpleado(idEstado);
     }
     
-    public ArrayList<Estado> buscarListaEstados(){
+    public ArrayList<EstadoEmpleado> buscarListaEstados(){
         return controladorPersistencia.traerListaEstados();
     }
     

@@ -1,7 +1,6 @@
 package persistencia;
 
 import clases.GrupoTrabajo;
-import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -10,9 +9,8 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 
-public class GrupoTrabajoJpaController implements Serializable{
-                
-    
+public class GrupoTrabajoJpaController{
+
     private EntityManagerFactory emf = null;
 
     public GrupoTrabajoJpaController(EntityManagerFactory emf) {

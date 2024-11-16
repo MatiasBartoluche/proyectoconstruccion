@@ -11,20 +11,24 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class Usuario implements Serializable{
-    
+
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private int id_usuario;
     
-    @OneToOne
+    @OneToOne(cascade = CascadeType.MERGE, orphanRemoval = true)
     private Empleado empleado;
+    
     private String usuario;
     private String clave;
     private String salt;
     
-    @OneToOne//(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "id_rol", referencedColumnName = "id_rol")
+    @OneToOne(cascade = CascadeType.MERGE, orphanRemoval = true)
+    @JoinColumn(name = "id_rol", referencedColumnName = "id_rol")
     private Rol rol;
+    
     private boolean aprobado = false;
     private String auditoria;
     
@@ -110,8 +114,6 @@ public class Usuario implements Serializable{
         if(this.usuario.equals(usuario) && this.clave.equals(clave)){
             existe = true;
         }
-        
         return existe;
     }
-
 }
