@@ -31,6 +31,10 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
   -webkit-appearance: none; 
 }
 
+article{
+    border-radius: 6px;
+}
+
 input{
     font-family: "Roboto", sans-serif; /*fuentes de letra*/
     outline: 0;
@@ -780,4 +784,24 @@ body.dark .home .text{
     border: 1px solid #dddddd; /* Borde más claro */
     cursor: not-allowed; /* Cambia el cursor para indicar que no es editable */
     opacity: 0.7; /* Reduce la opacidad para dar efecto visual */
+}
+
+/* --------------------- estilos pagina lista_empleados.jsp ----------------- */
+
+.listaEmpleados, .botonesLista{
+    width: 98%;
+    margin: 1%;
+    padding: 1%;
+    background-color: var(--sidebar-color);
+    margin-bottom: 5%;
+}
+
+.listaEmpleados h2{
+    width: 100%;
+    border-bottom: 3px solid var(--text-color);
+}
+
+#btnListaObreros, #btnListaSubcontratados, #btnListaAdministrativos{
+    width: 30%;
+    margin: 1%;
 }

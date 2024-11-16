@@ -122,7 +122,29 @@
         
     <section class="home">
 
+        <article class="botonesLista" id="botonesListasEmpleados">
+            <button id="btnListaObreros">Ocultar lista de obreros</button>
+            
+            <button id="btnListaSubcontratados">Ocultar lista de Subcontratados</button>
+            
+            <button id="btnListaAdministrativos">Ocultar lista de administrativos</button>
+        </article>
+        
+        <article class="listaEmpleados" id="listaObreros">
+            <h2>Lista de obreros</h2>
+            
+        </article>
+        
+        <article class="listaEmpleados" id="listaSubcontratados">
+            <h2>Lista de Empleados subcontratados</h2>
+            
+        </article>
 
+        <article class="listaEmpleados" id="listaOficina">
+            <h2>Lista de Empleados administrativos</h2>
+            
+        </article>
+        
     </section>
                 
     <footer class="pie">
