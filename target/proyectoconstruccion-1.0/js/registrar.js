@@ -11,6 +11,7 @@ function buscarEmpleado(){
         localStorage.removeItem('empleado');
         $('#resultadoBusquedaEmpleado').empty();
         $('#resultadoBusquedaEmpleado').css('display', 'block');
+        $('#formularioRegistro').css('display', 'none');
         //$('#formularioRegistro').css('display', 'none');
         var legajo = $('#inputLegajo').val();
         
@@ -80,6 +81,7 @@ function cargarRoles(){
             // 'data' es un array de objetos Usuario en formato JSON
             // Aquí puedes iterar y mostrar los datos en tu página
             $.each(data, function (i, item) {
+                $('#rol').empty();
                 $('#rol').append('<option value="' + item.id_rol + '" id="' + item.descripcion + '">' + item.descripcion + '</option>');
             });
         },
@@ -97,9 +99,9 @@ function registrarUsuario(){
     var verificarRepetirClave = false;
 
     //Validar nombre
-    const erUsuario = /^[a-z0-9_-]{3,16}$/;
+    const erUsuario = /^[a-zA-Z0-9_]{3,16}$/;
     //Validar password
-    const erPassword = /^[a-z0-9_-]{6,18}$/;
+    const erPassword = /^[a-zA-Z0-9_]{6,18}$/;
 
     $('#usuario').on('input', function () {
         // verificar el usuario

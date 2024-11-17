@@ -278,6 +278,7 @@ function mensajeModal(respuesta){
     $('.botonesModal').empty();
     
     if(respuesta.status === true){
+        $('#contenedorTextoModal').empty();
         $('#contenedorTextoModal').append('<p>Si desea registrar un nuevo empleado, pulse el boton "Nuevo Empleado"</p>');
         $('#contenedorTextoModal').append('<p>Si desea finalizar, pulse el boton "Cerrar"</p>');
         

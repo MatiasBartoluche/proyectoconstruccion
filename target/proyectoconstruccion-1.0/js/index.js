@@ -6,9 +6,9 @@ $(document).ready(function(){
 
 function verificarLongitud(){
     // validar usuario
-    const erUsuario = /^[a-z0-9_-]{3,16}$/;
+    const erUsuario = /^[a-zA-Z0-9_]{3,16}$/;
     //Validar password
-    const erPassword = /^[a-z0-9_-]{6,18}$/;
+    const erPassword = /^[a-zA-Z0-9_]{6,18}$/;
 
     var usuario = $('#usuario').val();
     var clave = $('#pass').val();
@@ -59,6 +59,7 @@ function login(){
                 data: {usuario: usuario, clave: claveEncriptada},
                 dataType: 'json',
                 success: function (response) {
+                    console.log(response);
                     if(response.status === 'success'){
                         console.log('usuario correcto');
                         if(response.autorizado === true){

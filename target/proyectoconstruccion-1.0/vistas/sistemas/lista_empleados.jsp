@@ -120,7 +120,7 @@
         </div>
     </nav>        
         
-    <section class="home">
+    <section class="home" id="homeListaEmpleados">
 
         <article class="botonesLista" id="botonesListasEmpleados">
             <button id="btnListaObreros">Ocultar lista de obreros</button>
@@ -132,17 +132,35 @@
         
         <article class="listaEmpleados" id="listaObreros">
             <h2>Lista de obreros</h2>
-            
+            <div class="cabeceraListaEmpleados">
+                <p>Legajo</p>
+                <p>Empleado</p>
+                <p>CUIL</p>
+                <p>Cargo</p>
+                <p>Fecha de ingreso</p>
+            </div>
         </article>
         
         <article class="listaEmpleados" id="listaSubcontratados">
             <h2>Lista de Empleados subcontratados</h2>
-            
+            <div class="cabeceraListaEmpleados">
+                <p>Legajo</p>
+                <p>Empleado</p>
+                <p>CUIL</p>
+                <p>Cargo</p>
+                <p>Fecha de ingreso</p>
+            </div>
         </article>
 
         <article class="listaEmpleados" id="listaOficina">
             <h2>Lista de Empleados administrativos</h2>
-            
+            <div class="cabeceraListaEmpleados">
+                <p>Legajo</p>
+                <p>Empleado</p>
+                <p>CUIL</p>
+                <p>Cargo</p>
+                <p>Fecha de ingreso</p>
+            </div>
         </article>
         
     </section>

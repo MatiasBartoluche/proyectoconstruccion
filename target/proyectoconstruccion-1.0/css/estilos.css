@@ -805,3 +805,53 @@ body.dark .home .text{
     width: 30%;
     margin: 1%;
 }
+
+.cabeceraListaEmpleados, .empleado{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1%;
+}
+
+.cabeceraListaEmpleados p, .empleado p{
+    width: 19%;
+    padding: 1%;
+}
+
+.impar{
+    background-color: #cfd1d6;
+    color: var(--text-color);
+}
+
+.botonesEmpleado{
+    width: 5%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+
+.botonesEmpleado span{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+}
+
+.btnIcono{
+    border-radius: 6px;
+    background-color: transparent;
+    border: 1px solid var(--text-color);
+    align-content: center;
+    color: var(--text-color)
+}
+
+.btnIcono:hover{
+    background-color: var(--primary-color);
+    color: var(--sidebar-color);
+}
+
+.btnIcono:hover .icon{
+    color: var(--sidebar-color);
+}

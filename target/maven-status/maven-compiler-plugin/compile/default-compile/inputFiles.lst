@@ -20,7 +20,6 @@ D:\github\proyectoconstruccion\src\main\java\clases\FacturaProveedor.java
 D:\github\proyectoconstruccion\src\main\java\clases\GrupoTrabajo.java
 D:\github\proyectoconstruccion\src\main\java\persistencia\GrupoTrabajoJpaController.java
 D:\github\proyectoconstruccion\src\main\java\persistencia\UsuarioJpaController.java
-D:\github\proyectoconstruccion\src\main\java\servlets\RoleFilter.java
 D:\github\proyectoconstruccion\src\main\java\clases\Contrato.java
 D:\github\proyectoconstruccion\src\main\java\clases\Subcontratista.java
 D:\github\proyectoconstruccion\src\main\java\clases\EstadoEmpleado.java
@@ -34,6 +33,7 @@ D:\github\proyectoconstruccion\src\main\java\clases\LiquidacionSueldo.java
 D:\github\proyectoconstruccion\src\main\java\clases\Aporte.java
 D:\github\proyectoconstruccion\src\main\java\clases\EntregaEPP.java
 D:\github\proyectoconstruccion\src\main\java\servlets\SvLogout.java
+D:\github\proyectoconstruccion\src\main\java\servlets\SvEmpleados.java
 D:\github\proyectoconstruccion\src\main\java\clases\FacturaSubcontratista.java
 D:\github\proyectoconstruccion\src\main\java\clases\Plano.java
 D:\github\proyectoconstruccion\src\main\java\clases\Presupuesto.java
@@ -47,6 +47,7 @@ D:\github\proyectoconstruccion\src\main\java\persistencia\exceptions\Preexisting
 D:\github\proyectoconstruccion\src\main\java\servlets\SvResultadoBuscarLegajo.java
 D:\github\proyectoconstruccion\src\main\java\persistencia\EstadoEmpleadoJpaController.java
 D:\github\proyectoconstruccion\src\main\java\servlets\SvRegistrar.java
+D:\github\proyectoconstruccion\src\main\java\clases\RoleFilter.java
 D:\github\proyectoconstruccion\src\main\java\persistencia\ContratoJpaController.java
 D:\github\proyectoconstruccion\src\main\java\com\mycompany\proyectoconstruccion\JakartaRestConfiguration.java
 D:\github\proyectoconstruccion\src\main\java\persistencia\ControladorPersistencia.java
