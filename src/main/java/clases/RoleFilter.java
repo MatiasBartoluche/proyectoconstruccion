@@ -29,7 +29,7 @@ public class RoleFilter implements Filter {
         // excluir los servlet del filtro
         if ( uri.contains("/SvIndex") ||  uri.contains("/SvRegistrar") || uri.contains("/SvLogout") 
                 || uri.contains("/SvResultadoBuscarLegajo") || uri.contains("/proyectoconstruccion/SvNuevoEmpleado")
-                || uri.contains("/proyectoconstruccion/SvEmpleados")){
+                || uri.contains("/proyectoconstruccion/SvEmpleados") || uri.contains("/proyectoconstruccion/SvDetalleEmpleado")){
             chain.doFilter(req, res);
             return;
         }

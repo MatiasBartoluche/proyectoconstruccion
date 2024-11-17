@@ -26,6 +26,7 @@ clases\Empleado.class
 clases\EmpleadoObra.class
 clases\GrupoTrabajo.class
 clases\Rubro.class
+servlets\SvDetalleEmpleado.class
 com\mycompany\proyectoconstruccion\JakartaRestConfiguration.class
 persistencia\exceptions\NonexistentEntityException.class
 clases\HistorialEstadoObra.class

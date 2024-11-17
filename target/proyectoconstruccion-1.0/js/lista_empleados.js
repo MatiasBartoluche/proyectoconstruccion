@@ -101,8 +101,8 @@ function insertarEmpleado(empleado, tipoContrato, tipoClase){
 function detalleEmpleado(){
     $('#homeListaEmpleados').on('click', '.btnDetalleEmpleado', function () {
         const legajo = $(this).data('legajo'); // Obtener el legajo del botón
-        console.log('Detalles del empleado con legajo: ');
         console.log(legajo);
-        // Aquí puedes agregar la lógica para manejar el evento
+        localStorage.setItem('detalleEmpleado', legajo);
+        window.location.href = "/proyectoconstruccion/vistas/sistemas/detalle_empleado.jsp";
     });
 }
