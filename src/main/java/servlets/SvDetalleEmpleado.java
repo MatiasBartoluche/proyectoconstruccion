@@ -8,6 +8,7 @@ import com.google.gson.GsonBuilder;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
+import java.util.Base64;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -49,6 +50,13 @@ public class SvDetalleEmpleado extends HttpServlet {
         int numeroLegajo = Integer.parseInt(detalleLegajo);
         
         Empleado empleado = controlador.buscarEmpleado(numeroLegajo);
+        
+        String fotoBase64 = null;
+        if (empleado.getFotoDni() != null) {
+            fotoBase64 = Base64.getEncoder().encodeToString(empleado.getFotoDni());
+        }
+        
+        empleado.setFotoDniBase64(fotoBase64);
         
         Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
         

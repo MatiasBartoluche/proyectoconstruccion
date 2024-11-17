@@ -27,6 +27,18 @@ div{
     border-radius: 6px;
 }
 
+article{
+    background-color: var(--sidebar-color);
+    margin-bottom: 1%;
+    padding: 1%;
+    border-radius: 6px;
+}
+
+h2{
+    width: 100%;
+    border-bottom: 3px solid var(--text-color);
+}
+
 input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
 }
@@ -42,7 +54,7 @@ input{
     border: 1px solid var(--text-color);
     border-radius: 6px;
     margin: 0 0 15px;
-    padding: 15px;
+    padding: 10px;
     box-sizing: border-box;
     font-size: 14px;
 }
@@ -854,4 +866,185 @@ body.dark .home .text{
 
 .btnIcono:hover .icon{
     color: var(--sidebar-color);
+}
+
+/* ----------------------- inicio estilos detalle_empleado.jsp -------------- */
+
+#detalleEmpleado{
+    width: 98%;
+    margin: 1%;
+    padding: 1%;
+    background-color: var(--sidebar-color);
+}
+
+#detalleEmpleado h2{
+    width: 100%;
+    border-bottom: 3px solid var(--text-color);
+    margin-bottom: 1%;
+}
+
+#detalleDatosPersonales{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#detalleFotoDni{
+    max-width: 40%;
+}
+
+#contenedorDetalleDatosPersonales{
+    width: 60%;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1%;
+}
+
+#labelNombres, #labelApellidos, #labelCuil{
+    width: 18%;
+    margin: 1%;
+    align-content: center;
+    justify-content: center;
+}
+
+#detalleNombresEmpleado, #detalleApellidosEmpleado{
+    width: 70%;
+}
+
+#detalleDigitoGlobal, #detalleDigitoVerificador{
+    width: 10%;
+}
+
+#detalleCuerpoCuil{
+    width: 40%;
+}
+
+.guion{
+    width: 5%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+}
+
+#nuevaFotoDni{
+    display: none;
+}
+
+#detalleCalle{
+    width: 50%;
+    padding: 1%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+}
+#detalleCalle label{
+    width: 20%;
+}
+
+#detalleCalle input{
+    width: 80%;
+}
+
+#detalleNumero, #detalleDpto{
+    width: 25%;
+    padding: 1%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+}
+
+#detalleNumero label, #detalleDpto label{
+    width: 40%;
+}
+
+#detalleNumero input, #detalleDpto input{
+    width: 60%;
+}
+
+#detalleLocalidad{
+    width: 50%;
+    padding: 1%;
+    margin-right: 1%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+}
+
+#detalleLocalidad label{
+    width: 20%;
+}
+
+#detalleLocalidad input{
+    width: 80%;
+}
+
+#detalleTelefonosEmpleado{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+}
+
+#detalleTelefonosEmpleado label{
+    width: 20%;
+    text-align: center;
+}
+
+#detalleTelefonosEmpleado input{
+    width: 29%;
+    margin-right: 1%;
+}
+
+.contenedorDetalleAdministrativo{
+    width: 33%;
+}
+
+.contenedorDetalleAdministrativo label{
+    width: 40%;
+}
+
+.contenedorDetalleAdministrativo input{
+    width: 60%;
+}
+
+.contenedorDetalleSelect{
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.contenedorDetalleSelect label{
+    width: 50%;
+}
+
+.contenedorDetalleSelect select{
+    width: 40%;
+    margin-right: 10%;
+}
+
+.historialEmpleado, #botonesHistorialEmpleado{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.historialEmpleado{
+    display: none;
+}
+
+#botonesHistorialEmpleado button{
+    width: 18%;
+    margin:  1%;
+}
+
+.mensajeHistorialVacio{
+    width: 100%;
+    text-align: center;
+    margin: 1%;
+    font-size: 30px;
 }

@@ -121,7 +121,118 @@
         
     <section class="home">
 
+        <article id="detalleEmpleado">
+            
+            <form id="detalleDatosPersonales">
+                <h2>Datos personales</h2>
+                
+                <img id="detalleFotoDni" src="">
+                <input type="file" id="nuevaFotoDni" accept="image/*">
+                
+                <div id="contenedorDetalleDatosPersonales">
+                    <label id="labelNombres">Nombres</label>
+                    <input type="text" id="detalleNombresEmpleado" disabled="true" required>
+                    
+                    <label id="labelApellidos">Apellidos</label>
+                    <input type="text" id="detalleApellidosEmpleado" disabled="true" required>
 
+                    <label id="labelCuil">CUIL</label>
+                    <input type="number" id="detalleDigitoGlobal" disabled="true" required>
+                    <label class="guion">-</label>
+                    <input type="number" id="detalleCuerpoCuil" disabled="true" required>
+                    <label class="guion">-</label>
+                    <input type="number" id="detalleDigitoVerificador" disabled="true" required>
+                </div>
+
+                <h2>Datos de contacto</h2>
+                <div id="detalleCalle">
+                    <label>Calle</label>
+                    <input type="text" id="detalleCalleEmpleado" disabled="true"> 
+                </div>
+                
+                <div id="detalleNumero">
+                    <label>Numero</label>
+                    <input type="text" id="detalleNumeroEmpleado" disabled="true"> 
+                </div>
+                
+                <div id="detalleDpto">
+                    <label>Piso-Dpto</label>
+                    <input type="text" id="detalleDptoEmpleado" disabled="true"> 
+                </div>
+                
+                <div id="detalleLocalidad">
+                    <label>Localidad</label>
+                    <input type="text" id="detalleLocalidadEmpleado" disabled="true"> 
+                </div>
+                
+                <div id="detalleTelefonosEmpleado">
+                    <label>Telefono</label>
+                    <input type="text" id="detalleTelefonoEmpleado" disabled="true">
+                    <label>Telefono familiar</label>
+                    <input type="text" id="detalleTelefonoFamiliarEmpleado" disabled="true">
+                </div>
+                
+                <h2>Datos Administrativos</h2>
+                <div class="contenedorDetalleAdministrativo">
+                    <label>Legajo</label>
+                    <input type="number" id="detalleLegajoEmpleado" disabled="true" required>
+                </div>
+                
+                <div class="contenedorDetalleAdministrativo">
+                    <label>Sueldo</label>
+                    <input type="number" id="detalleSueldoEmpleado" disabled="true" required>
+                </div>               
+
+                <div class="contenedorDetalleAdministrativo">
+                    <label>Fecha ingreso</label>
+                    <input type="date" id="detalleFechaEmpleado" disabled="true" required>
+                </div>
+                
+                <div class="contenedorDetalleSelect">
+                    <label>Contrato</label>
+                    <select id="detalleContratoEmpleado" disabled="true">
+
+                    </select>
+                </div>
+                
+                <div class="contenedorDetalleSelect">
+                    <label>Cargo</label>
+                    <select id="detalleJerarquiaEmpleado" disabled="true">
+                        
+                    </select>
+                </div>
+                
+                <button id="modificarDatosEmpleado">Modificar datos</button>
+            </form> 
+        </article>
+
+        <article id="botonesHistorialEmpleado">
+            <button id="btnHistorialTrabajos">Ver historial de trabajo</button>
+            <button id="btnHistorialART">Ver historial de ART</button>
+            <button id="btnHistorialAsistencias">Ver historial de Asistencias</button>
+            <button id="btnHistorialSueldos">Ver liquidaciones de sueldo</button>
+            <button id="btnHistorialEPP">Ver entregas de EPP</button>
+        </article>
+        
+        <article class="historialEmpleado" id="historialTrabajos">
+            <h2>Historial de trabajo</h2>
+        </article>
+        
+        <article class="historialEmpleado" id="historialART">
+            <h2>Historial ART</h2>
+        </article>
+        
+        <article class="historialEmpleado" id="historialAsistencias">
+            <h2>Historial de asistencias</h2>
+        </article>
+        
+        <article class="historialEmpleado" id="historialSueldos">
+            <h2>Liquidaciones de sueldo</h2>
+        </article>
+        
+        <article class="historialEmpleado" id="historialEPP">
+            <h2>Entregas de EPP</h2>
+        </article>
         
     </section>
                 
