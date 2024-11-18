@@ -24,19 +24,7 @@ public class SvDetalleEmpleado extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SvDetalleEmpleado</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SvDetalleEmpleado at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+
     }
 
     @Override
@@ -49,7 +37,7 @@ public class SvDetalleEmpleado extends HttpServlet {
         
         int numeroLegajo = Integer.parseInt(detalleLegajo);
         
-        Empleado empleado = controlador.buscarEmpleado(numeroLegajo);
+        Empleado empleado = controlador.buscarEmpleadoPorLegajo(numeroLegajo);
         
         String fotoBase64 = null;
         if (empleado.getFotoDni() != null) {

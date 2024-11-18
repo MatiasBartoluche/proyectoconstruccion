@@ -82,7 +82,7 @@ public class SvResultadoBuscarLegajo extends HttpServlet {
         }
         else{
             // busco un empleado con el legajo ingresado
-            Empleado empleado = control.buscarEmpleado(numeroLegajo);
+            Empleado empleado = control.buscarEmpleadoPorLegajo(numeroLegajo);
             if(empleado == null){
                 // no existe empleado con el legajo ingresado, sobreescribo la variable "respuestaJson"
                 respuestaJson = "{\"empleado\": null}";

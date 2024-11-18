@@ -21,7 +21,7 @@ public class EntregaEPP implements Serializable {
     private int id_entrega;
     
     @ManyToOne
-    @JoinColumn(name = "legajo", referencedColumnName = "legajo")
+    @JoinColumn(name = "id_empleado", referencedColumnName = "legajo")
     private Empleado empleadoEPP;
     
     @ManyToOne

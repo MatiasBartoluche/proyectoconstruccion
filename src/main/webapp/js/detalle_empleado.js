@@ -41,6 +41,10 @@ function detalleEmpleado(legajo){
 }
 
 function insertarDetalleEmpleado(empleado){
+    var idEmpleado = empleado.id_empleado;
+    
+    
+    
     $('#detalleNombresEmpleado').val(empleado.nombres);
     $('#detalleApellidosEmpleado').val(empleado.apellidos);
     
@@ -62,45 +66,48 @@ function insertarDetalleEmpleado(empleado){
         $('#detalleCalleEmpleado').val(empleado.calle);
     }
     else{
-        $('#detalleCalleEmpleado').val('Sin registrar');
+        $('#detalleCalleEmpleado').attr('placeholder', 'Sin registrar');
     }
     
     if(empleado.altura){
         $('#detalleNumeroEmpleado').val(empleado.altura);
     }
     else{
-        $('#detalleNumeroEmpleado').val('Sin registrar');
+        $('#detalleNumeroEmpleado').attr('placeholder', 'Sin registrar');
     }
     
     if(empleado.piso){
         $('#detalleDptoEmpleado').val(empleado.piso);
     }
     else{
-        $('#detalleDptoEmpleado').val('Sin registrar');
+        $('#detalleDptoEmpleado').attr('placeholder', 'Sin registrar');
     }
 
     if(empleado.localidad){
         $('#detalleLocalidadEmpleado').val(empleado.localidad);
     }
     else{
-        $('#detalleLocalidadEmpleado').val('Sin registrar');
+        $('#detalleLocalidadEmpleado').attr('placeholder', 'Sin registrar');
     }
     
     if(empleado.telefono){
         $('#detalleTelefonoEmpleado').val(empleado.telefono);
     }
     else{
-        $('#detalleTelefonoEmpleado').val('Sin registrar');
+        $('#detalleTelefonoEmpleado').attr('placeholder', 'Sin registrar');
     }
 
     if(empleado.telefono_familiar){
         $('#detalleTelefonoFamiliarEmpleado').val(empleado.telefono_familiar);
     }
     else{
-        $('#detalleTelefonoFamiliarEmpleado').val('Sin registrar');
+        $('#detalleTelefonoFamiliarEmpleado').attr('placeholder', 'Sin registrar');
     }
     
     $('#detalleLegajoEmpleado').val(empleado.legajo);
+    
+    $('#detalleLegajoEmpleado').attr('value', idEmpleado);
+    
     $('#detalleSueldoEmpleado').val(empleado.sueldo_base);
     $('#detalleFechaEmpleado').val(empleado.fecha_ingreso);
     
@@ -222,6 +229,8 @@ function cargarDatos(idContratoActual, idJerarquiaActual){
 }
 
 function capturarNuevosDatos(imagen){
+    var idEmpleado = $('#detalleLegajoEmpleado').attr('value');
+    console.log('++++++++++++++++++++++++++++++'+idEmpleado);
 
     var nuevoNombre = $('#detalleNombresEmpleado').val();
     var nuevoApellido = $('#detalleApellidosEmpleado').val();
@@ -333,6 +342,7 @@ function capturarNuevosDatos(imagen){
 
         var empleadoModificado = {};
 
+        $.extend(empleadoModificado, {id_empleado: idEmpleado});
         $.extend(empleadoModificado, {legajo: nuevoLegajo});
         $.extend(empleadoModificado, {jerarquia: jerarquia});
         $.extend(empleadoModificado, {nombres: nuevoNombre});
@@ -436,6 +446,8 @@ function cargarImagen(imagenActual){
 function cerrarDetalleModal(){
     $('#cerrarDetalleModal').click(function(){
         $('#contenedorTextoModal').empty();
+        
+        
         $('#mensajeModalModificarEmpleado').css('display', 'none');
     });
 }
@@ -451,6 +463,10 @@ function guardarEmpleadoModificado(empleado){
         success: function (response){
             console.log(response);
             mensajeModal(response);
+            if(response.status === true){
+                $('#guardarNuevosDatosEmpleado').css('display', 'none');
+                $('#cancelarNuevosDatos').css('display', 'none');
+            }
         },
         error: function (xhr, status, error) {
             console.error('Error al guardar el empleado:', error);
@@ -492,4 +508,10 @@ function cancelar(){
         
         $('#modificarDatosEmpleado').css('display', 'block');
     });
+}
+
+function mensajeModal(respuesta){
+    $('#contenedorTextoModal').empty();
+    $('#mensajeModalModificarEmpleado').css('display', 'block');
+    $('#contenedorTextoModal').append('<p>'+respuesta.mensaje+'</p>');
 }

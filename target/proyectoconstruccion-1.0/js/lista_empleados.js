@@ -15,9 +15,22 @@ function buscarEmpleados(){
         type: 'GET',
         dataType: 'json',
         success: function (response) {
-            
+            var contadorObrero = 0;
+            var contadorOficina = 0;
+            var contdorSubcontratista = 0;
             for (indice = 0; indice < response.length; indice++) {
-                insertarEmpleado(response[indice], response[indice].contrato.descripcion, indice);
+                if(response[indice].contrato.descripcion === 'Oficina'){
+                    insertarEmpleado(response[indice], '#listaOficina', contadorOficina);
+                    contadorOficina = contadorOficina +1;
+                }
+                else if(response[indice].contrato.descripcion === 'Obrero'){
+                    insertarEmpleado(response[indice], '#listaObreros', contadorObrero);
+                    contadorObrero = contadorObrero +1;
+                }
+                else if(response[indice].contrato.descripcion === 'Subcontratista'){
+                    insertarEmpleado(response[indice], '#listaSubcontratados', contdorSubcontratista);
+                    contdorSubcontratista = contdorSubcontratista +1;
+                }
             }
         },
         error: function (xhr, status, error) {
@@ -53,24 +66,10 @@ function toggleListas(idBoton, idLista, texto){
     });
 }
 
-function insertarEmpleado(empleado, tipoContrato, tipoClase){
+function insertarEmpleado(empleado, idLista, tipoClase){
     console.log(empleado);
-    var idLista = '';
     var clase = '';
-    
-    // defino en donde se insertara cada empleado
-    if(tipoContrato === "Oficina"){
-        idLista = '#listaOficina';
-        console.log('insertar en oficina');
-    }
-    else if(tipoContrato === 'Obrero'){
-        idLista = '#listaObreros';
-        console.log('insertar en obreros');
-    }
-    else if(tipoContrato === 'Subcontratista'){
-        idLista = '#listaSubcontratados';
-        console.log('insertar en subcontratados');
-    }
+
     
     // defino una clase "par" o "impar" dependiendo de la variable "tipoClase"
     if(tipoClase/2 === 0){

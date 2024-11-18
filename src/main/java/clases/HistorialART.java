@@ -23,7 +23,7 @@ public class HistorialART implements Serializable {
     private Obra obraART;
     
     @ManyToOne
-    @JoinColumn(name = "legajo", nullable = false)
+    @JoinColumn(name = "id_empleado", nullable = false)
     private Empleado empleadoART;
     
     private String descripcion;

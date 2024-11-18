@@ -19,7 +19,7 @@ public class Asistencia implements Serializable {
     private int id_asistencia;
     
     @ManyToOne
-    @JoinColumn(name = "legajo", nullable = false)
+    @JoinColumn(name = "id_empleado", nullable = false)
     private Empleado empleadoAsistencia;
     
     private LocalDate fecha;

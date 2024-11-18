@@ -166,7 +166,7 @@
                 
                 <div id="detalleNumero">
                     <label>Numero</label>
-                    <input class="habilitacion" type="text" id="detalleNumeroEmpleado" disabled="true"> 
+                    <input class="habilitacion" type="number" id="detalleNumeroEmpleado" disabled="true"> 
                 </div>
                 
                 <div id="detalleDpto">

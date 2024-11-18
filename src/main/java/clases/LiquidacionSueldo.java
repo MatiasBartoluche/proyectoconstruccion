@@ -26,7 +26,7 @@ public class LiquidacionSueldo implements Serializable {
     private GrupoAportes grupoAportes;
     
     @OneToOne
-    @JoinColumn(name = "legajo")
+    @JoinColumn(name = "id_empleado")
     private Empleado empleadoLiquidacion;
     
     @Column(precision = 14, scale = 7)

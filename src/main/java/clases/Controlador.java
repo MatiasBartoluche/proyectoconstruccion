@@ -54,6 +54,10 @@ public class Controlador {
         return controladorPersistencia.traerListaEmpleado();
     }
     
+    public Empleado buscarEmpleadoPorLegajo(int legajo){
+        return controladorPersistencia.findEmpleadoByLegajo(legajo);
+    }
+    
     // ###################### creando metodos para Estado #######################
     
     

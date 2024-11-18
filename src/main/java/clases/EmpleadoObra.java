@@ -18,7 +18,7 @@ public class EmpleadoObra implements Serializable {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "legajo", nullable = false)
+    @JoinColumn(name = "id_empleado", nullable = false)
     private Empleado empleadoObra;
 
     @ManyToOne

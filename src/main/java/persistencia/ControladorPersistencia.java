@@ -86,6 +86,10 @@ public class ControladorPersistencia {
         return listaEmpleados;
     }
     
+    public Empleado findEmpleadoByLegajo(int Legajo){
+        return empleadoJpa.findEmpleadoByLegajo(Legajo);
+    }
+    
     // ###################### creando metodos para EstadoEmpleadoJpaController ###################################
    
     public void crearEstadoEmpleado(EstadoEmpleado estado) {

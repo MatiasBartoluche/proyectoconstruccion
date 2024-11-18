@@ -78,10 +78,11 @@ function cargarRoles(){
         type: 'GET',
         dataType: 'json',
         success: function (data) {
+            console.log(data);
             // 'data' es un array de objetos Usuario en formato JSON
             // Aquí puedes iterar y mostrar los datos en tu página
+            $('#rol').empty();
             $.each(data, function (i, item) {
-                $('#rol').empty();
                 $('#rol').append('<option value="' + item.id_rol + '" id="' + item.descripcion + '">' + item.descripcion + '</option>');
             });
         },

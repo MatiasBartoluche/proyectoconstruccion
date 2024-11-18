@@ -2,12 +2,17 @@ package persistencia;
 
 import clases.Empleado;
 import java.util.List;
+import java.util.function.Predicate;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 public class EmpleadoJpaController{
 
@@ -47,9 +52,9 @@ public class EmpleadoJpaController{
             empleado = em.merge(empleado);
             em.getTransaction().commit();
         } catch (Exception ex) {
-            int legajo = empleado.getLegajo();
-            if (findEmpleado(legajo) == null) {
-                throw new EntityNotFoundException("El Empleado con legajo " + legajo + " no existe.");
+            int id = empleado.getId();
+            if (findEmpleado(id) == null) {
+                throw new EntityNotFoundException("El Empleado con legajo " + id + " no existe.");
             }
             throw ex;
         } finally {
@@ -60,16 +65,16 @@ public class EmpleadoJpaController{
     }
 
     // Eliminar usuario
-    public void destroy(int legajo) throws EntityNotFoundException {
+    public void destroy(int id) throws EntityNotFoundException {
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
             Empleado empleado;
             try {
-                empleado = em.getReference(Empleado.class, legajo);
-                empleado.getLegajo();
+                empleado = em.getReference(Empleado.class, id);
+                empleado.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new EntityNotFoundException("El Empleado con legajo " + legajo + " no existe.");
+                throw new EntityNotFoundException("El Empleado con legajo " + id + " no existe.");
             }
             em.remove(empleado);
             em.getTransaction().commit();
@@ -81,10 +86,10 @@ public class EmpleadoJpaController{
     }
 
     // Encontrar usuario por legajo
-    public Empleado findEmpleado(int legajo) {
+    public Empleado findEmpleado(int id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Empleado.class, legajo);
+            return em.find(Empleado.class, id);
         } finally {
             em.close();
         }
@@ -116,4 +121,26 @@ public class EmpleadoJpaController{
             em.close();
         }
     }
+    
+    public Empleado findEmpleadoByLegajo(int legajo) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Empleado> cq = cb.createQuery(Empleado.class);
+            Root<Empleado> empleado = cq.from(Empleado.class);
+
+            // Construir la condición
+            cq.where(cb.equal(empleado.get("legajo"), legajo));
+
+            TypedQuery<Empleado> query = em.createQuery(cq);
+            return query.getSingleResult();
+        }
+        catch (NoResultException e) {
+            return null;
+        }
+        finally{
+            em.close();
+        }
+    }
+    
 }
