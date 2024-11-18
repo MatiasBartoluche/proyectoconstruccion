@@ -23,6 +23,19 @@
             }
         %>
         
+        <div id="mensajeModalModificarEmpleado" class="modal">
+            <div class="modal-content">
+                <span class="close"></span>
+                <h2>Mensaje</h2>
+                <div id="contenedorTextoModal">
+
+                </div>
+                <div class="botonesModal">
+                    <button id="cerrarDetalleModal">Aceptar</button>
+                </div>
+            </div>
+        </div>  
+      
     <header class="cabecera">
         Header
     </header>
@@ -126,84 +139,91 @@
             <form id="detalleDatosPersonales">
                 <h2>Datos personales</h2>
                 
-                <img id="detalleFotoDni" src="">
-                <input type="file" id="nuevaFotoDni" accept="image/*">
+                <img id="detalleFotoDni" src="" alt="detalleFotoDni">
                 
                 <div id="contenedorDetalleDatosPersonales">
                     <label id="labelNombres">Nombres</label>
-                    <input type="text" id="detalleNombresEmpleado" disabled="true" required>
+                    <input class="habilitacion" type="text" id="detalleNombresEmpleado" disabled="true" required>
                     
                     <label id="labelApellidos">Apellidos</label>
-                    <input type="text" id="detalleApellidosEmpleado" disabled="true" required>
+                    <input class="habilitacion" type="text" id="detalleApellidosEmpleado" disabled="true" required>
 
                     <label id="labelCuil">CUIL</label>
-                    <input type="number" id="detalleDigitoGlobal" disabled="true" required>
+                    <input class="habilitacion" type="number" id="detalleDigitoGlobal" disabled="true" required>
                     <label class="guion">-</label>
-                    <input type="number" id="detalleCuerpoCuil" disabled="true" required>
+                    <input class="habilitacion" class="habilitacion" type="number" id="detalleCuerpoCuil" disabled="true" required>
                     <label class="guion">-</label>
-                    <input type="number" id="detalleDigitoVerificador" disabled="true" required>
+                    <input class="habilitacion" type="number" id="detalleDigitoVerificador" disabled="true" required>
                 </div>
+                
+                <input type="file" id="nuevaFotoDni" accept="image/*">
 
                 <h2>Datos de contacto</h2>
                 <div id="detalleCalle">
                     <label>Calle</label>
-                    <input type="text" id="detalleCalleEmpleado" disabled="true"> 
+                    <input class="habilitacion" type="text" id="detalleCalleEmpleado" disabled="true"> 
                 </div>
                 
                 <div id="detalleNumero">
                     <label>Numero</label>
-                    <input type="text" id="detalleNumeroEmpleado" disabled="true"> 
+                    <input class="habilitacion" type="text" id="detalleNumeroEmpleado" disabled="true"> 
                 </div>
                 
                 <div id="detalleDpto">
                     <label>Piso-Dpto</label>
-                    <input type="text" id="detalleDptoEmpleado" disabled="true"> 
+                    <input class="habilitacion" type="text" id="detalleDptoEmpleado" disabled="true"> 
                 </div>
                 
                 <div id="detalleLocalidad">
                     <label>Localidad</label>
-                    <input type="text" id="detalleLocalidadEmpleado" disabled="true"> 
+                    <input class="habilitacion" type="text" id="detalleLocalidadEmpleado" disabled="true"> 
                 </div>
                 
                 <div id="detalleTelefonosEmpleado">
                     <label>Telefono</label>
-                    <input type="text" id="detalleTelefonoEmpleado" disabled="true">
+                    <input class="habilitacion" type="text" id="detalleTelefonoEmpleado" disabled="true">
                     <label>Telefono familiar</label>
-                    <input type="text" id="detalleTelefonoFamiliarEmpleado" disabled="true">
+                    <input class="habilitacion" type="text" id="detalleTelefonoFamiliarEmpleado" disabled="true">
                 </div>
                 
                 <h2>Datos Administrativos</h2>
                 <div class="contenedorDetalleAdministrativo">
                     <label>Legajo</label>
-                    <input type="number" id="detalleLegajoEmpleado" disabled="true" required>
+                    <input class="habilitacion" type="number" id="detalleLegajoEmpleado" disabled="true" required>
                 </div>
                 
                 <div class="contenedorDetalleAdministrativo">
                     <label>Sueldo</label>
-                    <input type="number" id="detalleSueldoEmpleado" disabled="true" required>
+                    <input class="habilitacion" type="number" id="detalleSueldoEmpleado" disabled="true" required>
                 </div>               
 
                 <div class="contenedorDetalleAdministrativo">
                     <label>Fecha ingreso</label>
-                    <input type="date" id="detalleFechaEmpleado" disabled="true" required>
+                    <input class="habilitacion" type="date" id="detalleFechaEmpleado" disabled="true" required>
                 </div>
                 
                 <div class="contenedorDetalleSelect">
                     <label>Contrato</label>
-                    <select id="detalleContratoEmpleado" disabled="true">
+                    <select class="habilitacion" id="detalleContratoEmpleado" disabled="true">
 
                     </select>
                 </div>
                 
                 <div class="contenedorDetalleSelect">
                     <label>Cargo</label>
-                    <select id="detalleJerarquiaEmpleado" disabled="true">
+                    <select class="habilitacion" id="detalleJerarquiaEmpleado" disabled="true">
                         
                     </select>
                 </div>
                 
+                
+            </form>
+            <div id="contenedorBotonesModificar">
                 <button id="modificarDatosEmpleado">Modificar datos</button>
-            </form> 
+
+                <button id="guardarNuevosDatosEmpleado">Guardar datos</button>
+                <button id="cancelarNuevosDatos">Cancelar</button>
+            </div>
         </article>
 
         <article id="botonesHistorialEmpleado">

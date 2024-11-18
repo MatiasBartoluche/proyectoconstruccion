@@ -800,6 +800,26 @@ body.dark .home .text{
 
 /* --------------------- estilos pagina lista_empleados.jsp ----------------- */
 
+.habilitacion:disabled{
+    cursor: not-allowed;
+}
+
+#contenedorBotonesModificar{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#contenedorBotonesModificar button{
+    width: 40%;
+}
+
+#guardarNuevosDatosEmpleado, #cancelarNuevosDatos{
+    display: none; 
+}
+
 .listaEmpleados, .botonesLista{
     width: 98%;
     margin: 1%;
