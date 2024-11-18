@@ -89,7 +89,7 @@ function insertarEmpleado(empleado, idLista, tipoClase){
                             '<p>'+empleado.fecha_ingreso+'</p>'+
                             '<div class="botonesEmpleado">'+
                                 //'<a href="./detalle_empleado.jsp">'+
-                                    '<span class="btnIcono btnDetalleEmpleado" id="'+empleado.legajo+'" data-legajo="'+empleado.legajo+'">'+
+                                    '<span class="btnIcono btnDetalleEmpleado" id="'+empleado.id_empleado+'" data-idEmpleado="'+empleado.id_empleado+'">'+
                                         '<i class="bx bx-search-alt icon"></i>'+
                                     '</span>'+
                                 //'</a>'+
@@ -99,9 +99,9 @@ function insertarEmpleado(empleado, idLista, tipoClase){
 
 function detalleEmpleado(){
     $('#homeListaEmpleados').on('click', '.btnDetalleEmpleado', function () {
-        const legajo = $(this).data('legajo'); // Obtener el legajo del botón
-        console.log(legajo);
-        localStorage.setItem('detalleEmpleado', legajo);
+        const idEmpleado = $(this).data('idempleado'); // Obtener el legajo del botón
+        console.log(idEmpleado);
+        localStorage.setItem('detalleEmpleado', idEmpleado);
         window.location.href = "/proyectoconstruccion/vistas/sistemas/detalle_empleado.jsp";
     });
 }

@@ -33,11 +33,11 @@ public class SvDetalleEmpleado extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         
-        String detalleLegajo = request.getParameter("detalleLegajo");
+        String detalleId = request.getParameter("detalleIdEmpleado");
         
-        int numeroLegajo = Integer.parseInt(detalleLegajo);
+        int numeroId = Integer.parseInt(detalleId);
         
-        Empleado empleado = controlador.buscarEmpleadoPorLegajo(numeroLegajo);
+        Empleado empleado = controlador.buscarEmpleado(numeroId);
         
         String fotoBase64 = null;
         if (empleado.getFotoDni() != null) {

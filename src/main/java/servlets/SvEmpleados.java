@@ -69,9 +69,16 @@ public class SvEmpleados extends HttpServlet {
             empleadoRecibido.setFotoDni(foto);
         }
         
+        String enviarJson;
+        Empleado verificarEmpleado = controlador.buscarEmpleadoPorLegajo(empleadoRecibido.getLegajo());
       
-        controlador.editarEmpleado(empleadoRecibido);
-        String enviarJson = "{\"status\": true,  \"mensaje\":\"Los datos del empleado han sido actualizados\"}";
+        if(verificarEmpleado == null){
+            controlador.editarEmpleado(empleadoRecibido);
+            enviarJson = "{\"status\": true,  \"mensaje\":\"Los datos del empleado han sido actualizados\"}";
+        }
+        else{
+            enviarJson = "{\"status\": false,  \"mensaje\":\"El legajo ingresado coincide con el legajo de un empleado ya registrado\"}";
+        }
         
         response.getWriter().write(enviarJson);
     }

@@ -1,7 +1,7 @@
 $(document).ready(function(){
-    var legajo = localStorage.getItem('detalleEmpleado');
+    var idEmpleado = localStorage.getItem('detalleEmpleado');
     
-    detalleEmpleado(legajo);
+    detalleEmpleado(idEmpleado);
     
     habilitarCamposEmpleado();
     
@@ -20,11 +20,11 @@ $(document).ready(function(){
     cancelar();
 });
 
-function detalleEmpleado(legajo){
+function detalleEmpleado(idEmpleado){
     $.ajax({
         url: '/proyectoconstruccion/SvDetalleEmpleado', // URL del servlet
         type: 'GET',
-        data: {detalleLegajo: legajo},
+        data: {detalleIdEmpleado: idEmpleado},
         dataType: 'json',
         success: function (response) {
             insertarDetalleEmpleado(response);
@@ -400,7 +400,7 @@ function toggleListas(idBoton, idLista, texto){
     });
 }
 
-function cargarImagen(imagenActual){
+function cargarImagen(){
     $('#guardarNuevosDatosEmpleado').click(function(){
         const FileInput = document.getElementById("nuevaFotoDni");
         const File = FileInput.files[0];
@@ -462,6 +462,7 @@ function guardarEmpleadoModificado(empleado){
         dataType: 'json',
         success: function (response){
             console.log(response);
+            localStorage.setItem('detalleEmpleado', empleado.id_empleado);
             mensajeModal(response);
             if(response.status === true){
                 $('#guardarNuevosDatosEmpleado').css('display', 'none');
@@ -514,4 +515,5 @@ function mensajeModal(respuesta){
     $('#contenedorTextoModal').empty();
     $('#mensajeModalModificarEmpleado').css('display', 'block');
     $('#contenedorTextoModal').append('<p>'+respuesta.mensaje+'</p>');
+    $('#modificarDatosEmpleado').css('display', 'block');
 }
