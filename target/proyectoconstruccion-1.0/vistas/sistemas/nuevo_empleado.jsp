@@ -205,6 +205,13 @@
                     </select>
                 </div>
                 
+                <div id="contenedorEstadoEmpleado">
+                <label>Estado</label>
+                    <select id="estadoEmpleado" name="estado">
+                        <!-- select vacio, los tag option se cargaran por jquery -->
+                    </select>
+                </div>
+                
                 <div id="contenedorLegajo">
                     <label>N° legajo</label>
                     <input id="legajo" type="number" placeholder="Legajo" name="legajo">

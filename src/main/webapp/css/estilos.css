@@ -771,8 +771,8 @@ body.dark .home .text{
     flex-wrap: wrap;
 }
 
-#contenedorJerarquia, #contenedorContrato{
-    width: 48%;
+#contenedorJerarquia, #contenedorContrato, #contenedorEstadoEmpleado{
+    width: 30%;
     margin: 1%;
     display: flex;
     flex-wrap: wrap;    

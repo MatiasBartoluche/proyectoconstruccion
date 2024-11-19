@@ -17,6 +17,7 @@ function cargarDatos(){
         type: 'GET',
         dataType: 'json',
         success: function (response) {
+            console.log(response);
             // 'data' es un array de objetos Usuario en formato JSON
             // Aquí puedes iterar y mostrar los datos en tu página
             $.each(response.jerarquias, function (i, item) {
@@ -29,6 +30,15 @@ function cargarDatos(){
                 }
                 else{
                     $('#contrato').append('<option value="' + item.id_contrato + '" id="' + item.descripcion + '">' + item.descripcion + '</option>');
+                }
+            });
+            
+            $.each(response.estados, function (i, item) {
+                if(item.descripcion === 'Activo'){
+                    $('#estadoEmpleado').append('<option value="' + item.id_estado + '" id="' + item.descripcion + '" selected>' + item.descripcion + '</option>');
+                }
+                else{
+                    $('#estadoEmpleado').append('<option value="' + item.id_estado + '" id="' + item.descripcion + '">' + item.descripcion + '</option>');
                 }
             });
         },
@@ -86,11 +96,16 @@ function capturarDatos(imagen){
     
     //datos administrativos
     var legajo = $('#legajo').val();
+    
     var idJerarquia = $('#jerarquia').val();
     var descripcionJerarquia = $('#jerarquia option:selected').html();
     
     var idContrato = $('#contrato').val();
     var descripcionContrato = $('#contrato option:selected').html();
+    
+    var idEstadoEmpleado = $('#estadoEmpleado').val();
+    var descripcionEstadoEmpleado = $('#estadoEmpleado option:selected').html();
+    
     var salarioEmpleado = $('#salarioEmpleado').val();
     var fechaIngreso = $('#fechaIngreso').val();
     
@@ -225,6 +240,7 @@ function capturarDatos(imagen){
         
         var jerarquia = {id_jerarquia: idJerarquia, descripcion: descripcionJerarquia};
         var contrato = {id_contrato: idContrato, descripcion: descripcionContrato};
+        var estado = {id_estado: idEstadoEmpleado, descripcion: descripcionEstadoEmpleado};
         // agrego informacion al objeto empleado
         $.extend(empleado, {legajo: legajo});
         $.extend(empleado, {jerarquia: jerarquia});
@@ -234,6 +250,7 @@ function capturarDatos(imagen){
         $.extend(empleado, {foto_dni_base64: dniEmpleado});
         $.extend(empleado, {fecha_ingreso: fechaIngreso});
         $.extend(empleado, {contrato: contrato});
+        $.extend(empleado, {estado: estado});
         $.extend(empleado, {sueldo_base: salarioEmpleado});
         
         // ajustarDato() recibe el dato capturado y en caso de ser '' retorna null

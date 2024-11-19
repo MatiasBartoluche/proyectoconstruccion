@@ -3,6 +3,7 @@ package servlets;
 import clases.Contrato;
 import clases.Controlador;
 import clases.Empleado;
+import clases.EstadoEmpleado;
 import clases.Jerarquia;
 import clases.LocalDateAdapter;
 import com.google.gson.Gson;
@@ -39,9 +40,11 @@ public class SvNuevoEmpleado extends HttpServlet {
         
         List<Jerarquia> listaJerarquias;
         List<Contrato> listaContratos;
+        List<EstadoEmpleado>listaEstados;
         // realizo la consulta a la base de datos
         listaJerarquias = control.buscarListaJerarquias();
         listaContratos = control.buscarListaContratos();
+        listaEstados = control.buscarListaEstados();
         
         // instancia de la clase "CargarDatos" que recibe dos listas como parametros
         // para enviarlas a la pagina
@@ -49,6 +52,7 @@ public class SvNuevoEmpleado extends HttpServlet {
         
         datos.setContratos(listaContratos);
         datos.setJerarquias(listaJerarquias);
+        datos.setEstados(listaEstados);
         
         // convertir la lista de a Json
         Gson gson = new Gson();
@@ -110,6 +114,7 @@ public class SvNuevoEmpleado extends HttpServlet {
     private class CargarDatos{
         List<Jerarquia> jerarquias;
         List<Contrato> contratos;
+        List<EstadoEmpleado>estados;
         
         public CargarDatos(){}
 
@@ -128,5 +133,14 @@ public class SvNuevoEmpleado extends HttpServlet {
         public void setContratos(List<Contrato> contratos) {
             this.contratos = contratos;
         }
+
+        public List<EstadoEmpleado> getEstados() {
+            return estados;
+        }
+
+        public void setEstados(List<EstadoEmpleado> estados) {
+            this.estados = estados;
+        }
+        
     }
 }

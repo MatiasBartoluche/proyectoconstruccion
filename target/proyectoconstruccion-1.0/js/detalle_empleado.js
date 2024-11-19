@@ -43,8 +43,6 @@ function detalleEmpleado(idEmpleado){
 function insertarDetalleEmpleado(empleado){
     var idEmpleado = empleado.id_empleado;
     
-    
-    
     $('#detalleNombresEmpleado').val(empleado.nombres);
     $('#detalleApellidosEmpleado').val(empleado.apellidos);
     
