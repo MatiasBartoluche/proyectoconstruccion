@@ -1033,7 +1033,7 @@ body.dark .home .text{
 }
 
 .contenedorDetalleSelect{
-    width: 50%;
+    width: 33%;
     display: flex;
     flex-wrap: wrap;
 }

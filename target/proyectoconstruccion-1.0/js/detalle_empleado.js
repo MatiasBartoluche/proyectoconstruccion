@@ -111,7 +111,7 @@ function insertarDetalleEmpleado(empleado){
     
     $('#detalleContratoEmpleado').append('<option value="' + empleado.contrato.id_contrato + '" id="' + empleado.contrato.descripcion + '">' + empleado.contrato.descripcion + '</option>');
     $('#detalleJerarquiaEmpleado').append('<option value="' + empleado.jerarquia.id_jerarquia+ '" id="' + empleado.jerarquia.descripcion + '">' + empleado.jerarquia.descripcion + '</option>');
-    
+    $('#detalleEstadoEmpleado').append('<option value="' + empleado.estado.id_estado+ '" id="' + empleado.estado.descripcion + '">' + empleado.estado.descripcion + '</option>');
     
     // cargando historiales de empleado
     if(empleado.asignaciones.length === 0){
@@ -177,10 +177,11 @@ function habilitarCamposEmpleado(){
 
         // primero habilito los campos <select>
         $('#detalleContratoEmpleado').prop('disabled', false);
-        $('#detalleJerarquiaEmpleado').prop('disabled', false);     
+        $('#detalleJerarquiaEmpleado').prop('disabled', false);
+        $('#detalleEstadoEmpleado').prop('disabled', false);
         
         // luego cargo con todos los datos de la base de datos
-        cargarDatos($('#detalleContratoEmpleado').val(), $('#detalleJerarquiaEmpleado').val());
+        cargarDatos($('#detalleContratoEmpleado').val(), $('#detalleJerarquiaEmpleado').val(), $('#detalleEstadoEmpleado').val());
         
         $('#guardarNuevosDatosEmpleado').css('display', 'block');
         $('#cancelarNuevosDatos').css('display', 'block');
@@ -189,10 +190,11 @@ function habilitarCamposEmpleado(){
     });
 }
 
-function cargarDatos(idContratoActual, idJerarquiaActual){
+function cargarDatos(idContratoActual, idJerarquiaActual, idEstadoActual){
     // vacio los select para evitar <option> duplicados
     $('#detalleContratoEmpleado').empty();
     $('#detalleJerarquiaEmpleado').empty();
+    $('#detalleEstadoEmpleado').empty();
     
     $.ajax({
         url: '/proyectoconstruccion/SvNuevoEmpleado', // URL del servlet
@@ -217,6 +219,15 @@ function cargarDatos(idContratoActual, idJerarquiaActual){
                 }
                 else{
                     $('#detalleContratoEmpleado').append('<option value="' + item.id_contrato + '" id="' + item.descripcion + '">' + item.descripcion + '</option>');
+                }
+            });
+            
+            $.each(response.estados, function (i, item) {
+                if(item.id_estado === idEstadoActual){
+                    $('#detalleEstadoEmpleado').append('<option value="' + item.id_estado + '" id="' + item.descripcion + '" selected>' + item.descripcion + '</option>');
+                }
+                else{
+                    $('#detalleEstadoEmpleado').append('<option value="' + item.id_estado + '" id="' + item.descripcion + '">' + item.descripcion + '</option>');
                 }
             });
         },
@@ -250,6 +261,9 @@ function capturarNuevosDatos(imagen){
 
     var idContrato = $('#detalleContratoEmpleado').val();
     var descripcionContrato = $('#detalleContratoEmpleado option:selected').html();
+    
+    var idDetalleEstado = $('#detalleEstadoEmpleado').val();
+    var descripcionDetalleEstado = $('#detalleEstadoEmpleado option:selected').html();
 
     var idJerarquia = $('#detalleJerarquiaEmpleado').val();
     var descripcionJerarquia = $('#detalleJerarquiaEmpleado option:selected').html();
@@ -337,6 +351,7 @@ function capturarNuevosDatos(imagen){
 
         var jerarquia = {id_jerarquia: idJerarquia, descripcion: descripcionJerarquia};
         var contrato = {id_contrato: idContrato, descripcion: descripcionContrato};
+        var estado = {id_estado: idDetalleEstado, descripcion: descripcionDetalleEstado};
 
         var empleadoModificado = {};
 
@@ -349,6 +364,7 @@ function capturarNuevosDatos(imagen){
         $.extend(empleadoModificado, {foto_dni_base64: imagen});
         $.extend(empleadoModificado, {fecha_ingreso: nuevaFecha});
         $.extend(empleadoModificado, {contrato: contrato});
+        $.extend(empleadoModificado, {estado: estado});
         $.extend(empleadoModificado, {sueldo_base: nuevoSueldo});
 
         // ajustarDato() recibe el dato capturado y en caso de ser '' retorna null
@@ -500,7 +516,8 @@ function cancelar(){
 
         // primero habilito los campos <select>
         $('#detalleContratoEmpleado').prop('disabled', true);
-        $('#detalleJerarquiaEmpleado').prop('disabled', true); 
+        $('#detalleJerarquiaEmpleado').prop('disabled', true);
+        $('#detalleEstadoEmpleado').prop('disabled', true);
         
         $('#guardarNuevosDatosEmpleado').css('display', 'none');
         $('#cancelarNuevosDatos').css('display', 'none');

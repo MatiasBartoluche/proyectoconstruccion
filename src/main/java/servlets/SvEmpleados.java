@@ -77,7 +77,15 @@ public class SvEmpleados extends HttpServlet {
             enviarJson = "{\"status\": true,  \"mensaje\":\"Los datos del empleado han sido actualizados\"}";
         }
         else{
-            enviarJson = "{\"status\": false,  \"mensaje\":\"El legajo ingresado coincide con el legajo de un empleado ya registrado\"}";
+            // si los legajos coinciden y los id coinciden
+            if(verificarEmpleado.getLegajo() == empleadoRecibido.getLegajo()
+                    && verificarEmpleado.getId() == empleadoRecibido.getId()){
+                        controlador.editarEmpleado(empleadoRecibido);
+                        enviarJson = "{\"status\": true,  \"mensaje\":\"Los datos del empleado han sido actualizados\"}";
+            }
+            else{
+                enviarJson = "{\"status\": false,  \"mensaje\":\"El legajo ingresado coincide con el legajo de un empleado ya registrado\"}";
+            }
         }
         
         response.getWriter().write(enviarJson);

@@ -216,6 +216,12 @@
                     </select>
                 </div>
                 
+                <div class="contenedorDetalleSelect">
+                    <label>Estado</label>
+                    <select class="habilitacion" id="detalleEstadoEmpleado" disabled="true">
+                        
+                    </select>
+                </div>
                 
             </form>
             <div id="contenedorBotonesModificar">
