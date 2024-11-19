@@ -3,6 +3,7 @@ package clases;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,11 +26,11 @@ public class FacturaProveedor implements Serializable {
     @Column(precision = 14, scale = 7)
     private BigDecimal monto;
     
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "id_proveedor", nullable = false)
     private Proveedor proveedor;
     
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name="id_obra", nullable = false)
     private Obra obraProveedor;
 

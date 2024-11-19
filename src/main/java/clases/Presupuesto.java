@@ -28,10 +28,10 @@ public class Presupuesto implements Serializable {
     
     private LocalDate fechaVersion;
     
-    @OneToMany(mappedBy = "presupuestoRubro", cascade = CascadeType.MERGE, orphanRemoval = true)
+    @OneToMany(mappedBy = "presupuestoRubro", cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     private ArrayList<Rubro> rubros = new ArrayList<>();
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "id_obra", nullable = false)
     private Obra obraPresupuesto;
     

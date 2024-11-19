@@ -24,11 +24,11 @@ public class Rubro implements Serializable {
     
     private String nombre;
     
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "rubro_padre_id")
     private Rubro rubroPadre;
     
-    @OneToMany(mappedBy = "rubroPadre", cascade = CascadeType.MERGE, orphanRemoval = true)
+    @OneToMany(mappedBy = "rubroPadre", cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     private ArrayList<Rubro> subRubros = new ArrayList<>();
     
     @Column(precision = 20, scale = 10)
@@ -49,7 +49,7 @@ public class Rubro implements Serializable {
     @Column(precision = 20, scale = 10)
     private BigDecimal cert1;
     
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "id_presupuesto", nullable = false)
     private Presupuesto presupuestoRubro;
 

@@ -3,6 +3,7 @@ package clases;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,15 +21,15 @@ public class EntregaEPP implements Serializable {
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private int id_entrega;
     
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "id_empleado", referencedColumnName = "legajo")
     private Empleado empleadoEPP;
     
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "id_obra", referencedColumnName = "id_obra")
     private Obra obraEPP;
     
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "id_epp") // Columna en la tabla EPP para almacenar el ID de EntregaEPP
     private ArrayList<EPP> lista_epp = new ArrayList<>();
     

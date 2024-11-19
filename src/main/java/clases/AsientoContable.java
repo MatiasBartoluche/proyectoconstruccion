@@ -2,6 +2,7 @@ package clases;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -32,7 +33,7 @@ public class AsientoContable implements Serializable {
     @Enumerated(EnumType.STRING)
     private Columna columna;
     
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "id_registro_contable")
     private RegistroContable registroContable;
 

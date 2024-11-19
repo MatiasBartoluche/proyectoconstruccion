@@ -26,7 +26,7 @@ public class Obra implements Serializable {
     private int id_obra;
     
     // apunta al atributo "id_sociedad" de la clase Sociedad
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "id_sociedad", nullable = false)
     private Sociedad sociedadObra;
     
@@ -40,38 +40,38 @@ public class Obra implements Serializable {
     //private Provincia provincia;
     private LocalDate fecha_inicio;
     
-    @OneToOne(cascade = CascadeType.MERGE, orphanRemoval = true)
-    @JoinColumn(name = "id_tipo_obra", referencedColumnName = "id_tipoObra")
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn(name = "id_tipo_obra", referencedColumnName = "id_tipo_obra")
     private TipoObra tipo_obra;
     
     // OneToMany representa relacion 1-n con actualizacion en cascada
     // mappedBy="empleadoObra" apunta al atributo de tipo Obra en la otra clase a relacionar
     
-    @OneToMany(mappedBy = "obraEmpleado", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "obraEmpleado", cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     private ArrayList<EmpleadoObra> asignaciones = new ArrayList<>();
     
-    @OneToMany(mappedBy = "obraHistorial", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "obraHistorial", cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     private ArrayList<HistorialEstadoObra> historial_estado_obra = new ArrayList<>();
     
-    @OneToMany(mappedBy = "obraPlano", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "obraPlano", cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     private ArrayList<Plano> planos = new ArrayList<>();
     
-    @OneToMany(mappedBy = "obraInspeccion", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "obraInspeccion", cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     private ArrayList<Inspeccion> inspecciones = new ArrayList<>();
     
-    @OneToMany(mappedBy = "obraART", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "obraART", cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     private ArrayList<HistorialART> historialART = new ArrayList<>();
     
-    @OneToMany(mappedBy = "obraProveedor", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "obraProveedor", cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     private ArrayList<FacturaProveedor> facturas_proveedores = new ArrayList<>();
     
-    @OneToMany(mappedBy = "obraSubcontratista", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "obraSubcontratista", cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     private ArrayList<FacturaSubcontratista> facturas_subcontratistas = new ArrayList<>();
     
-    @OneToMany(mappedBy = "obraEPP", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "obraEPP", cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     private ArrayList<EntregaEPP> entregasEPP = new ArrayList<>();
     
-    @OneToMany(mappedBy = "obraPresupuesto", cascade = CascadeType.MERGE, orphanRemoval = true)
+    @OneToMany(mappedBy = "obraPresupuesto", cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     private ArrayList<Presupuesto> historialPresupuestos = new ArrayList<>();
 
 

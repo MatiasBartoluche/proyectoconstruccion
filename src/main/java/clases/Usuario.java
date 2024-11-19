@@ -18,14 +18,14 @@ public class Usuario implements Serializable{
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private int id_usuario;
     
-    @OneToOne(cascade = CascadeType.MERGE, orphanRemoval = true)
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     private Empleado empleado;
     
     private String usuario;
     private String clave;
     private String salt;
     
-    @OneToOne(cascade = CascadeType.MERGE, orphanRemoval = true)
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "id_rol", referencedColumnName = "id_rol")
     private Rol rol;
     

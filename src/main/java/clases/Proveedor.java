@@ -21,7 +21,7 @@ public class Proveedor implements Serializable{
     private String cuit;
     private String nombre;
     
-    @OneToMany(mappedBy="proveedor", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy="proveedor", cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     private ArrayList<FacturaProveedor> facturas = new ArrayList<>();
 
     public Proveedor() {

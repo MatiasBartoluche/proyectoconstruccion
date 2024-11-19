@@ -20,11 +20,11 @@ public class LibroDiario implements Serializable {
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private int id_libro_diario;
     
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "id_sociedad")
     private Sociedad sociedadLibroDiario;
     
-    @OneToMany(mappedBy = "libroDiario", cascade = CascadeType.MERGE, orphanRemoval = true)
+    @OneToMany(mappedBy = "libroDiario", cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     private ArrayList<RegistroContable> registros = new ArrayList<>();
 
     public LibroDiario() {

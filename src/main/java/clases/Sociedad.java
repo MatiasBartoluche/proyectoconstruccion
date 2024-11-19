@@ -21,7 +21,7 @@ public class Sociedad implements Serializable {
     private int id_sociedad;
     
     // apunta al atributo "sociedad" de la clase "seguro"
-    @OneToMany(mappedBy = "sociedadSeguro", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "sociedadSeguro", cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     private ArrayList<Seguro> seguros = new ArrayList<>();
     
     private String cuit_sociedad;
@@ -34,10 +34,10 @@ public class Sociedad implements Serializable {
     //private Provincia provincia;
     
     // mappedBy="sociedadObra", relacion bidireccional, apunta al atributo "sociedad" de la clase "Obra"
-    @OneToMany(mappedBy = "sociedadObra", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "sociedadObra", cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     private ArrayList<Obra> obras = new ArrayList<>();
     
-    @OneToOne(mappedBy = "sociedadLibroDiario", cascade = CascadeType.MERGE)
+    @OneToOne(mappedBy = "sociedadLibroDiario", cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     private LibroDiario libroDiario;
 
     public Sociedad() {

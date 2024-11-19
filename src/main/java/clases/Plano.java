@@ -1,6 +1,7 @@
 package clases;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,7 +18,7 @@ public class Plano implements Serializable {
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private int id_plano;
     
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name="id_obra", referencedColumnName="id_obra")
     private Obra obraPlano;
     

@@ -27,7 +27,7 @@ public class Empleado implements Serializable {
     @Column(unique = true)
     private int legajo; // el legajo sera ingresado manualmente por el usuario del sistema
     
-    @OneToOne(cascade = CascadeType.MERGE, orphanRemoval = true)
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "id_jerarquia", referencedColumnName = "id_jerarquia")
     private Jerarquia jerarquia;
     
@@ -51,30 +51,30 @@ public class Empleado implements Serializable {
     @Column(precision = 14, scale = 7)
     private BigDecimal sueldo_base;
     
-    @OneToOne(cascade = CascadeType.MERGE, orphanRemoval = true)
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "id_contrato", referencedColumnName = "id_contrato")
     private Contrato contrato; // 0 = empleado de oficina, 1 = obrero, 2 = subcontratado
     
-    @OneToOne(cascade = CascadeType.MERGE, orphanRemoval = true)
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "id_estado", referencedColumnName = "id_estado")
     private EstadoEmpleado estado;
     
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     private GrupoTrabajo grupo;
 
-    @OneToMany(mappedBy = "empleadoObra", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "empleadoObra", cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     private ArrayList<EmpleadoObra> asignaciones = new ArrayList<>();
     
-    @OneToMany(mappedBy = "empleadoART", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "empleadoART", cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     private ArrayList<HistorialART> historialART = new ArrayList<>();
 
-    @OneToMany(mappedBy = "empleadoLiquidacion", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "empleadoLiquidacion", cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     private ArrayList<LiquidacionSueldo> liquidaciones = new ArrayList<>();
  
-    @OneToMany(mappedBy = "empleadoEPP", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "empleadoEPP", cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     private ArrayList<EntregaEPP> planillaEPP = new ArrayList<>();
 
-    @OneToMany(mappedBy = "empleadoAsistencia", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "empleadoAsistencia", cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     private ArrayList<Asistencia> asistencias;
       
     public Empleado() {
