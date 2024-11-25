@@ -121,6 +121,16 @@
         
     <section class="home">
 
+        <article id="articleNuevoCargo">
+            <h2>Crear nuevo cargo</h2>
+            <label>Descripcion del nuevo cargo</label>
+            <input type="text" id="nuecoCargo" placeholder="Descripcion">
+            <button id="guardarCargo">Guardar</button>
+        </article>
+        
+        <article id="listaCargos">
+            <h2>Cargos</h2>
+        </article>
 
     </section>
                 

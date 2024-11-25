@@ -1068,3 +1068,25 @@ body.dark .home .text{
     margin: 1%;
     font-size: 30px;
 }
+
+/* ---------------------- estilos pagina jerarquias.jsp --------------------- */
+
+#articleNuevoCargo, #listaCargos{
+    width: 98%;
+    margin: 1%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#articleNuevoCargo label{
+    width: 35%;
+    margin-top: 1%;
+    text-align: center;
+}
+
+#articleNuevoCargo input, #articleNuevoCargo button{
+    width: 30%;
+    margin: 1% 1% 0 0;
+}
