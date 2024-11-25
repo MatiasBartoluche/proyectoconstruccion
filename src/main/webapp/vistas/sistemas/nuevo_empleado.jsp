@@ -102,7 +102,7 @@
                     <li class="nav-link"> <!--------------- Inicio elemento de la lista -->
                         <a href="./sistemas.html">
                             <i class="bx bx-laptop icon"></i>
-                            <span class="text nav-text">Contabilidad</span>
+                            <span class="text nav-text">Sistemas</span>
                         </a>
                     </li> <!------------------------------- fin elemento de la lista -->
                 </ul>
