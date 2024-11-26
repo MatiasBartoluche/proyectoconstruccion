@@ -20,8 +20,7 @@ public class Jerarquia implements Serializable{
     public Jerarquia() {
     }
 
-    public Jerarquia(int id_jerarquia, String descripcion) {
-        this.id_jerarquia = id_jerarquia;
+    public Jerarquia(String descripcion) {
         this.descripcion = descripcion;
     }
 

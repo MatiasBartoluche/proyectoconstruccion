@@ -10,7 +10,7 @@
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         
-        <script src="${pageContext.request.contextPath}/js/detalle_empleado.js"></script>
+        <script src="${pageContext.request.contextPath}/js/jerarquias.js"></script>
     </head>
     <body>
 
@@ -22,6 +22,19 @@
                 response.sendRedirect("index.jsp");
             }
         %>
+
+        <div id="mensajeModalJerarquia" class="modal">
+            <div class="modal-content">
+                <span class="close"></span>
+                <h2>Mensaje del servidor</h2>
+                <div id="contenedorTextoModal">
+                    <p id="mensajeModalTexto"></p>
+                </div>
+                <div class="botonesModal">
+                    <button id="modalJerarquia">Aceptar</button>
+                </div>
+            </div>
+        </div>        
         
     <header class="cabecera">
         Header
@@ -124,7 +137,7 @@
         <article id="articleNuevoCargo">
             <h2>Crear nuevo cargo</h2>
             <label>Descripcion del nuevo cargo</label>
-            <input type="text" id="nuecoCargo" placeholder="Descripcion">
+            <input type="text" id="nuevoCargo" name="nuevoCargo" placeholder="Descripcion">
             <button id="guardarCargo">Guardar</button>
         </article>
         
