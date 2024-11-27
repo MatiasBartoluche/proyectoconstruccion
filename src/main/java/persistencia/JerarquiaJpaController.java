@@ -69,7 +69,7 @@ public class JerarquiaJpaController{
                 jerarquia = em.getReference(Jerarquia.class, id);
                 jerarquia.getIdJerarquia();
             } catch (EntityNotFoundException enfe) {
-                throw new EntityNotFoundException("El Contrato con id " + id + " no existe.");
+                throw new EntityNotFoundException("La jerarquia con id " + id + " no existe.");
             }
             em.remove(jerarquia);
             em.getTransaction().commit();

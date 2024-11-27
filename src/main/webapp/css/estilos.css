@@ -152,6 +152,28 @@ select{
     margin: 1%;
 }
 
+
+.btnIcono{
+    border-radius: 6px;
+    background-color: transparent;
+    border: 1px solid var(--text-color);
+    align-content: center;
+    color: var(--text-color);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.btnIcono:hover{
+    background-color: var(--primary-color);
+    color: var(--sidebar-color);
+}
+
+.btnIcono:hover .icon{
+    color: var(--sidebar-color);
+}
+
 /*------------------------ estilos pagina index.jsp --------------------------*/
 body{
     background-color: var(--body-color);
@@ -871,23 +893,6 @@ body.dark .home .text{
     width: 100%;
 }
 
-.btnIcono{
-    border-radius: 6px;
-    background-color: transparent;
-    border: 1px solid var(--text-color);
-    align-content: center;
-    color: var(--text-color)
-}
-
-.btnIcono:hover{
-    background-color: var(--primary-color);
-    color: var(--sidebar-color);
-}
-
-.btnIcono:hover .icon{
-    color: var(--sidebar-color);
-}
-
 /* ----------------------- inicio estilos detalle_empleado.jsp -------------- */
 
 #detalleEmpleado{
@@ -1071,7 +1076,7 @@ body.dark .home .text{
 
 /* ---------------------- estilos pagina jerarquias.jsp --------------------- */
 
-#articleNuevoCargo, #listaCargos{
+#articleNuevoCargo, #listaCargos, #contenedorCargos{
     width: 98%;
     margin: 1%;
     display: flex;
@@ -1089,4 +1094,44 @@ body.dark .home .text{
 #articleNuevoCargo input, #articleNuevoCargo button{
     width: 30%;
     margin: 1% 1% 0 0;
+}
+
+
+
+.cargo{
+    width: 51%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.cargo input{
+    width: 68%;
+    text-align: center;
+    margin: 1% 0 1% 0;
+    padding: 1%;
+}
+
+.botonesJerarquia{
+    width: 30%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.botonesJerarquia span{
+    width: 40%;
+    margin: 0 5% 0 5%;
+    padding: 2% 0 2% 0;
+}
+
+.btnGuardarJerarquia{
+    display: none;
+    width: 30%;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }

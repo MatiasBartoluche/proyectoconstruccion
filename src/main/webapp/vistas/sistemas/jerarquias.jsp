@@ -32,6 +32,8 @@
                 </div>
                 <div class="botonesModal">
                     <button id="modalJerarquia">Aceptar</button>
+                    <button id="modalBorrarJerarquia">Aceptar</button>
+                    <button id="modalCancelarJerarquia">Cancelar</button>
                 </div>
             </div>
         </div>        
@@ -143,6 +145,7 @@
         
         <article id="listaCargos">
             <h2>Cargos</h2>
+            <div id="contenedorCargos"></div>
         </article>
 
     </section>

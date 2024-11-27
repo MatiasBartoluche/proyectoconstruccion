@@ -72,7 +72,7 @@ function insertarEmpleado(empleado, idLista, tipoClase){
 
     
     // defino una clase "par" o "impar" dependiendo de la variable "tipoClase"
-    if(tipoClase/2 === 0){
+    if(tipoClase%2 === 0){
         clase = 'impar';
     }
     else{
