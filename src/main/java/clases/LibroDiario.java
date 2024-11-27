@@ -30,7 +30,7 @@ public class LibroDiario implements Serializable {
     public LibroDiario() {
     }
 
-    public int getIiLibroDiario() {
+    public int getIdLibroDiario() {
         return id_libro_diario;
     }
 

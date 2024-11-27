@@ -45,7 +45,7 @@ public class SvJerarquias extends HttpServlet {
             case "borrar":{
                     String idJerarquia = request.getParameter("idJerarquia");
                     int numeroJerarquia = Integer.parseInt(idJerarquia);
-                    borrarJerarquia(request, response, numeroJerarquia);
+                    borrarJerarquia(response, numeroJerarquia);
                     System.out.println("borrar jerarquia: ");
                     break;
                 }
@@ -112,12 +112,19 @@ public class SvJerarquias extends HttpServlet {
         response.getWriter().write(respuestaJson);
     }
 
-    private void borrarJerarquia(HttpServletRequest request, HttpServletResponse response, int idJerarquia)  throws ServletException, IOException{
+    private void borrarJerarquia(HttpServletResponse response, int idJerarquia)  throws ServletException, IOException{
         System.out.println("borrar jerarquia: "+idJerarquia);
         
-        controlador.eliminarJerarquia(idJerarquia);
+        String respuestaJson;
         
-        String respuestaJson = "{\"status\": true,  \"mensaje\":\"El cargo ha sido borrado con exito\"}";
+        try{
+            controlador.eliminarJerarquia(idJerarquia);
+        
+            respuestaJson = "{\"status\": true,  \"mensaje\":\"El cargo ha sido borrado con exito\"}";
+        }
+        catch(Exception e){
+            respuestaJson = "{\"status\": true,  \"mensaje\":\"El cargo no se puede borrar, esta siendo ocupado por otros empleados\"}";
+        }       
         response.getWriter().write(respuestaJson);
     }
 }
