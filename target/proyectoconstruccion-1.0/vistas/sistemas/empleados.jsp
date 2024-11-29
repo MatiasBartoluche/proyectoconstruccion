@@ -123,6 +123,10 @@
         
         <a href="./lista_empleados.jsp"> <article class="modulo">Lista de empleados</article> </a>
         
+        <a href="./nuevo_grupo_trabajo.jsp"> <article class="modulo">Crear grupo de trabajo</article> </a>
+        
+        <a href="./lista_grupo_trabajo.jsp"> <article class="modulo">Lista de grupos de trabajo</article> </a>
+        
         <a href="./jerarquias.jsp"> <article class="modulo">Administrar cargos</article> </a>
 
     </section>

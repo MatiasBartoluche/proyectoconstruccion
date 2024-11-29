@@ -1135,3 +1135,59 @@ body.dark .home .text{
     justify-content: center;
     align-items: center;
 }
+
+/* ----------- estilos pagina nuevo_grupo_trabajo.jsp ----------------------- */
+
+#seleccionGrupo{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 98%;
+    margin: 1%;
+}
+
+#capataces, #subcontratistas, #empleados{
+    display: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 98%;
+    margin: 1%;
+}
+
+#contenedorGrupos{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+#contenedorGrupos label, #contenedorGrupos select{
+    width: 30%;
+}
+
+#contenedorGrupos button{
+    width: 15%;
+}
+
+#seleccionarGrupo:disabled ,#aceptarGrupo:disabled, #cancelarGrupo:disabled{
+    background-color: #f5f5f5; /* Fondo gris claro */
+    color: #aaaaaa; /* Texto gris */
+    border: 1px solid #dddddd; /* Borde más claro */
+    cursor: not-allowed; /* Cambia el cursor para indicar que no es editable */
+    opacity: 0.7; /* Reduce la opacidad para dar efecto visual */
+}
+
+#contenedorCapataces, #contenedorEmpleados, #contenedorSubcontratistas{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;   
+}
+
+#nombreGrupo{
+    margin: 1%;
+}
