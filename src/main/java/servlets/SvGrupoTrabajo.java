@@ -65,13 +65,34 @@ public class SvGrupoTrabajo extends HttpServlet {
         String respuestaJson;
         
         try{
+            //primero guardo el grupo, para generar un id
             controlador.crearGrupoTrabajo(grupoRecibido);
+            
+            // recupero el empleado capataz de la base de datos
+            Empleado capataz = controlador.buscarEmpleado(grupoRecibido.getCapataz().getId());
+            // guardo el grupo en el capataz
+            capataz.setGrupo(grupoRecibido);
+            // actualizo los datos del capataz en la base de datos
+            controlador.editarEmpleado(capataz);
+            
+            // por cada empleado de la lista del grupo
+            for(Empleado empleado : grupoRecibido.getListaEmpleados()){
+                // recupero el empleado de la base de datos
+                int idEmpleado = empleado.getId();
+                Empleado actualizar = controlador.buscarEmpleado(idEmpleado);
+                // guardo el grupo en el empleado
+                actualizar.setGrupo(grupoRecibido);
+                // actualizo los datos en la base de datos
+                controlador.editarEmpleado(actualizar);
+            }
+
             respuestaJson = "{\"mensaje\": \"El grupo de trabajo se ha creado con exito\"}";
         }
         catch(Exception e){
             respuestaJson = "{\"mensaje\": \"No se pudo guardar el grupo de trabajo\", \"error\": \" "+e+" \"}";
-        }
+        }   
         response.getWriter().write(respuestaJson);
+        
     }
 
     @Override

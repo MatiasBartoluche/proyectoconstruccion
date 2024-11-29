@@ -28,8 +28,8 @@ public class GrupoTrabajo implements Serializable {
     private Empleado capataz;
     
     // Relación uno-a-muchos para los empleados subalternos, con cascada de actualizaciones
-    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinColumn(name = "id_grupo") // Crea una columna 'id_grupo' en la tabla Empleado para esta relación
+    @OneToMany(mappedBy = "grupo", cascade = {CascadeType.MERGE, CascadeType.REFRESH}, orphanRemoval = true)
+    //@JoinColumn(name = "id_grupo") // Crea una columna 'id_grupo' en la tabla Empleado para esta relación
     private ArrayList<Empleado> empleados = new ArrayList<>();
 
     public GrupoTrabajo() {

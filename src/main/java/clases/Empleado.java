@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Transient;
@@ -59,7 +60,8 @@ public class Empleado implements Serializable {
     @JoinColumn(name = "id_estado", referencedColumnName = "id_estado")
     private EstadoEmpleado estado;
     
-    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToOne//(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn(name = "id_grupo", nullable = false)
     private GrupoTrabajo grupo;
 
     @OneToMany(mappedBy = "empleadoObra", cascade = {CascadeType.MERGE, CascadeType.REFRESH})
