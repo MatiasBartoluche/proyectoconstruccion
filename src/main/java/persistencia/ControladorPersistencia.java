@@ -9,6 +9,7 @@ import clases.Rol;
 import clases.Usuario;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -90,6 +91,13 @@ public class ControladorPersistencia {
         return empleadoJpa.findEmpleadoByLegajo(Legajo);
     }
     
+    public ArrayList<Empleado> findEmpleadosByAttributes(Map<String, Object> parametros){
+        List<Empleado> lista = empleadoJpa.findEmpleadosByAttributes(parametros);
+        
+        ArrayList<Empleado> listaEmpleados = new ArrayList<>(lista);
+        
+        return listaEmpleados;
+    }
     // ###################### creando metodos para EstadoEmpleadoJpaController ###################################
    
     public void crearEstadoEmpleado(EstadoEmpleado estado) {

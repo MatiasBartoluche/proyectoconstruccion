@@ -1,7 +1,9 @@
 package persistencia;
 
 import clases.Empleado;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -143,4 +145,32 @@ public class EmpleadoJpaController{
         }
     }
     
+    public List<Empleado> findEmpleadosByAttributes(Map<String, Object> parametros){
+        EntityManager em = getEntityManager();
+        
+        try {
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Empleado> cq = cb.createQuery(Empleado.class);
+            Root<Empleado> empleado = cq.from(Empleado.class);
+
+            List<Predicate> predicates = new ArrayList<>();
+
+            for (Map.Entry<String, Object> filtro : parametros.entrySet()) {
+                String atributo = filtro.getKey();
+                Object valor = filtro.getValue();
+
+                if (valor instanceof String && !((String) valor).isEmpty()) {
+                    predicates.add((Predicate) cb.like(empleado.get(atributo), "%" + valor + "%"));
+                } else if (valor != null) {
+                    predicates.add((Predicate) cb.equal(empleado.get(atributo), valor));
+                }
+            }
+
+            cq.where((javax.persistence.criteria.Predicate[]) predicates.toArray(new Predicate[0]));
+
+            return em.createQuery(cq).getResultList();
+        } finally {
+            em.close();
+        }
+    }
 }

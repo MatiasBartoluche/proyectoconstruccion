@@ -1,6 +1,7 @@
 package clases;
 
 import java.util.ArrayList;
+import java.util.Map;
 import persistencia.ControladorPersistencia;
 
 public class Controlador {
@@ -58,6 +59,9 @@ public class Controlador {
         return controladorPersistencia.findEmpleadoByLegajo(legajo);
     }
     
+    public ArrayList<Empleado> buscarEmpleadosPorAtributos(Map<String, Object> parametros){
+        return controladorPersistencia.findEmpleadosByAttributes(parametros);
+    }
     // ###################### creando metodos para Estado #######################
     
     
