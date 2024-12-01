@@ -67,8 +67,8 @@ function detalleGrupo(grupo){
         const idGrupo = $(this).attr('id'); // Obtener el legajo del botón
         console.log('accion: '+idGrupo.split('-')[0]);
         console.log('id: '+idGrupo.split('-')[1]);
-        //localStorage.setItem('detalleGrupo', grupo);
-        //window.location.href = "/proyectoconstruccion/vistas/sistemas/detalle_grupo_trabajo.jsp";
+        localStorage.setItem('detalleGrupo', JSON.stringify(grupo));
+        window.location.href = "/proyectoconstruccion/vistas/sistemas/detalle_grupo_trabajo.jsp";
     });
 }
 
