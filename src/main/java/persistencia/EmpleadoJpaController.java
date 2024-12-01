@@ -1,10 +1,11 @@
 package persistencia;
 
 import clases.Empleado;
+import clases.GrupoTrabajo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Predicate;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
@@ -14,6 +15,7 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
 
 public class EmpleadoJpaController{
@@ -168,6 +170,38 @@ public class EmpleadoJpaController{
 
             cq.where((javax.persistence.criteria.Predicate[]) predicates.toArray(new Predicate[0]));
 
+            return em.createQuery(cq).getResultList();
+        } finally {
+            em.close();
+        }
+    }
+    
+    public List<Empleado> findEmpleadosByGroup(Integer idGrupo, String nombreGrupo) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Empleado> cq = cb.createQuery(Empleado.class);
+            Root<Empleado> empleado = cq.from(Empleado.class);
+
+            // Crear un alias para la relación con GrupoTrabajo
+            Join<Empleado, GrupoTrabajo> grupo = empleado.join("grupo");
+
+            List<Predicate> predicates = new ArrayList<>();
+
+            // Filtrar por id del grupo si se proporciona
+            if (idGrupo != null) {
+                predicates.add(cb.equal(grupo.get("id_grupo"), idGrupo));
+            }
+
+            // Filtrar por nombre del grupo si se proporciona
+            if (nombreGrupo != null && !nombreGrupo.isEmpty()) {
+                predicates.add(cb.like(grupo.get("nombre_grupo"), "%" + nombreGrupo + "%"));
+            }
+
+            // Agregar las condiciones al query
+            cq.where(predicates.toArray(new Predicate[0]));
+
+            // Ejecutar la consulta
             return em.createQuery(cq).getResultList();
         } finally {
             em.close();

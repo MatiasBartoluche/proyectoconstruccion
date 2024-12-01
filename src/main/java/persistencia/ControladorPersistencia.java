@@ -4,6 +4,7 @@ import clases.Contrato;
 import clases.Empleado;
 import clases.EstadoEmpleado;
 import clases.GrupoTrabajo;
+import clases.GrupoTrabajoDTO;
 import clases.Jerarquia;
 import clases.Rol;
 import clases.Usuario;
@@ -98,6 +99,13 @@ public class ControladorPersistencia {
         
         return listaEmpleados;
     }
+    
+    public ArrayList<Empleado> findEmpleadoByGroup(int idGrupo, String nombreGrupo){
+        List<Empleado> lista = empleadoJpa.findEmpleadosByGroup(idGrupo, nombreGrupo);
+        ArrayList<Empleado> listaEmpleados = new ArrayList<>(lista);
+        return listaEmpleados;
+    }
+    
     // ###################### creando metodos para EstadoEmpleadoJpaController ###################################
    
     public void crearEstadoEmpleado(EstadoEmpleado estado) {
@@ -158,6 +166,12 @@ public class ControladorPersistencia {
         ArrayList<GrupoTrabajo> listaGrupos = new ArrayList<>(lista);
         
         return listaGrupos;
+    }
+    
+    public ArrayList<GrupoTrabajoDTO> convertirAGrupoTrabajoDTO(List<GrupoTrabajo> grupos){
+        List<GrupoTrabajoDTO> lista = grupoJpa.convertirAGrupoTrabajoDTO(grupos);
+        ArrayList<GrupoTrabajoDTO> gruposDTO = new ArrayList<>(lista);
+        return gruposDTO;
     }
     
     // ############################## creando metodos para JerarquiaJpaController ########################

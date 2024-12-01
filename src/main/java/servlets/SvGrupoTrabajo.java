@@ -3,6 +3,7 @@ package servlets;
 import clases.Controlador;
 import clases.Empleado;
 import clases.GrupoTrabajo;
+import clases.GrupoTrabajoDTO;
 import clases.LocalDateAdapter;
 import clases.Subcontratista;
 import com.google.gson.Gson;
@@ -11,7 +12,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,11 +43,18 @@ public class SvGrupoTrabajo extends HttpServlet {
         // capturo el legajo ingresado
         String mensaje = request.getParameter("mensaje");
         
-        if("Capataz".equals(mensaje)){
-            armarGrupoTrabajo(response);
-        }
-        else if("Subcontratista".equals(mensaje)){
-            armarGrupoSubcontratista(response);
+        if(null != mensaje)switch (mensaje) {
+            case "Capataz":
+                armarGrupoTrabajo(response);
+                break;
+            case "Subcontratista":
+                armarGrupoSubcontratista(response);
+                break;
+            case "grupos":
+                buscarGrupos(response);
+                break;
+            default:
+                break;
         }
     }
 
@@ -153,11 +163,37 @@ public class SvGrupoTrabajo extends HttpServlet {
         //response.getWriter().write();
     }
     
+    public void buscarGrupos(HttpServletResponse response) throws IOException{
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        String respuestaJson = "{\"mensaje\": \"No existen grupos de trabajo\"}";
+        
+        // primero, debo buscar la lista de grupos de trabajo en la base de datos
+        ArrayList<GrupoTrabajo> grupos = controlador.buscarListaGruposTrabajo();
+        
+        if(!grupos.isEmpty()){
+            // si la lista no es vacia, convertir el resultado en dto
+            ArrayList<GrupoTrabajoDTO> gruposDTO = controlador.gruposTrabajoDTO(grupos);
+            Gson gson = new GsonBuilder()
+                .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
+                .create();
+            
+            respuestaJson = gson.toJson(gruposDTO);
+            
+            System.out.println("+++++++++++ gruposDTO: "+gruposDTO);
+            
+            System.out.println(respuestaJson);
+        }
+
+        response.getWriter().write(respuestaJson);
+    }
+    
 // clase que se usa de fotma local para enviar dos listas a traves de un json
     private class CargarDatos{
         List<Empleado> capataces;
         List<Empleado> empleados;
-        List<Subcontratista>subcontratistas;
+        List<Subcontratista> subcontratistas;
+        List<GrupoTrabajo> grupos;
         
         public CargarDatos(){}
 
@@ -185,6 +221,13 @@ public class SvGrupoTrabajo extends HttpServlet {
             this.subcontratistas = subcontratistas;
         }
 
-        
+        public List<GrupoTrabajo> getGrupos() {
+            return grupos;
+        }
+
+        public void setGrupos(List<GrupoTrabajo> grupos) {
+            this.grupos = grupos;
+        }
+
     }
 }

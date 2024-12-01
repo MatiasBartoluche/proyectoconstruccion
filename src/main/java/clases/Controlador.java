@@ -62,6 +62,10 @@ public class Controlador {
     public ArrayList<Empleado> buscarEmpleadosPorAtributos(Map<String, Object> parametros){
         return controladorPersistencia.findEmpleadosByAttributes(parametros);
     }
+    
+    public ArrayList<Empleado> buscarEmpleadosPorGrupo(int idGrupo, String nombre){
+        return controladorPersistencia.findEmpleadoByGroup(idGrupo, nombre);
+    }
     // ###################### creando metodos para Estado #######################
     
     
@@ -105,6 +109,10 @@ public class Controlador {
     
     public ArrayList<GrupoTrabajo> buscarListaGruposTrabajo(){
         return controladorPersistencia.traerListaGruposTrabajo();
+    }
+    
+    public ArrayList<GrupoTrabajoDTO> gruposTrabajoDTO(ArrayList<GrupoTrabajo> grupos){
+        return controladorPersistencia.convertirAGrupoTrabajoDTO(grupos);
     }
     
     // ######################## creando metodos para Jerarquia ##################

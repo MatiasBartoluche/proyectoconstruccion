@@ -1,7 +1,12 @@
 package persistencia;
 
+import clases.Empleado;
+import clases.EmpleadoDTO;
 import clases.GrupoTrabajo;
+import clases.GrupoTrabajoDTO;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
@@ -101,19 +106,48 @@ public class GrupoTrabajoJpaController{
     
     private List<GrupoTrabajo> findGrupoTrabajoEntities(boolean all, int maxResults, int firstResult){
         EntityManager em = getEntityManager();
-        try{
-            //Query query = em.createQuery("SELECT rol FROM rol");
-            CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        try {
+            // Crear y ejecutar la consulta
+            CriteriaQuery<GrupoTrabajo> cq = em.getCriteriaBuilder().createQuery(GrupoTrabajo.class);
             cq.select(cq.from(GrupoTrabajo.class));
-            Query query = em.createQuery(cq);
-            if(!all){
-                query.setMaxResults(maxResults);
-                query.setFirstResult(firstResult);
+            List<GrupoTrabajo> grupos = em.createQuery(cq).getResultList();
+
+            // Cargar las listas de empleados para evitar LazyInitializationException
+            for (GrupoTrabajo grupo : grupos) {
+                grupo.getListaEmpleados().size(); // Forzar la inicialización
+                if (grupo.getCapataz() != null) {
+                    grupo.getCapataz().getNombres(); // Inicializa el capataz
+                }
             }
-            return query.getResultList();
-        }
-        finally{
+
+            return grupos;
+        } finally {
             em.close();
         }
+    }
+    
+    public List<GrupoTrabajoDTO> convertirAGrupoTrabajoDTO(List<GrupoTrabajo> grupos) {
+        List<GrupoTrabajoDTO> dtos = new ArrayList<>();
+        for (GrupoTrabajo grupo : grupos) {
+            GrupoTrabajoDTO dto = new GrupoTrabajoDTO();
+            dto.setIdGrupo(grupo.getIdGrupo());
+            dto.setNombreGrupo(grupo.getNombreGrupo());
+
+            List<EmpleadoDTO> empleadosDTO = grupo.getListaEmpleados().stream().map(empleado -> {
+                EmpleadoDTO empDTO = new EmpleadoDTO();
+                empDTO.setIdEmpleado(empleado.getId());
+                empDTO.setNombres(empleado.getNombres());
+                empDTO.setFechaIngreso(empleado.getFechaIngreso());
+                empDTO.setJerarquia(empleado.getJerarquia());
+                empDTO.setContrato(empleado.getContrato());
+                empDTO.setCuil(empleado.getCuil());
+                empDTO.setLegajo(empleado.getLegajo());
+                return empDTO;
+            }).collect(Collectors.toList());
+
+            dto.setEmpleados(empleadosDTO);
+            dtos.add(dto);
+        }
+        return dtos;
     }
 }
