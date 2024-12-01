@@ -1,6 +1,5 @@
 package persistencia;
 
-import clases.Empleado;
 import clases.EmpleadoDTO;
 import clases.GrupoTrabajo;
 import clases.GrupoTrabajoDTO;
@@ -11,7 +10,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaQuery;
 
 public class GrupoTrabajoJpaController{
@@ -132,11 +130,13 @@ public class GrupoTrabajoJpaController{
             GrupoTrabajoDTO dto = new GrupoTrabajoDTO();
             dto.setIdGrupo(grupo.getIdGrupo());
             dto.setNombreGrupo(grupo.getNombreGrupo());
+            //dto.setCapataz(grupo.getCapataz());
 
             List<EmpleadoDTO> empleadosDTO = grupo.getListaEmpleados().stream().map(empleado -> {
                 EmpleadoDTO empDTO = new EmpleadoDTO();
                 empDTO.setIdEmpleado(empleado.getId());
                 empDTO.setNombres(empleado.getNombres());
+                empDTO.setApellidos(empleado.getApellidos());
                 empDTO.setFechaIngreso(empleado.getFechaIngreso());
                 empDTO.setJerarquia(empleado.getJerarquia());
                 empDTO.setContrato(empleado.getContrato());

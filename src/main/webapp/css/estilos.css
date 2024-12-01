@@ -174,6 +174,53 @@ select{
     color: var(--sidebar-color);
 }
 
+
+/*--------------------------------------- inicio estilos clase modulo -------------------------------------------*/
+
+/* estos estilos se aplican a los modulos de la pagina principal, sociedades*/
+.home .modulo{
+    font-size: 30px;
+    font-weight: 500;
+    background-color: var(--sidebar-color);
+    color: var(--text-color);
+    margin: 2% 4%;
+    width: 40%;
+    height: 120px;
+    float: left;
+    text-align: center;
+    border-radius: 6px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center; /*alineamiento vertical*/
+    justify-content: center; /*alineamiento horizontal*/
+}
+
+.modulo .icono{
+    width: 20%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center; /*alineamiento vertical*/
+    justify-content: center; /*alineamiento horizontal*/
+}
+
+.modulo .moduloTexto{
+    width: 78%;
+    margin: 1%;
+    align-content: center; /*alineamiento vertical*/
+    justify-content: center; /*alineamiento horizontal*/
+}
+
+.modulo:hover{
+    -webkit-transform:scale(1.2);
+    transform:scale(1.2);
+    box-shadow: 14px 14px 20px 0 var(--text-color);
+    -webkit-box-shadow: 14px 14px 20px 0 var(--text-color);
+    transition: var(--tran-05);
+}
+
+/*--------------------------------------- fin estilos clase modulo -------------------------------------------*/
+
+
 /*------------------------ estilos pagina index.jsp --------------------------*/
 body{
     background-color: var(--body-color);
@@ -609,51 +656,6 @@ body.dark .home .text{
     width: calc(100% - 78px);
 }
 /*--------------------------------------- fin estilos contenedor home/section ------------------------------*/
-
-/*--------------------------------------- inicio estilos article -------------------------------------------*/
-
-/* estos estilos se aplican a los modulos de la pagina principal, sociedades*/
-.home .modulo{
-    font-size: 30px;
-    font-weight: 500;
-    background-color: var(--sidebar-color);
-    color: var(--text-color);
-    margin: 2% 4%;
-    width: 40%;
-    height: 120px;
-    float: left;
-    text-align: center;
-    border-radius: 6px;
-    display: flex;
-    flex-wrap: wrap;
-    align-content: center; /*alineamiento vertical*/
-    justify-content: center; /*alineamiento horizontal*/
-}
-
-.modulo .icono{
-    width: 20%;
-    display: flex;
-    flex-wrap: wrap;
-    align-content: center; /*alineamiento vertical*/
-    justify-content: center; /*alineamiento horizontal*/
-}
-
-.modulo .moduloTexto{
-    width: 78%;
-    margin: 1%;
-    align-content: center; /*alineamiento vertical*/
-    justify-content: center; /*alineamiento horizontal*/
-}
-
-.modulo:hover{
-    -webkit-transform:scale(1.2);
-    transform:scale(1.2);
-    box-shadow: 14px 14px 20px 0 var(--text-color);
-    -webkit-box-shadow: 14px 14px 20px 0 var(--text-color);
-    transition: var(--tran-05);
-}
-
-/*--------------------------------------- fin estilos article -------------------------------------------*/
 
 /*---------------------------------- inicio estilos clase "formulario" ----------------------------------*/
 
@@ -1190,4 +1192,46 @@ body.dark .home .text{
 
 #nombreGrupo{
     margin: 1%;
+}
+
+/* ---------------- inicio estilos pagina lista_grupo_trabajo.jsp ----------- */
+
+#homeListaGrupos .grupos{
+    font-size: 20px;
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 45%;
+    margin: 2%;
+}
+
+#homeListaGrupos .grupos .contenedorImagen{
+    width: 30%;
+    margin: 0;
+    padding: 2%;
+}
+
+#homeListaGrupos .grupos img{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#homeListaGrupos .grupos .infoGrupo{
+    width: 60%;
+}
+
+#homeListaGrupos .grupos .botonesGrupo{
+    width: 10%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+#homeListaGrupos .grupos .botonesGrupo .btnVerGrupo,
+#homeListaGrupos .grupos .botonesGrupo .btnBorrarGrupo{
+    width: 100%;
 }

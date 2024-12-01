@@ -36,7 +36,9 @@ public class RoleFilter implements Filter {
         }
         
         // Permitir acceso a recursos estáticos (CSS, JS, imágenes, etc)
-        if (uri.startsWith(request.getContextPath() + "/css") || uri.startsWith(request.getContextPath() + "/js") ) {
+        if (uri.startsWith(request.getContextPath() + "/css")
+                || uri.startsWith(request.getContextPath() + "/js")
+                || uri.startsWith(request.getContextPath() + "/img")) {
             chain.doFilter(req, res);
             return;
         }

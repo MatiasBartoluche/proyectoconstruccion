@@ -12,9 +12,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -63,13 +61,10 @@ public class SvGrupoTrabajo extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-
         // request.getReader retorna un Reader que permite leer la peticion
         BufferedReader leerDatos = request.getReader();
-        
         //construyo el Gson con LocalDateAdapter
         Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
-        
         GrupoTrabajo grupoRecibido = gson.fromJson(leerDatos, GrupoTrabajo.class);
         
         String respuestaJson;
@@ -77,7 +72,6 @@ public class SvGrupoTrabajo extends HttpServlet {
         try{
             //primero guardo el grupo, para generar un id
             controlador.crearGrupoTrabajo(grupoRecibido);
-            
             // recupero el empleado capataz de la base de datos
             Empleado capataz = controlador.buscarEmpleado(grupoRecibido.getCapataz().getId());
             // guardo el grupo en el capataz
@@ -95,7 +89,6 @@ public class SvGrupoTrabajo extends HttpServlet {
                 // actualizo los datos en la base de datos
                 controlador.editarEmpleado(actualizar);
             }
-
             respuestaJson = "{\"mensaje\": \"El grupo de trabajo se ha creado con exito\"}";
         }
         catch(Exception e){
@@ -113,11 +106,11 @@ public class SvGrupoTrabajo extends HttpServlet {
     public void armarGrupoTrabajo(HttpServletResponse response) throws IOException{
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        
+        // inicializo un string con contenido json
         String respuestaJson = "{\"mensaje\": \"No existen empleados y/o capataces para armar un grupo de trabajo\"}";
-        
+        // consulto lista de empleados
         ArrayList<Empleado> listaEmpleados = controlador.buscarListaEmpleados();
-        
+        // inicializo listas de empleados y capataces
         ArrayList<Empleado> capataces = new ArrayList<>();
         ArrayList<Empleado> empleados = new ArrayList<>();
         
@@ -128,27 +121,28 @@ public class SvGrupoTrabajo extends HttpServlet {
                 if("Capataz".equals(emp.getJerarquia().getDescripcion())
                         && "Obrero".equals(emp.getContrato().getDescripcion())
                         && emp.getGrupo() == null){
-                    capataces.add(emp);
+                    capataces.add(emp); // agrego a la lista de capataces
                 }
                 // empleado contrato "obrero" que no sea capataz y no pertenezca a un grupo
                 else if("Obrero".equals(emp.getContrato().getDescripcion())
                         && !"Capataz".equals(emp.getJerarquia().getDescripcion())
                         && emp.getGrupo() == null){
-                    empleados.add(emp);
+                    empleados.add(emp); // agrego a la lista de empleados
                 }
             }
             // ambas listas debe contener al menos un elemento para poder crear un grupo
             if(!capataces.isEmpty() && !empleados.isEmpty()){
                 CargarDatos datos = new CargarDatos();
+                // agrego datos a la clase
                 datos.setCapataces(capataces);
                 datos.setEmpleados(empleados);
-
+                // conviero a json
                 Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
-
+                // cambio el valor del string
                 respuestaJson = gson.toJson(datos);
             }
         }
-        
+        // envio el string
         response.getWriter().write(respuestaJson);
     }
     
@@ -167,24 +161,14 @@ public class SvGrupoTrabajo extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         String respuestaJson = "{\"mensaje\": \"No existen grupos de trabajo\"}";
-        
         // primero, debo buscar la lista de grupos de trabajo en la base de datos
         ArrayList<GrupoTrabajo> grupos = controlador.buscarListaGruposTrabajo();
-        
+        // si la lista no es vacia, convertir el resultado en dto
         if(!grupos.isEmpty()){
-            // si la lista no es vacia, convertir el resultado en dto
             ArrayList<GrupoTrabajoDTO> gruposDTO = controlador.gruposTrabajoDTO(grupos);
-            Gson gson = new GsonBuilder()
-                .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
-                .create();
-            
+            Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
             respuestaJson = gson.toJson(gruposDTO);
-            
-            System.out.println("+++++++++++ gruposDTO: "+gruposDTO);
-            
-            System.out.println(respuestaJson);
         }
-
         response.getWriter().write(respuestaJson);
     }
     

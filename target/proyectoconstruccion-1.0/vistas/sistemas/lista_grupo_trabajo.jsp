@@ -117,7 +117,7 @@
         </div>
     </nav>        
         
-    <section class="home">
+    <section class="home" id="homeListaGrupos">
 
 
     </section>

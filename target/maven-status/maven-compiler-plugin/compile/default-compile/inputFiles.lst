@@ -27,9 +27,11 @@ D:\github\proyectoconstruccion\src\main\java\clases\Rol.java
 D:\github\proyectoconstruccion\src\main\java\servlets\SvJerarquias.java
 D:\github\proyectoconstruccion\src\main\java\persistencia\SeguroJpaController.java
 D:\github\proyectoconstruccion\src\main\java\clases\Inspeccion.java
+D:\github\proyectoconstruccion\src\main\java\clases\GrupoTrabajoDTO.java
 D:\github\proyectoconstruccion\src\main\java\clases\FacturaProveedor.java
 D:\github\proyectoconstruccion\src\main\java\clases\GrupoTrabajo.java
 D:\github\proyectoconstruccion\src\main\java\persistencia\GrupoTrabajoJpaController.java
+D:\github\proyectoconstruccion\src\main\java\clases\EmpleadoDTO.java
 D:\github\proyectoconstruccion\src\main\java\persistencia\FacturaSubcontratistaJpaController.java
 D:\github\proyectoconstruccion\src\main\java\persistencia\UsuarioJpaController.java
 D:\github\proyectoconstruccion\src\main\java\clases\Contrato.java

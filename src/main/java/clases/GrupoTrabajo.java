@@ -26,7 +26,7 @@ public class GrupoTrabajo implements Serializable {
     // crea la columna capataz_id en la tabla grupotrabajo, que hace referencia al legajo del empleado capataz
     @OneToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "capataz_id", referencedColumnName = "id_empleado")
-    @Expose(serialize = false)
+    //@Expose(serialize = false)
     private Empleado capataz;
     
     // Relación uno-a-muchos para los empleados subalternos, con cascada de actualizaciones
