@@ -21,7 +21,8 @@ public class RoleFilter implements Filter {
 // ----------------------- exclusion del filto para recursos generales --------------------------------
 
         // excluir las paginas del filtro
-        if (uri.contains("/index.jsp") || uri.contains("/registrar.jsp") || uri.contains("/noaprobado.jsp")) {
+        if (uri.contains("/index.jsp") || uri.contains("/registrar.jsp")
+                || uri.contains("/noaprobado.jsp") || uri.contains("/pendiente.jsp")) {
             chain.doFilter(req, res);
             return;
         }

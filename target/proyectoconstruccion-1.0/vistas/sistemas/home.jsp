@@ -44,49 +44,49 @@
                 <ul class="menu-links">
 
                     <li class="nav-link"> <!--------------- Inicio elemento de la lista -->
-                        <a href="./sociedades.html">
+                        <a href="../pendiente.jsp">
                             <i class="bx bx-food-menu icon"></i>
                             <span class="text nav-text">Sociedades</span>
                         </a>
                     </li> <!------------------------------- fin elemento de la lista -->
 
                     <li class="nav-link"> <!--------------- Inicio elemento de la lista -->
-                        <a href="./obrass.html">
+                        <a href="../pendiente.jsp">
                             <i class="bx bx-buildings icon"></i>
                             <span class="text nav-text">Obras</span>
                         </a>
                     </li> <!------------------------------- fin elemento de la lista -->
 
                     <li class="nav-link"> <!--------------- Inicio elemento de la lista -->
-                        <a href="./empleados.html">
+                        <a href="./empleados.jsp">
                             <i class="bx bx-hard-hat icon"></i>
                             <span class="text nav-text">Empleados</span>
                         </a>
                     </li> <!------------------------------- fin elemento de la lista -->
 
                     <li class="nav-link"> <!--------------- Inicio elemento de la lista -->
-                        <a href="./subcontratista.html">
+                        <a href="../pendiente.jsp">
                             <i class="bx bx-user-plus icon"></i>
                             <span class="text nav-text">Subcontratista</span>
                         </a>
                     </li> <!------------------------------- fin elemento de la lista -->
 
                     <li class="nav-link"> <!--------------- Inicio elemento de la lista -->
-                        <a href="./proveedores.html">
+                        <a href="../pendiente.jsp">
                             <i class="bx bx-cart-add icon"></i>
                             <span class="text nav-text">Proveedores</span>
                         </a>
                     </li> <!------------------------------- fin elemento de la lista -->
 
                     <li class="nav-link"> <!--------------- Inicio elemento de la lista -->
-                        <a href="./contabilidad.html">
+                        <a href="../pendiente.jsp">
                             <i class="bx bx-line-chart icon"></i>
                             <span class="text nav-text">Contabilidad</span>
                         </a>
                     </li> <!------------------------------- fin elemento de la lista -->
                     
                     <li class="nav-link"> <!--------------- Inicio elemento de la lista -->
-                        <a href="./sistemas.html">
+                        <a href="../pendiente.jsp">
                             <i class="bx bx-laptop icon"></i>
                             <span class="text nav-text">Sistemas</span>
                         </a>
@@ -119,7 +119,7 @@
         
     <section class="home">
 
-        <a href="./sociedades.jsp">
+        <a href="../pendiente.jsp">
             <article class="modulo">
                 <div class="icono">
                     <i class="bx bx-food-menu icon"></i>
@@ -141,7 +141,7 @@
             </article> 
         </a>
 
-        <a href="./obras.jsp">
+        <a href="../pendiente.jsp">
             <article class="modulo">
                 <div class="icono">
                     <i class="bx bx-buildings icon"></i>
@@ -152,7 +152,7 @@
             </article> 
         </a>
 
-        <a href="./proveedores.jsp">
+        <a href="../pendiente.jsp">
             <article class="modulo">
                 <div class="icono">
                     <i class="bx bx-cart-add icon"></i>
@@ -163,7 +163,7 @@
             </article>
         </a>
 
-        <a href="./subcontratistas.jsp">
+        <a href="../pendiente.jsp">
             <article class="modulo">
                 <div class="icono">
                     <i class="bx bx-user-plus icon"></i>
@@ -174,7 +174,7 @@
             </article> 
         </a>
 
-        <a href="./contabilidad.jsp">
+        <a href="../pendiente.jsp">
             <article class="modulo">
                 <div class="icono">
                     <i class="bx bx-line-chart icon"></i>
@@ -185,7 +185,7 @@
             </article> 
         </a>
         
-        <a href="./sistemas.jsp">
+        <a href="../pendiente.jsp">
             <article class="modulo">
                 <div class="icono">
                     <i class="bx bx-laptop icon"></i>
