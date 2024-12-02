@@ -3,7 +3,7 @@ package servlets;
 import clases.Controlador;
 import clases.Empleado;
 import clases.GrupoTrabajo;
-import clases.GrupoTrabajoDTO;
+import clasesDTO.GrupoTrabajoDTO;
 import clases.LocalDateAdapter;
 import clases.Subcontratista;
 import com.google.gson.Gson;
@@ -161,11 +161,12 @@ public class SvGrupoTrabajo extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         String respuestaJson = "{\"mensaje\": \"No existen grupos de trabajo\"}";
+        
         // primero, debo buscar la lista de grupos de trabajo en la base de datos
         ArrayList<GrupoTrabajo> grupos = controlador.buscarListaGruposTrabajo();
         // si la lista no es vacia, convertir el resultado en dto
         if(!grupos.isEmpty()){
-            ArrayList<GrupoTrabajoDTO> gruposDTO = controlador.gruposTrabajoDTO(grupos);
+            ArrayList<GrupoTrabajoDTO> gruposDTO = controlador.convertirListaGruposTrabajoDTO(grupos);
             Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
             respuestaJson = gson.toJson(gruposDTO);
         }

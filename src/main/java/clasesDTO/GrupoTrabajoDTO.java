@@ -1,5 +1,6 @@
-package clases;
+package clasesDTO;
 
+import clases.Empleado;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,10 +8,17 @@ import java.util.List;
 public class GrupoTrabajoDTO {
     private int id_grupo;
     private String nombre_grupo;
-    private Empleado capataz;
-    private List<EmpleadoDTO> empleados = new ArrayList<>();
+    private EmpleadoDTO capataz;
+    private List<EmpleadoDTO> empleados;
 
     public GrupoTrabajoDTO() {
+    }
+
+    public GrupoTrabajoDTO(int id_grupo, String nombre_grupo, EmpleadoDTO capataz, List<EmpleadoDTO> empleados) {
+        this.id_grupo = id_grupo;
+        this.nombre_grupo = nombre_grupo;
+        this.capataz = capataz;
+        this.empleados = empleados;
     }
 
     public int getIdGrupo() {
@@ -29,11 +37,11 @@ public class GrupoTrabajoDTO {
         this.nombre_grupo = nombre_grupo;
     }
 
-    public Empleado getCapataz() {
+    public EmpleadoDTO getCapataz() {
         return capataz;
     }
 
-    public void setCapataz(Empleado capataz) {
+    public void setCapataz(EmpleadoDTO capataz) {
         this.capataz = capataz;
     }
 
@@ -41,7 +49,7 @@ public class GrupoTrabajoDTO {
         return empleados;
     }
 
-    public void setEmpleados(List<EmpleadoDTO> empleados) {
+    public void setEmpleados(ArrayList<EmpleadoDTO> empleados) {
         this.empleados = empleados;
     }
 }

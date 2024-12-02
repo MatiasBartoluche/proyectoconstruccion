@@ -1,8 +1,21 @@
 package persistencia;
 
+import clases.Asistencia;
+import clases.Contrato;
 import clases.Empleado;
+import clases.EmpleadoObra;
+import clases.EntregaEPP;
+import clases.EstadoEmpleado;
 import clases.GrupoTrabajo;
+import clases.HistorialART;
+import clases.Jerarquia;
+import clases.LiquidacionSueldo;
+import clasesDTO.EmpleadoDTO;
+import clasesDTO.GrupoTrabajoDTO;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.criteria.Predicate;
@@ -162,13 +175,13 @@ public class EmpleadoJpaController{
                 Object valor = filtro.getValue();
 
                 if (valor instanceof String && !((String) valor).isEmpty()) {
-                    predicates.add((Predicate) cb.like(empleado.get(atributo), "%" + valor + "%"));
+                    predicates.add(cb.like(empleado.get(atributo), "%" + valor + "%"));
                 } else if (valor != null) {
-                    predicates.add((Predicate) cb.equal(empleado.get(atributo), valor));
+                    predicates.add(cb.equal(empleado.get(atributo), valor));
                 }
             }
 
-            cq.where((javax.persistence.criteria.Predicate[]) predicates.toArray(new Predicate[0]));
+            cq.where(predicates.toArray(new Predicate[0]));
 
             return em.createQuery(cq).getResultList();
         } finally {
@@ -206,5 +219,67 @@ public class EmpleadoJpaController{
         } finally {
             em.close();
         }
+    }
+    
+    //convertir una instancia de Empleado a EmpleadoDto 
+    public EmpleadoDTO convertirAEmpleadoDTO(Empleado empleado) {
+        EmpleadoDTO empDTO = null;
+        GrupoTrabajoDTO grupoDTO = null;
+        // Obtener datos del grupo y capataz si existen
+        int idGrupo = 0;
+        String nombreGrupo = null;
+        if (empleado == null) {
+            empDTO = null;
+        }
+        
+        /*if (empleado.getGrupo() != null) {
+             nombreGrupo = empleado.getGrupo().getNombre(); // Nombre del grupo
+             if (empleado.getGrupo().getCapataz() != null) {
+                 nombreCapataz = empleado.getGrupo().getCapataz().getNombre(); // Nombre del capataz
+             }
+         }*/
+       
+        empDTO = new EmpleadoDTO();
+        empDTO.setIdEmpleado(empleado.getId());
+        empDTO.setLegajo(empleado.getLegajo());
+        empDTO.setNombres(empleado.getNombres());
+        empDTO.setApellidos(empleado.getApellidos());
+        empDTO.setCuil(empleado.getCuil());
+        empDTO.setCalle(empleado.getCalle());
+        empDTO.setAltura(empleado.getAltura());
+        empDTO.setPiso(empleado.getPiso());
+        empDTO.setLocalidad(empleado.getLocalidad());
+        empDTO.setTelefono(empleado.getTelefono());
+        empDTO.setTelefonoFamiliar(empleado.getTelefonoFamiliar());
+        empDTO.setFotoDni(empleado.getFotoDni());
+        empDTO.setFechaIngreso(empleado.getFechaIngreso());
+        empDTO.setDespido(empleado.isDespido());
+        empDTO.setSueldoBase(empleado.getSueldoBase());
+        
+        empDTO.setJerarquia(empleado.getJerarquia());
+        empDTO.setContrato(empleado.getContrato());
+        empDTO.setEstado(empleado.getEstado());
+        //empDTO.setGrupo();
+        empDTO.setAsignaciones(empleado.getAsignaciones());
+        empDTO.setHistorialART(empleado.getHistorialART());
+        empDTO.setLiquidaciones(empleado.getLiquidaciones());
+        empDTO.setPlanillaEPP(empleado.getPlanillaEPP());
+        empDTO.setAsistencias(empleado.getAsistencias());
+//----------------------------------------------------------------------------------
+
+        //return new EmpleadoDTO();
+        return empDTO;
+    }
+
+    public List<EmpleadoDTO> convertirListaAEmpleadoDTO(List<Empleado> empleados) {
+        if (empleados == null || empleados.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        List<EmpleadoDTO> listaDTO = new ArrayList<>();
+        for (Empleado empleado : empleados) {
+            listaDTO.add(convertirAEmpleadoDTO(empleado));
+        }
+        return listaDTO;
     }
 }

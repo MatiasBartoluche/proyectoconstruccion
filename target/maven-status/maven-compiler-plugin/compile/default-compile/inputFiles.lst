@@ -9,6 +9,7 @@ D:\github\proyectoconstruccion\src\main\java\persistencia\EmpleadoObraJpaControl
 D:\github\proyectoconstruccion\src\main\java\persistencia\JerarquiaJpaController.java
 D:\github\proyectoconstruccion\src\main\java\clases\EmpleadoObra.java
 D:\github\proyectoconstruccion\src\main\java\persistencia\FacturaProveedorJpaController.java
+D:\github\proyectoconstruccion\src\main\java\clasesDTO\EmpleadoDTO.java
 D:\github\proyectoconstruccion\src\main\java\clases\RegistroContable.java
 D:\github\proyectoconstruccion\src\main\java\clases\LibroDiario.java
 D:\github\proyectoconstruccion\src\main\java\persistencia\AsientoContableJpaController.java
@@ -19,6 +20,7 @@ D:\github\proyectoconstruccion\src\main\java\clases\Jerarquia.java
 D:\github\proyectoconstruccion\src\main\java\persistencia\InspeccionJpaController.java
 D:\github\proyectoconstruccion\src\main\java\persistencia\EmpleadoJpaController.java
 D:\github\proyectoconstruccion\src\main\java\clases\Columna.java
+D:\github\proyectoconstruccion\src\main\java\clasesDTO\GrupoTrabajoDTO.java
 D:\github\proyectoconstruccion\src\main\java\clases\Empleado.java
 D:\github\proyectoconstruccion\src\main\java\persistencia\SociedadJpaController.java
 D:\github\proyectoconstruccion\src\main\java\servlets\SvDetalleEmpleado.java
@@ -27,11 +29,9 @@ D:\github\proyectoconstruccion\src\main\java\clases\Rol.java
 D:\github\proyectoconstruccion\src\main\java\servlets\SvJerarquias.java
 D:\github\proyectoconstruccion\src\main\java\persistencia\SeguroJpaController.java
 D:\github\proyectoconstruccion\src\main\java\clases\Inspeccion.java
-D:\github\proyectoconstruccion\src\main\java\clases\GrupoTrabajoDTO.java
 D:\github\proyectoconstruccion\src\main\java\clases\FacturaProveedor.java
 D:\github\proyectoconstruccion\src\main\java\clases\GrupoTrabajo.java
 D:\github\proyectoconstruccion\src\main\java\persistencia\GrupoTrabajoJpaController.java
-D:\github\proyectoconstruccion\src\main\java\clases\EmpleadoDTO.java
 D:\github\proyectoconstruccion\src\main\java\persistencia\FacturaSubcontratistaJpaController.java
 D:\github\proyectoconstruccion\src\main\java\persistencia\UsuarioJpaController.java
 D:\github\proyectoconstruccion\src\main\java\clases\Contrato.java

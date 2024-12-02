@@ -1,6 +1,4 @@
-$(document).ready(function(){
-    console.log('grupos');
-    
+$(document).ready(function(){    
     buscarGrupos('grupos');
 });
 
@@ -11,7 +9,13 @@ function buscarGrupos(mensaje){
         data: {mensaje: mensaje},
         dataType: 'json',
         success: function (response) {
-            insertarGrupos(response);
+            if(response.mensaje){
+                console.log(response);
+                $('#homeListaGrupos').append('<article> <h1>No existen grupos de trabajo</h1> </article>');
+            }
+            else{
+                insertarGrupos(response);
+            }
         },
         error: function (xhr, status, error) {
             console.error("Error:", error);
@@ -25,18 +29,11 @@ function insertarGrupos(lista){
         console.log(lista[indice]);
         var idGrupo = lista[indice].id_grupo;
         var nombreGrupo = lista[indice].nombre_grupo;
-        var capataz = '';
-        var cantidadEmpleados = lista[indice].empleados.length;
+        var capataz = lista[indice].capataz;
+        var cantidadEmpleados = 1 + lista[indice].empleados.length; // cantidad de empleados de la lista mas el capataz
         
         if(lista[indice].nombre_grupo === '' || lista[indice].nombre_grupo === undefined){
             nombreGrupo = 'Sin nombre';
-        }
-        
-        for(indiceEmpleados = 0; indiceEmpleados < lista[indice].empleados.length; indiceEmpleados++){
-            if(lista[indice].empleados[indiceEmpleados].jerarquia.descripcion === 'Capataz'){
-                capataz = lista[indice].empleados[indiceEmpleados];
-            }
-            //indiceEmpleados = indiceEmpleados + 1;
         }
 
         $('#homeListaGrupos').append('<article class="modulo grupos">'+

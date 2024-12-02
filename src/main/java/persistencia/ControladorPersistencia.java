@@ -4,10 +4,11 @@ import clases.Contrato;
 import clases.Empleado;
 import clases.EstadoEmpleado;
 import clases.GrupoTrabajo;
-import clases.GrupoTrabajoDTO;
+import clasesDTO.GrupoTrabajoDTO;
 import clases.Jerarquia;
 import clases.Rol;
 import clases.Usuario;
+import clasesDTO.EmpleadoDTO;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -106,6 +107,16 @@ public class ControladorPersistencia {
         return listaEmpleados;
     }
     
+    public EmpleadoDTO convertirAEmpleadoDTO(Empleado emp){
+        return empleadoJpa.convertirAEmpleadoDTO(emp);
+    }
+    
+    public ArrayList<EmpleadoDTO> convertirListaAEmpleadoDTO(List<Empleado> empleados){
+        List<EmpleadoDTO> lista = empleadoJpa.convertirListaAEmpleadoDTO(empleados);
+        ArrayList<EmpleadoDTO> empleadosDTO = new ArrayList<>(lista);
+        return empleadosDTO;
+    }
+    
     // ###################### creando metodos para EstadoEmpleadoJpaController ###################################
    
     public void crearEstadoEmpleado(EstadoEmpleado estado) {
@@ -168,8 +179,12 @@ public class ControladorPersistencia {
         return listaGrupos;
     }
     
-    public ArrayList<GrupoTrabajoDTO> convertirAGrupoTrabajoDTO(List<GrupoTrabajo> grupos){
-        List<GrupoTrabajoDTO> lista = grupoJpa.convertirAGrupoTrabajoDTO(grupos);
+    public GrupoTrabajoDTO convertirGrupoTrabajoDTO(GrupoTrabajo grupo){
+        return grupoJpa.convertirGrupoTrabajoDTO(grupo);
+    }
+    
+    public ArrayList<GrupoTrabajoDTO> convertirListaGrupoTrabajoDTO(List<GrupoTrabajo> grupos){
+        List<GrupoTrabajoDTO> lista = grupoJpa.convertirListaGrupoTrabajoDTO(grupos);
         ArrayList<GrupoTrabajoDTO> gruposDTO = new ArrayList<>(lista);
         return gruposDTO;
     }

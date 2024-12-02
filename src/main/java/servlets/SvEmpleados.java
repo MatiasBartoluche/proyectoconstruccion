@@ -3,11 +3,13 @@ package servlets;
 import clases.Controlador;
 import clases.Empleado;
 import clases.LocalDateAdapter;
+import clasesDTO.EmpleadoDTO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -36,11 +38,12 @@ public class SvEmpleados extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         
-        List<Empleado> empleados = controlador.buscarListaEmpleados();
+        ArrayList<Empleado> empleados = controlador.buscarListaEmpleados();
+        ArrayList<EmpleadoDTO> empleadosDTO = controlador.convertirListaAEmpleadosDTO(empleados);
         
         Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
         
-        String listaEmpleados = gson.toJson(empleados);
+        String listaEmpleados = gson.toJson(empleadosDTO);
         
         response.getWriter().write(listaEmpleados);
     }

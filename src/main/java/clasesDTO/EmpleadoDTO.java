@@ -1,5 +1,13 @@
-package clases;
+package clasesDTO;
 
+import clases.Asistencia;
+import clases.Contrato;
+import clases.EmpleadoObra;
+import clases.EntregaEPP;
+import clases.EstadoEmpleado;
+import clases.HistorialART;
+import clases.Jerarquia;
+import clases.LiquidacionSueldo;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;

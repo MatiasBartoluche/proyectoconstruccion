@@ -26,7 +26,6 @@ persistencia\ObraJpaController.class
 clases\Columna.class
 clases\Jerarquia.class
 clases\RegistroContable.class
-clases\GrupoTrabajoDTO.class
 persistencia\ContratoJpaController.class
 persistencia\EmpleadoJpaController.class
 servlets\SvResultadoBuscarLegajo.class
@@ -39,7 +38,7 @@ clases\EmpleadoObra.class
 clases\GrupoTrabajo.class
 clases\Rubro.class
 servlets\SvDetalleEmpleado.class
-clases\EmpleadoDTO.class
+clasesDTO\EmpleadoDTO.class
 com\mycompany\proyectoconstruccion\JakartaRestConfiguration.class
 persistencia\EPPJpaController.class
 persistencia\exceptions\NonexistentEntityException.class
@@ -72,6 +71,7 @@ clases\RoleFilter.class
 persistencia\PlanoJpaController.class
 clases\GrupoAportes.class
 clases\TipoAsiento.class
+clasesDTO\GrupoTrabajoDTO.class
 servlets\SvNuevoEmpleado$CargarDatos.class
 persistencia\RegistroContableJpaController.class
 servlets\SvGrupoTrabajo.class

@@ -1,9 +1,11 @@
 package persistencia;
 
-import clases.EmpleadoDTO;
+import clases.Empleado;
+import clasesDTO.EmpleadoDTO;
 import clases.GrupoTrabajo;
-import clases.GrupoTrabajoDTO;
+import clasesDTO.GrupoTrabajoDTO;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
@@ -123,31 +125,36 @@ public class GrupoTrabajoJpaController{
             em.close();
         }
     }
-    
-    public List<GrupoTrabajoDTO> convertirAGrupoTrabajoDTO(List<GrupoTrabajo> grupos) {
-        List<GrupoTrabajoDTO> dtos = new ArrayList<>();
-        for (GrupoTrabajo grupo : grupos) {
-            GrupoTrabajoDTO dto = new GrupoTrabajoDTO();
-            dto.setIdGrupo(grupo.getIdGrupo());
-            dto.setNombreGrupo(grupo.getNombreGrupo());
-            //dto.setCapataz(grupo.getCapataz());
 
-            List<EmpleadoDTO> empleadosDTO = grupo.getListaEmpleados().stream().map(empleado -> {
-                EmpleadoDTO empDTO = new EmpleadoDTO();
-                empDTO.setIdEmpleado(empleado.getId());
-                empDTO.setNombres(empleado.getNombres());
-                empDTO.setApellidos(empleado.getApellidos());
-                empDTO.setFechaIngreso(empleado.getFechaIngreso());
-                empDTO.setJerarquia(empleado.getJerarquia());
-                empDTO.setContrato(empleado.getContrato());
-                empDTO.setCuil(empleado.getCuil());
-                empDTO.setLegajo(empleado.getLegajo());
-                return empDTO;
-            }).collect(Collectors.toList());
-
-            dto.setEmpleados(empleadosDTO);
-            dtos.add(dto);
+   public GrupoTrabajoDTO convertirGrupoTrabajoDTO(GrupoTrabajo grupoTrabajo) {
+        EmpleadoJpaController empJpa = new EmpleadoJpaController();
+        if (grupoTrabajo == null) {
+            return null;
         }
-        return dtos;
+
+        EmpleadoDTO capataz = empJpa.convertirAEmpleadoDTO(grupoTrabajo.getCapataz());
+
+
+        // Obtener los nombres de los empleados
+        List<Empleado> listaEmpleados = grupoTrabajo.getListaEmpleados();
+        List<EmpleadoDTO> listaEmpleadosDTO = empJpa.convertirListaAEmpleadoDTO(listaEmpleados);
+
+        // Crear y retornar el DTO
+        return new GrupoTrabajoDTO(
+            grupoTrabajo.getIdGrupo(),
+            grupoTrabajo.getNombreGrupo(),
+            capataz,
+            listaEmpleadosDTO
+        );
+    }
+    
+    public List<GrupoTrabajoDTO> convertirListaGrupoTrabajoDTO(List<GrupoTrabajo> grupos) {
+        if (grupos == null || grupos.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        return grupos.stream()
+            .map(this::convertirGrupoTrabajoDTO)
+            .collect(Collectors.toList());
     }
 }

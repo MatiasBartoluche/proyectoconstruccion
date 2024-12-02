@@ -1,5 +1,7 @@
 package clases;
 
+import clasesDTO.EmpleadoDTO;
+import clasesDTO.GrupoTrabajoDTO;
 import java.util.ArrayList;
 import java.util.Map;
 import persistencia.ControladorPersistencia;
@@ -66,6 +68,14 @@ public class Controlador {
     public ArrayList<Empleado> buscarEmpleadosPorGrupo(int idGrupo, String nombre){
         return controladorPersistencia.findEmpleadoByGroup(idGrupo, nombre);
     }
+    
+    public EmpleadoDTO convertirAEmpleadoDTO(Empleado empleado){
+        return controladorPersistencia.convertirAEmpleadoDTO(empleado);
+    }
+    
+    public ArrayList<EmpleadoDTO> convertirListaAEmpleadosDTO(ArrayList<Empleado> empleados){
+        return controladorPersistencia.convertirListaAEmpleadoDTO(empleados);
+    }
     // ###################### creando metodos para Estado #######################
     
     
@@ -111,8 +121,12 @@ public class Controlador {
         return controladorPersistencia.traerListaGruposTrabajo();
     }
     
-    public ArrayList<GrupoTrabajoDTO> gruposTrabajoDTO(ArrayList<GrupoTrabajo> grupos){
-        return controladorPersistencia.convertirAGrupoTrabajoDTO(grupos);
+    public GrupoTrabajoDTO grupoTrabajoDTO(GrupoTrabajo grupo){
+        return controladorPersistencia.convertirGrupoTrabajoDTO(grupo);
+    }
+    
+    public ArrayList<GrupoTrabajoDTO> convertirListaGruposTrabajoDTO(ArrayList<GrupoTrabajo> grupos){
+        return controladorPersistencia.convertirListaGrupoTrabajoDTO(grupos);
     }
     
     // ######################## creando metodos para Jerarquia ##################
