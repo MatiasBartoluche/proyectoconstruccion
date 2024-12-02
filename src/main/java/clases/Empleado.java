@@ -61,7 +61,7 @@ public class Empleado implements Serializable {
     private EstadoEmpleado estado;
     
     @ManyToOne//(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
-    @JoinColumn(name = "id_grupo", nullable = false)
+    @JoinColumn(name = "id_grupo", nullable = true)
     private GrupoTrabajo grupo;
 
     @OneToMany(mappedBy = "empleadoObra", cascade = {CascadeType.MERGE, CascadeType.REFRESH})

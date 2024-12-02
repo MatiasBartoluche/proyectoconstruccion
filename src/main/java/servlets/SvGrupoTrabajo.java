@@ -51,6 +51,10 @@ public class SvGrupoTrabajo extends HttpServlet {
             case "grupos":
                 buscarGrupos(response);
                 break;
+            case "borrar":
+                int idGrupo = Integer.parseInt(request.getParameter("idBorrar"));
+                borrarGrupo(response, idGrupo);
+                break;
             default:
                 break;
         }
@@ -169,6 +173,18 @@ public class SvGrupoTrabajo extends HttpServlet {
             ArrayList<GrupoTrabajoDTO> gruposDTO = controlador.convertirListaGruposTrabajoDTO(grupos);
             Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
             respuestaJson = gson.toJson(gruposDTO);
+        }
+        response.getWriter().write(respuestaJson);
+    }
+    
+    public void borrarGrupo(HttpServletResponse response, int idGrupo) throws IOException{
+        String respuestaJson = "{\"mensaje\": \"El grupo se ha borrado con exito\"}";
+        
+        try{
+            controlador.eliminarGrupo(idGrupo);
+        }
+        catch(Exception e){
+            respuestaJson = "{\"mensaje\": \"no se ha podido borrar el grupo\", \"error\":\""+e+"\"}";
         }
         response.getWriter().write(respuestaJson);
     }

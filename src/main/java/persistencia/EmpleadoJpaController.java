@@ -1,19 +1,9 @@
 package persistencia;
 
-import clases.Asistencia;
-import clases.Contrato;
 import clases.Empleado;
-import clases.EmpleadoObra;
-import clases.EntregaEPP;
-import clases.EstadoEmpleado;
 import clases.GrupoTrabajo;
-import clases.HistorialART;
-import clases.Jerarquia;
-import clases.LiquidacionSueldo;
 import clasesDTO.EmpleadoDTO;
 import clasesDTO.GrupoTrabajoDTO;
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

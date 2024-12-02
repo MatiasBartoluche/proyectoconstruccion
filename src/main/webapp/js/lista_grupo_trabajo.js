@@ -1,5 +1,7 @@
 $(document).ready(function(){    
     buscarGrupos('grupos');
+    
+    cerrarModal('#cancelarModalGrupos');
 });
 
 function buscarGrupos(mensaje){
@@ -30,7 +32,7 @@ function insertarGrupos(lista){
         var idGrupo = lista[indice].id_grupo;
         var nombreGrupo = lista[indice].nombre_grupo;
         var capataz = lista[indice].capataz;
-        var cantidadEmpleados = 1 + lista[indice].empleados.length; // cantidad de empleados de la lista mas el capataz
+        var cantidadEmpleados = lista[indice].empleados.length; // cantidad de empleados de la lista mas el capataz
         
         if(lista[indice].nombre_grupo === '' || lista[indice].nombre_grupo === undefined){
             nombreGrupo = 'Sin nombre';
@@ -72,9 +74,56 @@ function detalleGrupo(grupo){
 function borrarGrupo(grupo){
     $('#homeListaGrupos').on('click', '.btnBorrarGrupo', function () {
         const idGrupo = $(this).attr('id'); // Obtener el legajo del botón
-        console.log('accion: '+idGrupo.split('-')[0]);
-        console.log('id: '+idGrupo.split('-')[1]);
-        //localStorage.setItem('detalleEmpleado', idEmpleado);
-        //window.location.href = "/proyectoconstruccion/vistas/sistemas/detalle_empleado.jsp";
+        mensajeModalBorrar(idGrupo.split('-')[1]);
+    });
+}
+
+function mensajeModalBorrar(idGrupo){
+    $('#contenedorTextoModal').empty();
+    $('#contenedorTextoModal').append('<p>¿Desea borrar este grupo?</p>');
+    $('#mensajeModalListaGrupos').show();
+    $('#cerrarModalGrupos').hide();
+    borrarModal(idGrupo);
+}
+
+function borrarModal(idGrupo){
+    $('#borrarModalGrupos').click(function(){
+        $('#contenedorTextoModal').empty();
+        console.log('Borrar: '+idGrupo);
+        
+        $('#cerrarModalGrupos').show();
+        $('#cancelarModalGrupos').hide();
+        $('#borrarModalGrupos').hide();
+        
+        solicitudBorrar(idGrupo);
+        
+        cerrarModal('#cerrarModalGrupos');
+    });
+}
+
+function cerrarModal(idBoton){
+    $(idBoton).click(function(){
+        $('#mensajeModalListaGrupos').hide();
+        if(idBoton === '#cerrarModalGrupos'){
+            $('#homeListaGrupos').empty();
+            buscarGrupos('grupos');
+        }
+    });
+}
+
+function solicitudBorrar(idGrupo){
+    $.ajax({
+        url: '/proyectoconstruccion/SvGrupoTrabajo', // URL del servlet
+        type: 'GET',
+        data: {mensaje: 'borrar', idBorrar: idGrupo},
+        dataType: 'json',
+        success: function (response) {
+            console.log(response);
+            $('#contenedorTextoModal').empty();
+            $('#contenedorTextoModal').append('<p>'+response.mensaje+'</p>');
+        },
+        error: function (xhr, status, error) {
+            console.error("Error:", error);
+        }
     });
 }

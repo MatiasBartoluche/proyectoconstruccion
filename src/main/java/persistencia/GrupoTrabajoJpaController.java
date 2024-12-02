@@ -69,19 +69,26 @@ public class GrupoTrabajoJpaController{
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
-            GrupoTrabajo grupo;
-            try {
-                grupo = em.getReference(GrupoTrabajo.class, id);
-                grupo.getIdGrupo();
-            } catch (EntityNotFoundException enfe) {
-                throw new EntityNotFoundException("El Contrato con id " + id + " no existe.");
+            GrupoTrabajo grupo = em.find(GrupoTrabajo.class, id);
+
+            if (grupo != null) {
+                Empleado capataz = grupo.getCapataz();
+                capataz.setGrupo(null);
+                em.merge(capataz);
+                // Desvincular empleados
+                for (Empleado empleado : grupo.getListaEmpleados()) {
+                    empleado.setGrupo(null); // Quitar la referencia al grupo
+                    em.merge(empleado); // Actualizar en la base de datos
+                }
+                // Eliminar el grupo
+                em.remove(grupo);
             }
-            em.remove(grupo);
             em.getTransaction().commit();
+        } catch (Exception ex) {
+            em.getTransaction().rollback();
+            throw ex;
         } finally {
-            if (em != null) {
-                em.close();
-            }
+            em.close();
         }
     }
 
@@ -119,7 +126,6 @@ public class GrupoTrabajoJpaController{
                     grupo.getCapataz().getNombres(); // Inicializa el capataz
                 }
             }
-
             return grupos;
         } finally {
             em.close();
@@ -133,12 +139,18 @@ public class GrupoTrabajoJpaController{
         }
 
         EmpleadoDTO capataz = empJpa.convertirAEmpleadoDTO(grupoTrabajo.getCapataz());
+        List<EmpleadoDTO> listaEmpleadosDTO = new ArrayList<>();
 
-
-        // Obtener los nombres de los empleados
+        // obtener lista de empleados
         List<Empleado> listaEmpleados = grupoTrabajo.getListaEmpleados();
-        List<EmpleadoDTO> listaEmpleadosDTO = empJpa.convertirListaAEmpleadoDTO(listaEmpleados);
-
+        
+        for(Empleado emp : listaEmpleados){
+            // si eml empleado no es capataz, agrego a la lista de empleados subalternos
+            if(!"Capataz".equals(emp.getJerarquia().getDescripcion())){
+                EmpleadoDTO empDTO = empJpa.convertirAEmpleadoDTO(emp);
+                listaEmpleadosDTO.add(empDTO);
+            }
+        }
         // Crear y retornar el DTO
         return new GrupoTrabajoDTO(
             grupoTrabajo.getIdGrupo(),
@@ -152,7 +164,6 @@ public class GrupoTrabajoJpaController{
         if (grupos == null || grupos.isEmpty()) {
             return Collections.emptyList();
         }
-
         return grupos.stream()
             .map(this::convertirGrupoTrabajoDTO)
             .collect(Collectors.toList());
