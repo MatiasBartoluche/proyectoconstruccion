@@ -31,7 +31,8 @@ public class RoleFilter implements Filter {
         if ( uri.contains("/SvIndex") ||  uri.contains("/SvRegistrar") || uri.contains("/SvLogout") 
                 || uri.contains("/SvResultadoBuscarLegajo") || uri.contains("/proyectoconstruccion/SvNuevoEmpleado")
                 || uri.contains("/proyectoconstruccion/SvEmpleados") || uri.contains("/proyectoconstruccion/SvDetalleEmpleado")
-                || uri.contains("/proyectoconstruccion/SvJerarquias") || uri.contains("/proyectoconstruccion/SvGrupoTrabajo")){
+                || uri.contains("/proyectoconstruccion/SvJerarquias") || uri.contains("/proyectoconstruccion/SvGrupoTrabajo")
+                || uri.contains("/proyectoconstruccion/SvDetalleGrupoTrabajo")){
             chain.doFilter(req, res);
             return;
         }

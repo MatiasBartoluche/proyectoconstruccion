@@ -20,6 +20,21 @@
                 response.sendRedirect("index.jsp");
             }
         %>
+
+        <div id="mensajeModalDetalleGrupo" class="modal">
+            <div class="modal-content">
+                <span class="close"></span>
+                <h2>Mensaje</h2>
+                <div id="contenedorTextoModal">
+
+                </div>
+                <div class="botonesModal">
+                    <button id="aceptarModalGrupo">Aceptar</button>
+                    <button id="eliminarModalGrupo">Eliminar</button>
+                    <button id="cancelarModalGrupo">Cancelar</button>
+                </div>
+            </div>
+        </div>         
         
     <header class="cabecera">
         Header
@@ -119,7 +134,25 @@
         
     <section class="home">
 
+        <article id="detaleGrupo">
+            <h2>Informacion del grupo</h2>
+            
+            <div id="contenedorCapataz">
+                
+            </div>
+ 
+            <h2>Lista de obreros</h2>
+            <div class="cabeceraListaEmpleados">
+                <p>Legajo</p>
+                <p>Empleado</p>
+                <p>CUIL</p>
+                <p>Cargo</p>
+                <p>Fecha de ingreso</p>
+            </div>
+            <div id="contenedorIntegrantes">
 
+            </div>
+        </article>
         
     </section>
                 

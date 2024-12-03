@@ -15,8 +15,7 @@ import java.util.ArrayList;
 public class EmpleadoDTO {
     private int id_empleado;
     private int legajo;
-    private Jerarquia jerarquia;
-    
+    private Jerarquia jerarquia;    
     private String nombres;
     private String apellidos;
     private String cuil;
@@ -31,23 +30,15 @@ public class EmpleadoDTO {
     private LocalDate fecha_ingreso; // LocalDate fecha sin hora
     private int antiguedad;
     private boolean despido; // true = despido, false = empleado vigente
-    
     private BigDecimal sueldo_base;
     
     private Contrato contrato;
-
     private EstadoEmpleado estado;
-
     private GrupoTrabajoDTO grupoDTO;
-
     private ArrayList<EmpleadoObra> asignaciones = new ArrayList<>();
-    
     private ArrayList<HistorialART> historialART = new ArrayList<>();
-
     private ArrayList<LiquidacionSueldo> liquidaciones = new ArrayList<>();
- 
     private ArrayList<EntregaEPP> planillaEPP = new ArrayList<>();
-    
     private ArrayList<Asistencia> asistencias;
 
     public EmpleadoDTO() {

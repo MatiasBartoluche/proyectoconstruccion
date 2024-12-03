@@ -32,7 +32,7 @@ function insertarGrupos(lista){
         var idGrupo = lista[indice].id_grupo;
         var nombreGrupo = lista[indice].nombre_grupo;
         var capataz = lista[indice].capataz;
-        var cantidadEmpleados = lista[indice].empleados.length; // cantidad de empleados de la lista mas el capataz
+        var cantidadEmpleados = 1 + lista[indice].empleados.length; // cantidad de empleados de la lista mas el capataz
         
         if(lista[indice].nombre_grupo === '' || lista[indice].nombre_grupo === undefined){
             nombreGrupo = 'Sin nombre';

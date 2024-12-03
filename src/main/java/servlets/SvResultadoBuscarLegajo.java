@@ -88,8 +88,10 @@ public class SvResultadoBuscarLegajo extends HttpServlet {
                 respuestaJson = "{\"empleado\": null}";
             }
             else{
-                // convierto el empleado encontrado a json y sobreescribo la variable "respuestaJson"
-                Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
+                // convierto el empleado encontrado a json 
+                Gson gson = new GsonBuilder()
+                        .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
+                        .create();
                 String empleadoJson = gson.toJson(empleado);
                 respuestaJson = empleadoJson;
             }

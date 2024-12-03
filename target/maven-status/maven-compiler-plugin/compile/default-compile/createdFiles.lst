@@ -44,6 +44,7 @@ persistencia\EPPJpaController.class
 persistencia\exceptions\NonexistentEntityException.class
 persistencia\TipoObraJpaController.class
 clases\HistorialEstadoObra.class
+servlets\SvDetalleGrupoTrabajo.class
 clases\EntregaEPP.class
 clases\Asistencia.class
 clases\Presupuesto.class

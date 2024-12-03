@@ -32,6 +32,9 @@ article{
     margin-bottom: 1%;
     padding: 1%;
     border-radius: 6px;
+    width: 98%;
+    margin: 1%;
+    padding: 1%;
 }
 
 h2{
@@ -41,10 +44,6 @@ h2{
 
 input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
-}
-
-article{
-    border-radius: 6px;
 }
 
 input{
@@ -1234,4 +1233,11 @@ body.dark .home .text{
 #homeListaGrupos .grupos .botonesGrupo .btnVerGrupo,
 #homeListaGrupos .grupos .botonesGrupo .btnBorrarGrupo{
     width: 100%;
+}
+
+/* ---------------- estilos pagina detalle_grupo_trabajo.jsp ---------------- */
+
+#contenedorIntegrantes .botonesEmpleado span{
+    width:48%;
+    margin: 1%;
 }
