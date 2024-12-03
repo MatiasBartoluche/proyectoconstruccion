@@ -31,6 +31,7 @@
                 </div>
                 <div class="botonesModal">
                     <button id="cerrarModalGrupo">Aceptar</button>
+                    <button id="aceptarModalGrupos">Aceptar</button>
                 </div>
             </div>
         </div>

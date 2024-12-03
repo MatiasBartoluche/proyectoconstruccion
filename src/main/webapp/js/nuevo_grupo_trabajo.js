@@ -6,7 +6,7 @@ $(document).ready(function(){
     
     crearGrupo();
     
-    cerrarModalGrupos();
+    //cerrarModalGrupos();
 });
 
 function aceptarGrupo(){
@@ -163,7 +163,7 @@ function crearGrupo(){
         console.log('empleados: '+empleados);
         
         if(idCapataz === undefined){
-            console.log('----------------- no se puede crear un grupo sin jefe de grupo');
+            modalGrupos('No se puede crear un grupo sin jefe de grupo', '#aceptarModalGrupos');
         }
         else{
             $.extend(grupoTrabajo, {nombre_grupo: nombreGrupo});
@@ -184,7 +184,7 @@ function nuevoGrupo(grupo){
         data: JSON.stringify(grupo),
         dataType: 'json',
         success: function (response) {
-            modalGrupos(response.mensaje);
+            modalGrupos(response.mensaje, '#cerrarModalGRupos');
 
         },
         error: function (xhr, status, error) {
@@ -193,12 +193,23 @@ function nuevoGrupo(grupo){
     });
 }
 
-function modalGrupos(respuesta){
+function modalGrupos(respuesta, idBoton){
     console.log(respuesta);
     $('#contenedorTextoModal').empty();
     $('#mensajeModalGrupos').css('display', 'block');
     $('#contenedorTextoModal').append('<p>'+respuesta+'</p>');
-
+    if(idBoton === '#cerrarModalGrupo'){
+        $('#aceptarModalGrupos').hide();
+        cerrarModalGrupos();
+    }
+    else{
+        $('#aceptarModalGrupos').show();
+        $('#cerrarModalGrupo').hide();
+        $('#aceptarModalGrupos').click(function(){
+            $('#contenedorTextoModal').empty();
+            $('#mensajeModalGrupos').css('display', 'none');
+        });
+    }
 }
 
 function cerrarModalGrupos(){

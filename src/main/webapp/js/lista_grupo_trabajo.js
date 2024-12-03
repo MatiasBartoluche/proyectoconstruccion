@@ -1,15 +1,26 @@
-$(document).ready(function(){    
+$(document).ready(function () {
+    
     buscarGrupos('grupos');
     
     cerrarModal('#cancelarModalGrupos');
+    // Detectar cuando se carga la página desde el historial del navegador
+    window.addEventListener('pageshow', function (event) {
+        if (event.persisted || performance.getEntriesByType('navigation')[0].type === 'back_forward') {
+            buscarGrupos('grupos'); // Volver a cargar los datos de grupos
+        }
+    });
 });
 
+
+
 function buscarGrupos(mensaje){
+    $('#homeListaGrupos').empty();
     $.ajax({
         url: '/proyectoconstruccion/SvGrupoTrabajo', // URL del servlet
         type: 'GET',
         data: {mensaje: mensaje},
         dataType: 'json',
+        cache: false,
         success: function (response) {
             if(response.mensaje){
                 console.log(response);
@@ -26,6 +37,7 @@ function buscarGrupos(mensaje){
 }
 
 function insertarGrupos(lista){
+    $('#homeListaGrupos').empty();
     var rutaImagen = '/proyectoconstruccion/img/grupo.jpg';
     for(indice = 0; indice < lista.length; indice++){
         console.log(lista[indice]);
@@ -61,12 +73,11 @@ function insertarGrupos(lista){
     }
 }
 
-function detalleGrupo(grupo){
+function detalleGrupo(){
     $('#homeListaGrupos').on('click', '.btnVerGrupo', function () {
-        const idGrupo = $(this).attr('id'); // Obtener el legajo del botón
-        console.log('accion: '+idGrupo.split('-')[0]);
-        console.log('id: '+idGrupo.split('-')[1]);
-        localStorage.setItem('detalleGrupo', JSON.stringify(grupo));
+        const idGrupo = $(this).attr('id').split('-')[1]; // Obtener el legajo del botón
+        console.log('id: '+idGrupo);
+        localStorage.setItem('detalleGrupo', idGrupo);
         window.location.href = "/proyectoconstruccion/vistas/sistemas/detalle_grupo_trabajo.jsp";
     });
 }
@@ -91,23 +102,19 @@ function borrarModal(idGrupo){
         $('#contenedorTextoModal').empty();
         console.log('Borrar: '+idGrupo);
         
-        $('#cerrarModalGrupos').show();
-        $('#cancelarModalGrupos').hide();
-        $('#borrarModalGrupos').hide();
+        $('#cerrarModalGrupos').hide();
+        $('#cancelarModalGrupos').show();
+        $('#borrarModalGrupos').show();
         
         solicitudBorrar(idGrupo);
-        
         cerrarModal('#cerrarModalGrupos');
+        
     });
 }
 
 function cerrarModal(idBoton){
     $(idBoton).click(function(){
         $('#mensajeModalListaGrupos').hide();
-        if(idBoton === '#cerrarModalGrupos'){
-            $('#homeListaGrupos').empty();
-            buscarGrupos('grupos');
-        }
     });
 }
 
@@ -121,6 +128,12 @@ function solicitudBorrar(idGrupo){
             console.log(response);
             $('#contenedorTextoModal').empty();
             $('#contenedorTextoModal').append('<p>'+response.mensaje+'</p>');
+            $('#cerrarModalGrupos').show();
+            $('#cancelarModalGrupos').hide();
+            $('#borrarModalGrupos').hide();
+            
+            $('#homeListaGrupos').empty();
+            buscarGrupos('grupos');
         },
         error: function (xhr, status, error) {
             console.error("Error:", error);

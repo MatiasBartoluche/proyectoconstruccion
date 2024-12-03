@@ -96,7 +96,9 @@ public class GrupoTrabajoJpaController{
     public GrupoTrabajo findGrupoTrabajo(int id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(GrupoTrabajo.class, id);
+            GrupoTrabajo grupo = em.find(GrupoTrabajo.class, id);
+            em.refresh(grupo);
+            return grupo;
         } finally {
             em.close();
         }
@@ -121,10 +123,15 @@ public class GrupoTrabajoJpaController{
 
             // Cargar las listas de empleados para evitar LazyInitializationException
             for (GrupoTrabajo grupo : grupos) {
-                grupo.getListaEmpleados().size(); // Forzar la inicialización
-                if (grupo.getCapataz() != null) {
-                    grupo.getCapataz().getNombres(); // Inicializa el capataz
+                if(grupo != null){
+                    em.refresh(grupo);
+                    grupo.getListaEmpleados().size(); // Forzar la inicialización
+                    if (grupo.getCapataz() != null) {
+                        grupo.getCapataz().getNombres(); // Inicializa el capataz
+                    }
                 }
+                
+
             }
             return grupos;
         } finally {

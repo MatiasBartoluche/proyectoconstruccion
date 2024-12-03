@@ -38,6 +38,10 @@ public class SvGrupoTrabajo extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
+        response.setHeader("Pragma", "no-cache"); // HTTP 1.0
+        response.setDateHeader("Expires", 0); // Proxies
+        
         // capturo el legajo ingresado
         String mensaje = request.getParameter("mensaje");
         
@@ -162,8 +166,13 @@ public class SvGrupoTrabajo extends HttpServlet {
     }
     
     public void buscarGrupos(HttpServletResponse response) throws IOException{
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
+        response.setHeader("Pragma", "no-cache"); // HTTP 1.0
+        response.setDateHeader("Expires", 0); // Proxies
+        
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
+        
         String respuestaJson = "{\"mensaje\": \"No existen grupos de trabajo\"}";
         
         // primero, debo buscar la lista de grupos de trabajo en la base de datos
@@ -171,7 +180,8 @@ public class SvGrupoTrabajo extends HttpServlet {
         // si la lista no es vacia, convertir el resultado en dto
         if(!grupos.isEmpty()){
             ArrayList<GrupoTrabajoDTO> gruposDTO = controlador.convertirListaGruposTrabajoDTO(grupos);
-            Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
+            Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();           
+            
             respuestaJson = gson.toJson(gruposDTO);
         }
         response.getWriter().write(respuestaJson);

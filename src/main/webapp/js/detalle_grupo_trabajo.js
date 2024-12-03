@@ -1,11 +1,10 @@
 $(document).ready(function(){
     console.log('detalle grupo');
     
-    var grupo = JSON.parse(localStorage.getItem('detalleGrupo'));
-    idGrupo = grupo.id_grupo;
-    console.log(grupo);
+    var idGrupo = localStorage.getItem('detalleGrupo');
     
-    insertarDetalleGrupo(grupo);
+    cargarGrupo(idGrupo);
+    
     detalleEmpleado();
     borrarEmpleadoDelGrupo();
     
@@ -13,9 +12,8 @@ $(document).ready(function(){
     cerrarModal('#aceptarModalGrupo');
 });
 
-var idGrupo = 0;
-
 function insertarDetalleGrupo(grupo){
+    $('#contenedorCapataz').empty();
     var nombre = grupo.nombre_grupo;
     var capataz = grupo.capataz;
     var empleados = grupo.empleados;
@@ -92,6 +90,7 @@ function borrarEmpleado(idEmpleado){
             type: 'GET',
             data: {mensaje: 'borrarEmpleado', idBorrarEmpleado: idEmpleado},
             dataType: 'json',
+            cache: false,
             success: function (response) {
                 console.log(response);
             },
@@ -108,11 +107,31 @@ function cerrarModal(idBoton){
         if(idBoton === '#aceptarModalGrupo'){
             $('#contenedorCapataz').empty();
             $('#contenedorIntegrantes').empty();
-            cargarGrupo(idGrupo);
+            cargarGrupo(localStorage.getItem('detalleGrupo'));
         }
     });
 }
 
 function cargarGrupo(idGrupo){
     console.log('ecargar grupo: '+idGrupo);
+    
+    $.ajax({
+        url: '/proyectoconstruccion/SvDetalleGrupoTrabajo', // URL del servlet
+        type: 'GET',
+        data: {mensaje: 'recargarGrupo', idGrupo: idGrupo},
+        dataType: 'json',
+        cache: false,
+        success: function (response) {
+            console.log(response);
+            if(response.mensaje){
+                
+            }
+            else{
+                insertarDetalleGrupo(response);
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error("Error:", error);
+        }
+    });
 }
