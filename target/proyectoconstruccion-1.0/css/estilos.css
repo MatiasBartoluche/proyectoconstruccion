@@ -1241,3 +1241,29 @@ body.dark .home .text{
     width:48%;
     margin: 1%;
 }
+
+#contenedorCapataz, #botonesCapataz{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#listaCambiarCapataz{
+    display: none;
+}
+
+#dniCapataz{
+    width: 40%;
+}
+
+#datosCapataz{
+    width: 60%;
+}
+
+#datosCapataz p{
+    width: 98%;
+    margin: 1%;
+    font-size: 30px;
+}

@@ -4,11 +4,16 @@ import clases.Controlador;
 import clases.Empleado;
 import clases.GrupoTrabajo;
 import clases.LocalDateAdapter;
+import clasesDTO.EmpleadoDTO;
 import clasesDTO.GrupoTrabajoDTO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,13 +40,20 @@ public class SvDetalleGrupoTrabajo extends HttpServlet {
         
         String mensaje = request.getParameter("mensaje");
         
-        if("borrarEmpleado".equals(mensaje)){
-            int idBorrarEmpleado = Integer.parseInt(request.getParameter("idBorrarEmpleado"));
-            borrarEmpleadoDelGrupo(response, idBorrarEmpleado);
-        }
-        else if("recargarGrupo".equals(mensaje)){
-            int idGrupo = Integer.parseInt(request.getParameter("idGrupo"));
-            recargarGrupo(response, idGrupo);
+        if(null != mensaje)switch (mensaje) {
+            case "borrarEmpleado":
+                int idBorrarEmpleado = Integer.parseInt(request.getParameter("idBorrarEmpleado"));
+                borrarEmpleadoDelGrupo(response, idBorrarEmpleado);
+                break;
+            case "recargarGrupo":
+                int idGrupo = Integer.parseInt(request.getParameter("idGrupo"));
+                recargarGrupo(response, idGrupo);
+                break;
+            case "capataz":
+                cargarCapataz(response);
+                break;
+            default:
+                break;
         }
     }
 
@@ -78,12 +90,39 @@ public class SvDetalleGrupoTrabajo extends HttpServlet {
             
             GrupoTrabajoDTO grupoDTO = controlador.grupoTrabajoDTO(grupo);
             
+            // si el capataz tiene una foto guardada, la convierto en base64
+            EmpleadoDTO capatazDTO = grupoDTO.getCapataz();
+            
+            if (capatazDTO.getFotoDni() != null) {
+                String fotoBase64 = null;
+                fotoBase64 = Base64.getEncoder().encodeToString(capatazDTO.getFotoDni());
+                capatazDTO.setFotoDniBase64(fotoBase64);
+                grupoDTO.setCapataz(capatazDTO);
+            }
+            
             Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
             
             respuestaJson = gson.toJson(grupoDTO);
         }
         catch(Exception e){
             respuestaJson = "{\"mensaje\": \"El grupo no se ha podido recargar\", \"error\": \""+e+"\"}";
+        }
+        response.getWriter().write(respuestaJson);
+    }
+    
+    public void cargarCapataz(HttpServletResponse response) throws IOException{
+        String respuestaJson = "{\"mensaje\": \"No se han encontrado capataces\"}";
+        
+        ArrayList<Empleado> listaEmpleados = controlador.buscarPorDescripcionJerarquia("Capataz");
+        
+        if(listaEmpleados != null){
+            ArrayList<EmpleadoDTO> empleadosDTO = controlador.convertirListaAEmpleadosDTO(listaEmpleados);
+            Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
+            respuestaJson = gson.toJson(empleadosDTO);
+            
+            for(Empleado emp: listaEmpleados){
+                System.out.println("+++++++++++++++++++++ grupo: "+emp.getGrupo());
+            }
         }
         response.getWriter().write(respuestaJson);
     }

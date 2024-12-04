@@ -2,8 +2,10 @@ package persistencia;
 
 import clases.Empleado;
 import clases.GrupoTrabajo;
+import clases.Jerarquia;
 import clasesDTO.EmpleadoDTO;
 import clasesDTO.GrupoTrabajoDTO;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -152,29 +154,47 @@ public class EmpleadoJpaController{
     
     public List<Empleado> findEmpleadosByAttributes(Map<String, Object> parametros){
         EntityManager em = getEntityManager();
-        
         try {
             CriteriaBuilder cb = em.getCriteriaBuilder();
             CriteriaQuery<Empleado> cq = cb.createQuery(Empleado.class);
-            Root<Empleado> empleado = cq.from(Empleado.class);
+            Root<Empleado> root = cq.from(Empleado.class);
 
             List<Predicate> predicates = new ArrayList<>();
+            // Iterar sobre los criterios del mapa
+            for (Map.Entry<String, Object> entry : parametros.entrySet()) {
+                String campo = entry.getKey();
+                Object valor = entry.getValue();
 
-            for (Map.Entry<String, Object> filtro : parametros.entrySet()) {
-                String atributo = filtro.getKey();
-                Object valor = filtro.getValue();
-
-                if (valor instanceof String && !((String) valor).isEmpty()) {
-                    predicates.add(cb.like(empleado.get(atributo), "%" + valor + "%"));
-                } else if (valor != null) {
-                    predicates.add(cb.equal(empleado.get(atributo), valor));
+                if (valor != null) {
+                    // Agregar restricciones basadas en el tipo de valor
+                    if (valor instanceof String) {
+                        // Búsqueda parcial (LIKE) para cadenas
+                        predicates.add(cb.like(cb.lower(root.get(campo)), "%" + valor.toString().toLowerCase() + "%"));
+                    } else if (valor instanceof Integer) {
+                        // Igualdad para números
+                        predicates.add(cb.equal(root.get(campo), valor));
+                    } else if (valor instanceof LocalDate) {
+                        // Ejemplo: rango de fechas (requiere claves específicas en el mapa)
+                        if (campo.equals("fechaIngresoDesde")) {
+                            predicates.add(cb.greaterThanOrEqualTo(root.get("fecha_ingreso"), (LocalDate) valor));
+                        }
+                    } else if (valor instanceof Jerarquia || valor instanceof GrupoTrabajo) {
+                        // Comparación de objetos relacionados
+                        predicates.add(cb.equal(root.get(campo), valor));
+                    }
                 }
             }
 
-            cq.where(predicates.toArray(new Predicate[0]));
+            // Aplicar las restricciones dinámicas
+            cq.where(cb.and(predicates.toArray(new Predicate[0])));
 
+            // Opcional: ordenar por un campo específico
+            cq.orderBy(cb.asc(root.get("nombre"))); // Cambiar "nombre" si es necesario
+
+            // Ejecutar la consulta
             return em.createQuery(cq).getResultList();
-        } finally {
+        }
+        finally {
             em.close();
         }
     }
@@ -213,23 +233,17 @@ public class EmpleadoJpaController{
     
     //convertir una instancia de Empleado a EmpleadoDto 
     public EmpleadoDTO convertirAEmpleadoDTO(Empleado empleado) {
-        EmpleadoDTO empDTO = null;
         GrupoTrabajoDTO grupoDTO = null;
-        // Obtener datos del grupo y capataz si existen
-        int idGrupo = 0;
-        String nombreGrupo = null;
-        if (empleado == null) {
-            empDTO = null;
+
+        // Verifica si el empleado pertenece a un grupo
+        if (empleado.getGrupo() != null) {
+            GrupoTrabajo grupo = empleado.getGrupo();
+            grupoDTO = new GrupoTrabajoDTO();
+            grupoDTO.setIdGrupo(grupo.getIdGrupo());
+            grupoDTO.setNombreGrupo(grupo.getNombreGrupo());
         }
-        
-        /*if (empleado.getGrupo() != null) {
-             nombreGrupo = empleado.getGrupo().getNombre(); // Nombre del grupo
-             if (empleado.getGrupo().getCapataz() != null) {
-                 nombreCapataz = empleado.getGrupo().getCapataz().getNombre(); // Nombre del capataz
-             }
-         }*/
-       
-        empDTO = new EmpleadoDTO();
+
+        EmpleadoDTO empDTO = new EmpleadoDTO();
         empDTO.setIdEmpleado(empleado.getId());
         empDTO.setLegajo(empleado.getLegajo());
         empDTO.setNombres(empleado.getNombres());
@@ -249,7 +263,7 @@ public class EmpleadoJpaController{
         empDTO.setJerarquia(empleado.getJerarquia());
         empDTO.setContrato(empleado.getContrato());
         empDTO.setEstado(empleado.getEstado());
-        //empDTO.setGrupo();
+        empDTO.setGrupo( grupoDTO);
         empDTO.setAsignaciones(empleado.getAsignaciones());
         empDTO.setHistorialART(empleado.getHistorialART());
         empDTO.setLiquidaciones(empleado.getLiquidaciones());
@@ -271,5 +285,24 @@ public class EmpleadoJpaController{
             listaDTO.add(convertirAEmpleadoDTO(empleado));
         }
         return listaDTO;
+    }
+    
+    public List<Empleado> buscarPorDescripcionJerarquia(String descripcion) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Empleado> cq = cb.createQuery(Empleado.class);
+            Root<Empleado> root = cq.from(Empleado.class);
+
+            // Realizar join con Jerarquia
+            Join<Empleado, Jerarquia> jerarquiaJoin = root.join("jerarquia");
+
+            // Filtro por descripción
+            cq.where(cb.equal(cb.lower(jerarquiaJoin.get("descripcion")), descripcion.toLowerCase()));
+
+            return em.createQuery(cq).getResultList();
+        } finally {
+            em.close();
+        }
     }
 }

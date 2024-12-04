@@ -6,7 +6,7 @@ $(document).ready(function(){
     
     crearGrupo();
     
-    //cerrarModalGrupos();
+    cerrarModalGrupos();
 });
 
 function aceptarGrupo(){
@@ -202,14 +202,7 @@ function modalGrupos(respuesta, idBoton){
         $('#aceptarModalGrupos').hide();
         cerrarModalGrupos();
     }
-    else{
-        $('#aceptarModalGrupos').show();
-        $('#cerrarModalGrupo').hide();
-        $('#aceptarModalGrupos').click(function(){
-            $('#contenedorTextoModal').empty();
-            $('#mensajeModalGrupos').css('display', 'none');
-        });
-    }
+
 }
 
 function cerrarModalGrupos(){

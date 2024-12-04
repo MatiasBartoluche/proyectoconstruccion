@@ -10,19 +10,29 @@ $(document).ready(function(){
     
     cerrarModal('#cancelarModalGrupo');
     cerrarModal('#aceptarModalGrupo');
+    
+    detalleCapataz();
+    cambiarCapataz();
+    
+    modalAceptarCambioCapataz();
+    modalCambiarCapataz();
+    modalCancelarCapataz();
+
 });
 
 function insertarDetalleGrupo(grupo){
-    $('#contenedorCapataz').empty();
     var nombre = grupo.nombre_grupo;
     var capataz = grupo.capataz;
     var empleados = grupo.empleados;
     var clase = 'impar';
     
     //insertar capataz
-    $('#contenedorCapataz').append('<div>'+
-                                        '<p>'+capataz.apellidos+'</p>'+
-                                    '</div>');
+    $('#btnDetalleCapataz').attr('value', capataz.id_empleado);
+    $('#dniCapataz').attr('src', `data:image/png;base64,${capataz.foto_dni_base64}`);
+    $('#datosCapataz').append('<p>Nombre: '+capataz.apellidos+', '+capataz.nombres+'</p>');
+    $('#datosCapataz').append('<p>Cuil: '+capataz.cuil+'</p>');
+    $('#datosCapataz').append('<p>Fecha de ingreso: '+capataz.fecha_ingreso+'</p>');
+    $('#datosCapataz').append('<p>Numero de legajo: '+capataz.legajo+'</p>');
     
     // insertar empleados
     for(indice=0; indice<empleados.length; indice++){
@@ -105,7 +115,6 @@ function cerrarModal(idBoton){
     $(idBoton).click(function(){
         $('#mensajeModalDetalleGrupo').hide();
         if(idBoton === '#aceptarModalGrupo'){
-            $('#contenedorCapataz').empty();
             $('#contenedorIntegrantes').empty();
             cargarGrupo(localStorage.getItem('detalleGrupo'));
         }
@@ -135,3 +144,88 @@ function cargarGrupo(idGrupo){
         }
     });
 }
+
+function detalleCapataz(){
+    $('#btnDetalleCapataz').click(function(){
+        var idCapataz = $('#btnDetalleCapataz').attr('value');
+        console.log('detalle capataz: '+idCapataz);
+        localStorage.setItem('detalleEmpleado', idCapataz);
+        window.location.href = "/proyectoconstruccion/vistas/sistemas/detalle_empleado.jsp";
+    });
+}
+
+function cambiarCapataz(){
+    $('#btnCambiarCapataz').click(function(){
+        var idCapataz = $('#btnDetalleCapataz').attr('value');
+        console.log('cambiar capataz:'+idCapataz);
+        
+        $('#modalCambiarCapataz').show();
+        $('#aceptarModalCapataz').hide();
+        
+        $('#listaCambiarCapataz').show();
+        
+        $('#cambiarModalCapataz').show();
+        $('#cancelarModalCapataz').show();
+        
+        cargarCapataz();
+    });
+}
+
+function modalAceptarCambioCapataz(){
+    $('#aceptarModalCapataz').click(function(){
+        console.log('aceptar');
+        $('#modalCambiarCapataz').hide();
+        $('#CancelarModalCapataz').hide();
+        
+        $('#listaCambiarCapataz').hide();
+    });
+}
+
+function modalCambiarCapataz(){
+    $('#cambiarModalCapataz').click(function(){
+        console.log('cambiar');
+        $('#aceptarModalCapataz').show();
+        $('#cambiarModalCapataz').hide();
+        $('#cancelarModalCapataz').hide();
+    });
+}
+
+function modalCancelarCapataz(){
+    $('#cancelarModalCapataz').click(function(){
+        console.log('cancelar');
+        $('#modalCambiarCapataz').hide();
+    });
+}
+
+function cargarCapataz(){
+    $.ajax({
+        url: '/proyectoconstruccion/SvDetalleGrupoTrabajo', // URL del servlet
+        type: 'GET',
+        data: {mensaje: 'capataz'},
+        dataType: 'json',
+        cache: false,
+        success: function (response) {
+            insertarCapataces(response);
+        },
+        error: function (xhr, status, error) {
+            console.error('Error al obtener empleados:', error);
+        }
+    });
+}
+
+function insertarCapataces(listaEmpleados){
+    console.log(listaEmpleados);
+}
+
+/*
+        $(idContenedor).append('<div class="empleado '+clase+'">'+
+                                    '<p>'+item.legajo+'</p>'+
+                                    '<p>'+item.apellidos+', '+item.nombres+'</p>'+
+                                    '<p>'+item.cuil+'</p>'+
+                                    '<p>'+item.jerarquia.descripcion+'</p>'+
+                                    '<p>'+item.fecha_ingreso+'</p>'+
+                                    '<div class="botonesEmpleado" id"check-'+item.id_empleado+'">'+
+                                       '<input type="checkbox" id="'+item.id_empleado+'" value="'+item.id_empleado+'">'+
+                                    '</div>'+
+                                '</div>');
+*/

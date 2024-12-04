@@ -117,6 +117,12 @@ public class ControladorPersistencia {
         return empleadosDTO;
     }
     
+    public ArrayList<Empleado> buscarPorDescripcionJerarquia(String descripcion){
+        List<Empleado> lista = empleadoJpa.buscarPorDescripcionJerarquia(descripcion);
+        ArrayList<Empleado> empleadosJerarquia= new ArrayList<>(lista);
+        return empleadosJerarquia;
+    }
+    
     // ###################### creando metodos para EstadoEmpleadoJpaController ###################################
    
     public void crearEstadoEmpleado(EstadoEmpleado estado) {

@@ -7,6 +7,12 @@ $(document).ready(function(){
     buscarEmpleados();
     
     detalleEmpleado();
+    
+    window.addEventListener('pageshow', function (event) {
+        if (event.persisted || performance.getEntriesByType('navigation')[0].type === 'back_forward') {
+            buscarEmpleados(); // Volver a cargar los datos de empleados
+        }
+    });
 });
 
 function buscarEmpleados(){

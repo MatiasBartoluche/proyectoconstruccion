@@ -34,7 +34,28 @@
                     <button id="cancelarModalGrupo">Cancelar</button>
                 </div>
             </div>
-        </div>         
+        </div>
+        
+        <div id="modalCambiarCapataz" class="modal">
+            <div class="modal-content">
+                <span class="close"></span>
+                <h2>Cambiar capataz</h2>
+                
+                <div id="contenedorTextoModal">
+
+                </div>
+                
+                <div id="listaCambiarCapataz">
+
+                </div>
+                
+                <div class="botonesModal">
+                    <button id="aceptarModalCapataz">Aceptar</button>
+                    <button id="cambiarModalCapataz">Cambiar</button>
+                    <button id="cancelarModalCapataz">Cancelar</button>
+                </div>
+            </div>
+        </div>   
         
     <header class="cabecera">
         Header
@@ -138,7 +159,13 @@
             <h2>Informacion del grupo</h2>
             
             <div id="contenedorCapataz">
-                
+                <img id="dniCapataz" src=""/>
+                <div id="datosCapataz"></div>
+            </div>
+            
+            <div id="botonesCapataz">
+                <button id="btnDetalleCapataz">Ver detalles</button>
+                <button id="btnCambiarCapataz">Cambiar capataz</button>
             </div>
  
             <h2>Lista de obreros</h2>

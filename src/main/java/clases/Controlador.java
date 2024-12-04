@@ -76,6 +76,10 @@ public class Controlador {
     public ArrayList<EmpleadoDTO> convertirListaAEmpleadosDTO(ArrayList<Empleado> empleados){
         return controladorPersistencia.convertirListaAEmpleadoDTO(empleados);
     }
+    
+    public ArrayList<Empleado> buscarPorDescripcionJerarquia(String descripcion){
+        return controladorPersistencia.buscarPorDescripcionJerarquia(descripcion);
+    }
     // ###################### creando metodos para Estado #######################
     
     

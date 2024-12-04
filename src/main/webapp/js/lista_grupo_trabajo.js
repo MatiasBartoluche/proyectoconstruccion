@@ -2,6 +2,9 @@ $(document).ready(function () {
     
     buscarGrupos('grupos');
     
+    detalleGrupo();
+    borrarGrupo();
+    
     cerrarModal('#cancelarModalGrupos');
     // Detectar cuando se carga la página desde el historial del navegador
     window.addEventListener('pageshow', function (event) {
@@ -68,8 +71,7 @@ function insertarGrupos(lista){
                                             '</span>'+
                                         '</div>'+
                                     '</article>');
-        detalleGrupo(lista[indice]);
-        borrarGrupo(lista[indice]);
+
     }
 }
 
@@ -82,31 +84,35 @@ function detalleGrupo(){
     });
 }
 
-function borrarGrupo(grupo){
+function borrarGrupo(){
     $('#homeListaGrupos').on('click', '.btnBorrarGrupo', function () {
-        const idGrupo = $(this).attr('id'); // Obtener el legajo del botón
-        mensajeModalBorrar(idGrupo.split('-')[1]);
+        var idGrupo = $(this).attr('id').split('-')[1]; // Obtener el id del botón
+        console.log('borrar: '+idGrupo);
+        localStorage.setItem('borrarGrupo', idGrupo);
+        $('#cancelarModalGrupos').show();
+        $('#borrarModalGrupos').show();
+        mensajeModalBorrar();
     });
 }
 
-function mensajeModalBorrar(idGrupo){
+function mensajeModalBorrar(){
     $('#contenedorTextoModal').empty();
     $('#contenedorTextoModal').append('<p>¿Desea borrar este grupo?</p>');
     $('#mensajeModalListaGrupos').show();
     $('#cerrarModalGrupos').hide();
-    borrarModal(idGrupo);
+    borrarModal();
 }
 
-function borrarModal(idGrupo){
+function borrarModal(){
     $('#borrarModalGrupos').click(function(){
         $('#contenedorTextoModal').empty();
-        console.log('Borrar: '+idGrupo);
+        //console.log('Borrar: '+idGrupo);
         
         $('#cerrarModalGrupos').hide();
         $('#cancelarModalGrupos').show();
         $('#borrarModalGrupos').show();
         
-        solicitudBorrar(idGrupo);
+        solicitudBorrar();
         cerrarModal('#cerrarModalGrupos');
         
     });
@@ -118,7 +124,8 @@ function cerrarModal(idBoton){
     });
 }
 
-function solicitudBorrar(idGrupo){
+function solicitudBorrar(){
+    var idGrupo = localStorage.getItem('borrarGrupo');
     $.ajax({
         url: '/proyectoconstruccion/SvGrupoTrabajo', // URL del servlet
         type: 'GET',
