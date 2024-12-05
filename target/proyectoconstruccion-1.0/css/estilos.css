@@ -1237,6 +1237,15 @@ body.dark .home .text{
 
 /* ---------------- estilos pagina detalle_grupo_trabajo.jsp ---------------- */
 
+#seleccionCapataz{
+    width: 90%;
+    /*top: 75%;*/
+}
+
+#btnAceptarCapataz, #btnCancelarCapataz{
+    display: none;
+}
+
 #contenedorIntegrantes .botonesEmpleado span{
     width:48%;
     margin: 1%;
@@ -1254,6 +1263,15 @@ body.dark .home .text{
     display: none;
 }
 
+#listaCambiarCapataz .empleado{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#listaCambiarCapataz .empleado p{
+    width: 19%;
+}
+
 #dniCapataz{
     width: 40%;
 }
@@ -1266,4 +1284,9 @@ body.dark .home .text{
     width: 98%;
     margin: 1%;
     font-size: 30px;
+}
+
+#listaCapataces{
+    display: none;
+    width: 100%;
 }

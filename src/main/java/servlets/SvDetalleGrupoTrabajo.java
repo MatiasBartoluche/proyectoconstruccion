@@ -60,6 +60,14 @@ public class SvDetalleGrupoTrabajo extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        
+        String mensaje = request.getParameter("mensaje");
+        
+        if("cambiar".equals(mensaje)){
+            cambiarCapataz(request, response);
+        }
 
     }
 
@@ -69,6 +77,8 @@ public class SvDetalleGrupoTrabajo extends HttpServlet {
     }
 
     public void borrarEmpleadoDelGrupo(HttpServletResponse response, int idEmpleado) throws IOException{
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
         String respuestaJson = "{\"mensaje\": \"El empleado se ha borrado del grupo con exito\"}";
         
         try{
@@ -83,6 +93,8 @@ public class SvDetalleGrupoTrabajo extends HttpServlet {
     }
     
     public void recargarGrupo(HttpServletResponse response, int idGrupo) throws IOException{
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
         String respuestaJson;
         
         try{
@@ -111,6 +123,8 @@ public class SvDetalleGrupoTrabajo extends HttpServlet {
     }
     
     public void cargarCapataz(HttpServletResponse response) throws IOException{
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
         String respuestaJson = "{\"mensaje\": \"No se han encontrado capataces\"}";
         
         ArrayList<Empleado> listaEmpleados = controlador.buscarPorDescripcionJerarquia("Capataz");
@@ -119,11 +133,70 @@ public class SvDetalleGrupoTrabajo extends HttpServlet {
             ArrayList<EmpleadoDTO> empleadosDTO = controlador.convertirListaAEmpleadosDTO(listaEmpleados);
             Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
             respuestaJson = gson.toJson(empleadosDTO);
-            
-            for(Empleado emp: listaEmpleados){
-                System.out.println("+++++++++++++++++++++ grupo: "+emp.getGrupo());
-            }
         }
         response.getWriter().write(respuestaJson);
+    }
+    
+    public void cambiarCapataz(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        String stringJson;
+        
+        Map<String, Object> respuestaJson = new HashMap<>();
+        
+        int idCapatazActual = Integer.parseInt(request.getParameter("actual"));
+        int idNuevoCapataz = Integer.parseInt(request.getParameter("nuevo"));
+        boolean intercambiar = Boolean.parseBoolean(request.getParameter("intercambiar"));
+        
+        Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
+            
+        try{
+            Empleado capatazActual = controlador.buscarEmpleado(idCapatazActual);
+            Empleado nuevoCapataz = controlador.buscarEmpleado(idNuevoCapataz);
+            
+            EmpleadoDTO capatazDTO = controlador.convertirAEmpleadoDTO(nuevoCapataz);
+
+            GrupoTrabajo grupo = capatazActual.getGrupo();
+            
+            if(intercambiar == false){
+                grupo.setCapataz(nuevoCapataz);
+
+                capatazActual.setGrupo(null);
+                nuevoCapataz.setGrupo(grupo);
+                
+                controlador.editarGrupo(grupo);
+                controlador.editarEmpleado(capatazActual);
+                controlador.editarEmpleado(nuevoCapataz);
+
+                respuestaJson.put("status", true);
+                respuestaJson.put("mensaje", "El capataz se ha cambiado con exito");
+                respuestaJson.put("capataz", capatazDTO);
+            }
+            else if(intercambiar == true){
+                GrupoTrabajo nuevoGrupo = nuevoCapataz.getGrupo();
+
+                grupo.setCapataz(nuevoCapataz);
+                nuevoGrupo.setCapataz(capatazActual);
+                
+                capatazActual.setGrupo(nuevoGrupo);
+                nuevoCapataz.setGrupo(grupo);
+                
+                controlador.editarGrupo(grupo);
+                controlador.editarGrupo(nuevoGrupo);
+                controlador.editarEmpleado(capatazActual);
+                controlador.editarEmpleado(nuevoCapataz);
+                
+                respuestaJson.put("status", true);
+                respuestaJson.put("mensaje", "Los capataces se han intercambiado con exito");
+                respuestaJson.put("capataz", capatazDTO);
+            }
+        }
+        catch(Exception e){
+            respuestaJson.put("status", false);
+            respuestaJson.put("mensaje", "No se ha podido renovar el capataz");
+            respuestaJson.put("error", e);
+        }
+        stringJson = gson.toJson(respuestaJson);
+        response.getWriter().write(stringJson);
     }
 }

@@ -29,33 +29,14 @@
 
                 </div>
                 <div class="botonesModal">
-                    <button id="aceptarModalGrupo">Aceptar</button>
-                    <button id="eliminarModalGrupo">Eliminar</button>
-                    <button id="cancelarModalGrupo">Cancelar</button>
+                    <button id="btnModalCambiarCapataz">Cambiar</button>
+                    <button id="btnModalAceptar">Aceptar</button>
+                    <button id="btnModalCancelar">Cancelar</button>
                 </div>
             </div>
         </div>
         
-        <div id="modalCambiarCapataz" class="modal">
-            <div class="modal-content">
-                <span class="close"></span>
-                <h2>Cambiar capataz</h2>
-                
-                <div id="contenedorTextoModal">
 
-                </div>
-                
-                <div id="listaCambiarCapataz">
-
-                </div>
-                
-                <div class="botonesModal">
-                    <button id="aceptarModalCapataz">Aceptar</button>
-                    <button id="cambiarModalCapataz">Cambiar</button>
-                    <button id="cancelarModalCapataz">Cancelar</button>
-                </div>
-            </div>
-        </div>   
         
     <header class="cabecera">
         Header
@@ -161,12 +142,20 @@
             <div id="contenedorCapataz">
                 <img id="dniCapataz" src=""/>
                 <div id="datosCapataz"></div>
+                
+                <div id="listaCapataces">
+                    
+                </div>
             </div>
             
             <div id="botonesCapataz">
                 <button id="btnDetalleCapataz">Ver detalles</button>
                 <button id="btnCambiarCapataz">Cambiar capataz</button>
+                <button id="btnAceptarCapataz">Cambiar</button>
+                <button id="btnCancelarCapataz">Cancelar</button>
             </div>
+            
+            
  
             <h2>Lista de obreros</h2>
             <div class="cabeceraListaEmpleados">

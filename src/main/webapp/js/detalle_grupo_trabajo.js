@@ -1,23 +1,26 @@
 $(document).ready(function(){
-    console.log('detalle grupo');
     
+    // cuando se accede a la pagina desde el historial del navegador, refresca las funciones
+    window.addEventListener('pageshow', function (event) {
+        if (event.persisted || performance.getEntriesByType('navigation')[0].type === 'back_forward') {
+            var idGrupo = localStorage.getItem('detalleGrupo');
+            cargarGrupo(idGrupo);
+        }
+    });
+    
+    $('#cambiarCapataz').hide();
     var idGrupo = localStorage.getItem('detalleGrupo');
-    
+
     cargarGrupo(idGrupo);
-    
     detalleEmpleado();
-    borrarEmpleadoDelGrupo();
-    
-    cerrarModal('#cancelarModalGrupo');
-    cerrarModal('#aceptarModalGrupo');
-    
     detalleCapataz();
+    
+    desplegarListaCapataces();
+    cancelarCapataz();
+    
     cambiarCapataz();
     
-    modalAceptarCambioCapataz();
-    modalCambiarCapataz();
-    modalCancelarCapataz();
-
+    cerrarModal('#btnModalAceptar');
 });
 
 function insertarDetalleGrupo(grupo){
@@ -27,12 +30,16 @@ function insertarDetalleGrupo(grupo){
     var clase = 'impar';
     
     //insertar capataz
+    $('#contenedorCapataz').attr('value', capataz.id_empleado);
     $('#btnDetalleCapataz').attr('value', capataz.id_empleado);
-    $('#dniCapataz').attr('src', `data:image/png;base64,${capataz.foto_dni_base64}`);
     $('#datosCapataz').append('<p>Nombre: '+capataz.apellidos+', '+capataz.nombres+'</p>');
     $('#datosCapataz').append('<p>Cuil: '+capataz.cuil+'</p>');
     $('#datosCapataz').append('<p>Fecha de ingreso: '+capataz.fecha_ingreso+'</p>');
     $('#datosCapataz').append('<p>Numero de legajo: '+capataz.legajo+'</p>');
+    
+    if(capataz.foto_dni_base64){
+        $('#dniCapataz').attr('src', `data:image/png;base64,${capataz.foto_dni_base64}`);
+    }
     
     // insertar empleados
     for(indice=0; indice<empleados.length; indice++){
@@ -70,21 +77,6 @@ function detalleEmpleado(){
     });
 }
 
-function borrarEmpleadoDelGrupo(){
-    $('#contenedorIntegrantes').on('click', '.btnBorrarEmpleado', function () {
-        const idEmpleado = $(this).data('idempleado'); // Obtener el legajo del botón
-        mensajeModalBorrarEmpleado(idEmpleado);
-    });
-}
-
-function mensajeModalBorrarEmpleado(idEmpleado){
-    $('#contenedorTextoModal').empty();
-    $('#contenedorTextoModal').append('<p>¿Desea borrar este empleado?</p>');
-    $('#mensajeModalDetalleGrupo').show();
-    $('#aceptarModalGrupo').hide();
-    borrarEmpleado(idEmpleado);
-}
-
 function borrarEmpleado(idEmpleado){
     $('#eliminarModalGrupo').click(function(){
         console.log('eliminar: '+idEmpleado);
@@ -111,18 +103,8 @@ function borrarEmpleado(idEmpleado){
     });
 }
 
-function cerrarModal(idBoton){
-    $(idBoton).click(function(){
-        $('#mensajeModalDetalleGrupo').hide();
-        if(idBoton === '#aceptarModalGrupo'){
-            $('#contenedorIntegrantes').empty();
-            cargarGrupo(localStorage.getItem('detalleGrupo'));
-        }
-    });
-}
-
 function cargarGrupo(idGrupo){
-    console.log('ecargar grupo: '+idGrupo);
+    console.log('recargar grupo: '+idGrupo);
     
     $.ajax({
         url: '/proyectoconstruccion/SvDetalleGrupoTrabajo', // URL del servlet
@@ -131,9 +113,8 @@ function cargarGrupo(idGrupo){
         dataType: 'json',
         cache: false,
         success: function (response) {
-            console.log(response);
             if(response.mensaje){
-                
+                console.log(response.mensaje);
             }
             else{
                 insertarDetalleGrupo(response);
@@ -154,49 +135,6 @@ function detalleCapataz(){
     });
 }
 
-function cambiarCapataz(){
-    $('#btnCambiarCapataz').click(function(){
-        var idCapataz = $('#btnDetalleCapataz').attr('value');
-        console.log('cambiar capataz:'+idCapataz);
-        
-        $('#modalCambiarCapataz').show();
-        $('#aceptarModalCapataz').hide();
-        
-        $('#listaCambiarCapataz').show();
-        
-        $('#cambiarModalCapataz').show();
-        $('#cancelarModalCapataz').show();
-        
-        cargarCapataz();
-    });
-}
-
-function modalAceptarCambioCapataz(){
-    $('#aceptarModalCapataz').click(function(){
-        console.log('aceptar');
-        $('#modalCambiarCapataz').hide();
-        $('#CancelarModalCapataz').hide();
-        
-        $('#listaCambiarCapataz').hide();
-    });
-}
-
-function modalCambiarCapataz(){
-    $('#cambiarModalCapataz').click(function(){
-        console.log('cambiar');
-        $('#aceptarModalCapataz').show();
-        $('#cambiarModalCapataz').hide();
-        $('#cancelarModalCapataz').hide();
-    });
-}
-
-function modalCancelarCapataz(){
-    $('#cancelarModalCapataz').click(function(){
-        console.log('cancelar');
-        $('#modalCambiarCapataz').hide();
-    });
-}
-
 function cargarCapataz(){
     $.ajax({
         url: '/proyectoconstruccion/SvDetalleGrupoTrabajo', // URL del servlet
@@ -213,19 +151,183 @@ function cargarCapataz(){
     });
 }
 
-function insertarCapataces(listaEmpleados){
-    console.log(listaEmpleados);
+function insertarCapataces(listaCapataces){
+    $('#listaCambiarCapataz').empty();
+    
+    $('#btnDetalleCapataz').hide();
+    $('#btnCambiarCapataz').hide();
+    
+    $('#btnAceptarCapataz').show();
+    $('#btnCancelarCapataz').show();
+    
+    $('#cambiarCapataz').append('<h2>Seleccione un nuevo capataz</h2>');
+    var clase = 'impar';
+    var intercambiar = false;
+    var disponible = 'Disponible';
+    var capatazActual = parseInt($('#contenedorCapataz').attr('value'));
+    
+    for(indice = 0; indice < listaCapataces.length; indice++){
+        if(indice%2 === 0){
+            clase = 'impar';
+        }
+        else{
+            clase = 'par';
+        }
+        
+        if(listaCapataces[indice].grupoDTO){
+            intercambiar = true;
+            disponible = 'Ocupado';
+        }
+        else{
+            intercambiar = false;
+            disponible = 'Disponible';
+        }
+        
+        if(listaCapataces[indice].id_empleado !== capatazActual){
+            $('#listaCapataces').append('<div class="empleado '+clase+'">'+
+                                                    '<p>'+listaCapataces[indice].legajo+'</p>'+
+                                                    '<p>'+listaCapataces[indice].apellidos+', '+listaCapataces[indice].nombres+'</p>'+
+                                                    '<p>'+listaCapataces[indice].cuil+'</p>'+
+                                                    '<p>'+listaCapataces[indice].fecha_ingreso+'</p>'+
+                                                    '<p id="disponible-'+listaCapataces[indice].id_empleado+'" value="'+intercambiar+'">'+disponible+'</p>'+
+                                                    '<div class="botonesEmpleado" id"check-'+listaCapataces[indice].id_empleado+'">'+
+                                                       '<input type="radio" name="capataz" id="'+listaCapataces[indice].id_empleado+'" value="'+listaCapataces[indice].id_empleado+'">'+
+                                                    '</div>'+
+                                                '</div>');
+        }
+    }
 }
 
-/*
-        $(idContenedor).append('<div class="empleado '+clase+'">'+
-                                    '<p>'+item.legajo+'</p>'+
-                                    '<p>'+item.apellidos+', '+item.nombres+'</p>'+
-                                    '<p>'+item.cuil+'</p>'+
-                                    '<p>'+item.jerarquia.descripcion+'</p>'+
-                                    '<p>'+item.fecha_ingreso+'</p>'+
-                                    '<div class="botonesEmpleado" id"check-'+item.id_empleado+'">'+
-                                       '<input type="checkbox" id="'+item.id_empleado+'" value="'+item.id_empleado+'">'+
-                                    '</div>'+
-                                '</div>');
-*/
+function desplegarListaCapataces(){
+    $('#btnCambiarCapataz').click(function(){
+        // muestro la lista de capataces
+        $('#listaCapataces').show();  
+        // oculto los botones
+        $('#btnCambiarCapatas').hide();
+        // llamo a la funcion de carga de capataces para llenar #listaCapataces
+        cargarCapataz();
+    });
+}
+
+function cancelarCapataz(){
+    $('#btnCancelarCapataz').click(function(){
+        $('#listaCapataces').hide();
+        $('#listaCapataces').empty();
+
+        $('#btnAceptarCapataz').hide();
+        $('#btnCancelarCapataz').hide();
+        $('#btnCambiarCapataz').show();
+        $('#btnDetalleCapataz').show();
+    });
+}
+
+function cambiarCapataz(){
+    $('#btnAceptarCapataz').off('click').click(function(){
+        var capatazActual = $('#contenedorCapataz').attr('value');
+        var nuevoCapataz = $('input[name="capataz"]:checked').val();
+        var intercambiar = $('#disponible-'+nuevoCapataz).attr('value');
+        console.log(intercambiar);
+        
+        if(nuevoCapataz === undefined){
+            mensajeModal('Debe seleccionar un capataz', false, true, false);
+        }
+        else{
+            var cambiarCapataz = {actual: capatazActual, nuevo: nuevoCapataz, intercambiar: intercambiar};
+            if(intercambiar === true){
+                var mensaje = 'El capataz seleccionado ya pertenece a un grupo ¿Desea intercambiar los capataces de ambos grupos?';
+                mensajeModal(mensaje, true, false, true);
+                solicitudCambiarCapataz(cambiarCapataz);
+                cerrarModal('#btnModalCancelar');
+            }
+            else{
+                mensajeModal('¿desea reemplazar el capataz actual?' ,true, false, true);
+                solicitudCambiarCapataz(cambiarCapataz);
+                cerrarModal('#btnModalCancelar');
+            }
+        }
+    });
+}
+
+// se le pasa como parametro tres boolean, para determinar la visualizacion del boton
+function mensajeModal(mensaje, btnCambiar, btnAceptar, btnCancelar){
+    // borrar el mensaje anterior, si es que lo tiene
+    $('#contenedorTextoModal').empty();
+    
+    $('#mensajeModalDetalleGrupo').show();
+    $('#contenedorTextoModal').append('<p>'+mensaje+'</p>');
+    
+    //
+    if(btnCambiar === true){
+        $('#btnModalCambiarCapataz').show();
+    }
+    else{
+        $('#btnModalCambiarCapataz').hide();
+    }
+    
+    if(btnAceptar === true){
+        $('#btnModalAceptar').show();
+    }
+    else{
+        $('#btnModalAceptar').hide();
+    }
+    
+    if(btnCancelar === true){
+        $('#btnModalCancelar').show();
+    }
+    else{
+        $('#btnModalCancelar').hide();
+    }
+}
+
+function cerrarModal(idBoton){
+    $(idBoton).click(function(){
+        $('#mensajeModalDetalleGrupo').hide();
+    });
+}
+
+function solicitudCambiarCapataz(cambiar){
+    $('#btnModalCambiarCapataz').off('click').click(function(){
+        $.extend(cambiar, {mensaje: 'cambiar'});
+        console.log(cambiar);
+        
+        $.ajax({
+            url: '/proyectoconstruccion/SvDetalleGrupoTrabajo', // URL del servlet
+            type: 'POST',
+            data: cambiar,
+            dataType: 'json',
+            cache: false,
+            success: function (response) {
+                console.log(response);
+                if(response.status === true){
+                    mensajeModal(response.mensaje, false, true, false);
+                    cargarNuevoCapataz(response.capataz);
+                }
+                else{
+                    mensajeModal(response.mensaje, false, true, false);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('Error al obtener empleados:', error);
+            }
+        });
+    });
+}
+
+function cargarNuevoCapataz(nuevoCapataz){
+    //vaciar todos los elementos
+    console.log('-------- insertando nuevo capataz');
+    $('#datosCapataz').empty();
+    $('#dniCapataz').attr('src','');
+    
+    //insertar capataz
+    $('#contenedorCapataz').attr('value', nuevoCapataz.id_empleado);
+    $('#btnDetalleCapataz').attr('value', nuevoCapataz.id_empleado);
+    $('#datosCapataz').append('<p>Nombre: '+nuevoCapataz.apellidos+', '+nuevoCapataz.nombres+'</p>');
+    $('#datosCapataz').append('<p>Cuil: '+nuevoCapataz.cuil+'</p>');
+    $('#datosCapataz').append('<p>Fecha de ingreso: '+nuevoCapataz.fecha_ingreso+'</p>');
+    $('#datosCapataz').append('<p>Numero de legajo: '+nuevoCapataz.legajo+'</p>');
+    
+    if(nuevoCapataz.foto_dni_base64){
+        $('#dniCapataz').attr('src', `data:image/png;base64,${nuevoCapataz.foto_dni_base64}`);
+    }
+}
