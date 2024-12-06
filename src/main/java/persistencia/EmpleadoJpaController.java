@@ -287,7 +287,7 @@ public class EmpleadoJpaController{
         return listaDTO;
     }
     
-    public List<Empleado> buscarPorDescripcionJerarquia(String descripcion) {
+    public List<Empleado> findByDescripcionJerarquia(String descripcion) {
         EntityManager em = getEntityManager();
         try {
             CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -305,4 +305,37 @@ public class EmpleadoJpaController{
             em.close();
         }
     }
+    
+    public List<Empleado> findEmpleadosByJerarquiaContrato(String descripcionJerarquia, boolean jerarquia, String descripcionContrato, boolean contrato) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Empleado> cq = cb.createQuery(Empleado.class);
+            Root<Empleado> empleado = cq.from(Empleado.class);
+
+            List<Predicate> predicates = new ArrayList<>();
+
+            if (descripcionJerarquia != null && jerarquia == false) {
+                predicates.add(cb.notEqual(empleado.get("jerarquia").get("descripcion"), descripcionJerarquia));
+            }
+            else if (descripcionJerarquia != null && jerarquia == true) {
+                predicates.add(cb.equal(empleado.get("jerarquia").get("descripcion"), descripcionJerarquia));
+            }
+            
+            if (descripcionContrato != null && contrato == false) {
+                predicates.add(cb.notEqual(empleado.get("contrato").get("descripcion"), descripcionContrato));
+            }
+            else if (descripcionContrato != null && contrato == true) {
+                predicates.add(cb.equal(empleado.get("contrato").get("descripcion"), descripcionContrato));
+            }
+
+            cq.where(predicates.toArray(new Predicate[0]));
+
+            TypedQuery<Empleado> query = em.createQuery(cq);
+            return query.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
 }

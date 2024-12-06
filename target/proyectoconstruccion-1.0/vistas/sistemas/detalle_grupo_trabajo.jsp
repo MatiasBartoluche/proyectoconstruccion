@@ -136,7 +136,7 @@
         
     <section class="home">
 
-        <article id="detaleGrupo">
+        <article id="detalleGrupo">
             <h2>Informacion del grupo</h2>
             
             <div id="contenedorCapataz">
@@ -154,9 +154,7 @@
                 <button id="btnAceptarCapataz">Cambiar</button>
                 <button id="btnCancelarCapataz">Cancelar</button>
             </div>
-            
-            
- 
+
             <h2>Lista de obreros</h2>
             <div class="cabeceraListaEmpleados">
                 <p>Legajo</p>
@@ -167,6 +165,23 @@
             </div>
             <div id="contenedorIntegrantes">
 
+            </div>
+            
+            <div id="contenedorNuevosEmpleados">
+                <h2>Agregar nuevos empleados</h2>
+                <div class="cabeceraListaEmpleados">
+                    <p>Legajo</p>
+                    <p>Empleado</p>
+                    <p>CUIL</p>
+                    <p>Cargo</p>
+                    <p>Fecha de ingreso</p>
+                </div>
+                <div id="nuevosEmpleados"></div>
+            </div>
+            <div id="botonesNuevosEmpleados">
+                <button id="btnAgregarEmpleados">Agregar empleados</button>
+                <button id="btnAceptarEmpleados">Aceptar</button>
+                <button id="btnCancelarEmpleados">Cancelar</button>
             </div>
         </article>
         

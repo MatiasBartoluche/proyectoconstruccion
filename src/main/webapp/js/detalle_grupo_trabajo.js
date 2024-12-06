@@ -21,14 +21,20 @@ $(document).ready(function(){
     cambiarCapataz();
     
     cerrarModal('#btnModalAceptar');
+    
+    agregarEmpleados();
+    cancelarEmpleados();
 });
 
 function insertarDetalleGrupo(grupo){
+    var idGrupo = grupo.id_grupo;
     var nombre = grupo.nombre_grupo;
     var capataz = grupo.capataz;
     var empleados = grupo.empleados;
     var clase = 'impar';
     
+    
+    $('#detalleGrupo').attr('value', idGrupo)
     //insertar capataz
     $('#contenedorCapataz').attr('value', capataz.id_empleado);
     $('#btnDetalleCapataz').attr('value', capataz.id_empleado);
@@ -330,4 +336,81 @@ function cargarNuevoCapataz(nuevoCapataz){
     if(nuevoCapataz.foto_dni_base64){
         $('#dniCapataz').attr('src', `data:image/png;base64,${nuevoCapataz.foto_dni_base64}`);
     }
+}
+
+function agregarEmpleados(){
+    $('#btnAgregarEmpleados').click(function(){
+        $('#btnAgregarEmpleados').hide();
+        $('#nuevosEmpleados').empty();
+        $('#contenedorNuevosEmpleados').show();
+        
+        $('#btnAceptarEmpleados').show();
+        $('#btnCancelarEmpleados').show();
+        
+        $.ajax({
+            url: '/proyectoconstruccion/SvDetalleGrupoTrabajo', // URL del servlet
+            type: 'GET',
+            data: {mensaje: 'empleados'},
+            dataType: 'json',
+            cache: false,
+            success: function (response) {
+                insertarNuevosEmpleados(response.empleados);
+            },
+            error: function (xhr, status, error) {
+                console.error("Error:", error);
+            }
+        });
+    });
+}
+
+function insertarNuevosEmpleados(listaEmpleados){
+    console.log(listaEmpleados);
+    var idGrupo = parseInt($('#detalleGrupo').attr('value'));
+    var clase = 'impar';
+    var disponible = 'Disponible';
+    var booleanDisponible = true;
+    
+    for(indice=0; indice < listaEmpleados.length; indice++){
+        if(indice%2 === 0){
+            clase = 'impar';
+        }
+        else{
+            clase = 'par';
+        }
+        
+        if(listaEmpleados[indice].grupoDTO){
+            disponible = 'Ocupado';
+            booleanDisponible = false;
+        }
+        else{
+            disponible = 'Disponible';
+            booleanDisponible = true;
+        }
+        //console.log('grupo actual: '+idGrupo+' - '+'grupo del empleado: '+listaEmpleados[indice].grupoDTO.id_grupo);
+        
+        if(listaEmpleados[indice].grupoDTO === undefined || listaEmpleados[indice].grupoDTO.id_grupo !== idGrupo){
+            $('#nuevosEmpleados').append('<div class="empleado '+clase+'">'+
+                                                        '<p>'+listaEmpleados[indice].legajo+'</p>'+
+                                                        '<p>'+listaEmpleados[indice].apellidos+', '+listaEmpleados[indice].nombres+'</p>'+
+                                                        '<p>'+listaEmpleados[indice].cuil+'</p>'+
+                                                        '<p>'+listaEmpleados[indice].fecha_ingreso+'</p>'+
+                                                        '<p id="disponible-'+listaEmpleados[indice].id_empleado+'" value="'+booleanDisponible+'">'+disponible+'</p>'+
+                                                        '<div class="botonesEmpleado" id"check-'+listaEmpleados[indice].id_empleado+'">'+
+                                                           //'<input type="radio" name="capataz" id="'+listaEmpleados[indice].id_empleado+'" value="'+listaEmpleados[indice].id_empleado+'">'+
+                                                           '<input type="checkbox" id="'+listaEmpleados[indice].id_empleado+'" value="'+listaEmpleados[indice].id_empleado+'">'+
+                                                        '</div>'+
+                                                    '</div>');
+        }
+    }
+}
+
+function cancelarEmpleados(){
+    $('#btnCancelarEmpleados').click(function(){
+        $('#contenedorNuevosEmpleados').hide();
+        $('#empleados').empty();
+        
+        $('#btnCancelarEmpleados').hide();
+        $('#btnAceptarEmpleados').hide();
+        $('#btnAgregarEmpleados').show();
+    });
 }

@@ -52,6 +52,9 @@ public class SvDetalleGrupoTrabajo extends HttpServlet {
             case "capataz":
                 cargarCapataz(response);
                 break;
+            case "empleados":
+                cargarEmpleados(response);
+                break;
             default:
                 break;
         }
@@ -99,9 +102,7 @@ public class SvDetalleGrupoTrabajo extends HttpServlet {
         
         try{
             GrupoTrabajo grupo = controlador.buscarGrupo(idGrupo);
-            
             GrupoTrabajoDTO grupoDTO = controlador.grupoTrabajoDTO(grupo);
-            
             // si el capataz tiene una foto guardada, la convierto en base64
             EmpleadoDTO capatazDTO = grupoDTO.getCapataz();
             
@@ -111,9 +112,7 @@ public class SvDetalleGrupoTrabajo extends HttpServlet {
                 capatazDTO.setFotoDniBase64(fotoBase64);
                 grupoDTO.setCapataz(capatazDTO);
             }
-            
             Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
-            
             respuestaJson = gson.toJson(grupoDTO);
         }
         catch(Exception e){
@@ -140,9 +139,9 @@ public class SvDetalleGrupoTrabajo extends HttpServlet {
     public void cambiarCapataz(HttpServletRequest request, HttpServletResponse response) throws IOException{
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        String stringJson;
+        String respuestaJson;
         
-        Map<String, Object> respuestaJson = new HashMap<>();
+        Map<String, Object> armarJson = new HashMap<>();
         
         int idCapatazActual = Integer.parseInt(request.getParameter("actual"));
         int idNuevoCapataz = Integer.parseInt(request.getParameter("nuevo"));
@@ -153,9 +152,7 @@ public class SvDetalleGrupoTrabajo extends HttpServlet {
         try{
             Empleado capatazActual = controlador.buscarEmpleado(idCapatazActual);
             Empleado nuevoCapataz = controlador.buscarEmpleado(idNuevoCapataz);
-            
             EmpleadoDTO capatazDTO = controlador.convertirAEmpleadoDTO(nuevoCapataz);
-
             GrupoTrabajo grupo = capatazActual.getGrupo();
             
             if(intercambiar == false){
@@ -168,9 +165,9 @@ public class SvDetalleGrupoTrabajo extends HttpServlet {
                 controlador.editarEmpleado(capatazActual);
                 controlador.editarEmpleado(nuevoCapataz);
 
-                respuestaJson.put("status", true);
-                respuestaJson.put("mensaje", "El capataz se ha cambiado con exito");
-                respuestaJson.put("capataz", capatazDTO);
+                armarJson.put("status", true);
+                armarJson.put("mensaje", "El capataz se ha cambiado con exito");
+                armarJson.put("capataz", capatazDTO);
             }
             else if(intercambiar == true){
                 GrupoTrabajo nuevoGrupo = nuevoCapataz.getGrupo();
@@ -186,17 +183,44 @@ public class SvDetalleGrupoTrabajo extends HttpServlet {
                 controlador.editarEmpleado(capatazActual);
                 controlador.editarEmpleado(nuevoCapataz);
                 
-                respuestaJson.put("status", true);
-                respuestaJson.put("mensaje", "Los capataces se han intercambiado con exito");
-                respuestaJson.put("capataz", capatazDTO);
+                armarJson.put("status", true);
+                armarJson.put("mensaje", "Los capataces se han intercambiado con exito");
+                armarJson.put("capataz", capatazDTO);
             }
         }
         catch(Exception e){
-            respuestaJson.put("status", false);
-            respuestaJson.put("mensaje", "No se ha podido renovar el capataz");
-            respuestaJson.put("error", e);
+            armarJson.put("status", false);
+            armarJson.put("mensaje", "No se ha podido renovar el capataz");
+            armarJson.put("error", e);
         }
-        stringJson = gson.toJson(respuestaJson);
-        response.getWriter().write(stringJson);
+        respuestaJson = gson.toJson(armarJson);
+        response.getWriter().write(respuestaJson);
+    }
+    
+    public void cargarEmpleados(HttpServletResponse response) throws IOException{
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        
+        String respuestaJson = "{\"status\": \""+false+"\" ,\"mensaje\": \"No se han encontrado empleados\"}";
+        Map<String, Object> armarJson = new HashMap<>();
+        
+        Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
+
+        try{
+            ArrayList<Empleado> listaEmpleados = controlador.buscarPorJerarquiaContrato("Capataz", false, "Obrero", true);
+            if(listaEmpleados != null){
+                ArrayList<EmpleadoDTO> empleadosDTO = controlador.convertirListaAEmpleadosDTO(listaEmpleados);
+                armarJson.put("status", true);
+                armarJson.put("empleados", empleadosDTO);
+                respuestaJson = gson.toJson(armarJson);
+            }
+        }
+        catch(Exception e){
+            armarJson.put("status", false);
+            armarJson.put("mensaje", "Ha ocurrido un error en la carga de empleados");
+            armarJson.put("error", e);
+            respuestaJson = gson.toJson(armarJson);
+        }
+        response.getWriter().write(respuestaJson);
     }
 }

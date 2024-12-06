@@ -29,15 +29,15 @@ public class ControladorPersistencia {
     
     // ############################ Creando metodos para ContratoJpaController ############################
     
-    public void crearContrato(Contrato contrato) {
+    public void createContrato(Contrato contrato) {
         contratoJpa.create(contrato);
     }
 
-    public void eliminarContrato(int idContrato) {
+    public void deleteContrato(int idContrato) {
         contratoJpa.destroy(idContrato);
     }
 
-    public void editarContrato(Contrato contrato) {
+    public void editContrato(Contrato contrato) {
         try{
             contratoJpa.edit(contrato);
         }
@@ -46,29 +46,27 @@ public class ControladorPersistencia {
         }
     }
 
-    public Contrato traerContrato(int idContrato) {
+    public Contrato findContrato(int idContrato) {
         return contratoJpa.findContrato(idContrato);
     }
 
-    public ArrayList<Contrato> traerListaContratos() {
+    public ArrayList<Contrato> fintListaContratos() {
         List<Contrato> lista = contratoJpa.findContratoEntities();
-        
         ArrayList<Contrato> listaContratos = new ArrayList<>(lista);
-        
         return listaContratos;
     }
     
     // ############################ creando metodos para EmpleadoJpaController ############################
     
-    public void crearEmpleado(Empleado empleado) {
+    public void createEmpleado(Empleado empleado) {
         empleadoJpa.create(empleado);
     }
 
-    public void eliminarEmpleado(int idEmpleado) {
+    public void deleteEmpleado(int idEmpleado) {
         empleadoJpa.destroy(idEmpleado);
     }
 
-    public void editarEmpleado(Empleado empleado) {
+    public void editEmpleado(Empleado empleado) {
         try{
             empleadoJpa.edit(empleado);
         }
@@ -77,15 +75,13 @@ public class ControladorPersistencia {
         }
     }
 
-    public Empleado traerEmpleado(int idEmpleado) {
+    public Empleado findEmpleado(int idEmpleado) {
         return empleadoJpa.findEmpleado(idEmpleado);
     }
 
-    public ArrayList<Empleado> traerListaEmpleado() {
+    public ArrayList<Empleado> findListaEmpleado() {
         List<Empleado> lista = empleadoJpa.findEmpleadoEntities();
-        
         ArrayList<Empleado> listaEmpleados = new ArrayList<>(lista);
-        
         return listaEmpleados;
     }
     
@@ -95,9 +91,7 @@ public class ControladorPersistencia {
     
     public ArrayList<Empleado> findEmpleadosByAttributes(Map<String, Object> parametros){
         List<Empleado> lista = empleadoJpa.findEmpleadosByAttributes(parametros);
-        
-        ArrayList<Empleado> listaEmpleados = new ArrayList<>(lista);
-        
+        ArrayList<Empleado> listaEmpleados = new ArrayList<>(lista); 
         return listaEmpleados;
     }
     
@@ -107,33 +101,39 @@ public class ControladorPersistencia {
         return listaEmpleados;
     }
     
-    public EmpleadoDTO convertirAEmpleadoDTO(Empleado emp){
+    public EmpleadoDTO convertAEmpleadoDTO(Empleado emp){
         return empleadoJpa.convertirAEmpleadoDTO(emp);
     }
     
-    public ArrayList<EmpleadoDTO> convertirListaAEmpleadoDTO(List<Empleado> empleados){
+    public ArrayList<EmpleadoDTO> convertListaAEmpleadoDTO(List<Empleado> empleados){
         List<EmpleadoDTO> lista = empleadoJpa.convertirListaAEmpleadoDTO(empleados);
         ArrayList<EmpleadoDTO> empleadosDTO = new ArrayList<>(lista);
         return empleadosDTO;
     }
     
-    public ArrayList<Empleado> buscarPorDescripcionJerarquia(String descripcion){
-        List<Empleado> lista = empleadoJpa.buscarPorDescripcionJerarquia(descripcion);
+    public ArrayList<Empleado> findByDescripcionJerarquia(String descripcion){
+        List<Empleado> lista = empleadoJpa.findByDescripcionJerarquia(descripcion);
         ArrayList<Empleado> empleadosJerarquia= new ArrayList<>(lista);
         return empleadosJerarquia;
     }
     
+    public ArrayList<Empleado> findByJerarquiaContrato(String descJerarquia, boolean jerarquia, String descContrato, boolean contrato){
+        List<Empleado> lista = empleadoJpa.findEmpleadosByJerarquiaContrato(descJerarquia, jerarquia, descContrato, contrato);
+        ArrayList<Empleado> listaEmpleados = new ArrayList<>(lista);
+        return listaEmpleados;
+    }
+    
     // ###################### creando metodos para EstadoEmpleadoJpaController ###################################
    
-    public void crearEstadoEmpleado(EstadoEmpleado estado) {
+    public void creteEstadoEmpleado(EstadoEmpleado estado) {
         estadoJpa.create(estado);
     }
 
-    public void eliminarEstadoEmpleado(int idEstado) {
+    public void deleteEstadoEmpleado(int idEstado) {
         estadoJpa.destroy(idEstado);
     }
 
-    public void editarEstadoEmpleado(EstadoEmpleado estado) {
+    public void editEstadoEmpleado(EstadoEmpleado estado) {
         try{
             estadoJpa.edit(estado);
         }
@@ -142,29 +142,27 @@ public class ControladorPersistencia {
         }
     }
 
-    public EstadoEmpleado traerEstadoEmpleado(int idEstado) {
+    public EstadoEmpleado findEstadoEmpleado(int idEstado) {
         return estadoJpa.findEstado(idEstado);
     }
 
-    public ArrayList<EstadoEmpleado> traerListaEstados() {
+    public ArrayList<EstadoEmpleado> findListaEstados() {
         List<EstadoEmpleado> lista = estadoJpa.findEstadoEntities();
-        
         ArrayList<EstadoEmpleado> listaEstados = new ArrayList<>(lista);
-        
         return listaEstados;
     }
     
     // ###################### creando metodos para GrupoTrabajoJpaController #############################
     
-    public void crearGrupo(GrupoTrabajo grupo) {
+    public void createGrupo(GrupoTrabajo grupo) {
         grupoJpa.create(grupo);
     }
 
-    public void eliminarGrupo(int idGrupo) {
+    public void deleteGrupo(int idGrupo) {
         grupoJpa.destroy(idGrupo);
     }
 
-    public void editarGrupo(GrupoTrabajo grupo) {
+    public void editGrupo(GrupoTrabajo grupo) {
         try{
             grupoJpa.edit(grupo);
         }
@@ -173,11 +171,11 @@ public class ControladorPersistencia {
         }
     }
 
-    public GrupoTrabajo traerGrupo(int idGrupo) {
+    public GrupoTrabajo findGrupo(int idGrupo) {
         return grupoJpa.findGrupoTrabajo(idGrupo);
     }
 
-    public ArrayList<GrupoTrabajo> traerListaGruposTrabajo() {
+    public ArrayList<GrupoTrabajo> findListaGruposTrabajo() {
         List<GrupoTrabajo> lista = grupoJpa.findGrupoTrabajoEntities();
         
         ArrayList<GrupoTrabajo> listaGrupos = new ArrayList<>(lista);
@@ -185,11 +183,11 @@ public class ControladorPersistencia {
         return listaGrupos;
     }
     
-    public GrupoTrabajoDTO convertirGrupoTrabajoDTO(GrupoTrabajo grupo){
+    public GrupoTrabajoDTO convertGrupoTrabajoDTO(GrupoTrabajo grupo){
         return grupoJpa.convertirGrupoTrabajoDTO(grupo);
     }
     
-    public ArrayList<GrupoTrabajoDTO> convertirListaGrupoTrabajoDTO(List<GrupoTrabajo> grupos){
+    public ArrayList<GrupoTrabajoDTO> convertListaGrupoTrabajoDTO(List<GrupoTrabajo> grupos){
         List<GrupoTrabajoDTO> lista = grupoJpa.convertirListaGrupoTrabajoDTO(grupos);
         ArrayList<GrupoTrabajoDTO> gruposDTO = new ArrayList<>(lista);
         return gruposDTO;
@@ -197,15 +195,15 @@ public class ControladorPersistencia {
     
     // ############################## creando metodos para JerarquiaJpaController ########################
     
-    public void crearJerarquia(Jerarquia jerarquia) {
+    public void createJerarquia(Jerarquia jerarquia) {
         jerarquiaJpa.create(jerarquia);
     }
 
-    public void eliminarJerarquia(int idJerarquia) {
+    public void deleteJerarquia(int idJerarquia) {
         jerarquiaJpa.destroy(idJerarquia);
     }
 
-    public void editarJerarquia(Jerarquia jerarquia) {
+    public void editJerarquia(Jerarquia jerarquia) {
         try{
             jerarquiaJpa.edit(jerarquia);
         }
@@ -214,11 +212,11 @@ public class ControladorPersistencia {
         }
     }
 
-    public Jerarquia traerJerarquia(int idJerarquia) {
+    public Jerarquia findJerarquia(int idJerarquia) {
         return jerarquiaJpa.findJerarquia(idJerarquia);
     }
 
-    public ArrayList<Jerarquia> traerListaJerarquias() {
+    public ArrayList<Jerarquia> findListaJerarquias() {
         List<Jerarquia> lista = jerarquiaJpa.findJerarquiaEntities();
         
         ArrayList<Jerarquia> listaJerarquias = new ArrayList<>(lista);
@@ -228,15 +226,15 @@ public class ControladorPersistencia {
     
     // ################################# creando metodos para RolJpaController ###########################
 
-    public void crearRol(Rol rol) {
+    public void createRol(Rol rol) {
         rolJpa.create(rol);
     }
     
-    public void eliminarRol(int idRol) {
+    public void deleteRol(int idRol) {
         rolJpa.destroy(idRol);
     }
 
-    public void editarRol(Rol rol) {
+    public void editRol(Rol rol) {
         try{
             rolJpa.edit(rol);
         }
@@ -245,11 +243,11 @@ public class ControladorPersistencia {
         }
     }
 
-    public Rol traerRol(int idRol) {
+    public Rol findRol(int idRol) {
         return rolJpa.findRol(idRol);
     }
 
-    public ArrayList<Rol> traerListaRoles() {
+    public ArrayList<Rol> findListaRoles() {
         List<Rol> lista = rolJpa.findRolEntities();
         
         ArrayList<Rol> listaRoles = new ArrayList<>(lista);
@@ -259,15 +257,15 @@ public class ControladorPersistencia {
 
     // ############################# creando metodos para UsuarioJpaController #############################
 
-    public void crearUsuario(Usuario usuario) {
+    public void createUsuario(Usuario usuario) {
         usuarioJpa.create(usuario);
     }
 
-    public void eliminarUsuario(int idUsuario) {
+    public void deleteUsuario(int idUsuario) {
         usuarioJpa.destroy(idUsuario);
     }
 
-    public void editarUsuario(Usuario usuario) {
+    public void editUsuario(Usuario usuario) {
         try{
             usuarioJpa.edit(usuario);
         }
@@ -276,11 +274,11 @@ public class ControladorPersistencia {
         }
     }
 
-    public Usuario traerUsuario(int idUsuario) {
+    public Usuario findUsuario(int idUsuario) {
         return usuarioJpa.findUsuario(idUsuario);
     }
 
-    public ArrayList<Usuario> traerListaUsuarios() {
+    public ArrayList<Usuario> findListaUsuarios() {
         List<Usuario> lista = usuarioJpa.findUsuarioEntities();
         
         ArrayList<Usuario> listaUsuarios = new ArrayList<>(lista);

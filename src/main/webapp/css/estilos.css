@@ -1242,7 +1242,7 @@ body.dark .home .text{
     /*top: 75%;*/
 }
 
-#btnAceptarCapataz, #btnCancelarCapataz{
+#btnAceptarCapataz, #btnCancelarCapataz, #btnAceptarEmpleados, #btnCancelarEmpleados{
     display: none;
 }
 
@@ -1251,7 +1251,7 @@ body.dark .home .text{
     margin: 1%;
 }
 
-#contenedorCapataz, #botonesCapataz{
+#contenedorCapataz, #botonesCapataz, #botonesNuevosEmpleados{
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -1286,7 +1286,7 @@ body.dark .home .text{
     font-size: 30px;
 }
 
-#listaCapataces{
+#listaCapataces, #contenedorNuevosEmpleados{
     display: none;
     width: 100%;
 }

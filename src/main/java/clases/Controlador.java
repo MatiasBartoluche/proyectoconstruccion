@@ -16,45 +16,45 @@ public class Controlador {
     // ######################### creando metodos para Contrato ##################
     
     public void crearContrato(Contrato contrato){
-        controladorPersistencia.crearContrato(contrato);
+        controladorPersistencia.createContrato(contrato);
     }
     
     public void eliminarContrato(int idContrato){
-        controladorPersistencia.eliminarContrato(idContrato);
+        controladorPersistencia.deleteContrato(idContrato);
     }
     
     public void editarContrato(Contrato contrato){
-        controladorPersistencia.editarContrato(contrato);
+        controladorPersistencia.editContrato(contrato);
     }
     
     public Contrato buscarContrato(int idContrato){
-        return controladorPersistencia.traerContrato(idContrato);
+        return controladorPersistencia.findContrato(idContrato);
     }
     
     public ArrayList<Contrato> buscarListaContratos(){
-        return controladorPersistencia.traerListaContratos();
+        return controladorPersistencia.fintListaContratos();
     }
     
     // ######################### creando metodos para Empleado ##################
     
     public void crearEmpleado(Empleado empleado){
-        controladorPersistencia.crearEmpleado(empleado);
+        controladorPersistencia.createEmpleado(empleado);
     }
     
     public void eliminarEmpleado(int idEmpleado){
-        controladorPersistencia.eliminarEmpleado(idEmpleado);
+        controladorPersistencia.deleteEmpleado(idEmpleado);
     }
     
     public void editarEmpleado(Empleado empleado){
-        controladorPersistencia.editarEmpleado(empleado);
+        controladorPersistencia.editEmpleado(empleado);
     }
     
     public Empleado buscarEmpleado(int idEmpleado){
-        return controladorPersistencia.traerEmpleado(idEmpleado);
+        return controladorPersistencia.findEmpleado(idEmpleado);
     }
     
     public ArrayList<Empleado> buscarListaEmpleados(){
-        return controladorPersistencia.traerListaEmpleado();
+        return controladorPersistencia.findListaEmpleado();
     }
     
     public Empleado buscarEmpleadoPorLegajo(int legajo){
@@ -70,132 +70,136 @@ public class Controlador {
     }
     
     public EmpleadoDTO convertirAEmpleadoDTO(Empleado empleado){
-        return controladorPersistencia.convertirAEmpleadoDTO(empleado);
+        return controladorPersistencia.convertAEmpleadoDTO(empleado);
     }
     
     public ArrayList<EmpleadoDTO> convertirListaAEmpleadosDTO(ArrayList<Empleado> empleados){
-        return controladorPersistencia.convertirListaAEmpleadoDTO(empleados);
+        return controladorPersistencia.convertListaAEmpleadoDTO(empleados);
     }
     
     public ArrayList<Empleado> buscarPorDescripcionJerarquia(String descripcion){
-        return controladorPersistencia.buscarPorDescripcionJerarquia(descripcion);
+        return controladorPersistencia.findByDescripcionJerarquia(descripcion);
+    }
+    
+    public ArrayList<Empleado> buscarPorJerarquiaContrato(String descJerarquia, boolean jerarquia, String descContrato, boolean contrato){
+        return controladorPersistencia.findByJerarquiaContrato(descJerarquia, jerarquia, descContrato, contrato);
     }
     // ###################### creando metodos para Estado #######################
     
     
     public void crearEstadoEmpleado(EstadoEmpleado estado){
-        controladorPersistencia.crearEstadoEmpleado(estado);
+        controladorPersistencia.creteEstadoEmpleado(estado);
     }
     
     public void eliminarEstado(int idEstado){
-        controladorPersistencia.eliminarEstadoEmpleado(idEstado);
+        controladorPersistencia.deleteEstadoEmpleado(idEstado);
     }
     
     public void editarEstado(EstadoEmpleado estado){
-        controladorPersistencia.editarEstadoEmpleado(estado);
+        controladorPersistencia.editEstadoEmpleado(estado);
     }
     
     public EstadoEmpleado buscarEstado(int idEstado){
-        return controladorPersistencia.traerEstadoEmpleado(idEstado);
+        return controladorPersistencia.findEstadoEmpleado(idEstado);
     }
     
     public ArrayList<EstadoEmpleado> buscarListaEstados(){
-        return controladorPersistencia.traerListaEstados();
+        return controladorPersistencia.findListaEstados();
     }
     
     // ###################### creando metodos para grupoTrabajo #################
     
     public void crearGrupoTrabajo(GrupoTrabajo grupo){
-        controladorPersistencia.crearGrupo(grupo);
+        controladorPersistencia.createGrupo(grupo);
     }
     
     public void eliminarGrupo(int idGrupo){
-        controladorPersistencia.eliminarGrupo(idGrupo);
+        controladorPersistencia.deleteGrupo(idGrupo);
     }
     
     public void editarGrupo(GrupoTrabajo grupo){
-        controladorPersistencia.editarGrupo(grupo);
+        controladorPersistencia.editGrupo(grupo);
     }
     
     public GrupoTrabajo buscarGrupo(int idGrupo){
-        return controladorPersistencia.traerGrupo(idGrupo);
+        return controladorPersistencia.findGrupo(idGrupo);
     }
     
     public ArrayList<GrupoTrabajo> buscarListaGruposTrabajo(){
-        return controladorPersistencia.traerListaGruposTrabajo();
+        return controladorPersistencia.findListaGruposTrabajo();
     }
     
     public GrupoTrabajoDTO grupoTrabajoDTO(GrupoTrabajo grupo){
-        return controladorPersistencia.convertirGrupoTrabajoDTO(grupo);
+        return controladorPersistencia.convertGrupoTrabajoDTO(grupo);
     }
     
     public ArrayList<GrupoTrabajoDTO> convertirListaGruposTrabajoDTO(ArrayList<GrupoTrabajo> grupos){
-        return controladorPersistencia.convertirListaGrupoTrabajoDTO(grupos);
+        return controladorPersistencia.convertListaGrupoTrabajoDTO(grupos);
     }
     
     // ######################## creando metodos para Jerarquia ##################
     
     public void crearJerarquia(Jerarquia jerarquia){
-        controladorPersistencia.crearJerarquia(jerarquia);
+        controladorPersistencia.createJerarquia(jerarquia);
     }
     
     public void eliminarJerarquia(int idJerarquia){
-        controladorPersistencia.eliminarJerarquia(idJerarquia);
+        controladorPersistencia.deleteJerarquia(idJerarquia);
     }
     
     public void editarJerarquia(Jerarquia jerarquia){
-        controladorPersistencia.editarJerarquia(jerarquia);
+        controladorPersistencia.editJerarquia(jerarquia);
     }
     
     public Jerarquia buscarJerarquia(int idJerarquia){
-        return controladorPersistencia.traerJerarquia(idJerarquia);
+        return controladorPersistencia.findJerarquia(idJerarquia);
     }
     
     public ArrayList<Jerarquia> buscarListaJerarquias(){
-        return controladorPersistencia.traerListaJerarquias();
+        return controladorPersistencia.findListaJerarquias();
     }
     
     // ########################## creando metodos para Rol ######################
     
     public void crearRol(Rol rol){
-        controladorPersistencia.crearRol(rol);
+        controladorPersistencia.createRol(rol);
     }
     
     public void eliminarRol(int idRol){
-        controladorPersistencia.eliminarRol(idRol);
+        controladorPersistencia.deleteRol(idRol);
     }
     
     public void editarRol(Rol rol){
-        controladorPersistencia.editarRol(rol);
+        controladorPersistencia.editRol(rol);
     }
     
     public Rol buscarRol(int idRol){
-        return controladorPersistencia.traerRol(idRol);
+        return controladorPersistencia.findRol(idRol);
     }
     
     public ArrayList<Rol> buscarListaRoles(){
-        return controladorPersistencia.traerListaRoles();
+        return controladorPersistencia.findListaRoles();
     }
     
     // ########################## creando metodos para usuario ##################
     
     public void crearUsuario(Usuario usuario){
-        controladorPersistencia.crearUsuario(usuario);
+        controladorPersistencia.createUsuario(usuario);
     }
     
     public void eliminarUsuario(int idUsuario){
-        controladorPersistencia.eliminarUsuario(idUsuario);
+        controladorPersistencia.findUsuario(idUsuario);
     }
     
     public void editarUsuario(Usuario usuario){
-        controladorPersistencia.editarUsuario(usuario);
+        controladorPersistencia.editUsuario(usuario);
     }
     
     public Usuario buscarUsuario(int idUsuario){
-        return controladorPersistencia.traerUsuario(idUsuario);
+        return controladorPersistencia.findUsuario(idUsuario);
     }
     
     public ArrayList<Usuario> buscarListaUsuarios(){
-        return controladorPersistencia.traerListaUsuarios();
+        return controladorPersistencia.findListaUsuarios();
     }   
 }
