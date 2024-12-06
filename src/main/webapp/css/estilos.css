@@ -1251,6 +1251,11 @@ body.dark .home .text{
     margin: 1%;
 }
 
+#contenedorIntegrantes h1{
+    width: 100%;
+    text-align: center;
+}
+
 #contenedorCapataz, #botonesCapataz, #botonesNuevosEmpleados{
     width: 100%;
     display: flex;

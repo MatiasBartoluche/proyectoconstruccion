@@ -8,11 +8,14 @@ import clasesDTO.EmpleadoDTO;
 import clasesDTO.GrupoTrabajoDTO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -70,6 +73,9 @@ public class SvDetalleGrupoTrabajo extends HttpServlet {
         
         if("cambiar".equals(mensaje)){
             cambiarCapataz(request, response);
+        }
+        else if("empleados".equals(mensaje)){
+            agregarEmpleados(request, response);
         }
 
     }
@@ -221,6 +227,41 @@ public class SvDetalleGrupoTrabajo extends HttpServlet {
             armarJson.put("error", e);
             respuestaJson = gson.toJson(armarJson);
         }
+        response.getWriter().write(respuestaJson);
+    }
+
+    private void agregarEmpleados(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        
+        String respuestaJson = "{\"mensaje\": \"Se han agregado los nuevos empleados al grupo\", \"status\": \""+true+"\"}";
+        
+        String grupoRequest =  request.getParameter("grupo");
+        Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
+        GrupoTrabajo grupoRecibido = gson.fromJson(grupoRequest, GrupoTrabajo.class);
+        
+        try{
+            GrupoTrabajo grupo = controlador.buscarGrupo(grupoRecibido.getIdGrupo());
+            
+            if(grupo != null){
+                for(Empleado emp : grupoRecibido.getListaEmpleados()){
+                    Empleado empleado = controlador.buscarEmpleado(emp.getId());
+                    // a este empleado le asigno el grupo
+                    empleado.setGrupo(grupo);
+                    // guardo este empleado
+                    controlador.editarEmpleado(empleado);
+                    
+                    //agrego este empleado al grupo
+                    grupo.agregarEmpleado(empleado);
+                }
+                // cuando termina el for, guardo el grupo con sus nuevos empleados
+                controlador.editarGrupo(grupo);
+            }
+        }
+        catch(Exception e){
+            respuestaJson = "{\"mensaje\": \"Ha ocurrido un error al agregar empleados al grupo\", \"status\": \""+false+"\", \"error\": \""+e+"\"}";
+        }
+        
         response.getWriter().write(respuestaJson);
     }
 }

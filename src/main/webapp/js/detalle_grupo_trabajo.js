@@ -3,8 +3,8 @@ $(document).ready(function(){
     // cuando se accede a la pagina desde el historial del navegador, refresca las funciones
     window.addEventListener('pageshow', function (event) {
         if (event.persisted || performance.getEntriesByType('navigation')[0].type === 'back_forward') {
-            var idGrupo = localStorage.getItem('detalleGrupo');
-            cargarGrupo(idGrupo);
+            //var idGrupo = localStorage.getItem('detalleGrupo');
+            //cargarGrupo(idGrupo);
         }
     });
     
@@ -24,9 +24,14 @@ $(document).ready(function(){
     
     agregarEmpleados();
     cancelarEmpleados();
+    aceptarEmpleados();
 });
 
 function insertarDetalleGrupo(grupo){
+    $('#datosCapataz').empty();
+    $('#dniCapataz').attr('src', '');
+    $('#contenedorIntegrantes').empty();
+    
     var idGrupo = grupo.id_grupo;
     var nombre = grupo.nombre_grupo;
     var capataz = grupo.capataz;
@@ -34,7 +39,7 @@ function insertarDetalleGrupo(grupo){
     var clase = 'impar';
     
     
-    $('#detalleGrupo').attr('value', idGrupo)
+    $('#detalleGrupo').attr('value', idGrupo);
     //insertar capataz
     $('#contenedorCapataz').attr('value', capataz.id_empleado);
     $('#btnDetalleCapataz').attr('value', capataz.id_empleado);
@@ -47,31 +52,36 @@ function insertarDetalleGrupo(grupo){
         $('#dniCapataz').attr('src', `data:image/png;base64,${capataz.foto_dni_base64}`);
     }
     
-    // insertar empleados
-    for(indice=0; indice<empleados.length; indice++){
-        if(indice%2 === 0){
-            clase = 'impar';
-        }
-        else{
-            clase = 'par';
-        }
-        
-        $('#contenedorIntegrantes').append('<div class="empleado '+clase+'">'+
-                                                '<p>'+empleados[indice].legajo+'</p>'+
-                                                '<p>'+empleados[indice].apellidos+', '+empleados[indice].nombres+'</p>'+
-                                                '<p>'+empleados[indice].cuil+'</p>'+
-                                                '<p>'+empleados[indice].jerarquia.descripcion+'</p>'+
-                                                '<p>'+empleados[indice].fecha_ingreso+'</p>'+
-                                                '<div class="botonesEmpleado">'+
-                                                    '<span class="btnIcono btnDetalleEmpleado" id="ver-'+empleados[indice].id_empleado+'" data-idEmpleado="'+empleados[indice].id_empleado+'">'+
-                                                        '<i class="bx bx-search-alt icon"></i>'+
-                                                    '</span>'+
-                                                    '<span class="btnIcono btnBorrarEmpleado" id="borrar-'+empleados[indice].id_empleado+'" data-idEmpleado="'+empleados[indice].id_empleado+'">'+
-                                                        '<i class="bx bx-trash icon"></i>'+
-                                                    '</span>'+
-                                                '</div>'+
-                                            '</div>');
-    }  
+    if(empleados.length === 0){
+        $('#contenedorIntegrantes').append('<h1>Este grupo no contiene empleados</h1>');
+    }
+    else{
+        // insertar empleados
+        for(indice=0; indice<empleados.length; indice++){
+            if(indice%2 === 0){
+                clase = 'impar';
+            }
+            else{
+                clase = 'par';
+            }
+
+            $('#contenedorIntegrantes').append('<div class="empleado '+clase+'">'+
+                                                    '<p>'+empleados[indice].legajo+'</p>'+
+                                                    '<p>'+empleados[indice].apellidos+', '+empleados[indice].nombres+'</p>'+
+                                                    '<p>'+empleados[indice].cuil+'</p>'+
+                                                    '<p>'+empleados[indice].jerarquia.descripcion+'</p>'+
+                                                    '<p>'+empleados[indice].fecha_ingreso+'</p>'+
+                                                    '<div class="botonesEmpleado">'+
+                                                        '<span class="btnIcono btnDetalleEmpleado" id="ver-'+empleados[indice].id_empleado+'" data-idEmpleado="'+empleados[indice].id_empleado+'">'+
+                                                            '<i class="bx bx-search-alt icon"></i>'+
+                                                        '</span>'+
+                                                        '<span class="btnIcono btnBorrarEmpleado" id="borrar-'+empleados[indice].id_empleado+'" data-idEmpleado="'+empleados[indice].id_empleado+'">'+
+                                                            '<i class="bx bx-trash icon"></i>'+
+                                                        '</span>'+
+                                                    '</div>'+
+                                                '</div>');
+        }  
+    }
 }
 
 function detalleEmpleado(){
@@ -172,36 +182,43 @@ function insertarCapataces(listaCapataces){
     var disponible = 'Disponible';
     var capatazActual = parseInt($('#contenedorCapataz').attr('value'));
     
-    for(indice = 0; indice < listaCapataces.length; indice++){
-        if(indice%2 === 0){
-            clase = 'impar';
-        }
-        else{
-            clase = 'par';
-        }
-        
-        if(listaCapataces[indice].grupoDTO){
-            intercambiar = true;
-            disponible = 'Ocupado';
-        }
-        else{
-            intercambiar = false;
-            disponible = 'Disponible';
-        }
-        
-        if(listaCapataces[indice].id_empleado !== capatazActual){
-            $('#listaCapataces').append('<div class="empleado '+clase+'">'+
-                                                    '<p>'+listaCapataces[indice].legajo+'</p>'+
-                                                    '<p>'+listaCapataces[indice].apellidos+', '+listaCapataces[indice].nombres+'</p>'+
-                                                    '<p>'+listaCapataces[indice].cuil+'</p>'+
-                                                    '<p>'+listaCapataces[indice].fecha_ingreso+'</p>'+
-                                                    '<p id="disponible-'+listaCapataces[indice].id_empleado+'" value="'+intercambiar+'">'+disponible+'</p>'+
-                                                    '<div class="botonesEmpleado" id"check-'+listaCapataces[indice].id_empleado+'">'+
-                                                       '<input type="radio" name="capataz" id="'+listaCapataces[indice].id_empleado+'" value="'+listaCapataces[indice].id_empleado+'">'+
-                                                    '</div>'+
-                                                '</div>');
+    if(listaCapataces.length === 0){
+        $('#listaCapataces').append('<h1>No existen capataces</h1>');
+    }
+    else{
+        for(indice = 0; indice < listaCapataces.length; indice++){
+            if(indice%2 === 0){
+                clase = 'impar';
+            }
+            else{
+                clase = 'par';
+            }
+
+            if(listaCapataces[indice].grupoDTO){
+                intercambiar = true;
+                disponible = 'Ocupado';
+            }
+            else{
+                intercambiar = false;
+                disponible = 'Disponible';
+            }
+
+            if(listaCapataces[indice].id_empleado !== capatazActual){
+                $('#listaCapataces').append('<div class="empleado '+clase+'">'+
+                                                        '<p>'+listaCapataces[indice].legajo+'</p>'+
+                                                        '<p>'+listaCapataces[indice].apellidos+', '+listaCapataces[indice].nombres+'</p>'+
+                                                        '<p>'+listaCapataces[indice].cuil+'</p>'+
+                                                        '<p>'+listaCapataces[indice].fecha_ingreso+'</p>'+
+                                                        '<p id="disponible-'+listaCapataces[indice].id_empleado+'" value="'+intercambiar+'">'+disponible+'</p>'+
+                                                        '<div class="botonesEmpleado" id"check-'+listaCapataces[indice].id_empleado+'">'+
+                                                           '<input type="radio" name="capataz" id="'+listaCapataces[indice].id_empleado+'" value="'+listaCapataces[indice].id_empleado+'">'+
+                                                        '</div>'+
+                                                    '</div>');
+            }
         }
     }
+    
+
 }
 
 function desplegarListaCapataces(){
@@ -321,6 +338,13 @@ function solicitudCambiarCapataz(cambiar){
 
 function cargarNuevoCapataz(nuevoCapataz){
     //vaciar todos los elementos
+    $('#listaCapataces').hide();
+    $('#btnAceptarCapataz').hide();
+    $('#btnCancelarCapataz').hide();
+    $('#btnDetalleCapataz').show();
+    $('#btnCambiarCapataz').show();
+    
+    
     console.log('-------- insertando nuevo capataz');
     $('#datosCapataz').empty();
     $('#dniCapataz').attr('src','');
@@ -370,38 +394,91 @@ function insertarNuevosEmpleados(listaEmpleados){
     var disponible = 'Disponible';
     var booleanDisponible = true;
     
-    for(indice=0; indice < listaEmpleados.length; indice++){
-        if(indice%2 === 0){
-            clase = 'impar';
-        }
-        else{
-            clase = 'par';
-        }
-        
-        if(listaEmpleados[indice].grupoDTO){
-            disponible = 'Ocupado';
-            booleanDisponible = false;
-        }
-        else{
-            disponible = 'Disponible';
-            booleanDisponible = true;
-        }
-        //console.log('grupo actual: '+idGrupo+' - '+'grupo del empleado: '+listaEmpleados[indice].grupoDTO.id_grupo);
-        
-        if(listaEmpleados[indice].grupoDTO === undefined || listaEmpleados[indice].grupoDTO.id_grupo !== idGrupo){
-            $('#nuevosEmpleados').append('<div class="empleado '+clase+'">'+
-                                                        '<p>'+listaEmpleados[indice].legajo+'</p>'+
-                                                        '<p>'+listaEmpleados[indice].apellidos+', '+listaEmpleados[indice].nombres+'</p>'+
-                                                        '<p>'+listaEmpleados[indice].cuil+'</p>'+
-                                                        '<p>'+listaEmpleados[indice].fecha_ingreso+'</p>'+
-                                                        '<p id="disponible-'+listaEmpleados[indice].id_empleado+'" value="'+booleanDisponible+'">'+disponible+'</p>'+
-                                                        '<div class="botonesEmpleado" id"check-'+listaEmpleados[indice].id_empleado+'">'+
-                                                           //'<input type="radio" name="capataz" id="'+listaEmpleados[indice].id_empleado+'" value="'+listaEmpleados[indice].id_empleado+'">'+
-                                                           '<input type="checkbox" id="'+listaEmpleados[indice].id_empleado+'" value="'+listaEmpleados[indice].id_empleado+'">'+
-                                                        '</div>'+
-                                                    '</div>');
+    if(listaEmpleados.length === 0){
+         $('#nuevosEmpleados').append('<h1>No existen empleados</h1>');
+    }
+    else{
+        for(indice=0; indice < listaEmpleados.length; indice++){
+            if(indice%2 === 0){
+                clase = 'impar';
+            }
+            else{
+                clase = 'par';
+            }
+
+            if(listaEmpleados[indice].grupoDTO){
+                disponible = 'Ocupado';
+                booleanDisponible = false;
+            }
+            else{
+                disponible = 'Disponible';
+                booleanDisponible = true;
+            }
+            //console.log('grupo actual: '+idGrupo+' - '+'grupo del empleado: '+listaEmpleados[indice].grupoDTO.id_grupo);
+
+            if(listaEmpleados[indice].grupoDTO === undefined || listaEmpleados[indice].grupoDTO.id_grupo !== idGrupo){
+                $('#nuevosEmpleados').append('<div class="empleado '+clase+'">'+
+                                                            '<p>'+listaEmpleados[indice].legajo+'</p>'+
+                                                            '<p>'+listaEmpleados[indice].apellidos+', '+listaEmpleados[indice].nombres+'</p>'+
+                                                            '<p>'+listaEmpleados[indice].cuil+'</p>'+
+                                                            '<p>'+listaEmpleados[indice].jerarquia.descripcion+'</p>'+
+                                                            '<p id="disponible-'+listaEmpleados[indice].id_empleado+'" value="'+booleanDisponible+'">'+disponible+'</p>'+
+                                                            '<div class="botonesEmpleado" id"check-'+listaEmpleados[indice].id_empleado+'">'+
+                                                               //'<input type="radio" name="capataz" id="'+listaEmpleados[indice].id_empleado+'" value="'+listaEmpleados[indice].id_empleado+'">'+
+                                                               '<input type="checkbox" id="'+listaEmpleados[indice].id_empleado+'" value="'+listaEmpleados[indice].id_empleado+'">'+
+                                                            '</div>'+
+                                                        '</div>');
+            }
         }
     }
+}
+
+function aceptarEmpleados(){
+    $('#btnAceptarEmpleados').click(function(){
+        var idGrupo = parseInt($('#detalleGrupo').attr('value'));
+        
+        var empleados = [];
+        $('input[type="checkbox"]:checked').each(function() {
+          empleados.push(empleado = {id_empleado: $(this).val()});
+        });
+        
+        if(empleados.length === 0){
+            mensajeModal('No se ha seleccionado ningun empleado', false, true, false);
+        }
+        else{
+            var grupo = {id_grupo: idGrupo, empleados: empleados};
+            var solicitud = {mensaje: 'empleados', grupo: JSON.stringify(grupo)};
+            
+            $.ajax({
+                url: '/proyectoconstruccion/SvDetalleGrupoTrabajo', // URL del servlet
+                type: 'POST',
+                data: solicitud,
+                dataType: 'json',
+                cache: false,
+                success: function (response) {
+                    console.log(response);
+                    if(response.mensaje === true){
+                        mensajeModal(response.mensaje ,false, true, false);
+                    }
+                    else{
+                        mensajeModal(response.mensaje ,false, true, false);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error:", error);
+                }
+            });
+        }
+        $('#contenedorNuevosEmpleados').hide();
+        $('#nuevosEmpleados').empty();
+
+        $('#btnCancelarEmpleados').hide();
+        $('#btnAceptarEmpleados').hide();
+
+        $('#btnAgregarEmpleadso').show();
+        console.log(empleados);
+        cargarGrupo(idGrupo);
+    });
 }
 
 function cancelarEmpleados(){

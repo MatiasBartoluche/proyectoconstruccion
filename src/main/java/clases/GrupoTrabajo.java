@@ -73,4 +73,10 @@ public class GrupoTrabajo implements Serializable {
     public void setListaEmpleados(ArrayList<Empleado> empleados) {
         this.empleados = empleados;
     }
+    
+    public void agregarEmpleado(Empleado empleado){
+        if(empleado != null){
+            this.empleados.add(empleado);
+        }
+    }
 }
