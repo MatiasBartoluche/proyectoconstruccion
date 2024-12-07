@@ -13,6 +13,10 @@ $(document).ready(function(){
 
     cargarGrupo(idGrupo);
     detalleEmpleado();
+    borrarEmpleado();
+    
+    modalEliminar();
+    
     detalleCapataz();
     
     desplegarListaCapataces();
@@ -93,15 +97,21 @@ function detalleEmpleado(){
     });
 }
 
-function borrarEmpleado(idEmpleado){
-    $('#eliminarModalGrupo').click(function(){
-        console.log('eliminar: '+idEmpleado);
-        $('#contenedorTextoModal').empty();
-        $('#contenedorTextoModal').append('<p>El empleado se ha borrado del grupo</p>');
-        
-        $('#cancelarModalGrupo').hide();
-        $('#eliminarModalGrupo').hide();
-        $('#aceptarModalGrupo').show();
+function borrarEmpleado(){
+    $('#contenedorIntegrantes').off('click').on('click', '.btnBorrarEmpleado', function () {
+        const idEmpleado = $(this).data('idempleado'); // Obtener el legajo del botón
+        console.log('Borrar empleado del grupo: '+idEmpleado);
+        localStorage.setItem('retirarEmpleado', idEmpleado);
+        mensajeModal('¿Desea retirar este empleado del grupo de trabajo?', false, false, true, true);
+        cerrarModal('#btnModalCancelar');
+    });
+}
+
+function modalEliminar(){
+    $('#btnModalBorrar').off('click').click(function(){
+        var idGrupo = parseInt($('#detalleGrupo').attr('value'));
+        var idEmpleado = localStorage.getItem('retirarEmpleado');
+        console.log('++++++++ borrando: '+idEmpleado);
         
         $.ajax({
             url: '/proyectoconstruccion/SvDetalleGrupoTrabajo', // URL del servlet
@@ -111,6 +121,8 @@ function borrarEmpleado(idEmpleado){
             cache: false,
             success: function (response) {
                 console.log(response);
+                mensajeModal(response.mensaje, false, true, false, false);
+                cargarGrupo(idGrupo);
             },
             error: function (xhr, status, error) {
                 console.error("Error:", error);
@@ -252,18 +264,18 @@ function cambiarCapataz(){
         console.log(intercambiar);
         
         if(nuevoCapataz === undefined){
-            mensajeModal('Debe seleccionar un capataz', false, true, false);
+            mensajeModal('Debe seleccionar un capataz', false, true, false, false);
         }
         else{
             var cambiarCapataz = {actual: capatazActual, nuevo: nuevoCapataz, intercambiar: intercambiar};
             if(intercambiar === true){
                 var mensaje = 'El capataz seleccionado ya pertenece a un grupo ¿Desea intercambiar los capataces de ambos grupos?';
-                mensajeModal(mensaje, true, false, true);
+                mensajeModal(mensaje, true, false, true, false);
                 solicitudCambiarCapataz(cambiarCapataz);
                 cerrarModal('#btnModalCancelar');
             }
             else{
-                mensajeModal('¿desea reemplazar el capataz actual?' ,true, false, true);
+                mensajeModal('¿desea reemplazar el capataz actual?' ,true, false, true, false);
                 solicitudCambiarCapataz(cambiarCapataz);
                 cerrarModal('#btnModalCancelar');
             }
@@ -272,7 +284,7 @@ function cambiarCapataz(){
 }
 
 // se le pasa como parametro tres boolean, para determinar la visualizacion del boton
-function mensajeModal(mensaje, btnCambiar, btnAceptar, btnCancelar){
+function mensajeModal(mensaje, btnCambiar, btnAceptar, btnCancelar, btnEliminar){
     // borrar el mensaje anterior, si es que lo tiene
     $('#contenedorTextoModal').empty();
     
@@ -300,6 +312,13 @@ function mensajeModal(mensaje, btnCambiar, btnAceptar, btnCancelar){
     else{
         $('#btnModalCancelar').hide();
     }
+    
+    if(btnEliminar === true){
+        $('#btnModalBorrar').show();
+    }
+    else{
+        $('#btnModalBorrar').hide();
+    }
 }
 
 function cerrarModal(idBoton){
@@ -322,11 +341,11 @@ function solicitudCambiarCapataz(cambiar){
             success: function (response) {
                 console.log(response);
                 if(response.status === true){
-                    mensajeModal(response.mensaje, false, true, false);
+                    mensajeModal(response.mensaje, false, true, false, false);
                     cargarNuevoCapataz(response.capataz);
                 }
                 else{
-                    mensajeModal(response.mensaje, false, true, false);
+                    mensajeModal(response.mensaje, false, true, false, false);
                 }
             },
             error: function (xhr, status, error) {
@@ -393,43 +412,39 @@ function insertarNuevosEmpleados(listaEmpleados){
     var clase = 'impar';
     var disponible = 'Disponible';
     var booleanDisponible = true;
-    
-    if(listaEmpleados.length === 0){
-         $('#nuevosEmpleados').append('<h1>No existen empleados</h1>');
-    }
-    else{
-        for(indice=0; indice < listaEmpleados.length; indice++){
-            if(indice%2 === 0){
-                clase = 'impar';
-            }
-            else{
-                clase = 'par';
-            }
-
-            if(listaEmpleados[indice].grupoDTO){
-                disponible = 'Ocupado';
-                booleanDisponible = false;
-            }
-            else{
-                disponible = 'Disponible';
-                booleanDisponible = true;
-            }
-            //console.log('grupo actual: '+idGrupo+' - '+'grupo del empleado: '+listaEmpleados[indice].grupoDTO.id_grupo);
-
-            if(listaEmpleados[indice].grupoDTO === undefined || listaEmpleados[indice].grupoDTO.id_grupo !== idGrupo){
-                $('#nuevosEmpleados').append('<div class="empleado '+clase+'">'+
-                                                            '<p>'+listaEmpleados[indice].legajo+'</p>'+
-                                                            '<p>'+listaEmpleados[indice].apellidos+', '+listaEmpleados[indice].nombres+'</p>'+
-                                                            '<p>'+listaEmpleados[indice].cuil+'</p>'+
-                                                            '<p>'+listaEmpleados[indice].jerarquia.descripcion+'</p>'+
-                                                            '<p id="disponible-'+listaEmpleados[indice].id_empleado+'" value="'+booleanDisponible+'">'+disponible+'</p>'+
-                                                            '<div class="botonesEmpleado" id"check-'+listaEmpleados[indice].id_empleado+'">'+
-                                                               //'<input type="radio" name="capataz" id="'+listaEmpleados[indice].id_empleado+'" value="'+listaEmpleados[indice].id_empleado+'">'+
-                                                               '<input type="checkbox" id="'+listaEmpleados[indice].id_empleado+'" value="'+listaEmpleados[indice].id_empleado+'">'+
-                                                            '</div>'+
-                                                        '</div>');
-            }
+         ////$('#nuevosEmpleados').append('<h1>No existen empleados</h1>');
+    for (indice = 0; indice < listaEmpleados.length; indice++) {
+        if (indice % 2 === 0) {
+            clase = 'impar';
+        } else {
+            clase = 'par';
         }
+
+        if (listaEmpleados[indice].grupoDTO) {
+            disponible = 'Ocupado';
+            booleanDisponible = false;
+        } else {
+            disponible = 'Disponible';
+            booleanDisponible = true;
+        }
+        //console.log('grupo actual: '+idGrupo+' - '+'grupo del empleado: '+listaEmpleados[indice].grupoDTO.id_grupo);
+
+        if (listaEmpleados[indice].grupoDTO === undefined || listaEmpleados[indice].grupoDTO.id_grupo !== idGrupo) {
+            $('#nuevosEmpleados').append('<div class="empleado ' + clase + '">' +
+                    '<p>' + listaEmpleados[indice].legajo + '</p>' +
+                    '<p>' + listaEmpleados[indice].apellidos + ', ' + listaEmpleados[indice].nombres + '</p>' +
+                    '<p>' + listaEmpleados[indice].cuil + '</p>' +
+                    '<p>' + listaEmpleados[indice].jerarquia.descripcion + '</p>' +
+                    '<p id="disponible-' + listaEmpleados[indice].id_empleado + '" value="' + booleanDisponible + '">' + disponible + '</p>' +
+                    '<div class="botonesEmpleado" id"check-' + listaEmpleados[indice].id_empleado + '">' +
+                    //'<input type="radio" name="capataz" id="'+listaEmpleados[indice].id_empleado+'" value="'+listaEmpleados[indice].id_empleado+'">'+
+                    '<input type="checkbox" id="' + listaEmpleados[indice].id_empleado + '" value="' + listaEmpleados[indice].id_empleado + '">' +
+                    '</div>' +
+                    '</div>');
+        }
+    }
+    if($('#nuevosEmpleados').children().length === 0){
+        $('#nuevosEmpleados').append('<h1>No existen empleados disponibles</h1>');
     }
 }
 
@@ -443,7 +458,7 @@ function aceptarEmpleados(){
         });
         
         if(empleados.length === 0){
-            mensajeModal('No se ha seleccionado ningun empleado', false, true, false);
+            mensajeModal('No se ha seleccionado ningun empleado', false, true, false, false);
         }
         else{
             var grupo = {id_grupo: idGrupo, empleados: empleados};
@@ -457,11 +472,19 @@ function aceptarEmpleados(){
                 cache: false,
                 success: function (response) {
                     console.log(response);
-                    if(response.mensaje === true){
-                        mensajeModal(response.mensaje ,false, true, false);
+                    if(response.status === true){
+                        mensajeModal(response.mensaje ,false, true, false, false);
+                        cargarGrupo(idGrupo);
+                        
+                        $('#contenedorNuevosEmpleados').hide();
+                        $('#nuevosEmpleados').empty();
+                        
+                        $('#btnAceptarEmpleados').hide();
+                        $('#btnCancelarEmpleados').hide();
+                        $('btnAgregarEmpleados').show();
                     }
                     else{
-                        mensajeModal(response.mensaje ,false, true, false);
+                        mensajeModal(response.mensaje ,false, true, false, false);
                     }
                 },
                 error: function (xhr, status, error) {
@@ -469,15 +492,6 @@ function aceptarEmpleados(){
                 }
             });
         }
-        $('#contenedorNuevosEmpleados').hide();
-        $('#nuevosEmpleados').empty();
-
-        $('#btnCancelarEmpleados').hide();
-        $('#btnAceptarEmpleados').hide();
-
-        $('#btnAgregarEmpleadso').show();
-        console.log(empleados);
-        cargarGrupo(idGrupo);
     });
 }
 

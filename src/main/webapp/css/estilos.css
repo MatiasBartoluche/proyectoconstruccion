@@ -1246,12 +1246,12 @@ body.dark .home .text{
     display: none;
 }
 
-#contenedorIntegrantes .botonesEmpleado span{
+.botonesEmpleado span{
     width:48%;
     margin: 1%;
 }
 
-#contenedorIntegrantes h1{
+#contenedorIntegrantes h1, #nuevosEmpleados h1{
     width: 100%;
     text-align: center;
 }

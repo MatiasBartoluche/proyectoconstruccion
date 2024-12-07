@@ -234,7 +234,9 @@ public class SvDetalleGrupoTrabajo extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         
-        String respuestaJson = "{\"mensaje\": \"Se han agregado los nuevos empleados al grupo\", \"status\": \""+true+"\"}";
+        String respuestaJson;
+        
+        Map<String, Object> armarJson = new HashMap<>();
         
         String grupoRequest =  request.getParameter("grupo");
         Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
@@ -257,9 +259,17 @@ public class SvDetalleGrupoTrabajo extends HttpServlet {
                 // cuando termina el for, guardo el grupo con sus nuevos empleados
                 controlador.editarGrupo(grupo);
             }
+            armarJson.put("mensaje", "Se han agregado los nuevos empleados al grupo");
+            armarJson.put("status", true);
+            
+            respuestaJson = gson.toJson(armarJson);
         }
         catch(Exception e){
-            respuestaJson = "{\"mensaje\": \"Ha ocurrido un error al agregar empleados al grupo\", \"status\": \""+false+"\", \"error\": \""+e+"\"}";
+            armarJson.put("mensaje", "Ha ocurrido un error al agregar empleados al grupo");
+            armarJson.put("status", false);
+            armarJson.put("error", e);
+            
+            respuestaJson = gson.toJson(armarJson);
         }
         
         response.getWriter().write(respuestaJson);
