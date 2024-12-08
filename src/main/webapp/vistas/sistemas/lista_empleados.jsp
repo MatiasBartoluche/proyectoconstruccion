@@ -139,6 +139,8 @@
                 <p>Cargo</p>
                 <p>Fecha de ingreso</p>
             </div>
+            
+            <div id="contenedorObreros"></div>
         </article>
         
         <article class="listaEmpleados" id="listaSubcontratados">
@@ -150,6 +152,7 @@
                 <p>Cargo</p>
                 <p>Fecha de ingreso</p>
             </div>
+            <div id="contenedorSubcontratados"></div>
         </article>
 
         <article class="listaEmpleados" id="listaOficina">
@@ -161,6 +164,7 @@
                 <p>Cargo</p>
                 <p>Fecha de ingreso</p>
             </div>
+            <div id="contenedorOficina"></div>
         </article>
         
     </section>

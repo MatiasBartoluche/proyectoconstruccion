@@ -24,17 +24,20 @@ function buscarEmpleados(){
             var contadorObrero = 0;
             var contadorOficina = 0;
             var contdorSubcontratista = 0;
+            $('#contenedorOficina').empty();
+            $('#contenedorObreros').empty();
+            $('#contenedorSubcontratados').empty();
             for (indice = 0; indice < response.length; indice++) {
                 if(response[indice].contrato.descripcion === 'Oficina'){
-                    insertarEmpleado(response[indice], '#listaOficina', contadorOficina);
+                    insertarEmpleado(response[indice], '#contenedorOficina', contadorOficina);
                     contadorOficina = contadorOficina +1;
                 }
                 else if(response[indice].contrato.descripcion === 'Obrero'){
-                    insertarEmpleado(response[indice], '#listaObreros', contadorObrero);
+                    insertarEmpleado(response[indice], '#contenedorObreros', contadorObrero);
                     contadorObrero = contadorObrero +1;
                 }
                 else if(response[indice].contrato.descripcion === 'Subcontratista'){
-                    insertarEmpleado(response[indice], '#listaSubcontratados', contdorSubcontratista);
+                    insertarEmpleado(response[indice], '#contenedorSubcontratados', contdorSubcontratista);
                     contdorSubcontratista = contdorSubcontratista +1;
                 }
             }
@@ -73,7 +76,6 @@ function toggleListas(idBoton, idLista, texto){
 }
 
 function insertarEmpleado(empleado, idLista, tipoClase){
-    console.log(empleado);
     var clase = '';
 
     
