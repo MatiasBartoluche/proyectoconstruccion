@@ -223,6 +223,13 @@
                     </select>
                 </div>
                 
+                <div class="contenedorDetalleSelect">
+                    <label>Grupo de trabajo</label>
+                    <select class="habilitacion" id="detalleGrupoTrabajo" disabled="true">
+                        
+                    </select>
+                </div>
+                
             </form>
             <div id="contenedorBotonesModificar">
                 <button id="modificarDatosEmpleado">Modificar datos</button>

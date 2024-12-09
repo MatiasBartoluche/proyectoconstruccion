@@ -48,6 +48,7 @@ public class Empleado implements Serializable {
     private LocalDate fecha_ingreso; // LocalDate fecha sin hora
     private int antiguedad;
     private boolean despido; // true = despido, false = empleado vigente
+    private LocalDate fecha_despido;
     
     @Column(precision = 14, scale = 7)
     private BigDecimal sueldo_base;
@@ -288,5 +289,13 @@ public class Empleado implements Serializable {
 
     public void setAsistencias(ArrayList<Asistencia> asistencias) {
         this.asistencias = asistencias;
+    }
+
+    public LocalDate getFecha_despido() {
+        return fecha_despido;
+    }
+
+    public void setFecha_despido(LocalDate fecha_despido) {
+        this.fecha_despido = fecha_despido;
     }
 }

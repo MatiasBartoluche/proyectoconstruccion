@@ -141,7 +141,9 @@
             <h2>Informacion del grupo</h2>
             
             <div id="contenedorCapataz">
-                <img id="dniCapataz" src=""/>
+                <div id="contenedorDni">
+                    <img id="dniCapataz" src=""/>
+                </div>
                 <div id="datosCapataz"></div>
                 
                 <div id="listaCapataces">

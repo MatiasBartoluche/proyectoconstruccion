@@ -98,7 +98,9 @@ public class EmpleadoJpaController{
     public Empleado findEmpleado(int id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Empleado.class, id);
+            Empleado empleado = em.find(Empleado.class, id);
+            em.refresh(empleado);
+            return empleado;
         } finally {
             em.close();
         }

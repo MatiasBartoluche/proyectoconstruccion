@@ -3,8 +3,8 @@ $(document).ready(function(){
     // cuando se accede a la pagina desde el historial del navegador, refresca las funciones
     window.addEventListener('pageshow', function (event) {
         if (event.persisted || performance.getEntriesByType('navigation')[0].type === 'back_forward') {
-            //var idGrupo = localStorage.getItem('detalleGrupo');
-            //cargarGrupo(idGrupo);
+            var idGrupo = localStorage.getItem('detalleGrupo');
+            cargarGrupo(idGrupo);
         }
     });
     
@@ -18,6 +18,7 @@ $(document).ready(function(){
     modalEliminar();
     
     detalleCapataz();
+    detalleEmpleado();
     
     desplegarListaCapataces();
     cancelarCapataz();
@@ -53,8 +54,12 @@ function insertarDetalleGrupo(grupo){
     $('#datosCapataz').append('<p>Numero de legajo: '+capataz.legajo+'</p>');
     
     if(capataz.foto_dni_base64){
+        //$('#contenedorDni').css('background-image' url('ruta/de/la/imagen.jpg');
         $('#dniCapataz').attr('src', `data:image/png;base64,${capataz.foto_dni_base64}`);
     }
+    
+        const img = document.querySelector('img');
+        console.log('Dimensiones de la imagen:', img.naturalWidth, img.naturalHeight);
     
     if(empleados.length === 0){
         $('#contenedorIntegrantes').append('<h1>Este grupo no contiene empleados</h1>');

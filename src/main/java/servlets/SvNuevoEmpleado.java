@@ -4,15 +4,20 @@ import clases.Contrato;
 import clases.Controlador;
 import clases.Empleado;
 import clases.EstadoEmpleado;
+import clases.GrupoTrabajo;
 import clases.Jerarquia;
 import clases.LocalDateAdapter;
+import clasesDTO.GrupoTrabajoDTO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,28 +43,27 @@ public class SvNuevoEmpleado extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         
-        List<Jerarquia> listaJerarquias;
-        List<Contrato> listaContratos;
-        List<EstadoEmpleado>listaEstados;
         // realizo la consulta a la base de datos
-        listaJerarquias = control.buscarListaJerarquias();
-        listaContratos = control.buscarListaContratos();
-        listaEstados = control.buscarListaEstados();
+        ArrayList<Jerarquia> listaJerarquias = control.buscarListaJerarquias();
+        ArrayList<Contrato> listaContratos = control.buscarListaContratos();
+        ArrayList<EstadoEmpleado>listaEstados = control.buscarListaEstados();
+        ArrayList<GrupoTrabajo> listaGrupos = control.buscarListaGruposTrabajo();
         
-        // instancia de la clase "CargarDatos" que recibe dos listas como parametros
-        // para enviarlas a la pagina
-        CargarDatos datos = new CargarDatos();
-        
-        datos.setContratos(listaContratos);
-        datos.setJerarquias(listaJerarquias);
-        datos.setEstados(listaEstados);
+        ArrayList<GrupoTrabajoDTO> gruposDTO = control.convertirListaGruposTrabajoDTO(listaGrupos);
+
+        // creacion de un HashMap para guardar listas como pares clave-valor
+        Map<String, Object> armarJson = new HashMap<>();
+        armarJson.put("jerarquias", listaJerarquias);
+        armarJson.put("contratos", listaContratos);
+        armarJson.put("estados", listaEstados);
+        armarJson.put("grupos", gruposDTO);
         
         // convertir la lista de a Json
-        Gson gson = new Gson();
-        String datosJson = gson.toJson(datos);
+        Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
+        String respuestaJson = gson.toJson(armarJson);
 
         // enviar el Json a la pagina jsp
-        response.getWriter().write(datosJson);
+        response.getWriter().write(respuestaJson);
     }
 
     @Override
@@ -109,38 +113,5 @@ public class SvNuevoEmpleado extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }
-    // clase que se usa de fotma local para enviar dos listas a traves de un json
-    private class CargarDatos{
-        List<Jerarquia> jerarquias;
-        List<Contrato> contratos;
-        List<EstadoEmpleado>estados;
-        
-        public CargarDatos(){}
-
-        public List<Jerarquia> getJerarquias() {
-            return jerarquias;
-        }
-
-        public void setJerarquias(List<Jerarquia> jerarquias) {
-            this.jerarquias = jerarquias;
-        }
-
-        public List<Contrato> getContratos() {
-            return contratos;
-        }
-
-        public void setContratos(List<Contrato> contratos) {
-            this.contratos = contratos;
-        }
-
-        public List<EstadoEmpleado> getEstados() {
-            return estados;
-        }
-
-        public void setEstados(List<EstadoEmpleado> estados) {
-            this.estados = estados;
-        }
-        
     }
 }

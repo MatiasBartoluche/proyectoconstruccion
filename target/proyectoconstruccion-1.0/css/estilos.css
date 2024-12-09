@@ -1028,6 +1028,9 @@ body.dark .home .text{
 
 .contenedorDetalleAdministrativo{
     width: 33%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
 }
 
 .contenedorDetalleAdministrativo label{
@@ -1042,6 +1045,8 @@ body.dark .home .text{
     width: 33%;
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 1%
 }
 
 .contenedorDetalleSelect label{
@@ -1277,8 +1282,17 @@ body.dark .home .text{
     width: 19%;
 }
 
+#contenedorDni{
+    width: 40%; /* O usa un valor fijo, como 400px */
+    height: auto; /* Asegúrate de definir la altura */
+    overflow: hidden; /* Oculta cualquier contenido que exceda las dimensiones */
+    position: relative;
+}
+
 #dniCapataz{
-    width: 40%;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
 }
 
 #datosCapataz{

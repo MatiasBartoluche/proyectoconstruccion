@@ -43,6 +43,7 @@ function detalleEmpleado(idEmpleado){
 function insertarDetalleEmpleado(empleado){
     var idEmpleado = empleado.id_empleado;
     
+    // insertar los datos del empleado en cada input
     $('#detalleNombresEmpleado').val(empleado.nombres);
     $('#detalleApellidosEmpleado').val(empleado.apellidos);
     
@@ -113,6 +114,21 @@ function insertarDetalleEmpleado(empleado){
     $('#detalleJerarquiaEmpleado').append('<option value="' + empleado.jerarquia.id_jerarquia+ '" id="' + empleado.jerarquia.descripcion + '">' + empleado.jerarquia.descripcion + '</option>');
     $('#detalleEstadoEmpleado').append('<option value="' + empleado.estado.id_estado+ '" id="' + empleado.estado.descripcion + '">' + empleado.estado.descripcion + '</option>');
     
+    // si pertenece a un grupo de trabajo
+    var nombreGrupo = empleado.grupoDTO.nombre_grupo;
+    console.log('nombre del grupo: '+nombreGrupo);
+    
+    if(nombreGrupo === ''){
+        nombreGrupo = 'Sin nombre';
+    }
+    
+    if(empleado.grupoDTO){
+        $('#detalleGrupoTrabajo').append('<option value="'+empleado.grupoDTO.id_grupo+'" id="'+empleado.grupoDTO.nombre_grupo+'">'+nombreGrupo+'</option>');
+    }
+    else{
+        $('#detalleGrupoTrabajo').append('<option value="0" id="0">Ninguno</option>');
+    }
+    
     // cargando historiales de empleado
     if(empleado.asignaciones.length === 0){
         $('#historialTrabajos').append('<h1 class="mensajeHistorialVacio">No hay resultados de busqueda</h1>');
@@ -179,9 +195,14 @@ function habilitarCamposEmpleado(){
         $('#detalleContratoEmpleado').prop('disabled', false);
         $('#detalleJerarquiaEmpleado').prop('disabled', false);
         $('#detalleEstadoEmpleado').prop('disabled', false);
+        $('#detalleGrupoTrabajo').prop('disabled', false);
         
         // luego cargo con todos los datos de la base de datos
-        cargarDatos($('#detalleContratoEmpleado').val(), $('#detalleJerarquiaEmpleado').val(), $('#detalleEstadoEmpleado').val());
+        var idContratoActual = parseInt($('#detalleContratoEmpleado').val());
+        var idJerarquiaActual = parseInt($('#detalleJerarquiaEmpleado').val());
+        var idEstadoActual = parseInt($('#detalleEstadoEmpleado').val());
+        var idGrupoActual = parseInt($('#detalleGrupoTrabajo').val());
+        cargarDatos(idContratoActual, idJerarquiaActual, idEstadoActual, idGrupoActual);
         
         $('#guardarNuevosDatosEmpleado').css('display', 'block');
         $('#cancelarNuevosDatos').css('display', 'block');
@@ -190,11 +211,12 @@ function habilitarCamposEmpleado(){
     });
 }
 
-function cargarDatos(idContratoActual, idJerarquiaActual, idEstadoActual){
+function cargarDatos(idContratoActual, idJerarquiaActual, idEstadoActual, idGrupoActual){
     // vacio los select para evitar <option> duplicados
     $('#detalleContratoEmpleado').empty();
     $('#detalleJerarquiaEmpleado').empty();
     $('#detalleEstadoEmpleado').empty();
+    $('#detalleGrupoTrabajo').empty();
     
     $.ajax({
         url: '/proyectoconstruccion/SvNuevoEmpleado', // URL del servlet
@@ -206,7 +228,7 @@ function cargarDatos(idContratoActual, idJerarquiaActual, idEstadoActual){
             $.each(response.jerarquias, function (i, item) {
                 if(item.id_jerarquia === idJerarquiaActual){
                     // agrego selected al <option> a insertar
-                    $('#detalleJerarquiaEmpleado').append('<option value="' + item.id_jerarquia + '" id="' + item.descripcion + ' selected">' + item.descripcion + '</option>');
+                    $('#detalleJerarquiaEmpleado').append('<option value="' + item.id_jerarquia + '" id="' + item.descripcion + '" selected>' + item.descripcion + '</option>');
                 }
                 else{
                     $('#detalleJerarquiaEmpleado').append('<option value="' + item.id_jerarquia + '" id="' + item.descripcion + '">' + item.descripcion + '</option>');
@@ -228,6 +250,16 @@ function cargarDatos(idContratoActual, idJerarquiaActual, idEstadoActual){
                 }
                 else{
                     $('#detalleEstadoEmpleado').append('<option value="' + item.id_estado + '" id="' + item.descripcion + '">' + item.descripcion + '</option>');
+                }
+            });
+            
+            $('#detalleGrupoTrabajo').append('<option value="0" id="0">Ninguno</option>');
+            $.each(response.grupos, function (i, item) {
+                if(item.id_grupo === idGrupoActual){
+                    $('#detalleGrupoTrabajo').append('<option value="' + item.id_grupo + '" id="' + item.nombre_grupo + '" selected>' + item.nombre_grupo + '</option>');
+                }
+                else{
+                    $('#detalleGrupoTrabajo').append('<option value="' + item.id_grupo + '" id="' + item.nombre_grupo + '">' + item.nombre_grupo + '</option>');
                 }
             });
         },
@@ -268,6 +300,8 @@ function capturarNuevosDatos(imagen){
     var idJerarquia = $('#detalleJerarquiaEmpleado').val();
     var descripcionJerarquia = $('#detalleJerarquiaEmpleado option:selected').html();
 
+    var idGrupo = parseInt($('#detalleGrupoTrabajo').val());
+    var nombreGrupo = $('#detalleGrupoTrabajo option:selected').html();
 // ------------------------------- validacion de campos -----------------------------------------
 
     // variables ligadas a los campo que no pueden ser nulos
@@ -349,11 +383,18 @@ function capturarNuevosDatos(imagen){
             && verificarLegajo === true && verificarSalario === true && verificarFecha === true) {
         console.log('---------------- armar json');
 
+        var empleadoModificado = {};
+
         var jerarquia = {id_jerarquia: idJerarquia, descripcion: descripcionJerarquia};
         var contrato = {id_contrato: idContrato, descripcion: descripcionContrato};
         var estado = {id_estado: idDetalleEstado, descripcion: descripcionDetalleEstado};
-
-        var empleadoModificado = {};
+        var grupo = {id_grupo: idGrupo, nombre_grupo: nombreGrupo};
+        
+        console.log(grupo);
+        
+        if(idGrupo !== 0){
+            $.extend(empleadoModificado, {grupo: grupo});
+        }
 
         $.extend(empleadoModificado, {id_empleado: idEmpleado});
         $.extend(empleadoModificado, {legajo: nuevoLegajo});
@@ -518,6 +559,7 @@ function cancelar(){
         $('#detalleContratoEmpleado').prop('disabled', true);
         $('#detalleJerarquiaEmpleado').prop('disabled', true);
         $('#detalleEstadoEmpleado').prop('disabled', true);
+        $('#detalleGrupoTrabajo').prop('disabled', true);
         
         $('#guardarNuevosDatosEmpleado').css('display', 'none');
         $('#cancelarNuevosDatos').css('display', 'none');
