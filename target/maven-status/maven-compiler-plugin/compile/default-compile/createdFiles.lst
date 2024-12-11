@@ -24,6 +24,7 @@ persistencia\AsientoContableJpaController.class
 persistencia\InspeccionJpaController.class
 persistencia\ObraJpaController.class
 clases\Columna.class
+clases\AjaxRequestFilter.class
 clases\Jerarquia.class
 clases\RegistroContable.class
 persistencia\ContratoJpaController.class
@@ -50,7 +51,6 @@ clases\Asistencia.class
 clases\Presupuesto.class
 persistencia\FacturaSubcontratistaJpaController.class
 clases\FacturaProveedor.class
-servlets\SvGrupoTrabajo$CargarDatos.class
 servlets\SvJerarquias.class
 persistencia\LiquidacionSueldoJpaController.class
 clases\Rol.class
@@ -84,5 +84,6 @@ persistencia\AsistenciaJpaController.class
 clases\Aporte.class
 persistencia\HistorialEstadoObraJpaController.class
 clases\LibroDiario.class
+clases\RedimensionarImagen.class
 clases\Subcontratista.class
 persistencia\SubcontratistaJpaController.class

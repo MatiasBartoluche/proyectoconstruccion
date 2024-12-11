@@ -61,4 +61,17 @@
         <filter-name>RoleFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    
+    <filter>
+        <filter-name>AjaxRequestFilter</filter-name>
+        <filter-class>clases.AjaxRequestFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AjaxRequestFilter</filter-name>
+        <url-pattern>/SvEmpleados</url-pattern>
+        <url-pattern>/SvGrupoTrabajo</url-pattern>
+        <url-pattern>/SvJerarquias</url-pattern>
+        <url-pattern>/SvNuevoEmpleado</url-pattern>
+        <url-pattern>/SvResultadoBuscarLegajo</url-pattern>
+    </filter-mapping>
 </web-app>
