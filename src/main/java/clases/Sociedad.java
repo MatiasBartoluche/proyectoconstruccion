@@ -19,19 +19,20 @@ public class Sociedad implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private int id_sociedad;
-    
-    // apunta al atributo "sociedad" de la clase "seguro"
-    @OneToMany(mappedBy = "sociedadSeguro", cascade = {CascadeType.MERGE, CascadeType.REFRESH})
-    private ArrayList<Seguro> seguros = new ArrayList<>();
-    
+    private String nombre;
     private String cuit_sociedad;
     private String razon_social;
     private String telefono;
     private String mail;
     private String Calle;
     private int altura;
+    private String piso;
     private String localidad;
     //private Provincia provincia;
+    
+    // apunta al atributo "sociedad" de la clase "seguro"
+    @OneToMany(mappedBy = "sociedadSeguro", cascade = {CascadeType.MERGE, CascadeType.REFRESH})
+    private ArrayList<Seguro> seguros = new ArrayList<>();
     
     // mappedBy="sociedadObra", relacion bidireccional, apunta al atributo "sociedad" de la clase "Obra"
     @OneToMany(mappedBy = "sociedadObra", cascade = {CascadeType.MERGE, CascadeType.REFRESH})
@@ -60,6 +61,14 @@ public class Sociedad implements Serializable {
 
     public void setIdSociedad(int id_sociedad) {
         this.id_sociedad = id_sociedad;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getCuitSociedad() {
@@ -108,6 +117,14 @@ public class Sociedad implements Serializable {
 
     public void setAltura(int altura) {
         this.altura = altura;
+    }
+
+    public String getPiso() {
+        return piso;
+    }
+
+    public void setPiso(String piso) {
+        this.piso = piso;
     }
 
     public String getLocalidad() {

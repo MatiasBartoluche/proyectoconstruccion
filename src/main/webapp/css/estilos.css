@@ -40,13 +40,14 @@ article{
 h2{
     width: 100%;
     border-bottom: 3px solid var(--text-color);
+    margin-bottom: 1%;
 }
 
 input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
 }
 
-input{
+input, textarea{
     font-family: "Roboto", sans-serif; /*fuentes de letra*/
     outline: 0;
     background: #f2f2f2; /*fondo gris claro*/
@@ -1308,4 +1309,73 @@ body.dark .home .text{
 #listaCapataces, #contenedorNuevosEmpleados{
     display: none;
     width: 100%;
+}
+
+/* ---------------- estilos pagina nueva_sociedad.jsp ----------------------- */
+
+#nuevaSociedad{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: baseline;
+}
+
+#labelNombre{
+    width: 20%;
+}
+
+#nombreNuevaSociedad{
+    width: 39%;
+    margin-left: 1%;
+}
+
+#cuitNuevaSociedad{
+    width: 39%;
+    margin-left: 1%;
+}
+
+#digitoGlobalSociedad, #digitoVerificadorSociedad{
+    width: 12%;
+}
+
+#cuerpoCuitSociedad{
+    width: 30%;
+}
+
+#guionCuit{
+    margin: 1%;
+}
+
+#labelRazonSocial{
+    width: 20%;
+}
+
+#razonSocialSociedad{
+    width: 79%;
+    margin-left: 1%;
+}
+
+#contenedorDireccionSociedad{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: baseline;
+}
+
+#contenedorDireccionSociedad input{
+    margin-right: 1%;
+}
+
+#contenedorDireccionSociedad label{
+    width: 12%;
+}
+
+#alturaSociedad, #pisoSociedad{
+    width: 10%;
+}
+
+#calleSociedad, #localidadSociedad{
+    width: 40%;
 }

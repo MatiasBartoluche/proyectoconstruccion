@@ -12,6 +12,7 @@ D:\github\proyectoconstruccion\src\main\java\persistencia\FacturaProveedorJpaCon
 D:\github\proyectoconstruccion\src\main\java\clasesDTO\EmpleadoDTO.java
 D:\github\proyectoconstruccion\src\main\java\clases\RegistroContable.java
 D:\github\proyectoconstruccion\src\main\java\clases\LibroDiario.java
+D:\github\proyectoconstruccion\src\main\java\clases\AjaxRequestFilter.java
 D:\github\proyectoconstruccion\src\main\java\persistencia\AsientoContableJpaController.java
 D:\github\proyectoconstruccion\src\main\java\persistencia\EntregaEPPJpaController.java
 D:\github\proyectoconstruccion\src\main\java\clases\EstadoObra.java
@@ -73,6 +74,7 @@ D:\github\proyectoconstruccion\src\main\java\persistencia\GrupoAportesJpaControl
 D:\github\proyectoconstruccion\src\main\java\persistencia\LiquidacionSueldoJpaController.java
 D:\github\proyectoconstruccion\src\main\java\servlets\SvRegistrar.java
 D:\github\proyectoconstruccion\src\main\java\clases\RoleFilter.java
+D:\github\proyectoconstruccion\src\main\java\clases\RedimensionarImagen.java
 D:\github\proyectoconstruccion\src\main\java\persistencia\HistorialEstadoObraJpaController.java
 D:\github\proyectoconstruccion\src\main\java\persistencia\ContratoJpaController.java
 D:\github\proyectoconstruccion\src\main\java\com\mycompany\proyectoconstruccion\JakartaRestConfiguration.java

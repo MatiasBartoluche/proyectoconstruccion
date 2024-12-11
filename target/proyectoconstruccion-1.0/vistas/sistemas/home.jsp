@@ -44,7 +44,7 @@
                 <ul class="menu-links">
 
                     <li class="nav-link"> <!--------------- Inicio elemento de la lista -->
-                        <a href="../pendiente.jsp">
+                        <a href="./sociedades.jsp">
                             <i class="bx bx-food-menu icon"></i>
                             <span class="text nav-text">Sociedades</span>
                         </a>
@@ -119,7 +119,7 @@
         
     <section class="home">
 
-        <a href="../pendiente.jsp">
+        <a href="./sociedades.jsp">
             <article class="modulo">
                 <div class="icono">
                     <i class="bx bx-food-menu icon"></i>
