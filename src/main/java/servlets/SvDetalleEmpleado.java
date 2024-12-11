@@ -7,7 +7,6 @@ import clasesDTO.EmpleadoDTO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.Base64;
 import javax.servlet.ServletException;
@@ -49,9 +48,7 @@ public class SvDetalleEmpleado extends HttpServlet {
         empDTO.setFotoDniBase64(fotoBase64);
         
         Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
-        
         String empleadoJson = gson.toJson(empDTO);
-        
         response.getWriter().write(empleadoJson);
     }
 

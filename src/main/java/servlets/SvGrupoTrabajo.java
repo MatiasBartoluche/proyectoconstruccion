@@ -5,14 +5,14 @@ import clases.Empleado;
 import clases.GrupoTrabajo;
 import clasesDTO.GrupoTrabajoDTO;
 import clases.LocalDateAdapter;
-import clases.Subcontratista;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -102,8 +102,7 @@ public class SvGrupoTrabajo extends HttpServlet {
         catch(Exception e){
             respuestaJson = "{\"mensaje\": \"No se pudo guardar el grupo de trabajo\", \"error\": \" "+e+" \"}";
         }   
-        response.getWriter().write(respuestaJson);
-        
+        response.getWriter().write(respuestaJson);   
     }
 
     @Override
@@ -140,14 +139,15 @@ public class SvGrupoTrabajo extends HttpServlet {
             }
             // ambas listas debe contener al menos un elemento para poder crear un grupo
             if(!capataces.isEmpty() && !empleados.isEmpty()){
-                CargarDatos datos = new CargarDatos();
+                Map<String, Object> listas = new HashMap<>();
                 // agrego datos a la clase
-                datos.setCapataces(capataces);
-                datos.setEmpleados(empleados);
+                
+                listas.put("capataces", capataces);
+                listas.put("empleados", empleados);
                 // conviero a json
                 Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
                 // cambio el valor del string
-                respuestaJson = gson.toJson(datos);
+                respuestaJson = gson.toJson(listas);
             }
         }
         // envio el string
@@ -158,10 +158,7 @@ public class SvGrupoTrabajo extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         
-        String respuestaJson = "{\"mensaje\": \"No existen empleados y/o Subcontratistas para armar un grupo de trabajo\"}";
-        
-        
-        
+        //String respuestaJson = "{\"mensaje\": \"No existen empleados y/o Subcontratistas para armar un grupo de trabajo\"}";
         //response.getWriter().write();
     }
     
@@ -181,7 +178,7 @@ public class SvGrupoTrabajo extends HttpServlet {
         if(!grupos.isEmpty()){
             ArrayList<GrupoTrabajoDTO> gruposDTO = controlador.convertirListaGruposTrabajoDTO(grupos);
             Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();           
-            
+            // sobreescribir la variable con el json de los grupos de trabajo
             respuestaJson = gson.toJson(gruposDTO);
         }
         response.getWriter().write(respuestaJson);
@@ -197,48 +194,5 @@ public class SvGrupoTrabajo extends HttpServlet {
             respuestaJson = "{\"mensaje\": \"no se ha podido borrar el grupo\", \"error\":\""+e+"\"}";
         }
         response.getWriter().write(respuestaJson);
-    }
-    
-// clase que se usa de fotma local para enviar dos listas a traves de un json
-    private class CargarDatos{
-        List<Empleado> capataces;
-        List<Empleado> empleados;
-        List<Subcontratista> subcontratistas;
-        List<GrupoTrabajo> grupos;
-        
-        public CargarDatos(){}
-
-        public List<Empleado> getCapataces() {
-            return capataces;
-        }
-
-        public void setCapataces(List<Empleado> Capataces) {
-            this.capataces = Capataces;
-        }
-
-        public List<Empleado> getEmpleados() {
-            return empleados;
-        }
-
-        public void setEmpleados(List<Empleado> empleados) {
-            this.empleados = empleados;
-        }
-
-        public List<Subcontratista> getSubcontratistas() {
-            return subcontratistas;
-        }
-
-        public void setSubcontratistas(List<Subcontratista> subcontratistas) {
-            this.subcontratistas = subcontratistas;
-        }
-
-        public List<GrupoTrabajo> getGrupos() {
-            return grupos;
-        }
-
-        public void setGrupos(List<GrupoTrabajo> grupos) {
-            this.grupos = grupos;
-        }
-
     }
 }

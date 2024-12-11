@@ -7,6 +7,7 @@ import clases.EstadoEmpleado;
 import clases.GrupoTrabajo;
 import clases.Jerarquia;
 import clases.LocalDateAdapter;
+import clases.RedimensionarImagen;
 import clasesDTO.GrupoTrabajoDTO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -14,9 +15,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -77,13 +76,13 @@ public class SvNuevoEmpleado extends HttpServlet {
         
         //construyo el Gson con LocalDateAdapter
         Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
-
         // Convertir JSON a objeto Java y guardarlo en la variable de tipo Empleado
         Empleado empleadoRecibido = gson.fromJson(leerDatos, Empleado.class);
   
         if(empleadoRecibido.getFotoDniBase64() != null){
+            RedimensionarImagen rImg = new RedimensionarImagen();
             String fotoBase64 = empleadoRecibido.getFotoDniBase64();
-            byte[] foto = Base64.getDecoder().decode(fotoBase64);
+            byte[] foto = rImg.redimensionarImagenBase64(fotoBase64, 300, 300);
 
             empleadoRecibido.setFotoDni(foto);
         }

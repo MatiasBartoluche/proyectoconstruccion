@@ -501,8 +501,6 @@ function cargarImagen(){
 function cerrarDetalleModal(){
     $('#cerrarDetalleModal').click(function(){
         $('#contenedorTextoModal').empty();
-        
-        
         $('#mensajeModalModificarEmpleado').css('display', 'none');
     });
 }

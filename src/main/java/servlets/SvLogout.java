@@ -1,6 +1,5 @@
 package servlets;
 
-import clases.Usuario;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +10,8 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "SvLogout", urlPatterns = {"/servlets/SvLogout"})
 public class SvLogout extends HttpServlet {
+
+    private static final long serialVersionUID = 1L;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

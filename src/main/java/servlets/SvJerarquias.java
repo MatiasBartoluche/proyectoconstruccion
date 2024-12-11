@@ -3,6 +3,7 @@ package servlets;
 import clases.Controlador;
 import clases.Jerarquia;
 import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -39,14 +40,12 @@ public class SvJerarquias extends HttpServlet {
                     String idJerarquia = request.getParameter("idJerarquia");
                     int numeroJerarquia = Integer.parseInt(idJerarquia);
                     editarJerarquia(request, response, numeroJerarquia);
-                    System.out.println("borrar jerarquia: ");
                     break;
                 }
             case "borrar":{
                     String idJerarquia = request.getParameter("idJerarquia");
                     int numeroJerarquia = Integer.parseInt(idJerarquia);
                     borrarJerarquia(response, numeroJerarquia);
-                    System.out.println("borrar jerarquia: ");
                     break;
                 }
             default:
@@ -60,21 +59,26 @@ public class SvJerarquias extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         
-        BufferedReader reader = request.getReader();
-        StringBuilder sb = new StringBuilder();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            sb.append(line);
-        }
-        String json = sb.toString();
+        String respuestaJson = "{\"status\": true, \"mensaje\": \"El cargo fue registrado exitosamente\"}";
+        
+        try{
+            BufferedReader reader = request.getReader();
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                sb.append(line);
+            }
+            String json = sb.toString();
 
-        Gson gson = new Gson();
-        Jerarquia jerarquia = gson.fromJson(json, Jerarquia.class);
-        
-        controlador.crearJerarquia(jerarquia);
-        
-        response.getWriter().write("{\"status\": true, \"mensaje\": \"El cargo fue registrado exitosamente\"}");
-        
+            Gson gson = new Gson();
+            Jerarquia jerarquia = gson.fromJson(json, Jerarquia.class);
+
+            controlador.crearJerarquia(jerarquia);
+        }
+        catch(JsonSyntaxException | IOException e){
+            respuestaJson = "{\"status\": false, \"mensaje\": \"no se ha podido crear el cargo\", \"error\": \""+e+"\"}";
+        }
+        response.getWriter().write(respuestaJson);
     }
 
     @Override
@@ -83,47 +87,50 @@ public class SvJerarquias extends HttpServlet {
     }// </editor-fold>
 
     public void cargarJerarquias(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        String respuestaJson;
         
-        List<Jerarquia> listaJerarquias;
-        
-        // realizo la consulta a la base de datos
-        listaJerarquias = controlador.buscarListaJerarquias();
-        
-        // convertir la lista de objetos Jerarquia a Json
-        Gson gson = new Gson();
-        String rolesJson = gson.toJson(listaJerarquias);
-
-        // enviar el Json a la pagina jsp
-        response.getWriter().write(rolesJson);
+        try{
+            List<Jerarquia> listaJerarquias;
+            // realizo la consulta a la base de datos
+            listaJerarquias = controlador.buscarListaJerarquias();
+            // convertir la lista de objetos Jerarquia a Json
+            Gson gson = new Gson();
+            respuestaJson = gson.toJson(listaJerarquias);
+            // enviar el Json a la pagina jsp
+        }
+        catch(Exception e){
+            respuestaJson = "{\"status\": false,  \"mensaje\":\"Ocurrio un error al intentar cargar los cargos\", \"error\": \""+e+"\"}";
+        }
+        response.getWriter().write(respuestaJson);
     }
 
     private void editarJerarquia(HttpServletRequest request, HttpServletResponse response, int idJerarquia)  throws ServletException, IOException{
         System.out.println("editar jerarquia: "+idJerarquia);
         
         String descripcion = request.getParameter("descripcion");
-        
-        Jerarquia jerarquia = new Jerarquia();
-        jerarquia.setIdJerarquia(idJerarquia);
-        jerarquia.setDescripcion(descripcion);
-        
-        controlador.editarJerarquia(jerarquia);
-        
         String respuestaJson = "{\"status\": true,  \"mensaje\":\"Los datos del cargo han sido actualizados\"}";
+        
+        try{
+            Jerarquia jerarquia = new Jerarquia();
+            jerarquia.setIdJerarquia(idJerarquia);
+            jerarquia.setDescripcion(descripcion);
+            controlador.editarJerarquia(jerarquia);
+        }
+        catch(Exception e){
+            respuestaJson = "{\"status\": false,  \"mensaje\":\"Ocurrio un error al intentar editar el cargo\", \"error\": \""+e+"\"}";
+        }
         response.getWriter().write(respuestaJson);
     }
 
     private void borrarJerarquia(HttpServletResponse response, int idJerarquia)  throws ServletException, IOException{
-        System.out.println("borrar jerarquia: "+idJerarquia);
-        
         String respuestaJson;
         
         try{
             controlador.eliminarJerarquia(idJerarquia);
-        
             respuestaJson = "{\"status\": true,  \"mensaje\":\"El cargo ha sido borrado con exito\"}";
         }
         catch(Exception e){
-            respuestaJson = "{\"status\": true,  \"mensaje\":\"El cargo no se puede borrar, esta siendo ocupado por otros empleados\"}";
+            respuestaJson = "{\"status\": false,  \"mensaje\":\"El cargo no se puede borrar, esta siendo ocupado por otros empleados\"}";
         }       
         response.getWriter().write(respuestaJson);
     }
