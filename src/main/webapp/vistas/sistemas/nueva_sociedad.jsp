@@ -21,6 +21,25 @@
                 response.sendRedirect("index.jsp");
             }
         %>
+
+        <div id="mensajeModalNuevaSociedad" class="modal">
+            <div class="modal-content">
+                <span class="close"></span>
+                <h2>Mensaje</h2>
+                <div id="contenedorTextoModal">
+
+                </div>
+                
+                <div id="mensajesAdvertencia"></div>
+                
+                <div class="botonesModal">
+                    <button id="btnModalCerrar">Aceptar</button>
+                    <button id="btnModalAceptar">Aceptar</button>
+                    <button id="btnModalBorrar">Eliminar</button>
+                    <button id="btnModalCancelar">Cancelar</button>
+                </div>
+            </div>
+        </div>        
         
     <header class="cabecera">
         Header
@@ -121,17 +140,17 @@
     <section class="home">
 
         <article id="nuevaSociedad">
-            <h2>Nuevasociedad</h2>
+            <h2>Nueva sociedad</h2>
             <label id="labelNombre">Nombre de la sociedad</label>
             <input type="text" id="nombreNuevaSociedad" placeholder="Nombre de la sociedad">
 
             <div id="cuitNuevaSociedad">
                 <label>CUIT</label>
-                <input type="number" id="digitoGlobalSociedad" placeholder="30">
+                <input type="number" id="digitoGlobalSociedad" placeholder="30" maxlength="2">
                 <label id="guionCuit">-</label>
-                <input type="number" id="cuerpoCuitSociedad" placeholder="12345678">
+                <input type="number" id="cuerpoCuitSociedad" placeholder="12345678" maxlength="8">
                 <label id="guionCuit">-</label>
-                <input type="number" id="digitoVerificadorSociedad" placeholder="1">
+                <input type="number" id="digitoVerificadorSociedad" placeholder="1" maxlength="1">
             </div>
             
             <label id="labelRazonSocial">Razon Social</label>
