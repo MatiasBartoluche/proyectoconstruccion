@@ -1383,3 +1383,45 @@ body.dark .home .text{
 #calleSociedad, #localidadSociedad{
     width: 40%;
 }
+
+/* ----------------- inicio estilos pagina lista_sociedades.jsp ------------- */
+
+#homeListaSociedades article{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#homeListaSociedades .contenedorImagen{
+    width: 20%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+}
+
+#homeListaSociedades .contenedorImagen .i{
+    width: 90%;
+}
+
+#homeListaSociedades .infoSociedad{
+    width: 70%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+#homeListaSociedades .infoSociedad p{
+    width: 100%;
+    font-size: 22px;
+    font-weight: 500;
+}
+
+#homeListaSociedades .botonesSociedad{
+    width: 10%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
