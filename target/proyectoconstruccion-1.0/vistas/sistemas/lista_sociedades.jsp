@@ -119,9 +119,7 @@
         
     <section class="home">
 
-        <a href="./nueva_sociedad.jsp"> <article class="modulo">Nueva sociedad</article> </a>
         
-        <a href="./lista_sociedades.jsp"> <article class="modulo">Lista de sociedades</article> </a>
         
     </section>
                 
