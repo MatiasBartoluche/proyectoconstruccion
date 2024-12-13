@@ -51,6 +51,7 @@ clases\Asistencia.class
 clases\Presupuesto.class
 persistencia\FacturaSubcontratistaJpaController.class
 clases\FacturaProveedor.class
+persistencia\ControladorPersistenciaSociedades.class
 servlets\SvJerarquias.class
 persistencia\LiquidacionSueldoJpaController.class
 clases\Rol.class
@@ -61,6 +62,7 @@ servlets\SvLogout.class
 persistencia\GrupoAportesJpaController.class
 clases\Inspeccion.class
 servlets\SvRegistrar.class
+servlets\SvSociedades.class
 clases\Sociedad.class
 persistencia\SeguroJpaController.class
 clases\TipoObra.class
@@ -69,6 +71,7 @@ persistencia\PresupuestoJpaController.class
 persistencia\ControladorPersistencia.class
 clases\Contrato.class
 clases\RoleFilter.class
+clases\ControladorSociedades.class
 persistencia\PlanoJpaController.class
 clases\GrupoAportes.class
 clases\TipoAsiento.class

@@ -33,10 +33,9 @@
                 <div id="mensajesAdvertencia"></div>
                 
                 <div class="botonesModal">
-                    <button id="btnModalCerrar">Aceptar</button>
                     <button id="btnModalAceptar">Aceptar</button>
-                    <button id="btnModalBorrar">Eliminar</button>
-                    <button id="btnModalCancelar">Cancelar</button>
+                    <button id="btnModalNuevo">Nueva Sociedad</button>
+                    <button id="btnModalCerrar">cerrar</button>
                 </div>
             </div>
         </div>        

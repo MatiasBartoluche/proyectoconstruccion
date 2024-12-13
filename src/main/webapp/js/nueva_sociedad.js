@@ -1,16 +1,23 @@
 $(document).ready(function(){
     capturarDatosSociedad();
     
-    cerrarModal()
+    cerrarModal();
+    vaciarCampos();
+    cerrarPagina();
 });
 
 
 function capturarDatosSociedad(){
     $('#guardarNuevaSociedad').click(function(){
+        
+        $('#btnModalAceptar').hide();
+        $('#btnModalCerrar').hide();
+        $('#btnModalNuevo').hide();   
+        
         var nombreSociedad = $('#nombreNuevaSociedad').val();
-        var digitoGlobalSociedad = $("#digitoGlobalSociedad").val();
-        var cuerpoCuit = $("#cuerpoCuitSociedad").val();
-        var digitoVerificadorSociedad = $("#digitoVerificadorSociedad").val();
+        var digitoGlobalSociedad = $('#digitoGlobalSociedad').val();
+        var cuerpoCuit = $('#cuerpoCuitSociedad').val();
+        var digitoVerificadorSociedad = $('#digitoVerificadorSociedad').val();
         var razonSocial = $('#razonSocialSociedad').val();
         var calleSociedad = $('#calleSociedad').val();
         var alturaSociedad = $('#alturaSociedad').val();
@@ -96,15 +103,16 @@ function capturarDatosSociedad(){
             $.extend(sociedad, {cuit_sociedad: digitoGlobalSociedad+'-'+cuerpoCuit+'-'+digitoVerificadorSociedad});
             console.log(sociedad);
             
-            //solicitudAjax('nuevo', sociedad);
+            solicitudAjax('nuevo', sociedad);
+            $('#mensajesAdvertencia').append('<p>Si desea registrar otra sociedad, haga click en el boton "nueva sociedad", de lo contrario, haga click en el boton "Cerrar"</p>');
         }
         else{
-            mensajeModal('Verifique estos campos antes de registrar una nueva sociedad', true, false, false, false);
+            mensajeModal('Verifique estos campos antes de registrar una nueva sociedad', true, false, false);
         }
     });
 }
 
-function SolicitudAjax(mensaje, sociedad){
+function solicitudAjax(mensaje, sociedad){
         $.ajax({
             url: '/proyectoconstruccion/SvSociedades', // URL del servlet
             type: 'POST',
@@ -113,6 +121,8 @@ function SolicitudAjax(mensaje, sociedad){
             cache: false,
             success: function (response) {
                 console.log(response);
+                mensajeModal(response.mensaje, false, true, true);
+                
             },
             error: function (xhr, status, error) {
                 console.error("Error:", error);
@@ -121,47 +131,72 @@ function SolicitudAjax(mensaje, sociedad){
 }
 
 // se le pasa como parametro tres boolean, para determinar la visualizacion del boton
-function mensajeModal(mensaje, btnCambiar, btnAceptar, btnCancelar, btnEliminar){
+function mensajeModal(mensaje, btnAceptar, btnCerrar, btnNuevo){
     // borrar el mensaje anterior, si es que lo tiene
-    
-    
     $('#mensajeModalNuevaSociedad').show();
     $('#contenedorTextoModal').append('<p>'+mensaje+'</p>');
-    
-    //
-    if(btnCambiar === true){
-        $('#btnModalCerrar').show();
-    }
-    else{
-        $('#btnModalcerrar').hide();
-    }
-    
+
     if(btnAceptar === true){
         $('#btnModalAceptar').show();
     }
     else{
         $('#btnModalAceptar').hide();
     }
-    
-    if(btnCancelar === true){
-        $('#btnModalCancelar').show();
+
+    if(btnCerrar === true){
+        $('#btnModalCerrar').show();
     }
     else{
-        $('#btnModalCancelar').hide();
+        $('#btnModalcerrar').hide();
     }
     
-    if(btnEliminar === true){
-        $('#btnModalBorrar').show();
+    if(btnNuevo === true){
+        $('#btnModalNuevo').show();
     }
     else{
-        $('#btnModalBorrar').hide();
+        $('#btnModalNuevo').hide();
     }
 }
 
 function cerrarModal(){
-    $('#btnModalCerrar').click(function(){
+    $('#btnModalAceptar').click(function(){
         $('#mensajeModalNuevaSociedad').hide();
         $('#contenedorTextoModal').empty();
         $('#mensajesAdvertencia').empty();
+        
+        $('#btnModalAceptar').hide();
+        $('#btnModalCerrar').hide();
+        $('#btnModalNuevo').hide();
+    });
+}
+
+//vaciar los campos del formunalio y ocultar el mensaje modal
+function vaciarCampos(){
+    $('#btnModalNuevo').click(function(){
+        $('#nombreNuevaSociedad').val('');
+        $('#digitoGlobalSociedad').val('');
+        $('#cuerpoCuitSociedad').val('');
+        $('#digitoVerificadorSociedad').val('');
+        $('#razonSocialSociedad').val('');
+        $('#calleSociedad').val('');
+        $('#alturaSociedad').val('');
+        $('#pisoSociedad').val('');
+        $('#localidadSociedad').val('');
+        $('#telefonoSociedad').val('');
+        $('#mailSociedad').val('');        
+
+        $('#mensajeModalNuevaSociedad').hide();
+        $('#contenedorTextoModal').empty();
+        $('#mensajesAdvertencia').empty();
+        
+        $('#btnModalAceptar').hide();
+        $('#btnModalCerrar').hide();
+        $('#btnModalNuevo').hide();
+    });
+}
+
+function cerrarPagina(){
+    $('#btnModalCerrar').click(function(){
+        window.location.href = "/proyectoconstruccion/vistas/sistemas/sociedades.jsp";
     });
 }

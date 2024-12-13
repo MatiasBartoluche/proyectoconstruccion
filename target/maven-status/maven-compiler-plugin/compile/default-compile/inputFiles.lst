@@ -53,6 +53,7 @@ D:\github\proyectoconstruccion\src\main\java\servlets\SvEmpleados.java
 D:\github\proyectoconstruccion\src\main\java\servlets\SvGrupoTrabajo.java
 D:\github\proyectoconstruccion\src\main\java\clases\FacturaSubcontratista.java
 D:\github\proyectoconstruccion\src\main\java\persistencia\PlanoJpaController.java
+D:\github\proyectoconstruccion\src\main\java\clases\ControladorSociedades.java
 D:\github\proyectoconstruccion\src\main\java\clases\Plano.java
 D:\github\proyectoconstruccion\src\main\java\clases\Presupuesto.java
 D:\github\proyectoconstruccion\src\main\java\persistencia\ObraJpaController.java
@@ -63,6 +64,7 @@ D:\github\proyectoconstruccion\src\main\java\clases\EPP.java
 D:\github\proyectoconstruccion\src\main\java\persistencia\HistorialARTJpaController.java
 D:\github\proyectoconstruccion\src\main\java\clases\Controlador.java
 D:\github\proyectoconstruccion\src\main\java\clases\LocalDateAdapter.java
+D:\github\proyectoconstruccion\src\main\java\persistencia\ControladorPersistenciaSociedades.java
 D:\github\proyectoconstruccion\src\main\java\persistencia\exceptions\NonexistentEntityException.java
 D:\github\proyectoconstruccion\src\main\java\persistencia\exceptions\PreexistingEntityException.java
 D:\github\proyectoconstruccion\src\main\java\persistencia\SubcontratistaJpaController.java
@@ -75,6 +77,7 @@ D:\github\proyectoconstruccion\src\main\java\persistencia\LiquidacionSueldoJpaCo
 D:\github\proyectoconstruccion\src\main\java\servlets\SvRegistrar.java
 D:\github\proyectoconstruccion\src\main\java\clases\RoleFilter.java
 D:\github\proyectoconstruccion\src\main\java\clases\RedimensionarImagen.java
+D:\github\proyectoconstruccion\src\main\java\servlets\SvSociedades.java
 D:\github\proyectoconstruccion\src\main\java\persistencia\HistorialEstadoObraJpaController.java
 D:\github\proyectoconstruccion\src\main\java\persistencia\ContratoJpaController.java
 D:\github\proyectoconstruccion\src\main\java\com\mycompany\proyectoconstruccion\JakartaRestConfiguration.java
