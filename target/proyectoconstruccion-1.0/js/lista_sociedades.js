@@ -49,8 +49,8 @@ function detalleSociedad(){
     $('#homeListaSociedades').on('click', '.btnVerSociedad', function () {
         const idSociedad = $(this).attr('id').split('-')[1]; // Obtener el legajo del botón
         console.log('id: '+idSociedad);
-        //localStorage.setItem('detalleSociedad', idSociedad);
-        //window.location.href = "/proyectoconstruccion/vistas/sistemas/detalle_grupo_trabajo.jsp";
+        localStorage.setItem('detalleSociedad', idSociedad);
+        window.location.href = "/proyectoconstruccion/vistas/sistemas/detalle_sociedad.jsp";
     });
 }
 

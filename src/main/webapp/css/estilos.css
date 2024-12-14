@@ -1425,3 +1425,89 @@ body.dark .home .text{
     flex-direction: column;
     justify-content: space-evenly;
 }
+
+/* ------------- inicio estilos pagina detalle_sociedad.jsp ----------------- */
+
+
+#detalleSociedad{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: baseline;
+}
+
+#mensajeModalDetalleSociedad button{
+    display: none;
+}
+
+#labelNombre{
+    width: 20%;
+}
+
+#nombreDetalleSociedad{
+    width: 39%;
+    margin-left: 1%;
+}
+
+#cuitDetalleSociedad{
+    width: 39%;
+    margin-left: 1%;
+}
+
+#digitoGlobalDetalleSociedad, #digitoVerificadorDetalleSociedad{
+    width: 12%;
+}
+
+#cuerpoCuitDetalleSociedad{
+    width: 30%;
+}
+
+#guionCuit{
+    margin: 1%;
+}
+
+#labelRazonSocial{
+    width: 20%;
+}
+
+#razonSocialDetalleSociedad{
+    width: 79%;
+    margin-left: 1%;
+}
+
+#contenedorDireccionDetalleSociedad{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: baseline;
+}
+
+#contenedorDireccionDetalleSociedad input{
+    margin-right: 1%;
+}
+
+#contenedorDireccionDetalleSociedad label{
+    width: 12%;
+}
+
+#alturaDetalleSociedad, #pisoDetalleSociedad{
+    width: 10%;
+}
+
+#calleDetalleSociedad, #localidadDetalleSociedad{
+    width: 40%;
+}
+
+#botonesDetalleSociedad{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+}
+
+#guardarNuevosDatosSociedad, #cancelarDatosSociedad{
+    display: none;
+}
