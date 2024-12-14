@@ -41,6 +41,9 @@ public class SvSociedades extends HttpServlet {
         if("sociedades".equals(mensaje)){
             cargarSociedades(response);
         }
+        else if("detalleSociedad".equals(mensaje)){
+            cargarDetalleSociedad(request, response);
+        }
     }
 
     @Override
@@ -97,6 +100,25 @@ public class SvSociedades extends HttpServlet {
         }
         catch(Exception e){
             respuestaJson = "{\"mensaje\": \"No se ha podido cargar la lista de sociedades\", \"error\": \""+e+"\"}";
+        }
+        response.getWriter().write(respuestaJson);
+    }
+
+    private void cargarDetalleSociedad(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String respuestaJson = "{\"mensaje\": \"No se ha encontrado detalles de esa sociedad\"}";
+        int idSociedad = Integer.parseInt(request.getParameter("idSociedad"));
+        
+        Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
+        
+        try{
+            Sociedad soc = controladorSoc.buscarSociedad(idSociedad);
+            
+            if(soc != null){
+                respuestaJson = gson.toJson(soc);
+            }
+        }
+        catch(Exception e){
+            respuestaJson = "{\"mensaje\": \"Ha ocurrido un error al intentar cargar los datos de la sociedad\", \"error\": \""+e+"\"}";
         }
         response.getWriter().write(respuestaJson);
     }
