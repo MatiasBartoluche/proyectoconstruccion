@@ -141,35 +141,35 @@
         <article id="detalleSociedad">
             <h2>Nueva sociedad</h2>
             <label id="labelNombre">Nombre de la sociedad</label>
-            <input type="text" id="nombreDetalleSociedad" placeholder="Nombre de la sociedad">
+            <input class="habilitacion" type="text" id="nombreDetalleSociedad" placeholder="Nombre de la sociedad" disabled>
 
             <div id="cuitDetalleSociedad">
                 <label>CUIT</label>
-                <input type="number" id="digitoGlobalDetalleSociedad" placeholder="30" maxlength="2">
+                <input class="habilitacion" type="number" id="digitoGlobalDetalleSociedad" placeholder="30" disabled>
                 <label id="guionCuit">-</label>
-                <input type="number" id="cuerpoCuitDetalleSociedad" placeholder="12345678" maxlength="8">
+                <input class="habilitacion" type="number" id="cuerpoCuitDetalleSociedad" placeholder="12345678" disabled>
                 <label id="guionCuit">-</label>
-                <input type="number" id="digitoVerificadorDetalleSociedad" placeholder="1" maxlength="1">
+                <input class="habilitacion" type="number" id="digitoVerificadorDetalleSociedad" placeholder="1" disabled>
             </div>
             
             <label id="labelRazonSocial">Razon Social</label>
-            <textarea id="razonSocialDetalleSociedad" placeholder="Razon social"></textarea>
+            <textarea class="habilitacion" id="razonSocialDetalleSociedad" placeholder="Razon social" disabled></textarea>
             
             <h2>Datos de contacto</h2>
             
             <div id="contenedorDireccionDetalleSociedad">
                 <label>Calle</label>
-                <input type="text" id="calleDetalleSociedad" placeholder="Calle">
+                <input class="habilitacion" type="text" id="calleDetalleSociedad" placeholder="Calle" disabled>
                 <label>Altura</label>
-                <input type="number" id="alturaDetalleSociedad" placeholder="Numero">
+                <input class="habilitacion" type="number" id="alturaDetalleSociedad" placeholder="Numero" disabled>
                 <label>Piso-Dpto</label>
-                <input type="text" id="pisoDetalleSociedad" placeholder="Piso">
+                <input class="habilitacion" type="text" id="pisoDetalleSociedad" placeholder="Piso-Dpto" disabled>
                 <label>Localidad</label>
-                <input type="text" id="localidadDetalleSociedad" placeholder="Localidad">
+                <input class="habilitacion" type="text" id="localidadDetalleSociedad" placeholder="Localidad" disabled>
                 <label>Telefono</label>
-                <input type="text" id="telefonoDetalleSociedad" placeholder="1123456789">
+                <input class="habilitacion" type="text" id="telefonoDetalleSociedad" placeholder="1123456789" disabled>
                 <label>Correo electronico</label>
-                <input type="email" id="mailDetalleSociedad" placeholder="correo@email.com">
+                <input class="habilitacion" type="email" id="mailDetalleSociedad" placeholder="correo@email.com" disabled>
             </div>
             
             <div id="botonesDetalleSociedad">

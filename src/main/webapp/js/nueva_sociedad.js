@@ -73,7 +73,7 @@ function capturarDatosSociedad(){
             $.extend(sociedad,{razon_social: razonSocial});
         }
         
-        if(calleSociedad !==''){
+        if(calleSociedad !=='' || calleSociedad !== 0){
             $.extend(sociedad,{calle: calleSociedad});
         }
         
