@@ -1445,21 +1445,22 @@ body.dark .home .text{
     width: 20%;
 }
 
-#nombreDetalleSociedad{
+#nombreDetalleSociedad, #nombreNuevoSeguro{
     width: 39%;
     margin-left: 1%;
 }
 
-#cuitDetalleSociedad{
+.cuitDetalleSociedad{
     width: 39%;
     margin-left: 1%;
 }
 
-#digitoGlobalDetalleSociedad, #digitoVerificadorDetalleSociedad{
+#digitoGlobalDetalleSociedad, #digitoVerificadorDetalleSociedad,
+#digitoGlobalNuevoSeguro, #digitoVerificadorNuevoSeguro{
     width: 12%;
 }
 
-#cuerpoCuitDetalleSociedad{
+#cuerpoCuitDetalleSociedad, #cuerpoCuitNuevoSeguro{
     width: 30%;
 }
 
@@ -1521,4 +1522,53 @@ body.dark .home .text{
 
 #historialSeguros, #historialObras{
     display: none;
+}
+
+#nuevoSeguro{
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: baseline;
+}
+
+#nuevoSeguro, #cancelarSeguro{
+    display: none;
+}
+
+#fechasSeguro{
+    width: 100%;
+}
+
+#fechasSeguro input{
+    width: 23%;
+    margin: 0 1% 0 1%;
+    
+}
+
+#fechasSeguro Label{
+    width: 25%;
+}
+
+#contenedorPoliza{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#contenedorPoliza label{
+    width: 20%;
+}
+
+#contenedorPoliza input{
+    width: 25%;
+    margin-left: 1%;
+}
+
+#contenedorBotonesSeguro{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: baseline;
 }

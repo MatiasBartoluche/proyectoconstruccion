@@ -19,6 +19,8 @@ public class Seguro implements Serializable {
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private int id_seguro;
     
+    private String nombre;
+    private String cuit;
     private int numero_poliza;
     LocalDate fecha_contratacion;
     LocalDate fecha_vencimiento;
@@ -36,6 +38,22 @@ public class Seguro implements Serializable {
 
     public void setIdSeguro(int id_seguro) {
         this.id_seguro = id_seguro;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getCuit() {
+        return cuit;
+    }
+
+    public void setCuit(String cuit) {
+        this.cuit = cuit;
     }
 
     public int getNumeroPoliza() {
