@@ -173,42 +173,9 @@
             
             <div id="botonesDetalleSociedad">
                 <button id="modificarSociedad">Modificar Datos</button>
-                <button id="agregarSeguro">Agregar seguro</button>
-                <button id="cancelarSeguro">Cancelar seguro</button>
+
                 <button id="guardarNuevosDatosSociedad">Guardar</button>
                 <button id="cancelarDatosSociedad">Cancelar</button>
-            </div>
-        </article>
-        
-        <article id="nuevoSeguro">
-            <h2>Nuevo seguro</h2>
-            
-            <label id="labelNombre">Nombre del seguro</label>
-            <input type="text" id="nombreNuevoSeguro" placeholder="Nombre del seguro">
-            
-            <div class="cuitDetalleSociedad">
-                <label>CUIT</label>
-                <input type="number" id="digitoGlobalNuevoSeguro" placeholder="30">
-                <label id="guionCuit">-</label>
-                <input type="number" id="cuerpoCuitNuevoSeguro" placeholder="12345678">
-                <label id="guionCuit">-</label>
-                <input type="number" id="digitoVerificadorNuevoSeguro" placeholder="1">
-            </div>
-            
-            <div id="contenedorPoliza">
-                <label>Numero de poliza</label>
-                <input type="text" id="numeroPoliza" placeholder="Poliza">
-            </div>
-            
-            <div id="fechasSeguro">
-                <label>Fecha de contratacion</label>
-                <input type="date" id="fechaContratacion">
-                <label>Fecha de vencimiento</label>
-                <input type="date" id="fechaVencimiento">
-            </div>
-            
-            <div id="contenedorBotonesSeguro">
-                <button id="btnGuardarSeguro">Guardar</button>
             </div>
         </article>
         

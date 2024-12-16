@@ -1524,15 +1524,31 @@ body.dark .home .text{
     display: none;
 }
 
+/* ---------------- inicio estolis pagina contratar_seguro.jsp -------------- */
+
 #nuevoSeguro{
+    display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-content: center;
     align-items: baseline;
 }
 
-#nuevoSeguro, #cancelarSeguro{
-    display: none;
+.cabeceraSociedades{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+}
+
+.cabeceraSociedades p{
+    width: 19%;
+}
+
+#nombreNuevoSeguro{
+    width: 39%;
+    margin-left: 1%;
 }
 
 #fechasSeguro{

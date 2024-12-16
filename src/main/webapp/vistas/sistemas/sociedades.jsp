@@ -123,6 +123,8 @@
         
         <a href="./lista_sociedades.jsp"> <article class="modulo">Lista de sociedades</article> </a>
         
+        <a href="./contratar_seguro.jsp"> <article class="modulo">contratar seguros</article> </a>
+        
     </section>
                 
     <footer class="pie">

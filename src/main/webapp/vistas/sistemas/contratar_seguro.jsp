@@ -8,6 +8,7 @@
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/contratar_seguro.js"></script>
         <title>Home</title>
     </head>
     <body>
@@ -20,6 +21,24 @@
                 response.sendRedirect("index.jsp");
             }
         %>
+
+
+        <div id="mensajeModalDetalleSociedad" class="modal">
+            <div class="modal-content">
+                <span class="close"></span>
+                <h2>Mensaje</h2>
+                <div id="contenedorTextoModal">
+
+                </div>
+                
+                <div id="mensajesAdvertencia"></div>
+                
+                <div class="botonesModal">
+                    <button id="btnModalSeguroAceptar">Aceptar</button>
+                    <button id="btnModalSeguroCerrar">Cerrar</button>
+                </div>
+            </div>
+        </div>    
         
     <header class="cabecera">
         Header
@@ -119,11 +138,51 @@
         
     <section class="home">
 
-        <a href="./nueva_sociedad.jsp"> <article class="modulo">Nueva sociedad</article> </a>
+        <article id="contenedorSociedades">
+            <h2>Seleccione una sociedad</h2>
+            
+            <div class="cabeceraSociedades">
+                <p>Nombre</p>
+                <p>CUIT</p>
+                <p>Fecha contrato</p>
+                <p>Vencimiento</p>
+                <p>Estado</p>
+            </div>
+            
+            <div id="listaSociedades"></div>
+        </article>
         
-        <a href="./lista_sociedades.jsp"> <article class="modulo">Lista de sociedades</article> </a>
-        
-        <a href="./contratar_seguro.jsp"> <article class="modulo">contratar seguros</article> </a>
+        <article id="nuevoSeguro">
+            <h2>Nuevo seguro</h2>
+            
+            <label id="labelNombre">Nombre del seguro</label>
+            <input type="text" id="nombreNuevoSeguro" placeholder="Nombre del seguro">
+            
+            <div class="cuitDetalleSociedad">
+                <label>CUIT</label>
+                <input type="number" id="digitoGlobalNuevoSeguro" placeholder="30">
+                <label id="guionCuit">-</label>
+                <input type="number" id="cuerpoCuitNuevoSeguro" placeholder="12345678">
+                <label id="guionCuit">-</label>
+                <input type="number" id="digitoVerificadorNuevoSeguro" placeholder="1">
+            </div>
+            
+            <div id="contenedorPoliza">
+                <label>Numero de poliza</label>
+                <input type="text" id="numeroPoliza" placeholder="Poliza">
+            </div>
+            
+            <div id="fechasSeguro">
+                <label>Fecha de contratacion</label>
+                <input type="date" id="fechaContratacion">
+                <label>Fecha de vencimiento</label>
+                <input type="date" id="fechaVencimiento">
+            </div>
+            
+            <div id="contenedorBotonesSeguro">
+                <button id="btnGuardarSeguro">Guardar</button>
+            </div>
+        </article>
         
     </section>
                 
