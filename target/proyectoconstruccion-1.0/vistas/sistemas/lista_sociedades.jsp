@@ -21,6 +21,24 @@
                 response.sendRedirect("index.jsp");
             }
         %>
+
+        <div id="mensajeModalListaSociedad" class="modal">
+            <div class="modal-content">
+                <span class="close"></span>
+                <h2>Mensaje</h2>
+                <div id="contenedorTextoModal">
+
+                </div>
+                
+                <div id="mensajesAdvertencia"></div>
+                
+                <div class="botonesModal">
+                    <button id="btnModalListaBorrar">Borrar</button>
+                    <button id="btnModalListaCancelar">Cancelar</button>
+                    <button id="btnModalListaCerrar">Cerrar</button>
+                </div>
+            </div>
+        </div>
         
     <header class="cabecera">
         Header

@@ -53,11 +53,18 @@ public class SvSociedades extends HttpServlet {
         
         String mensaje = request.getParameter("mensaje");
         
-        if("nuevo".equals(mensaje)){
-            nuevaSociedad(request, response);
-        }
-        else if("modificar".equals(mensaje)){
-            modificarSociedad(request, response);
+        if(null != mensaje)switch (mensaje) {
+            case "nuevo":
+                nuevaSociedad(request, response);
+                break;
+            case "modificar":
+                modificarSociedad(request, response);
+                break;
+            case "borrar":
+                borrarSociedad(request, response);
+                break;
+            default:
+                break;
         }
     }
 
@@ -139,6 +146,21 @@ public class SvSociedades extends HttpServlet {
         catch(Exception e){
             respuestaJson = "{\"mensaje\": \"Ha ocurrido un error al intentar modificar los datos de la sociedad\", \"error\": \""+e+"\"}";
         }
+        response.getWriter().write(respuestaJson);
+    }
+
+    private void borrarSociedad(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String respuestaJson = "{\"mensaje\": \"La sociedad se ha borado con exito\"}";
+        
+        int idSociedad = Integer.parseInt(request.getParameter("idSociedad"));
+        
+        try{
+            controladorSoc.eliminarSociedad(idSociedad);
+        }
+        catch(Exception e){
+            respuestaJson = "{\"mensaje\": \"Ha ocurrido un error al intentar borrar la sociedad\", \"error\": \""+e+"\"}";
+        }
+        
         response.getWriter().write(respuestaJson);
     }
 
