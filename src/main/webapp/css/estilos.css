@@ -1511,3 +1511,14 @@ body.dark .home .text{
 #guardarNuevosDatosSociedad, #cancelarDatosSociedad{
     display: none;
 }
+
+#contenedorBotones, #listaSeguros, #listaObras{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+}
+
+#historialSeguros, #historialObras{
+    display: none;
+}

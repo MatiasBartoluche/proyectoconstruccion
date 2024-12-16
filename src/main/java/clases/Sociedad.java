@@ -24,7 +24,7 @@ public class Sociedad implements Serializable {
     private String razon_social;
     private String telefono;
     private String mail;
-    private String Calle;
+    private String calle;
     private int altura;
     private String piso;
     private String localidad;
@@ -44,12 +44,12 @@ public class Sociedad implements Serializable {
     public Sociedad() {
     }
 
-    public Sociedad(String cuit_sociedad, String razon_social, String telefono, String mail, String Calle, int altura, String localidad, ArrayList<Obra> obras) {
+    public Sociedad(String cuit_sociedad, String razon_social, String telefono, String mail, String calle, int altura, String localidad, ArrayList<Obra> obras) {
         this.cuit_sociedad = cuit_sociedad;
         this.razon_social = razon_social;
         this.telefono = telefono;
         this.mail = mail;
-        this.Calle = Calle;
+        this.calle = calle;
         this.altura = altura;
         this.localidad = localidad;
         this.obras = obras;
@@ -104,11 +104,11 @@ public class Sociedad implements Serializable {
     }
 
     public String getCalle() {
-        return Calle;
+        return calle;
     }
 
     public void setCalle(String Calle) {
-        this.Calle = Calle;
+        this.calle = Calle;
     }
 
     public int getAltura() {

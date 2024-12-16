@@ -33,9 +33,8 @@
                 <div id="mensajesAdvertencia"></div>
                 
                 <div class="botonesModal">
-                    <button id="btnModalAceptar">Aceptar</button>
-                    <button id="btnModalNuevo">Nueva Sociedad</button>
-                    <button id="btnModalCerrar">cerrar</button>
+                    <button id="btnModalDetalleAceptar">Aceptar</button>
+                    <button id="btnModalDetalleCerrar">Cerrar</button>
                 </div>
             </div>
         </div>        
@@ -177,9 +176,22 @@
                 <button id="guardarNuevosDatosSociedad">Guardar</button>
                 <button id="cancelarDatosSociedad">Cancelar</button>
             </div>
-            
         </article>
         
+        <article id="contenedorBotones">
+            <button id="btnHistorialSeguros">Mostrar historial de seguros</button>
+            <button id="btnHistorialObras">Mostrar historial de obras</button>
+        </article>
+        
+        <article id="historialSeguros">
+            <h2>Historial de seguros</h2>
+            <div id="listaSeguros"></div>
+        </article>
+        
+        <article id="historialObras">
+            <h2>Historial de obras</h2>
+            <div id="listaObras"></div>
+        </article>     
     </section>
                 
     <footer class="pie">

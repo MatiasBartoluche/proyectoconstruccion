@@ -15,7 +15,7 @@ public class ControladorSociedades {
         controlPersistSoc.deleteSociedad(idSociedad);
     }
     
-    public void editarContrato(Sociedad sociedad){
+    public void editarSociedad(Sociedad sociedad){
         controlPersistSoc.editSociedad(sociedad);
     }
     

@@ -73,11 +73,11 @@ function capturarDatosSociedad(){
             $.extend(sociedad,{razon_social: razonSocial});
         }
         
-        if(calleSociedad !=='' || calleSociedad !== 0){
+        if(calleSociedad !==''){
             $.extend(sociedad,{calle: calleSociedad});
         }
         
-        if(alturaSociedad !==''){
+        if(alturaSociedad !=='' || alturaSociedad !== 0){
             $.extend(sociedad,{altura: alturaSociedad});
         }
 
@@ -147,7 +147,7 @@ function mensajeModal(mensaje, btnAceptar, btnCerrar, btnNuevo){
         $('#btnModalCerrar').show();
     }
     else{
-        $('#btnModalcerrar').hide();
+        $('#btnModalCerrar').hide();
     }
     
     if(btnNuevo === true){

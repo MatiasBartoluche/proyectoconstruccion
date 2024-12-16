@@ -7,7 +7,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -56,6 +55,9 @@ public class SvSociedades extends HttpServlet {
         
         if("nuevo".equals(mensaje)){
             nuevaSociedad(request, response);
+        }
+        else if("modificar".equals(mensaje)){
+            modificarSociedad(request, response);
         }
     }
 
@@ -119,6 +121,23 @@ public class SvSociedades extends HttpServlet {
         }
         catch(Exception e){
             respuestaJson = "{\"mensaje\": \"Ha ocurrido un error al intentar cargar los datos de la sociedad\", \"error\": \""+e+"\"}";
+        }
+        response.getWriter().write(respuestaJson);
+    }
+
+    private void modificarSociedad(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String sociedadRecibida = request.getParameter("sociedad");
+        String respuestaJson = "{\"mensaje\": \"Los datos se han modificado con exito\"}";
+        Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
+        
+        try{
+            if(sociedadRecibida != null){
+                Sociedad sociedad = gson.fromJson(sociedadRecibida, Sociedad.class);
+                controladorSoc.editarSociedad(sociedad);
+            }
+        }
+        catch(Exception e){
+            respuestaJson = "{\"mensaje\": \"Ha ocurrido un error al intentar modificar los datos de la sociedad\", \"error\": \""+e+"\"}";
         }
         response.getWriter().write(respuestaJson);
     }
