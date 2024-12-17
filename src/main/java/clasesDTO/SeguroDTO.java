@@ -9,7 +9,7 @@ public class SeguroDTO {
     private int numero_poliza;
     LocalDate fecha_contratacion;
     LocalDate fecha_vencimiento;
-    private SociedadDTO sociedadSeguro;
+    private SociedadDTO sociedadSeguroDTO;
 
     public SeguroDTO() {
     }
@@ -63,10 +63,10 @@ public class SeguroDTO {
     }
 
     public SociedadDTO getSociedad() {
-        return sociedadSeguro;
+        return sociedadSeguroDTO;
     }
 
     public void setSociedad(SociedadDTO sociedadDTO) {
-        this.sociedadSeguro = sociedadDTO;
+        this.sociedadSeguroDTO = sociedadDTO;
     }
 }

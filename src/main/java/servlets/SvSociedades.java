@@ -4,6 +4,7 @@ import clases.ControladorSociedades;
 import clases.LocalDateAdapter;
 import clases.Seguro;
 import clases.Sociedad;
+import clasesDTO.SociedadDTO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
@@ -108,7 +109,9 @@ public class SvSociedades extends HttpServlet {
         try{
             ArrayList<Sociedad> listaSociedades = controladorSoc.buscarListaSociedades();
             if(listaSociedades != null){
-                respuestaJson = gson.toJson(listaSociedades);
+                ArrayList<SociedadDTO> sociedadesDTO = controladorSoc.convertirListaASociedadesDTO(listaSociedades);
+                
+                respuestaJson = gson.toJson(sociedadesDTO);
             }
         }
         catch(Exception e){
@@ -118,6 +121,9 @@ public class SvSociedades extends HttpServlet {
     }
 
     private void cargarDetalleSociedad(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        
         String respuestaJson = "{\"mensaje\": \"No se ha encontrado detalles de esa sociedad\"}";
         int idSociedad = Integer.parseInt(request.getParameter("idSociedad"));
         
@@ -125,9 +131,9 @@ public class SvSociedades extends HttpServlet {
         
         try{
             Sociedad soc = controladorSoc.buscarSociedad(idSociedad);
-            
             if(soc != null){
-                respuestaJson = gson.toJson(soc);
+                SociedadDTO socDTO = controladorSoc.convertirSociedadDTO(soc);
+                respuestaJson = gson.toJson(socDTO);
             }
         }
         catch(Exception e){
@@ -137,6 +143,9 @@ public class SvSociedades extends HttpServlet {
     }
 
     private void modificarSociedad(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        
         String sociedadRecibida = request.getParameter("sociedad");
         String respuestaJson = "{\"mensaje\": \"Los datos se han modificado con exito\"}";
         Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
@@ -154,6 +163,9 @@ public class SvSociedades extends HttpServlet {
     }
 
     private void borrarSociedad(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        
         String respuestaJson = "{\"mensaje\": \"La sociedad se ha borado con exito\"}";
         
         int idSociedad = Integer.parseInt(request.getParameter("idSociedad"));
@@ -164,26 +176,28 @@ public class SvSociedades extends HttpServlet {
         catch(Exception e){
             respuestaJson = "{\"mensaje\": \"Ha ocurrido un error al intentar borrar la sociedad\", \"error\": \""+e+"\"}";
         }
-        
         response.getWriter().write(respuestaJson);
     }
 
     private void nuevoSeguro(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        
         String respuestaJson = "{\"mensaje\": \"El seguro se ha registrado con exito\"}";
         String seguroRecibido = request.getParameter("seguro");
         int idSociedad = Integer.parseInt(request.getParameter("idSociedad"));
-        Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
         
-        System.out.println(seguroRecibido);
-        System.out.println(idSociedad);
+        Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
         try{
+            // convierto el json en una clase "Seguro"
             Seguro seguro = gson.fromJson(seguroRecibido, Seguro.class);
-            
+            // busco la sociedad que esta contratando el seguro
             Sociedad sociedad = controladorSoc.buscarSociedad(idSociedad);
-            
+            // asigno la sociedad a la que pertenece este uevo seguro
             seguro.setSociedad(sociedad);
+            // agrego el seguro a la lista de seguros de la sociedad
             sociedad.contratarSeguro(seguro);
-            
+            // almaceno la sociedad y el seguro
             controladorSoc.crearSeguro(seguro);
             controladorSoc.editarSociedad(sociedad);
         }

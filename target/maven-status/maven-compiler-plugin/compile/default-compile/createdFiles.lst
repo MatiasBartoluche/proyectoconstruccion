@@ -23,6 +23,7 @@ persistencia\RubroJpaController.class
 persistencia\AsientoContableJpaController.class
 persistencia\InspeccionJpaController.class
 persistencia\ObraJpaController.class
+clasesDTO\SociedadDTO.class
 clases\Columna.class
 clases\AjaxRequestFilter.class
 clases\Jerarquia.class
@@ -37,6 +38,7 @@ persistencia\EntregaEPPJpaController.class
 persistencia\EmpleadoObraJpaController.class
 clases\EmpleadoObra.class
 clases\GrupoTrabajo.class
+clasesDTO\SeguroDTO.class
 clases\Rubro.class
 servlets\SvDetalleEmpleado.class
 clasesDTO\EmpleadoDTO.class

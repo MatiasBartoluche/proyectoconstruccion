@@ -16,9 +16,9 @@ public class SociedadDTO{
     private String piso;
     private String localidad;
 
-    private ArrayList<SeguroDTO> seguros = new ArrayList<>();
+    private ArrayList<SeguroDTO> segurosDTO = new ArrayList<>();
     
-    private ArrayList<Obra> obras = new ArrayList<>();
+    private ArrayList<Obra> obrasDTO = new ArrayList<>();
     
     private LibroDiario libroDiario;
 
@@ -106,24 +106,24 @@ public class SociedadDTO{
     }
 
     public ArrayList<Obra> getObras() {
-        return obras;
+        return obrasDTO;
     }
 
     public void setObras(ArrayList<Obra> obras) {
-        this.obras = obras;
+        this.obrasDTO = obras;
     }
 
     public ArrayList<SeguroDTO> getSeguro() {
-        return seguros;
+        return segurosDTO;
     }
 
     public void setSeguro(ArrayList<SeguroDTO> seguro) {
-        this.seguros = seguro;
+        this.segurosDTO = seguro;
     }
     
     // Método para añadir una nueva póliza con fecha de contratación
     public void contratarSeguro(SeguroDTO seguro) {
-        this.seguros.add(seguro);
+        this.segurosDTO.add(seguro);
     }
 
     public LibroDiario getLibroDiario() {

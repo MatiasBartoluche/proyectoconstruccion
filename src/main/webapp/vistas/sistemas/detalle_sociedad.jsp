@@ -138,7 +138,7 @@
     <section class="home">
 
         <article id="detalleSociedad">
-            <h2>Nueva sociedad</h2>
+            <h2>Datos Administrativos</h2>
             <label id="labelNombre">Nombre de la sociedad</label>
             <input class="habilitacion" type="text" id="nombreDetalleSociedad" placeholder="Nombre de la sociedad" disabled>
 
