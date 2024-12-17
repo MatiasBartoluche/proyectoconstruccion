@@ -1,8 +1,12 @@
 package persistencia;
 
-import clases.EPP;
 import clases.Seguro;
+import clases.Sociedad;
+import clasesDTO.SeguroDTO;
+import clasesDTO.SociedadDTO;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -85,10 +89,10 @@ public class SeguroJpaController implements Serializable{
     }
 
     // Encontrar usuario por legajo
-    public EPP findSeguro(int id) {
+    public Seguro findSeguro(int id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(EPP.class, id);
+            return em.find(Seguro.class, id);
         } finally {
             em.close();
         }
@@ -119,5 +123,45 @@ public class SeguroJpaController implements Serializable{
             em.close();
         }
     }  
+
+    public SeguroDTO convertirASeguroDTO(Seguro seguro) {
+        SeguroDTO segDTO = new SeguroDTO();
+        
+        segDTO.setIdSeguro(seguro.getIdSeguro());
+        segDTO.setNombre(seguro.getNombre());
+        segDTO.setCuit(seguro.getCuit());
+        segDTO.setNumeroPoliza(seguro.getNumeroPoliza());
+        segDTO.setFechaContratacion(seguro.getFechaContratacion());
+        segDTO.setFechaVencimiento(seguro.getFechaVencimiento());
+        
+        Sociedad sociedad = seguro.getSociedad();
+        SociedadDTO socDTO = new SociedadDTO();
+        
+        socDTO.setIdSociedad(sociedad.getIdSociedad());
+        socDTO.setNombre(sociedad.getNombre());
+        socDTO.setCuitSociedad(sociedad.getCuitSociedad());
+        socDTO.setRazonSocial(sociedad.getRazonSocial());
+        socDTO.setTelefono(sociedad.getTelefono());
+        socDTO.setMail(sociedad.getMail());
+        socDTO.setCalle(sociedad.getCalle());
+        socDTO.setAltura(sociedad.getAltura());
+        socDTO.setPiso(sociedad.getPiso());
+        socDTO.setLocalidad(sociedad.getLocalidad());
+        
+        segDTO.setSociedad(socDTO);
+
+        return segDTO;
+    }
     
+    public List<SeguroDTO> convertirListaASeguroDTO(List<Seguro> seguros) {
+        if (seguros == null || seguros.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        List<SeguroDTO> listaDTO = new ArrayList<>();
+        for (Seguro seg : seguros) {
+            listaDTO.add(convertirASeguroDTO(seg));
+        }
+        return listaDTO;
+    }
 }

@@ -1,7 +1,13 @@
 package persistencia;
 
+import clases.ControladorSociedades;
+import clases.Seguro;
 import clases.Sociedad;
+import clasesDTO.SeguroDTO;
+import clasesDTO.SociedadDTO;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -119,4 +125,39 @@ public class SociedadJpaController implements Serializable{
         }
     }  
     
+    public SociedadDTO convertirASociedadDTO(Sociedad sociedad){
+        ControladorSociedades controlSoc = new ControladorSociedades();
+        SociedadDTO socDTO = new SociedadDTO();
+        
+        socDTO.setIdSociedad(sociedad.getIdSociedad());
+        socDTO.setNombre(sociedad.getNombre());
+        socDTO.setCuitSociedad(sociedad.getCuitSociedad());
+        socDTO.setRazonSocial(sociedad.getRazonSocial());
+        socDTO.setTelefono(sociedad.getTelefono());
+        socDTO.setMail(sociedad.getMail());
+        socDTO.setCalle(sociedad.getCalle());
+        socDTO.setAltura(sociedad.getAltura());
+        socDTO.setPiso(sociedad.getPiso());
+        socDTO.setLocalidad(sociedad.getLocalidad());
+        
+        ArrayList<Seguro> seguros = sociedad.getSeguro();
+        
+        if(seguros != null){
+            ArrayList<SeguroDTO> segurosDTO = controlSoc.convertitListaSegurosDTO(seguros);
+            socDTO.setSeguro(segurosDTO);
+        }
+        return socDTO;
+    }
+    
+    public List<SociedadDTO> convertirListaASociedadDTO(List<Sociedad> sociedades) {
+        if (sociedades == null || sociedades.isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        List<SociedadDTO> listaDTO = new ArrayList<>();
+        for (Sociedad soc : sociedades) {
+            listaDTO.add(convertirASociedadDTO(soc));
+        }
+        return listaDTO;
+    }
 }

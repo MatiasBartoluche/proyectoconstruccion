@@ -1558,7 +1558,6 @@ body.dark .home .text{
 #fechasSeguro input{
     width: 23%;
     margin: 0 1% 0 1%;
-    
 }
 
 #fechasSeguro Label{
@@ -1569,15 +1568,16 @@ body.dark .home .text{
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+    align-items: baseline;
 }
 
 #contenedorPoliza label{
     width: 20%;
 }
 
-#contenedorPoliza input{
+#contenedorPoliza input, #contenedorPoliza select{
     width: 25%;
-    margin-left: 1%;
+    margin: 1%;
 }
 
 #contenedorBotonesSeguro{

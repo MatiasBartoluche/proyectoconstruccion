@@ -137,7 +137,7 @@
     </nav>        
         
     <section class="home">
-
+        <!--
         <article id="contenedorSociedades">
             <h2>Seleccione una sociedad</h2>
             
@@ -151,6 +151,7 @@
             
             <div id="listaSociedades"></div>
         </article>
+        -->
         
         <article id="nuevoSeguro">
             <h2>Nuevo seguro</h2>
@@ -168,6 +169,10 @@
             </div>
             
             <div id="contenedorPoliza">
+                <label>Sociedad asegurada</label>
+                <select id="selectSociedades">
+                    
+                </select>
                 <label>Numero de poliza</label>
                 <input type="text" id="numeroPoliza" placeholder="Poliza">
             </div>

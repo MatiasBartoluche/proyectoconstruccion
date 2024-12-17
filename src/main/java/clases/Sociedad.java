@@ -1,7 +1,6 @@
 package clases;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -152,11 +151,8 @@ public class Sociedad implements Serializable {
     }
     
     // Método para añadir una nueva póliza con fecha de contratación
-    public void contratarSeguro(Seguro poliza, LocalDate fechaContratacion, LocalDate fechaVencimiento) {
-        poliza.setSociedad(this);
-        poliza.setFechaContratacion(fechaContratacion);
-        poliza.setFechaVencimiento(fechaVencimiento);
-        this.seguros.add(poliza);
+    public void contratarSeguro(Seguro seguro) {
+        this.seguros.add(seguro);
     }
 
     public LibroDiario getLibroDiario() {

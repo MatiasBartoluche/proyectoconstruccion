@@ -2,6 +2,7 @@ package servlets;
 
 import clases.ControladorSociedades;
 import clases.LocalDateAdapter;
+import clases.Seguro;
 import clases.Sociedad;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -62,6 +63,9 @@ public class SvSociedades extends HttpServlet {
                 break;
             case "borrar":
                 borrarSociedad(request, response);
+                break;
+            case "nuevoSeguro":
+                nuevoSeguro(request, response);
                 break;
             default:
                 break;
@@ -161,6 +165,31 @@ public class SvSociedades extends HttpServlet {
             respuestaJson = "{\"mensaje\": \"Ha ocurrido un error al intentar borrar la sociedad\", \"error\": \""+e+"\"}";
         }
         
+        response.getWriter().write(respuestaJson);
+    }
+
+    private void nuevoSeguro(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String respuestaJson = "{\"mensaje\": \"El seguro se ha registrado con exito\"}";
+        String seguroRecibido = request.getParameter("seguro");
+        int idSociedad = Integer.parseInt(request.getParameter("idSociedad"));
+        Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
+        
+        System.out.println(seguroRecibido);
+        System.out.println(idSociedad);
+        try{
+            Seguro seguro = gson.fromJson(seguroRecibido, Seguro.class);
+            
+            Sociedad sociedad = controladorSoc.buscarSociedad(idSociedad);
+            
+            seguro.setSociedad(sociedad);
+            sociedad.contratarSeguro(seguro);
+            
+            controladorSoc.crearSeguro(seguro);
+            controladorSoc.editarSociedad(sociedad);
+        }
+        catch(JsonSyntaxException e){
+            respuestaJson = "{\"mensaje\": \"Ha ocurrido un error al intentar registrar el seguro\", \"error\": \""+e+"\"}";
+        }
         response.getWriter().write(respuestaJson);
     }
 

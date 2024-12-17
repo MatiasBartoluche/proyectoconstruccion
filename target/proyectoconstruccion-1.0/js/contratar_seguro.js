@@ -1,10 +1,34 @@
 $(document).ready(function(){
     capturarDatosSeguro();
     
+    cargarSociedades();
+    
     cerrarModal('#btnModalSeguroAceptar');
     cerrarModal('#btnModalSeguroCerrar');
 });
 
+function cargarSociedades(){
+    $.ajax({
+        url: '/proyectoconstruccion/SvSociedades', // URL del servlet
+        type: 'GET',
+        data: {mensaje: 'sociedades'},
+        dataType: 'json',
+        cache: false,
+        success: function (response) {
+            insertarSociedadesSelect(response);
+        },
+        error: function (xhr, status, error) {
+            console.error("Error:", error);
+        }
+    });  
+}
+
+function insertarSociedadesSelect(listaSociedades){
+    console.log(listaSociedades);
+    $.each(listaSociedades, function (i, item) {
+        $('#selectSociedades').append('<option value="' + item.id_sociedad + '" id="' + item.nombre + '">' + item.nombre + '</option>');
+    });
+}
 
 function capturarDatosSeguro(){
     $('#btnGuardarSeguro').click(function(){
@@ -64,14 +88,14 @@ function capturarDatosSeguro(){
         if(verificarNombre === true && verificarGlobal === true && verificarCuerpo === true 
                 && verificarDigito === true && numeroPoliza !== '' && fechaContratacionSeguro !== ''
                 && fechaVencimientoSeguro !== ''){
+            var idSociedad = parseInt($('#selectSociedades').val());
+            
             $.extend(seguro, {cuit: digitoGlobalSeguro+'-'+cuerpoCuitSeguro+'-'+digitoVerificadorSeguro});
             $.extend(seguro, {numero_poliza: numeroPoliza});
             $.extend(seguro, {fecha_contratacion: fechaContratacionSeguro});
             $.extend(seguro, {fecha_vencimiento: fechaVencimientoSeguro});
-            //$.extend(seguro, {sociedad: sociedad});
             console.log(seguro);
-            
-            //solicitudAjaxSeguros(seguro);
+            solicitudAjaxSeguros(seguro, idSociedad);
         }
         else{
             console.log('datos incompletos');
@@ -80,12 +104,12 @@ function capturarDatosSeguro(){
         }
     });
 }
-/*
-function solicitudAjaxSeguros(seguro){
+
+function solicitudAjaxSeguros(seguro, idSociedad){
     $.ajax({
         url: '/proyectoconstruccion/SvSociedades', // URL del servlet
         type: 'POST',
-        data: {mensaje: 'nuevoSeguro', seguro: JSON.stringify(seguro)},
+        data: {mensaje: 'nuevoSeguro', seguro: JSON.stringify(seguro), idSociedad: idSociedad},
         dataType: 'json',
         cache: false,
         success: function (response) {
@@ -96,7 +120,7 @@ function solicitudAjaxSeguros(seguro){
             console.error("Error:", error);
         }
     });
-}*/
+}
 
 function mensajeModal(mensaje, btnAceptar, btnCerrar){
     // borrar el mensaje anterior, si es que lo tiene
