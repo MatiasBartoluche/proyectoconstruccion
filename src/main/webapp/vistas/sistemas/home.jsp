@@ -58,7 +58,7 @@
                     </li> <!------------------------------- fin elemento de la lista -->
 
                     <li class="nav-link"> <!--------------- Inicio elemento de la lista -->
-                        <a href="../pendiente.jsp">
+                        <a href="./obras.jsp">
                             <i class="bx bx-buildings icon"></i>
                             <span class="text nav-text">Obras</span>
                         </a>
@@ -148,7 +148,7 @@
             </article> 
         </a>
 
-        <a href="../pendiente.jsp">
+        <a href="./obras.jsp">
             <article class="modulo">
                 <div class="icono">
                     <i class="bx bx-buildings icon"></i>

@@ -1629,3 +1629,53 @@ body.dark .home .text{
 #listaVencimientoSeguros div p, #vencimientoSeguros .cabeceraSeguros p{
     width: 20%;
 }
+
+/* --------------------- inicio estilos pagina nueva_obra.jsp --------------- */
+
+.datosObra{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: baseline;
+}
+
+#datosAdministrativosObra label{
+    width: 20%;
+}
+
+#datosAdministrativosObra input{
+    width: 29%;
+    margin-right: 1%;
+}
+
+#ubicacionNuevaObra label, #alturaNuevaObra{
+    width: 13%;
+}
+
+#ubicacionNuevaObra input{
+    margin-right: 1%;
+}
+
+#direccionNuevaObra, #localidadNuevaObra{
+    width: 22%;
+}
+
+#fechaTipoNuevaObra label{
+    width: 25%;
+}
+
+#fechaTipoNuevaObra select, #fechaTipoNuevaObra input{
+    width: 24%;
+    margin-right: 1%;
+}
+
+#datosSociedadNuevaObra label{
+    width: 25%;
+}
+
+#datosSociedadNuevaObra select, #datosSociedadNuevaObra input{
+    width: 24%;
+    margin-right: 1%;
+} 
