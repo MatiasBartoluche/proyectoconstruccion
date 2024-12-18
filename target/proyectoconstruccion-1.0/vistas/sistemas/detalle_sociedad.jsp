@@ -188,7 +188,7 @@
         
         <article id="historialSeguros">
             <h2>Historial de seguros</h2>
-            <div id="cabeceraSeguros">
+            <div class="cabeceraSeguros">
                 <p>Nombre</p>
                 <p>CUIT</p>
                 <p>N° poliza</p>

@@ -9,6 +9,7 @@
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="${pageContext.request.contextPath}/js/contratar_seguro.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
         <title>Home</title>
     </head>
     <body>
@@ -136,23 +137,7 @@
         </div>
     </nav>        
         
-    <section class="home">
-        <!--
-        <article id="contenedorSociedades">
-            <h2>Seleccione una sociedad</h2>
-            
-            <div class="cabeceraSociedades">
-                <p>Nombre</p>
-                <p>CUIT</p>
-                <p>Fecha contrato</p>
-                <p>Vencimiento</p>
-                <p>Estado</p>
-            </div>
-            
-            <div id="listaSociedades"></div>
-        </article>
-        -->
-        
+    <section class="home">  
         <article id="nuevoSeguro">
             <h2>Nuevo seguro</h2>
             
@@ -186,6 +171,22 @@
             
             <div id="contenedorBotonesSeguro">
                 <button id="btnGuardarSeguro">Guardar</button>
+            </div>
+        </article>
+        
+        <article id="vencimientoSeguros">
+            <h2>Seguros con fechas de vencimiento proximas</h2>
+            
+            <div class="cabeceraSeguros">
+                <p>Nombre</p>
+                <p>CUIT</p>
+                <p>N° poliza</p>
+                <p>Sociedad</p>
+                <p>Vencimiento</p>
+            </div>
+            
+            <div id="listaVencimientoSeguros">
+                <h1>No hay seguros proximos a vencer</h1>
             </div>
         </article>
         

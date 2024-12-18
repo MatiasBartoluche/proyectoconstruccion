@@ -1532,17 +1532,17 @@ body.dark .home .text{
     justify-content: center;
 }
 
-.seguro, #cabeceraSeguros{
+.seguro, .cabeceraSeguros{
     padding: 1%;
 }
 
-#cabeceraSeguros{
+.cabeceraSeguros{
     width: 100%;
     display: flex;
     flex-wrap: wrap;    
 }
 
-#cabeceraSeguros p{
+.cabeceraSeguros p{
     width: 19%;
 }
 
@@ -1616,4 +1616,16 @@ body.dark .home .text{
     justify-content: center;
     align-content: center;
     align-items: baseline;
+}
+
+#listaVencimientoSeguros, #listaVencimientoSeguros div{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+}
+
+#listaVencimientoSeguros div p, #vencimientoSeguros .cabeceraSeguros p{
+    width: 20%;
 }

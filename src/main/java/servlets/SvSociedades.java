@@ -4,6 +4,7 @@ import clases.ControladorSociedades;
 import clases.LocalDateAdapter;
 import clases.Seguro;
 import clases.Sociedad;
+import clasesDTO.SeguroDTO;
 import clasesDTO.SociedadDTO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -39,11 +40,18 @@ public class SvSociedades extends HttpServlet {
         
         String mensaje = request.getParameter("mensaje");
         
-        if("sociedades".equals(mensaje)){
-            cargarSociedades(response);
-        }
-        else if("detalleSociedad".equals(mensaje)){
-            cargarDetalleSociedad(request, response);
+        if(null != mensaje)switch (mensaje) {
+            case "sociedades":
+                cargarSociedades(response);
+                break;
+            case "detalleSociedad":
+                cargarDetalleSociedad(request, response);
+                break;
+            case "seguros":
+                cargarSeguros(response);
+                break;
+            default:
+                break;
         }
     }
 
@@ -230,6 +238,27 @@ public class SvSociedades extends HttpServlet {
         }
         catch(Exception e){
             respuestaJson = "{\"mensaje\": \"Ha ocurrido un error al intentar borrar el seguro\", \"error\": \""+e+"\"}";
+        }
+        response.getWriter().write(respuestaJson);
+    }
+
+    private void cargarSeguros(HttpServletResponse response) throws IOException {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        
+        String respuestaJson = "{\"mensaje\": \"No existen seguros\"}";
+        Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
+        
+        try{
+            ArrayList<Seguro> seguros = controladorSoc.buscarListaSeguros();
+            
+            if(seguros != null){
+                ArrayList<SeguroDTO> segurosDTO = controladorSoc.convertitListaSegurosDTO(seguros);
+                respuestaJson = gson.toJson(segurosDTO);
+            }
+        }
+        catch(Exception e){
+            respuestaJson = "{\"mensaje\": \"Ha ocurrido un error al intentar recuperar los seguros\", \"error\": \""+e+"\"}";
         }
         response.getWriter().write(respuestaJson);
     }

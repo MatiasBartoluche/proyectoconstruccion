@@ -5,6 +5,8 @@ $(document).ready(function(){
     
     cerrarModal('#btnModalSeguroAceptar');
     cerrarModal('#btnModalSeguroCerrar');
+    
+    verificarVencimientos();
 });
 
 function cargarSociedades(){
@@ -24,7 +26,6 @@ function cargarSociedades(){
 }
 
 function insertarSociedadesSelect(listaSociedades){
-    console.log(listaSociedades);
     $.each(listaSociedades, function (i, item) {
         $('#selectSociedades').append('<option value="' + item.id_sociedad + '" id="' + item.nombre + '">' + item.nombre + '</option>');
     });
@@ -161,3 +162,68 @@ function vaciarCampos(){
     $('#fechaContratacion').val('');
     $('#fechaVencimiento').val('');
 }
+
+function verificarVencimientos(){
+    $.ajax({
+        url: '/proyectoconstruccion/SvSociedades', // URL del servlet
+        type: 'GET',
+        data: {mensaje: 'seguros'},
+        dataType: 'json',
+        cache: false,
+        success: function (response) {
+            if(response.mensaje){
+                console.log(response.mensaje);
+            }
+            else{
+                verificarVencimientoSeguros(response);
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error("Error:", error);
+        }
+    });
+}
+
+function verificarVencimientoSeguros(listaSeguros){
+    var fechaActual = moment().format('YYYY-MM-DD'); 
+    var vencimientoSeguros = [];
+    
+    for(indice=0; indice<listaSeguros.length; indice++){
+        // string fecha de vencimiento
+        var vencimientoSeguro = moment(listaSeguros[indice].fecha_vencimiento);
+        //console.log('fecha actual: '+fechaActual+' - vencimiento: '+vencimientoSeguro);
+        var diferenciaDias = vencimientoSeguro.diff(fechaActual, 'days');
+        //console.log('el seguro cuenta con '+diferenciaDias+' dias antes de su vencimiento');
+        
+        if(diferenciaDias >= 0 && diferenciaDias <= 90){
+            $('#listaVencimientoSeguros').empty();
+            vencimientoSeguros.push(listaSeguros[indice]);
+        }
+    }
+    insertarVencimientoSeguros(vencimientoSeguros);
+}
+
+function insertarVencimientoSeguros(listaSeguros){
+    var clase = 'impar';
+    
+    for(indice=0; indice<listaSeguros.length; indice++){
+            if(indice%2 === 0){
+                clase = 'impar';
+            }
+            else{
+                clase = 'par';
+            }
+            
+            $('#listaVencimientoSeguros').append('<div class="seguro '+clase+'">'+
+                                        '<p>'+listaSeguros[indice].nombre+'</p>'+
+                                        '<p>'+listaSeguros[indice].cuit+'</p>'+
+                                        '<p>'+listaSeguros[indice].numero_poliza+'</p>'+
+                                        '<p>'+listaSeguros[indice].sociedadDTO.nombre+'</p>'+
+                                        '<p>'+listaSeguros[indice].fecha_vencimiento+'</p>'+
+                                    '</div>');
+    }
+}
+
+/**
+
+*/
