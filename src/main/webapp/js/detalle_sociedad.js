@@ -13,36 +13,41 @@ $(document).ready(function(){
     
     cerrarModal('#btnModalDetalleAceptar');
     cerrarModal('#btnModalDetalleCerrar');
+    cerrarModal('#btnModalDetalleCancelar');
+    
+    //btnDetalleSeguro();
+    btnBorrarSeguro();
 });
 
 function cargarDetalleSociedad(idSociedad){
-       $.ajax({
-            url: '/proyectoconstruccion/SvSociedades', // URL del servlet
-            type: 'GET',
-            data: {mensaje: 'detalleSociedad', idSociedad: idSociedad},
-            dataType: 'json',
-            cache: false,
-            success: function (response) {
-                console.log(response);
-                if(response.mensaje){
-                    console.log(response.mensaje);
-                }
-                else{
-                    insertarSociedad(response);
-                    // en este momento llamo a la funcion cancelarDatosSociedad
-                    // y le paso como parametro el objeto que obtuve de la solicitud
-                    // para poder recargar los datos en la pagina en caso de que el usuario
-                    // los haya modificado en el formulario pero cancelado su modificacion
-                    cancelarDatosSociedad(response);
-                }
-            },
-            error: function (xhr, status, error) {
-                console.error("Error:", error);
+    $.ajax({
+        url: '/proyectoconstruccion/SvSociedades', // URL del servlet
+        type: 'GET',
+        data: {mensaje: 'detalleSociedad', idSociedad: idSociedad},
+        dataType: 'json',
+        cache: false,
+        success: function (response) {
+            console.log(response);
+            if (response.mensaje) {
+                console.log(response.mensaje);
+            } else {
+                insertarSociedad(response);
+                // en este momento llamo a la funcion cancelarDatosSociedad
+                // y le paso como parametro el objeto que obtuve de la solicitud
+                // para poder recargar los datos en la pagina en caso de que el usuario
+                // los haya modificado en el formulario pero cancelado su modificacion
+                cancelarDatosSociedad(response);
             }
-        });
+        },
+        error: function (xhr, status, error) {
+            console.error("Error:", error);
+        }
+    });
 }
 
 function insertarSociedad(sociedad){
+    // vacial lista de seguros
+    $('#listaSeguros').empty();
     $('#detalleSociedad').attr('value', sociedad.id_sociedad);
     
     var cuit = sociedad.cuit_sociedad.split('-');
@@ -101,13 +106,87 @@ function insertarSociedad(sociedad){
        $('#mailDetalleSociedad').attr('placeholder', 'Sin datos'); 
     }
     
-    if(sociedad.seguros.length === 0){
+    if(sociedad.segurosDTO.length === 0){
         $('#listaSeguros').append('<h1>No hay seguros contratados</h1>');
     }
+    else{
+        insertarSeguros(sociedad.segurosDTO);
+    }
     
-    if(sociedad.obras.length === 0){
+    if(sociedad.obrasDTO.length === 0){
         $('#listaObras').append('<h1>No hay obras asociadas a esta sociedad</h1>');
     }
+}
+
+function insertarSeguros(listaSeguros){
+    var clase = 'impar';
+    for(indice=0; indice<listaSeguros.length; indice++){
+        if(indice%2 === 0){
+            clase = 'impar';
+        }
+        else{
+            clase = 'par';
+        }
+        
+        $('#listaSeguros').append('<div class="seguro '+clase+'">'+
+                                    '<p>'+listaSeguros[indice].nombre+'</p>'+
+                                    '<p>'+listaSeguros[indice].cuit+'</p>'+
+                                    '<p>'+listaSeguros[indice].numero_poliza+'</p>'+
+                                    '<p>'+listaSeguros[indice].fecha_contratacion+'</p>'+
+                                    '<p>'+listaSeguros[indice].fecha_vencimiento+'</p>'+
+                                    '<div class="botonesEmpleado">'+
+                                        '<span class="btnIcono btnDetalleSeguro" id="ver-'+listaSeguros[indice].id_seguro+'" data-idSeguro="'+listaSeguros[indice].id_seguro+'">'+
+                                            '<i class="bx bx-search-alt icon"></i>'+
+                                        '</span>'+
+                                        //'<span class="btnIcono btnBorrarSeguro" id="borrar-'+listaSeguros[indice].id_seguro+'" data-idSeguro="'+listaSeguros[indice].id_seguro+'">'+
+                                            //'<i class="bx bx-trash icon"></i>'+
+                                        //'</span>'+
+                                    '</div>'+
+                                '</div>');
+    }
+}
+
+/*
+function btnDetalleSeguro(){
+    $('#listaSeguros').on('click', '.btnDetalleSeguro', function () {
+        const idSeguro = $(this).attr('id').split('-')[1]; // Obtener el legajo del botón
+        console.log('id: '+idSeguro);
+        //localStorage.setItem('detalleSociedad', idSociedad);
+        //window.location.href = "/proyectoconstruccion/vistas/sistemas/detalle_sociedad.jsp";
+    });
+}
+*/
+
+function btnBorrarSeguro(){
+    $('#listaSeguros').on('click', '.btnBorrarSeguro', function () {
+        var idSeguro = $(this).attr('id').split('-')[1]; // Obtener el id del botón
+        mensajeModal('¿Esta seguro que desea borrar este seguro?', false, false, true, true);
+        btnModalBorrar('borrarSeguro', idSeguro);
+    });
+}
+
+function btnModalBorrar(mensaje, id){
+    $('#btnModalDetalleBorrar').click(function(){
+        console.log('borrar:' +mensaje+'-'+id);
+        
+       $.ajax({
+            url: '/proyectoconstruccion/SvSociedades', // URL del servlet
+            type: 'POST',
+            data: {mensaje: mensaje, id: id},
+            dataType: 'json',
+            cache: false,
+            success: function (response) {
+                console.log(response);
+                mensajeModal(response.mensaje, true, false, false, false);
+                
+                var idSociedad = localStorage.getItem("detalleSociedad");
+                cargarDetalleSociedad(idSociedad);
+            },
+            error: function (xhr, status, error) {
+                console.error("Error:", error);
+            }
+        });
+    });
 }
 
 function modificarSociedad(){
@@ -290,7 +369,7 @@ function guardarNuevosDatosSociedad(){
         }
         else{
             console.log('datos incompletos');
-            mensajeModal('Verifique estos campos antes de registrar una nueva sociedad', true, false);
+            mensajeModal('Verifique estos campos antes de registrar una nueva sociedad', true, false, false, false);
         }
     });
 }
@@ -304,7 +383,7 @@ function guardarDatosSociedad(sociedad){
         cache: false,
         success: function (response) {
             console.log(response.mensaje);
-            mensajeModal(response.mensaje, false, true);
+            mensajeModal(response.mensaje, false, true, false, false);
         },
         error: function (xhr, status, error) {
             console.error("Error:", error);
@@ -312,8 +391,9 @@ function guardarDatosSociedad(sociedad){
     });
 }
 
-function mensajeModal(mensaje, btnAceptar, btnCerrar){
+function mensajeModal(mensaje, btnAceptar, btnCerrar, btnBorrar, btnCancelar){
     // borrar el mensaje anterior, si es que lo tiene
+    $('#contenedorTextoModal').empty();
     $('#mensajeModalDetalleSociedad').show();
     $('#contenedorTextoModal').append('<p>'+mensaje+'</p>');
     $('#btnModalDetalleAceptar').show();
@@ -334,6 +414,20 @@ function mensajeModal(mensaje, btnAceptar, btnCerrar){
     }
     else{
         $('#btnModalDetalleCerrar').hide();
+    }
+    
+    if(btnBorrar === true){
+        $('#btnModalDetalleBorrar').show();
+    }
+    else{
+        $('#btnModalDetalleBorrar').hide();
+    }
+    
+    if(btnCancelar === true){
+        $('#btnModalDetalleCancelar').show();
+    }
+    else{
+        $('#btnModalDetalleCancelar').hide();
     }
 }
 

@@ -1524,6 +1524,35 @@ body.dark .home .text{
     display: none;
 }
 
+#listaSeguros, #listaSeguros .seguro{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+}
+
+.seguro, #cabeceraSeguros{
+    padding: 1%;
+}
+
+#cabeceraSeguros{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;    
+}
+
+#cabeceraSeguros p{
+    width: 19%;
+}
+
+.seguro p{
+    width: 19%;
+    padding: 1%;
+}
+
+
+
 /* ---------------- inicio estolis pagina contratar_seguro.jsp -------------- */
 
 #nuevoSeguro{

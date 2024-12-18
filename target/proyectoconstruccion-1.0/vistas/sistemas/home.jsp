@@ -152,6 +152,7 @@
             </article> 
         </a>
 
+        <!--
         <a href="../pendiente.jsp">
             <article class="modulo">
                 <div class="icono">
@@ -162,7 +163,9 @@
                 </div>
             </article>
         </a>
+        -->
 
+        <!--
         <a href="../pendiente.jsp">
             <article class="modulo">
                 <div class="icono">
@@ -173,7 +176,9 @@
                 </div>
             </article> 
         </a>
+        -->
 
+        <!--
         <a href="../pendiente.jsp">
             <article class="modulo">
                 <div class="icono">
@@ -184,6 +189,7 @@
                 </div>
             </article> 
         </a>
+        -->
         
         <a href="../pendiente.jsp">
             <article class="modulo">
@@ -191,7 +197,7 @@
                     <i class="bx bx-laptop icon"></i>
                 </div>
                 <div class="moduloTexto">
-                    <p>Modulo Contabilidad</p>
+                    <p>Modulo Admin sistemas</p>
                 </div>
             </article> 
         </a>

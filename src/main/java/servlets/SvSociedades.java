@@ -62,11 +62,14 @@ public class SvSociedades extends HttpServlet {
             case "modificar":
                 modificarSociedad(request, response);
                 break;
-            case "borrar":
+            case "borrarSociedad":
                 borrarSociedad(request, response);
                 break;
             case "nuevoSeguro":
                 nuevoSeguro(request, response);
+                break;
+            case "borrarSeguro":
+                borrarSeguro(request, response);
                 break;
             default:
                 break;
@@ -167,10 +170,16 @@ public class SvSociedades extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         
         String respuestaJson = "{\"mensaje\": \"La sociedad se ha borado con exito\"}";
-        
         int idSociedad = Integer.parseInt(request.getParameter("idSociedad"));
         
         try{
+            // busco la sociedad a eliminar
+            Sociedad socEliminar = controladorSoc.buscarSociedad(idSociedad);
+            // primero elimino todos los seguros pertenecientes a la sociedad
+            for(Seguro seg : socEliminar.getSeguros()){
+                controladorSoc.eliminarSeguro(seg.getIdSeguro());
+            }
+            // elimino la sociedad
             controladorSoc.eliminarSociedad(idSociedad);
         }
         catch(Exception e){
@@ -207,4 +216,21 @@ public class SvSociedades extends HttpServlet {
         response.getWriter().write(respuestaJson);
     }
 
+    private void borrarSeguro(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        
+        String respuestaJson = "{\"mensaje\": \"El seguro se ha borado con exito\"}";
+        int idSeguro = Integer.parseInt(request.getParameter("id"));
+        
+        //Gson gson = new GsonBuilder().registerTypeAdapter(LocalDate.class, new LocalDateAdapter()).create();
+        
+        try{
+            controladorSoc.eliminarSeguro(idSeguro);
+        }
+        catch(Exception e){
+            respuestaJson = "{\"mensaje\": \"Ha ocurrido un error al intentar borrar el seguro\", \"error\": \""+e+"\"}";
+        }
+        response.getWriter().write(respuestaJson);
+    }
 }

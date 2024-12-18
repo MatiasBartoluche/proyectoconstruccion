@@ -82,7 +82,7 @@ function solicitudAjaxBorrar(){
         $.ajax({
             url: '/proyectoconstruccion/SvSociedades', // URL del servlet
             type: 'POST',
-            data: {mensaje: 'borrar', idSociedad: idSociedad},
+            data: {mensaje: 'borrarSociedad', idSociedad: idSociedad},
             dataType: 'json',
             cache: false,
             success: function (response) {

@@ -92,7 +92,9 @@ public class SeguroJpaController implements Serializable{
     public Seguro findSeguro(int id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Seguro.class, id);
+            Seguro seguro = em.find(Seguro.class, id);
+            em.refresh(seguro);
+            return seguro;
         } finally {
             em.close();
         }

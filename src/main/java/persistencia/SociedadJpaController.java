@@ -93,7 +93,9 @@ public class SociedadJpaController implements Serializable{
     public Sociedad findSociedad(int id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Sociedad.class, id);
+            Sociedad sociedad = em.find(Sociedad.class, id);
+            em.refresh(sociedad);
+            return sociedad;
         } finally {
             em.close();
         }
@@ -140,11 +142,11 @@ public class SociedadJpaController implements Serializable{
         socDTO.setPiso(sociedad.getPiso());
         socDTO.setLocalidad(sociedad.getLocalidad());
         
-        ArrayList<Seguro> seguros = sociedad.getSeguro();
+        ArrayList<Seguro> seguros = sociedad.getSeguros();
         
         if(seguros != null){
             ArrayList<SeguroDTO> segurosDTO = controlSoc.convertitListaSegurosDTO(seguros);
-            socDTO.setSeguro(segurosDTO);
+            socDTO.setSeguros(segurosDTO);
         }
         return socDTO;
     }

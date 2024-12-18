@@ -113,11 +113,11 @@ public class SociedadDTO{
         this.obrasDTO = obras;
     }
 
-    public ArrayList<SeguroDTO> getSeguro() {
+    public ArrayList<SeguroDTO> getSeguros() {
         return segurosDTO;
     }
 
-    public void setSeguro(ArrayList<SeguroDTO> seguro) {
+    public void setSeguros(ArrayList<SeguroDTO> seguro) {
         this.segurosDTO = seguro;
     }
     

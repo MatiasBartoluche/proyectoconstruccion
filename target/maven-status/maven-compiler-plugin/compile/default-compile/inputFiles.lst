@@ -48,6 +48,7 @@ D:\github\proyectoconstruccion\src\main\java\clases\LiquidacionSueldo.java
 D:\github\proyectoconstruccion\src\main\java\persistencia\RegistroContableJpaController.java
 D:\github\proyectoconstruccion\src\main\java\clases\Aporte.java
 D:\github\proyectoconstruccion\src\main\java\clases\EntregaEPP.java
+D:\github\proyectoconstruccion\src\main\java\clasesDTO\SociedadDTO.java
 D:\github\proyectoconstruccion\src\main\java\servlets\SvLogout.java
 D:\github\proyectoconstruccion\src\main\java\servlets\SvEmpleados.java
 D:\github\proyectoconstruccion\src\main\java\servlets\SvGrupoTrabajo.java
@@ -77,6 +78,7 @@ D:\github\proyectoconstruccion\src\main\java\persistencia\LiquidacionSueldoJpaCo
 D:\github\proyectoconstruccion\src\main\java\servlets\SvRegistrar.java
 D:\github\proyectoconstruccion\src\main\java\clases\RoleFilter.java
 D:\github\proyectoconstruccion\src\main\java\clases\RedimensionarImagen.java
+D:\github\proyectoconstruccion\src\main\java\clasesDTO\SeguroDTO.java
 D:\github\proyectoconstruccion\src\main\java\servlets\SvSociedades.java
 D:\github\proyectoconstruccion\src\main\java\persistencia\HistorialEstadoObraJpaController.java
 D:\github\proyectoconstruccion\src\main\java\persistencia\ContratoJpaController.java

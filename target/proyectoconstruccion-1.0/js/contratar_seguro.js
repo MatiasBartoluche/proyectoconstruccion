@@ -115,6 +115,7 @@ function solicitudAjaxSeguros(seguro, idSociedad){
         success: function (response) {
             console.log(response.mensaje);
             mensajeModal(response.mensaje, false, true);
+            vaciarCampos();
         },
         error: function (xhr, status, error) {
             console.error("Error:", error);
@@ -149,4 +150,14 @@ function cerrarModal(idBoton){
         $('#contenedorTextoModal').empty();
         $('#mensajesAdvertencia').empty();
     });
+}
+
+function vaciarCampos(){
+    $('#nombreNuevoSeguro').val('');
+    $('#digitoGlobalNuevoSeguro').val('');
+    $('#cuerpoCuitNuevoSeguro').val('');
+    $('#digitoVerificadorNuevoSeguro').val('');
+    $('#numeroPoliza').val('');
+    $('#fechaContratacion').val('');
+    $('#fechaVencimiento').val('');
 }

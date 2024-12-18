@@ -35,6 +35,8 @@
                 <div class="botonesModal">
                     <button id="btnModalDetalleAceptar">Aceptar</button>
                     <button id="btnModalDetalleCerrar">Cerrar</button>
+                    <button id="btnModalDetalleBorrar">Borrar</button>
+                    <button id="btnModalDetalleCancelar">Cancelar</button>
                 </div>
             </div>
         </div>        
@@ -186,6 +188,13 @@
         
         <article id="historialSeguros">
             <h2>Historial de seguros</h2>
+            <div id="cabeceraSeguros">
+                <p>Nombre</p>
+                <p>CUIT</p>
+                <p>N° poliza</p>
+                <p>Contratacion</p>
+                <p>Vencimiento</p>
+            </div>
             <div id="listaSeguros"></div>
         </article>
         

@@ -142,11 +142,11 @@ public class Sociedad implements Serializable {
         this.obras = obras;
     }
 
-    public ArrayList<Seguro> getSeguro() {
+    public ArrayList<Seguro> getSeguros() {
         return seguros;
     }
 
-    public void setSeguro(ArrayList<Seguro> seguro) {
+    public void setSeguros(ArrayList<Seguro> seguro) {
         this.seguros = seguro;
     }
     
