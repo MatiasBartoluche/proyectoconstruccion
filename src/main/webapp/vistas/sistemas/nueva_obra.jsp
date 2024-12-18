@@ -14,6 +14,8 @@
         <link href="${pageContext.request.contextPath}/css/boxicons-2.1.4.css" rel='stylesheet'>
         
         <script src="${pageContext.request.contextPath}/js/jquery-3.5.1.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/moment.js"></script>
+        <script src="${pageContext.request.contextPath}/js/nueva_obra.js"></script>
         <title>Nueva obra</title>
     </head>
     <body>
@@ -39,7 +41,8 @@
                 
                 <div class="botonesModal">
                     <button id="btnModalObraAceptar">Aceptar</button>
-
+                    <button id="btnModalObraNueva">Nueva obra</button>
+                    <button id="btnModalObraCerrar">Cerrar</button>
                 </div>
             </div>
         </div>         
@@ -163,19 +166,19 @@
             </div>
             <div class="datosObra" id="fechaTipoNuevaObra">
                 <label>Fecha de inicio</label>
-                <input type="date">
+                <input type="date" id="fechaInicioObra">
                 <label>Tipo de obra</label>
-                <select id="tipoNuevaObra"></select>
+                <select id="selectTipoObra"></select>
             </div>
             
             <h2>Datos de la sociedad</h2>
             <div class="datosObra" id="datosSociedadNuevaObra">
                 <label>Sociedad Encargada</label>
-                <select id="seleccionarSociedad"></select>
+                <select id="selectSociedadesObra"></select>
                 <label>CUIT</label>
                 <input type="text" id="cuitSociedadNuevaObra" disabled>
                 <label>Seguro</label>
-                <input type="text" id="NobreSeguroNuevaObra" disabled>
+                <input type="text" id="nombreSeguroNuevaObra" disabled>
                 <label>Numero de poliza</label>
                 <input type="number" id="polizaNuevaObra" disabled>
                 <label>Contratacion</label>

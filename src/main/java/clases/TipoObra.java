@@ -13,7 +13,7 @@ public class TipoObra implements Serializable {
     
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
-    private int Id_tipo_obra;
+    private int id_tipo_obra;
     
     private String descripcion;
 
@@ -21,11 +21,11 @@ public class TipoObra implements Serializable {
     }
 
     public int getId_tipo_obra() {
-        return Id_tipo_obra;
+        return id_tipo_obra;
     }
 
     public void setId_tipo_obra(int Id_tipo_obra) {
-        this.Id_tipo_obra = Id_tipo_obra;
+        this.id_tipo_obra = Id_tipo_obra;
     }
 
     public String getDescripcion() {

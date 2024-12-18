@@ -87,7 +87,9 @@ public class ObraJpaController implements Serializable{
     public Obra findObra(int id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Obra.class, id);
+            Obra obra = em.find(Obra.class, id);
+            em.refresh(obra);
+            return obra;
         } finally {
             em.close();
         }

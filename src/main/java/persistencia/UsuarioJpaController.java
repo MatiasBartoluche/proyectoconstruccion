@@ -86,7 +86,9 @@ public class UsuarioJpaController{
     public Usuario findUsuario(int id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Usuario.class, id);
+            Usuario usuario = em.find(Usuario.class, id);
+            em.refresh(usuario);
+            return usuario;
         } finally {
             em.close();
         }

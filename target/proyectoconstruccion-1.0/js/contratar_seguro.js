@@ -41,7 +41,7 @@ function capturarDatosSeguro(){
         var fechaContratacionSeguro = $('#fechaContratacion').val();
         var fechaVencimientoSeguro = $('#fechaVencimiento').val();
         
-        // objeto "Sociedad" inicialmente vacio
+        // objeto "seguro" inicialmente vacio
         var seguro = {};
         // variables usadas para validar campos
         var verificarNombre = false;
